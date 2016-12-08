@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.frame</groupId>
+		<artifactId>boot-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../boot-parent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.frame</groupId>
+	<artifactId>boot-frame</artifactId>
+	<name>Spring Boot基础框架-父包</name>
+	<description>Spring Boot基础框架-父包</description>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>boot-frame-common</module>
+		<module>boot-frame-model</module>
+		<module>boot-frame-core</module>
+		<module>boot-frame-monitor</module>
+		<module>boot-frame-utils</module>
+		<module>boot-frame-boot-admin</module>
+	</modules>
+
+</project>

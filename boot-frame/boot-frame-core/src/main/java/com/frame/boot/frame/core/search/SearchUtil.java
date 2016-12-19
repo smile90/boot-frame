@@ -1,7 +1,7 @@
 package com.frame.boot.frame.core.search;
 
 import com.frame.boot.frame.common.search.enums.DataType;
-import com.frame.boot.frame.core.exception.SearchException;
+import com.frame.boot.frame.core.exceptions.SearchException;
 import com.frame.boot.frame.utils.DateUtil;
 
 public class SearchUtil {

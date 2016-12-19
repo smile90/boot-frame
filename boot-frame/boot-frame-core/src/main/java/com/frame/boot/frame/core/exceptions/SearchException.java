@@ -1,7 +1,7 @@
-package com.frame.boot.frame.core.exception;
+package com.frame.boot.frame.core.exceptions;
 
 import com.frame.boot.frame.core.constants.BootFrameCoreConstants;
-import com.frame.common.frame.base.exception.BaseRuntimeException;
+import com.frame.common.frame.base.exceptions.BaseRuntimeException;
 
 public class SearchException extends BaseRuntimeException {
 

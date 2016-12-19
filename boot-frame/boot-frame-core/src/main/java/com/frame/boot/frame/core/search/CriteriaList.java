@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.frame.boot.frame.common.search.enums.SearchConjunction;
-import com.frame.boot.frame.core.exception.SearchException;
+import com.frame.boot.frame.core.exceptions.SearchException;
 
 /**
  * 查询组

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import com.frame.boot.frame.common.search.beans.SearchData;
 import com.frame.boot.frame.common.search.enums.SearchType;
-import com.frame.boot.frame.core.exception.SearchException;
+import com.frame.boot.frame.core.exceptions.SearchException;
 
 /**
  * 查询器

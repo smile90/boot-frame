@@ -1,4 +1,4 @@
-package com.frame.security.entity;
+package com.frame.boot.frame.common.security.entity;
 
 import java.util.ArrayList;
 import java.util.List;

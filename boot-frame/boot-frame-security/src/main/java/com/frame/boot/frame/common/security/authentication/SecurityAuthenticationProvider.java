@@ -1,4 +1,4 @@
-package com.frame.security.authentication;
+package com.frame.boot.frame.common.security.authentication;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;

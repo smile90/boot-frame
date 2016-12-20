@@ -1,4 +1,4 @@
-package com.frame.boot.frame.common.base.constants;
+package com.frame.boot.frame.common.constants;
 
 /**
  * 常用常量

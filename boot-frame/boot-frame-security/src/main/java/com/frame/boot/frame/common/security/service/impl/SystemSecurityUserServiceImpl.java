@@ -1,4 +1,4 @@
-package com.frame.security.service.impl;
+package com.frame.boot.frame.common.security.service.impl;
 
 import javax.transaction.Transactional;
 
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.frame.security.repository.SystemSecurityUserRepository;
-import com.frame.security.service.SystemSecurityUserService;
+import com.frame.boot.frame.common.security.repository.SystemSecurityUserRepository;
+import com.frame.boot.frame.common.security.service.SystemSecurityUserService;
 
 @Service("systemSecurityUserService")
 public class SystemSecurityUserServiceImpl implements SystemSecurityUserService, UserDetailsService {

@@ -1,4 +1,4 @@
-package com.frame.security.config;
+package com.frame.boot.frame.common.security.config;
 
 import javax.annotation.Resource;
 
@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.frame.security.properties.SystemSecurityProperties;
+import com.frame.boot.frame.common.security.properties.SystemSecurityProperties;
 
 @EnableWebSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)

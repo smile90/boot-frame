@@ -1,4 +1,4 @@
-package com.frame.boot.frame.common.search.enums;
+package com.frame.common.frame.base.enums;
 
 
 /**

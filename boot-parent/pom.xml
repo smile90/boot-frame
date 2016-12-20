@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>com.frame</groupId>
-		<artifactId>boot-parent</artifactId>
+		<artifactId>common-parent</artifactId>
 		<version>1.0.0</version>
 		<relativePath>../common-parent/pom.xml</relativePath>
 	</parent>
@@ -17,11 +17,6 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<argLine>-Dfile.encoding=UTF-8</argLine>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-
 		<druid.version>1.0.26</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 

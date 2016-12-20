@@ -53,10 +53,10 @@
 	</appender>
 
 	<!-- 监控日志 -->
-	<logger name="com.lefu.boot.frame.common.monitor.log" additivity="false">
+	<logger name="com.frame.boot.frame.common.monitor.log" additivity="false">
 		<appender-ref ref="monitorLog" />
 	</logger>
-	<logger name="com.lefu.boot.frame.common.monitor.factory" additivity="false">
+	<logger name="com.frame.boot.frame.common.monitor.factory" additivity="false">
 		<appender-ref ref="monitorFactory" />
 	</logger>
 

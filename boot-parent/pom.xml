@@ -2,12 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.frame</groupId>
-		<artifactId>common-parent</artifactId>
-		<version>1.0.0</version>
-		<relativePath>../common-parent/pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>io.spring.platform</groupId>
+        <artifactId>platform-bom</artifactId>
+        <version>Athens-SR1</version>
+    </parent>
 
 	<groupId>com.frame</groupId>
 	<artifactId>boot-parent</artifactId>
@@ -17,6 +16,13 @@
 	<packaging>pom</packaging>
 
 	<properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <argLine>-Dfile.encoding=UTF-8</argLine>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+
 		<druid.version>1.0.26</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 
@@ -30,14 +36,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-	        <dependency>
-	            <groupId>io.spring.platform</groupId>
-	            <artifactId>platform-bom</artifactId>
-	            <version>Athens-SR1</version>
-	            <type>pom</type>
-	            <scope>import</scope>
-	        </dependency>
-
 			<!-- spring-boot-admin -->
 			<dependency>
 				<groupId>de.codecentric</groupId>
@@ -90,14 +88,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-	    <plugins>
-	        <plugin>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-maven-plugin</artifactId>
-	        </plugin>
-	    </plugins>
-	</build>
 
 </project>

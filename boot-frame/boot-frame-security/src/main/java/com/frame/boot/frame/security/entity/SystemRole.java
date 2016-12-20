@@ -1,4 +1,4 @@
-package com.frame.boot.frame.common.security.entity;
+package com.frame.boot.frame.security.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

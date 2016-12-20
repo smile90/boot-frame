@@ -1,4 +1,4 @@
-package com.frame.boot.frame.common.security.properties;
+package com.frame.boot.frame.security.properties;
 
 import java.util.Arrays;
 

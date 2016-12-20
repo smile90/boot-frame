@@ -12,6 +12,7 @@
     <name>Spring Boot基础框架-模型</name>
     <description>Spring Boot基础-模型</description>
     <packaging>jar</packaging>
+
     <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

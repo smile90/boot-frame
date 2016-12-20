@@ -26,9 +26,7 @@ public class UserParam extends RequestBean {
         final StringBuffer sb = new StringBuffer("UserParam{");
         sb.append("userType='").append(userType).append('\'');
         sb.append(", userNo='").append(userNo).append('\'');
-        sb.append("} ");
-        sb.append(super.toString());
+        sb.append('}');
         return sb.toString();
     }
-
 }

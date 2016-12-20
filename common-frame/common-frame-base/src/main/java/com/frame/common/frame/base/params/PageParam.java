@@ -48,6 +48,10 @@ public class PageParam extends RequestBean {
 
     @Override
     public String toString() {
-        return "PageParam [page=" + page + ", rows=" + rows + "]";
+        final StringBuffer sb = new StringBuffer("PageParam{");
+        sb.append("page=").append(page);
+        sb.append(", rows=").append(rows);
+        sb.append('}');
+        return sb.toString();
     }
 }

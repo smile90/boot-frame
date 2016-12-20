@@ -1,6 +1,6 @@
 package com.frame.boot.frame.core.search;
 
-import com.frame.boot.frame.common.search.enums.DataType;
+import com.frame.common.frame.base.enums.DataType;
 import com.frame.boot.frame.core.exceptions.SearchException;
 import com.frame.boot.frame.utils.DateUtil;
 

@@ -5,9 +5,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.frame.common.frame.base.enums.AndOr;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.frame.boot.frame.common.search.enums.SearchConjunction;
 import com.frame.boot.frame.core.exceptions.SearchException;
 
 /**
@@ -18,10 +18,10 @@ import com.frame.boot.frame.core.exceptions.SearchException;
 public class CriteriaGroup<T> implements Specification<T> {
 
 	private Criteria<T> criteria1;
-	private SearchConjunction conjunction;
+	private AndOr conjunction;
 	private Criteria<T> criteria2;
 
-	private CriteriaGroup(Criteria<T> criteria1, SearchConjunction conjunction, Criteria<T> criteria2) {
+	private CriteriaGroup(Criteria<T> criteria1, AndOr conjunction, Criteria<T> criteria2) {
 		super();
 		this.criteria1 = criteria1;
 		this.conjunction = conjunction;
@@ -29,11 +29,11 @@ public class CriteriaGroup<T> implements Specification<T> {
 	}
 
 	public static <T> CriteriaGroup<T> and(Criteria<T> criteria1, Criteria<T> criteria2) {
-		return new CriteriaGroup<T>(criteria1, SearchConjunction.AND, criteria2);
+		return new CriteriaGroup<T>(criteria1, AndOr.AND, criteria2);
 	}
 
 	public static <T> CriteriaGroup<T> or(Criteria<T> criteria1, Criteria<T> criteria2) {
-		return new CriteriaGroup<T>(criteria1, SearchConjunction.OR, criteria2);
+		return new CriteriaGroup<T>(criteria1, AndOr.OR, criteria2);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class CriteriaGroup<T> implements Specification<T> {
 			case AND: return cb.and(criteria1.toPredicate(root, query, cb), criteria2.toPredicate(root, query, cb));
 			case OR: return cb.or(criteria1.toPredicate(root, query, cb), criteria2.toPredicate(root, query, cb));
 			default: throw new SearchException(SearchException.ERROR_CODE_CRITERIA_ERROR,
-					String.format("SearchConjunction not found. conjunction:%s", conjunction),
+					String.format("AndOr not found. conjunction:%s", conjunction),
 					SearchException.SHOW_MSG_CRITERIA_ERROR);
 		}
 	}

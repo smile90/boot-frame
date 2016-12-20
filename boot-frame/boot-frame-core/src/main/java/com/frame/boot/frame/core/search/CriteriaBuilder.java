@@ -7,9 +7,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.frame.common.frame.base.enums.AndOr;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.frame.boot.frame.common.search.enums.SearchConjunction;
 import com.frame.boot.frame.core.exceptions.SearchException;
 
 /**
@@ -20,26 +20,26 @@ import com.frame.boot.frame.core.exceptions.SearchException;
 public class CriteriaBuilder<T> implements Specification<T> {
 
 	private List<Criteria<T>> criterias = new ArrayList<>();
-	private List<SearchConjunction> conjunctions = new ArrayList<>();
+	private List<AndOr> conjunctions = new ArrayList<>();
 
 	public CriteriaBuilder(Criteria<T> criteria) {
 		criterias.add(criteria);
 	}
 
-	public CriteriaBuilder(List<Criteria<T>> criterias, List<SearchConjunction> conjunctions) {
+	public CriteriaBuilder(List<Criteria<T>> criterias, List<AndOr> conjunctions) {
 		this.criterias = criterias;
 		this.conjunctions = conjunctions;
 	}
 
 	public CriteriaBuilder<T> and(Criteria<T> criteria) {
 		criterias.add(criteria);
-		conjunctions.add(SearchConjunction.AND);
+		conjunctions.add(AndOr.AND);
 		return this;
 	}
 
 	public CriteriaBuilder<T> or(Criteria<T> criteria) {
 		criterias.add(criteria);
-		conjunctions.add(SearchConjunction.OR);
+		conjunctions.add(AndOr.OR);
 		return this;
 	}
 
@@ -53,12 +53,12 @@ public class CriteriaBuilder<T> implements Specification<T> {
 		if (size >= 1) {
 			for (int i = 1; i < size; i++) {
 				Criteria<T> criteria = criterias.get(i);
-				SearchConjunction conjunction = conjunctions.get(i - 1);
+				AndOr conjunction = conjunctions.get(i - 1);
 				switch (conjunction) {
 					case AND: tempPredicate = cb.and(tempPredicate, criteria.toPredicate(root, query, cb)); break;
 					case OR: tempPredicate = cb.or(tempPredicate, criteria.toPredicate(root, query, cb)); break;
 					default: throw new SearchException(SearchException.ERROR_CODE_CRITERIA_ERROR,
-							String.format("SearchConjunction not found. conjunction:%s", conjunction),
+							String.format("AndOr not found. conjunction:%s", conjunction),
 							SearchException.SHOW_MSG_CRITERIA_ERROR);
 				}
 			}

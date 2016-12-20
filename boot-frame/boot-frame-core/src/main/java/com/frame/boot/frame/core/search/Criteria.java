@@ -1,17 +1,12 @@
 package com.frame.boot.frame.core.search;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
+import com.frame.boot.frame.core.exceptions.SearchException;
+import com.frame.common.frame.base.enums.SearchType;
+import com.frame.common.frame.base.params.SearchParam;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.frame.boot.frame.common.search.beans.SearchData;
-import com.frame.boot.frame.common.search.enums.SearchType;
-import com.frame.boot.frame.core.exceptions.SearchException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.*;
 
 /**
  * 查询器
@@ -20,7 +15,7 @@ import com.frame.boot.frame.core.exceptions.SearchException;
  */
 public class Criteria<T> implements Specification<T> {
 
-	private SearchData searchData;
+	private SearchParam searchParam;
 
 	/** 查询的字段名称 */
 	private String name;
@@ -31,8 +26,8 @@ public class Criteria<T> implements Specification<T> {
 	/** 查询的字段值 */
 	private Object value;
 
-	public Criteria(SearchData searchData) {
-		this.searchData = searchData;
+	public Criteria(SearchParam searchParam) {
+		this.searchParam = searchParam;
 	}
 
 	public Criteria(String name, SearchType type, Object value) {
@@ -43,50 +38,32 @@ public class Criteria<T> implements Specification<T> {
 
 	@Override
 	public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		if (searchData != null) {
-			Path expression = root.get(searchData.getName());
-			switch (searchData.getType()) {
-				case EQ:
-					return cb.equal(expression, (Comparable) SearchUtil.getObjectValue(searchData.getValue(), searchData.getValueType()));
-				case NE:
-					return cb.notEqual(expression, (Comparable) SearchUtil.getObjectValue(searchData.getValue(), searchData.getValueType()));
-				case LIKE:
-					return cb.like((Expression<String>) expression, "%" + searchData.getValue() + "%");
-				case LT:
-					return cb.lessThan(expression, (Comparable) SearchUtil.getObjectValue(searchData.getValue(), searchData.getValueType()));
-				case LE:
-					return cb.lessThanOrEqualTo(expression, (Comparable) SearchUtil.getObjectValue(searchData.getValue(), searchData.getValueType()));
-				case GT:
-					return cb.greaterThan(expression, (Comparable) SearchUtil.getObjectValue(searchData.getValue(), searchData.getValueType()));
-				case GE:
-					return cb.greaterThanOrEqualTo(expression, (Comparable) SearchUtil.getObjectValue(searchData.getValue(), searchData.getValueType()));
-				default: throw new SearchException(SearchException.ERROR_CODE_CRITERIA_ERROR,
-						String.format("searchType not found. searchData:%s", searchData),
-						SearchException.SHOW_MSG_CRITERIA_ERROR);
-			}
-		} else {
-			Path expression = root.get(name);
-			switch (type) {
-				case EQ:
-					return cb.equal(expression, (Comparable) value);
-				case NE:
-					return cb.notEqual(expression, (Comparable) value);
-				case LIKE:
-					return cb.like((Expression<String>) expression, "%" + value + "%");
-				case LT:
-					return cb.lessThan(expression, (Comparable) value);
-				case LE:
-					return cb.lessThanOrEqualTo(expression, (Comparable) value);
-				case GT:
-					return cb.greaterThan(expression, (Comparable) value);
-				case GE:
-					return cb.greaterThanOrEqualTo(expression, (Comparable) value);
-				default: throw new SearchException(SearchException.ERROR_CODE_CRITERIA_ERROR,
-						String.format("searchType not found. searchData:%s", searchData),
-						SearchException.SHOW_MSG_CRITERIA_ERROR);
-			}
-		}
+		String realName = (searchParam != null ? searchParam.getName() : name);
+		Object realValue = (searchParam != null ? searchParam.getValue() : value);
+		SearchType realType = (searchParam != null ? searchParam.getType() : type);
 
+		Path expression = root.get(realName);
+		switch (realType) {
+			case EQ:
+				return cb.equal(expression, (Comparable) realValue);
+			case NE:
+				return cb.notEqual(expression, (Comparable) realValue);
+			case LIKE:
+				return cb.like((Expression<String>) expression, "%" + realValue + "%");
+			case LT:
+				return cb.lessThan(expression, (Comparable) realValue);
+			case LE:
+				return cb.lessThanOrEqualTo(expression, (Comparable) realValue);
+			case GT:
+				return cb.greaterThan(expression, (Comparable) realValue);
+			case GE:
+				return cb.greaterThanOrEqualTo(expression, (Comparable) realValue);
+			case IN:
+				return expression.in(realValue);
+			default: throw new SearchException(SearchException.ERROR_CODE_CRITERIA_ERROR,
+					String.format("searchType not found. searchParam:%s", searchParam),
+					SearchException.SHOW_MSG_CRITERIA_ERROR);
+		}
 	}
 
 }

@@ -12,20 +12,21 @@
     <name>Spring Boot基础框架-公共</name>
     <description>Spring Boot基础-公共</description>
     <packaging>jar</packaging>
+
     <dependencies>
-	    <dependency>
-		    <groupId>com.frame</groupId>
-		    <artifactId>common-frame-base</artifactId>
-		    <version>1.0.0</version>
-	    </dependency>
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>common-frame-base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.frame</groupId>
-			<artifactId>boot-frame-utils</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>boot-frame-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
-		<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -50,14 +51,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
         <dependency>
-			<groupId>com.github.penggle</groupId>
-			<artifactId>kaptcha</artifactId>
-		</dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
     </dependencies>
 </project>

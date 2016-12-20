@@ -17,7 +17,6 @@
 	<packaging>pom</packaging>
 
 	<properties>
-
 		<druid.version>1.0.26</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 
@@ -25,7 +24,7 @@
 
 		<fastjson.version>1.2.8</fastjson.version>
 
-		<spring-boot-admin.version>1.4.3</spring-boot-admin.version>
+		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
         <kaptcha.version>2.3.2</kaptcha.version>
 	</properties>
 
@@ -34,10 +33,27 @@
 	        <dependency>
 	            <groupId>io.spring.platform</groupId>
 	            <artifactId>platform-bom</artifactId>
-	            <version>2.0.8.RELEASE</version>
+	            <version>Athens-SR1</version>
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>
+
+			<!-- spring-boot-admin -->
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-server</artifactId>
+				<version>${spring-boot-admin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-server-ui</artifactId>
+				<version>${spring-boot-admin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-client</artifactId>
+				<version>${spring-boot-admin.version}</version>
+			</dependency>
 
 			<!-- data source -->
 			<dependency>
@@ -64,23 +80,6 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson.version}</version>
-			</dependency>
-
-			<!-- spring-boot-admin -->
-			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-server</artifactId>
-				<version>${spring-boot-admin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-server-ui</artifactId>
-				<version>${spring-boot-admin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-starter-client</artifactId>
-				<version>${spring-boot-admin.version}</version>
 			</dependency>
 
 			<!-- kaptcha -->

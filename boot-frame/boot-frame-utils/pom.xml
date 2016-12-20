@@ -6,6 +6,7 @@
 		<groupId>com.frame</groupId>
 		<artifactId>boot-frame</artifactId>
 		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
     <artifactId>boot-frame-utils</artifactId>

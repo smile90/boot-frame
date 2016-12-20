@@ -1,27 +1,17 @@
 package com.frame.boot.frame.security.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
+import com.frame.boot.frame.model.entity.BaseMysqlEntity;
+import com.frame.boot.frame.utils.EmptyUtil;
+import com.frame.common.frame.base.bean.IUser;
+import com.frame.common.frame.base.enums.UserStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.frame.base.bean.IUser;
-import com.frame.base.enums.UserStatus;
-import com.frame.common.base.entity.BaseMysqlEntity;
-import com.frame.common.utils.EmptyUtil;
-import com.frame.core.system.entity.SystemType;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 系统权限用户
@@ -37,11 +27,6 @@ public class SystemSecurityUser extends BaseMysqlEntity<Long> implements IUser, 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static final long serialVersionUID = 1L;
-
-	/** 类别 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "`type_code`", referencedColumnName = "`code`", insertable = false, updatable = false)
-	private SystemType type;
 
 	/** 类别标识 */
 	@Column(name = "`type_code`")
@@ -68,20 +53,17 @@ public class SystemSecurityUser extends BaseMysqlEntity<Long> implements IUser, 
 	@JoinColumn(name = "`username`", referencedColumnName = "`username`")
 	List<SystemUserAuthority> userAuthorities;
 
-	public SystemType getType() {
-		return type;
-	}
-
-	public void setType(SystemType type) {
-		this.type = type;
-	}
-
 	public String getTypeCode() {
 		return typeCode;
 	}
 
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
+	}
+
+	@Override
+	public String getUserId() {
+		return getId() == null ? null : getId().toString();
 	}
 
 	public String getUsername() {

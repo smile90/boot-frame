@@ -1,25 +1,15 @@
 package com.frame.boot.frame.security.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.frame.boot.frame.model.entity.BaseMysqlEntity;
 
-import com.frame.common.base.entity.BaseMysqlEntity;
-import com.frame.core.system.entity.SystemType;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "sys_role")
 public class SystemRole extends BaseMysqlEntity<Long> {
 
 	private static final long serialVersionUID = -3516710790338452063L;
-
-	/** 类别 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "`type_code`", referencedColumnName = "`code`", insertable = false, updatable = false)
-	private SystemType type;
 
 	/** 类别标识 */
 	@Column(name = "`type_code`")
@@ -36,14 +26,6 @@ public class SystemRole extends BaseMysqlEntity<Long> {
 	/** 描述 */
 	@Column(name = "`description`")
 	private String description;
-
-	public SystemType getType() {
-		return type;
-	}
-
-	public void setType(SystemType type) {
-		this.type = type;
-	}
 
 	public String getTypeCode() {
 		return typeCode;

@@ -1,32 +1,17 @@
 package com.frame.boot.frame.security.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import com.frame.boot.frame.model.entity.BaseMysqlEntity;
 import org.springframework.security.core.GrantedAuthority;
 
-import com.frame.common.base.entity.BaseMysqlEntity;
-import com.frame.core.system.entity.SystemType;
-
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "sys_authority")
 public class SystemAuthority extends BaseMysqlEntity<Long> implements GrantedAuthority {
 
 	private static final long serialVersionUID = -8114252629309110405L;
-
-	/** 类别 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "`type_code`", referencedColumnName = "`code`", insertable = false, updatable = false)
-	private SystemType type;
 
 	/** 类别标识 */
 	@Column(name = "`type_code`")
@@ -80,14 +65,6 @@ public class SystemAuthority extends BaseMysqlEntity<Long> implements GrantedAut
 	/** 子 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
 	private List<SystemAuthority> children = new ArrayList<>();
-
-	public SystemType getType() {
-		return type;
-	}
-
-	public void setType(SystemType type) {
-		this.type = type;
-	}
 
 	public String getTypeCode() {
 		return typeCode;

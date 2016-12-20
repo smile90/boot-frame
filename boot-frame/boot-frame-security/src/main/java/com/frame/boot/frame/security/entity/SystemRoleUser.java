@@ -1,13 +1,9 @@
 package com.frame.boot.frame.security.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-import com.frame.common.base.entity.BaseMysqlEntity;
+import com.frame.boot.frame.model.entity.BaseMysqlEntity;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "sys_role_user")

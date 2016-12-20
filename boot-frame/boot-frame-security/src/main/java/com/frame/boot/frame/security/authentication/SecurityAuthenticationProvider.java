@@ -1,14 +1,8 @@
 package com.frame.boot.frame.security.authentication;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
-
-import org.springframework.security.authentication.AccountExpiredException;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import com.frame.boot.frame.utils.EmptyUtil;
+import com.frame.boot.frame.utils.EncodeAndDecodeUtil;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.frame.common.utils.EmptyUtil;
-import com.frame.common.utils.EncodeAndDecodeUtil;
+import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 @Service("securityAuthenticationProvider")
 public class SecurityAuthenticationProvider implements AuthenticationProvider {

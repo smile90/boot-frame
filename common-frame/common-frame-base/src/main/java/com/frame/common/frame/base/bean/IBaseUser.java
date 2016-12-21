@@ -12,7 +12,7 @@ public interface IBaseUser {
 	 * 获取主键
 	 * @return
 	 */
-	public abstract String getId();
+	public abstract String getUserId();
 
 	/**
 	 * 获取用户名

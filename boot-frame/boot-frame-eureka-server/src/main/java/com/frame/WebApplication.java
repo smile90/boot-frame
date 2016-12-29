@@ -7,13 +7,14 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.PropertySource;
 
-@SpringBootApplication
 @EnableEurekaServer
+@SpringBootApplication
 @EnableConfigurationProperties
 @PropertySource(
     ignoreResourceNotFound = true,
     value = {
         "classpath:/application.properties",
+        "classpath:/config/system.properties",
         "classpath:/config/eureka.properties"
     }
 )

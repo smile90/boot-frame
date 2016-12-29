@@ -7,13 +7,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.PropertySource;
 
-@SpringBootApplication
 @EnableAdminServer
+@SpringBootApplication
 @EnableConfigurationProperties
 @PropertySource(
     ignoreResourceNotFound = true,
     value = {
         "classpath:/application.properties",
+        "classpath:/config/system.properties",
         "classpath:/config/boot-admin.properties"
     }
 )

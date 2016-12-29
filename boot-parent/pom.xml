@@ -100,4 +100,17 @@
 		</dependencies>
 	</dependencyManagement>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.properties</include>
+                    <include>**/config/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

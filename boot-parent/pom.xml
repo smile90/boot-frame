@@ -23,6 +23,9 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.source>${java.version}</maven.compiler.source>
 
+		<spring-cloud.version>Camden.SR3</spring-cloud.version>
+		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
+
 		<druid.version>1.0.26</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 
@@ -30,12 +33,20 @@
 
 		<fastjson.version>1.2.8</fastjson.version>
 
-		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
         <kaptcha.version>2.3.2</kaptcha.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- spring cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
 			<!-- spring-boot-admin -->
 			<dependency>
 				<groupId>de.codecentric</groupId>

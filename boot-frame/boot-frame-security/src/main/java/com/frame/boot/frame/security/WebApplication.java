@@ -12,7 +12,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {"com.frame"})
-
 @ServletComponentScan(basePackages = {"com.frame"})
 @EnableJpaRepositories(basePackages = {"com.frame"})
 @EntityScan(basePackages = {"com.frame"})
@@ -22,7 +21,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     value = {
         "classpath:/application.properties",
         "classpath:/config/system.properties",
-        "classpath:/config/boot-admin.properties",
         "classpath:/config/eureka.properties",
         "classpath:/config/dataSource.properties",
         "classpath:/config/monitor.properties",

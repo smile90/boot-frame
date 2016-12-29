@@ -14,8 +14,7 @@ import org.springframework.context.annotation.PropertySource;
     ignoreResourceNotFound = true,
     value = {
         "classpath:/application.properties",
-        "classpath:/config/system.properties",
-        "classpath:/config/boot-admin.properties"
+        "classpath:/config/system.properties"
     }
 )
 public class WebApplication extends SpringBootServletInitializer {

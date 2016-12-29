@@ -1,6 +1,6 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.model.entity.BaseMysqlEntity;
+import com.frame.boot.frame.core.entity.BaseMysqlEntity;
 import com.frame.boot.frame.utils.EmptyUtil;
 import com.frame.common.frame.base.bean.IUser;
 import com.frame.common.frame.base.enums.UserStatus;

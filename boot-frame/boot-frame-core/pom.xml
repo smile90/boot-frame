@@ -18,11 +18,6 @@
 		    <artifactId>boot-frame-common</artifactId>
 		    <version>1.0.0</version>
 	    </dependency>
-	    <dependency>
-		    <groupId>com.frame</groupId>
-		    <artifactId>boot-frame-model</artifactId>
-		    <version>1.0.0</version>
-	    </dependency>
 		<dependency>
 			<groupId>com.frame</groupId>
 			<artifactId>boot-frame-utils</artifactId>

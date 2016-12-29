@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.frame.boot.frame.model.entity.AbstractEntity;
+import com.frame.boot.frame.core.entity.AbstractEntity;
 
 public interface BaseService<E extends AbstractEntity<ID>, ID extends Serializable> {
 

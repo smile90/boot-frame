@@ -1,4 +1,4 @@
-package com.frame.boot.frame.model.entity;
+package com.frame.boot.frame.core.entity;
 
 import java.io.Serializable;
 import java.util.Date;

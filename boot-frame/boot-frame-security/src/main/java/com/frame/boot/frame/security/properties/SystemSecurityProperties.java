@@ -1,13 +1,17 @@
 package com.frame.boot.frame.security.properties;
 
-import java.util.Arrays;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+import java.util.Arrays;
 
 @Configuration
+@PropertySource(value = {"classpath:/config/security.properties"}, ignoreResourceNotFound = true)
 @ConfigurationProperties(prefix = "frame.security")
 public class SystemSecurityProperties {
+
+    private boolean enable = true;
 
 	private boolean enableCsrf = true;
 
@@ -16,7 +20,15 @@ public class SystemSecurityProperties {
 	/** URL配置 */
 	private Url url = new Url();
 
-	public boolean isEnableCsrf() {
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public boolean isEnableCsrf() {
 		return enableCsrf;
 	}
 
@@ -94,9 +106,14 @@ public class SystemSecurityProperties {
 
 	}
 
-	@Override
-	public String toString() {
-		return "SystemSecurityProperties [enableCsrf=" + enableCsrf + ", enableFrameOptions=" + enableFrameOptions + ", url=" + url + "]";
-	}
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SystemSecurityProperties{");
+        sb.append("enable=").append(enable);
+        sb.append(", enableCsrf=").append(enableCsrf);
+        sb.append(", enableFrameOptions=").append(enableFrameOptions);
+        sb.append(", url=").append(url);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -22,7 +22,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private SystemSecurityProperties systemSecurityProperties;
+    private SystemSecurityProperties systemSecurityProperties;
 
 	@Resource(name = "securityAuthenticationProvider")
 	private AuthenticationProvider securityAuthenticationProvider;
@@ -35,19 +35,25 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	logger.info("{}", systemSecurityProperties);
-
-    	if (!systemSecurityProperties.isEnableFrameOptions()) {
-    		http.headers().frameOptions().disable();
-    	}
-    	if (!systemSecurityProperties.isEnableCsrf()) {
-    		http.csrf().disable();
-    	}
-    	SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
-		http
-			.authorizeRequests()
-			.antMatchers(url.getPermitPaths()).permitAll()
-			.antMatchers(url.getAuthenticatePaths()).authenticated()
-			.and().formLogin().loginPage(url.getLoginUrl()).defaultSuccessUrl(url.getIndexUrl()).failureUrl(url.getLoginUrl() + "?error").permitAll()
-			.and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl()).permitAll();
+		if (systemSecurityProperties.isEnable()) {
+			if (!systemSecurityProperties.isEnableFrameOptions()) {
+				http.headers().frameOptions().disable();
+			}
+			if (!systemSecurityProperties.isEnableCsrf()) {
+				http.csrf().disable();
+			}
+			SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
+			http
+				.authorizeRequests()
+				.antMatchers(url.getPermitPaths()).permitAll()
+				.antMatchers(url.getAuthenticatePaths()).authenticated()
+				.and().formLogin().loginPage(url.getLoginUrl()).defaultSuccessUrl(url.getIndexUrl()).failureUrl(url.getLoginUrl() + "?error").permitAll()
+				.and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl()).permitAll();
+		}
+		else {
+			http
+				.authorizeRequests()
+				.antMatchers("/**").permitAll();
+		}
     }
 }

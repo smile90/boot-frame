@@ -1,4 +1,4 @@
-package com.frame.boot.frame.model.entity;
+package com.frame.boot.frame.core.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

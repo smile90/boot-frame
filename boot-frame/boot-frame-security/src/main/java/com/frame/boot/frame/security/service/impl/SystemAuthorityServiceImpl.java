@@ -1,20 +1,19 @@
 package com.frame.boot.frame.security.service.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.frame.common.base.search.Criteria;
-import com.frame.common.base.search.enums.SearchType;
-import com.frame.common.base.service.impl.BaseServiceImpl;
-import com.frame.common.utils.EmptyUtil;
-import com.frame.common.utils.json.SimpleKeyMapProcessFilter;
+import com.frame.boot.frame.core.search.Criteria;
+import com.frame.boot.frame.core.service.impl.BaseServiceImpl;
 import com.frame.boot.frame.security.entity.SystemAuthority;
 import com.frame.boot.frame.security.service.SystemAuthorityService;
+import com.frame.boot.frame.utils.EmptyUtil;
+import com.frame.boot.frame.utils.json.SimpleKeyMapProcessFilter;
+import com.frame.common.frame.base.enums.SearchType;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("systemAuthorityService")
 public class SystemAuthorityServiceImpl extends BaseServiceImpl<SystemAuthority, Long> implements SystemAuthorityService {

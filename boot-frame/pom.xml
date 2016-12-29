@@ -17,9 +17,10 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>boot-frame-common</module>
-		<module>boot-frame-core</module>
-		<module>boot-frame-monitor</module>
 		<module>boot-frame-utils</module>
+		<module>boot-frame-monitor</module>
+		<module>boot-frame-core</module>
+		<module>boot-frame-security</module>
 		<module>boot-frame-boot-admin</module>
 	</modules>
 

@@ -26,7 +26,6 @@
 		<spring-cloud.version>Camden.SR3</spring-cloud.version>
 		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
 
-		<druid.version>1.0.26</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 
 		<commons-compress.version>1.11</commons-compress.version>
@@ -62,13 +61,6 @@
 				<groupId>de.codecentric</groupId>
 				<artifactId>spring-boot-admin-starter-client</artifactId>
 				<version>${spring-boot-admin.version}</version>
-			</dependency>
-
-			<!-- data source -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>druid</artifactId>
-				<version>${druid.version}</version>
 			</dependency>
 
 			<dependency>

@@ -1,20 +1,22 @@
 package com.frame.common.frame.base.params;
 
-public class PageParam extends RequestParam {
+import com.frame.common.frame.base.bean.RequestBean;
+
+public class PageBean extends RequestBean {
 
     private static final long serialVersionUID = 1L;
 
     private int page = 1;
     private int rows = 15;
 
-    public PageParam() {
+    public PageBean() {
     }
 
-    public PageParam(int page) {
+    public PageBean(int page) {
         this.page = page;
     }
 
-    public PageParam(int page, int rows) {
+    public PageBean(int page, int rows) {
         this.page = page;
         this.rows = rows;
     }
@@ -46,7 +48,7 @@ public class PageParam extends RequestParam {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("PageParam{");
+        final StringBuffer sb = new StringBuffer("PageBean{");
         sb.append("page=").append(page);
         sb.append(", rows=").append(rows);
         sb.append('}');

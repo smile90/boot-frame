@@ -1,8 +1,8 @@
 package com.frame.boot.frame.core.search;
 
 import com.frame.boot.frame.utils.EmptyUtil;
-import com.frame.common.frame.base.params.PageParam;
-import com.frame.common.frame.base.params.SortParam;
+import com.frame.common.frame.base.params.PageBean;
+import com.frame.common.frame.base.params.SortBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -20,7 +20,7 @@ public class SearchBuilder {
 	 * @param sortParam
 	 * @return
 	 */
-	public static Sort sort(SortParam sortParam) {
+	public static Sort sort(SortBean sortParam) {
 		if (sortParam != null) {
 			return new Sort(new Order(Direction.valueOf(sortParam.getSortType().name()), sortParam.getSortField()));
 		} else {
@@ -33,7 +33,7 @@ public class SearchBuilder {
 	 * @param sortParams
 	 * @return
 	 */
-	public static Sort sort(SortParam... sortParams) {
+	public static Sort sort(SortBean... sortParams) {
 		if (EmptyUtil.notEmpty(sortParams)) {
 			int len = sortParams.length;
 			Order[] orders = new Order[len];
@@ -51,9 +51,9 @@ public class SearchBuilder {
 	 * @param pageParam
 	 * @return
 	 */
-	public static PageRequest pageRequest(PageParam pageParam) {
+	public static PageRequest pageRequest(PageBean pageParam) {
 		if (pageParam == null) {
-			pageParam = new PageParam();
+			pageParam = new PageBean();
 		}
 		return new PageRequest(pageParam.getJpaPage(), pageParam.getRows());
 	}
@@ -64,9 +64,9 @@ public class SearchBuilder {
 	 * @param sortParam
 	 * @return
 	 */
-	public static PageRequest pageRequest(PageParam pageParam, SortParam sortParam) {
+	public static PageRequest pageRequest(PageBean pageParam, SortBean sortParam) {
 		if (pageParam == null) {
-			pageParam = new PageParam();
+			pageParam = new PageBean();
 		}
 		Sort sort = sort(sortParam);
 		if (sort == null) {

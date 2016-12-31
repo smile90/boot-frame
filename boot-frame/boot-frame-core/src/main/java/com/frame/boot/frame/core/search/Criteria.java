@@ -2,7 +2,7 @@ package com.frame.boot.frame.core.search;
 
 import com.frame.boot.frame.core.exceptions.SearchException;
 import com.frame.common.frame.base.enums.SearchType;
-import com.frame.common.frame.base.params.SearchParam;
+import com.frame.common.frame.base.params.SearchBean;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,7 +15,7 @@ import javax.persistence.criteria.*;
  */
 public class Criteria<T> implements Specification<T> {
 
-	private SearchParam searchParam;
+	private SearchBean searchParam;
 
 	/** 查询的字段名称 */
 	private String name;
@@ -26,7 +26,7 @@ public class Criteria<T> implements Specification<T> {
 	/** 查询的字段值 */
 	private Object value;
 
-	public Criteria(SearchParam searchParam) {
+	public Criteria(SearchBean searchParam) {
 		this.searchParam = searchParam;
 	}
 

@@ -1,8 +1,9 @@
 package com.frame.common.frame.base.params;
 
+import com.frame.common.frame.base.bean.RequestBean;
 import com.frame.common.frame.base.enums.SortType;
 
-public class SortParam extends RequestParam {
+public class SortBean extends RequestBean {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,7 +20,7 @@ public class SortParam extends RequestParam {
     /**
      * 默认构造
      */
-    public SortParam() {
+    public SortBean() {
     }
 
     /**
@@ -27,7 +28,7 @@ public class SortParam extends RequestParam {
      *
      * @param sortField
      */
-    public SortParam(String sortField) {
+    public SortBean(String sortField) {
         this.sortField = sortField;
         this.sortType = SortType.ASC;
     }
@@ -38,7 +39,7 @@ public class SortParam extends RequestParam {
      * @param sortField
      * @param sortType
      */
-    public SortParam(String sortField, SortType sortType) {
+    public SortBean(String sortField, SortType sortType) {
         this.sortField = sortField;
         this.sortType = sortType;
     }
@@ -61,7 +62,7 @@ public class SortParam extends RequestParam {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("SortParam{");
+        final StringBuffer sb = new StringBuffer("SortBean{");
         sb.append("sortField='").append(sortField).append('\'');
         sb.append(", sortType=").append(sortType);
         sb.append('}');

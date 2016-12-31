@@ -1,6 +1,8 @@
 package com.frame.common.frame.base.params;
 
-public class UserParam extends RequestParam {
+import com.frame.common.frame.base.bean.RequestBean;
+
+public class UserBean extends RequestBean {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +23,7 @@ public class UserParam extends RequestParam {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("UserParam{");
+        final StringBuffer sb = new StringBuffer("UserBean{");
         sb.append("userType='").append(userType).append('\'');
         sb.append(", userNo='").append(userNo).append('\'');
         sb.append('}');

@@ -1,9 +1,10 @@
 package com.frame.common.frame.base.params;
 
+import com.frame.common.frame.base.bean.RequestBean;
 import com.frame.common.frame.base.enums.DataType;
 import com.frame.common.frame.base.enums.SearchType;
 
-public class SearchParam extends RequestParam {
+public class SearchBean extends RequestBean {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,9 +20,9 @@ public class SearchParam extends RequestParam {
     /** 查询的字段值 */
     private String value;
 
-    public SearchParam() {}
+    public SearchBean() {}
 
-    public SearchParam(String name, SearchType type, DataType valueType, String value) {
+    public SearchBean(String name, SearchType type, DataType valueType, String value) {
         this.name = name;
         this.type = type;
         this.valueType = valueType;
@@ -62,7 +63,7 @@ public class SearchParam extends RequestParam {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("SearchParam{");
+        final StringBuffer sb = new StringBuffer("SearchBean{");
         sb.append("name='").append(name).append('\'');
         sb.append(", type=").append(type);
         sb.append(", valueType=").append(valueType);

@@ -1,8 +1,10 @@
 package com.frame.common.frame.base.params;
 
+import com.frame.common.frame.base.bean.RequestBean;
+
 import java.util.Date;
 
-public class DateParam extends RequestParam {
+public class DateBean extends RequestBean {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +25,7 @@ public class DateParam extends RequestParam {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("DateParam{");
+        final StringBuffer sb = new StringBuffer("DateBean{");
         sb.append("beginTime=").append(beginTime);
         sb.append(", endTime=").append(endTime);
         sb.append("} ");

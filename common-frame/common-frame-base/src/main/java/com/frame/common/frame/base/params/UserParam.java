@@ -1,8 +1,6 @@
 package com.frame.common.frame.base.params;
 
-import com.frame.common.frame.base.bean.RequestBean;
-
-public class UserParam extends RequestBean {
+public class UserParam extends RequestParam {
 
     private static final long serialVersionUID = 1L;
 

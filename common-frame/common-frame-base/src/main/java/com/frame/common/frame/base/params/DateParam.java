@@ -2,9 +2,7 @@ package com.frame.common.frame.base.params;
 
 import java.util.Date;
 
-import com.frame.common.frame.base.bean.RequestBean;
-
-public class DateParam extends RequestBean {
+public class DateParam extends RequestParam {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,10 +1,9 @@
 package com.frame.common.frame.base.params;
 
-import com.frame.common.frame.base.bean.RequestBean;
 import com.frame.common.frame.base.enums.DataType;
 import com.frame.common.frame.base.enums.SearchType;
 
-public class SearchParam extends RequestBean {
+public class SearchParam extends RequestParam {
 
     private static final long serialVersionUID = 1L;
 

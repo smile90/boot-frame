@@ -22,6 +22,7 @@
 		<module>boot-frame-core</module>
 		<module>boot-frame-security</module>
 		<module>boot-frame-boot-admin</module>
+		<module>boot-frame-eureka-server</module>
 	</modules>
 
 </project>

@@ -14,6 +14,9 @@ import org.springframework.data.jpa.domain.Specification;
 import com.frame.boot.frame.core.entity.AbstractEntity;
 import com.frame.boot.frame.core.service.BaseService;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public abstract class BaseServiceImpl<E extends AbstractEntity<ID>, ID extends Serializable> implements BaseService<E, ID> {
 
 	@Autowired

@@ -1,4 +1,4 @@
-package com.frame.boot.frame.portal;
+package com.frame.boot.frame;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

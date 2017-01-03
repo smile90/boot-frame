@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security;
+package com.frame.boot.frame.portal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {"com.frame"})
 @ServletComponentScan(basePackages = {"com.frame"})
 @EnableJpaRepositories(basePackages = {"com.frame"})

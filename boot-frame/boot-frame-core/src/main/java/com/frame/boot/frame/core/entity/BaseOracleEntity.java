@@ -1,5 +1,7 @@
 package com.frame.boot.frame.core.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import java.io.Serializable;
 
 import javax.persistence.GeneratedValue;
@@ -12,8 +14,9 @@ public abstract class BaseOracleEntity<PK extends Serializable> extends Abstract
 
 	private static final long serialVersionUID = 6397194043500936420L;
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @Id
+    @GeneratedValue(generator = "IDGenerator")
+    @GenericGenerator(name = "IDGenerator", strategy = "com.frame.boot.frame.core.entity.IDGenerator")
     private PK id;
 
     @Override

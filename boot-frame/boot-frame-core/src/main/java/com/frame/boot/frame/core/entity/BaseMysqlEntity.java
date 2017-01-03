@@ -1,5 +1,7 @@
 package com.frame.boot.frame.core.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +14,8 @@ public abstract class BaseMysqlEntity<ID extends Serializable> extends AbstractE
 	private static final long serialVersionUID = 6086217779965466797L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "IDGenerator")
+    @GenericGenerator(name = "IDGenerator", strategy = "com.frame.boot.frame.core.entity.IDGenerator")
     private ID id;
 
     @Override

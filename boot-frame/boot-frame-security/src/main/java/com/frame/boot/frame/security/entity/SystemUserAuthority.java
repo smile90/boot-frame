@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "sys_user_authority")
-public class SystemUserAuthority extends BaseMysqlEntity<Long> {
+public class SystemUserAuthority extends BaseMysqlEntity<String> {
 
 	private static final long serialVersionUID = 8092446545663729988L;
 

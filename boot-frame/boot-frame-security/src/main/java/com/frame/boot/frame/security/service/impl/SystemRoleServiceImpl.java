@@ -6,6 +6,6 @@ import com.frame.boot.frame.security.service.SystemRoleService;
 import org.springframework.stereotype.Service;
 
 @Service("systemRoleService")
-public class SystemRoleServiceImpl extends BaseServiceImpl<SystemRole, Long> implements SystemRoleService {
+public class SystemRoleServiceImpl extends BaseServiceImpl<SystemRole, String> implements SystemRoleService {
 
 }

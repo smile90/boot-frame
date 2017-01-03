@@ -5,6 +5,6 @@ import com.frame.boot.frame.security.entity.SystemAuthority;
 import org.springframework.stereotype.Repository;
 
 @Repository("systemAuthorityRepository")
-public interface SystemAuthorityRepository extends BaseRepository<SystemAuthority, Long> {
+public interface SystemAuthorityRepository extends BaseRepository<SystemAuthority, String> {
 
 }

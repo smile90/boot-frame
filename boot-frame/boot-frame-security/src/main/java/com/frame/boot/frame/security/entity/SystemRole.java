@@ -2,12 +2,14 @@ package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.core.entity.BaseMysqlEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "sys_role")
-public class SystemRole extends BaseMysqlEntity<Long> {
+public class SystemRole extends BaseMysqlEntity<String> {
 
 	private static final long serialVersionUID = -3516710790338452063L;
 

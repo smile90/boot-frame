@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("systemAuthorityService")
-public class SystemAuthorityServiceImpl extends BaseServiceImpl<SystemAuthority, Long> implements SystemAuthorityService {
+public class SystemAuthorityServiceImpl extends BaseServiceImpl<SystemAuthority, String> implements SystemAuthorityService {
 
 	private SerializeFilter mapKeys = new SimpleKeyMapProcessFilter(new String[] {"id", "code", "parentCode"}, new String[] {"tid", "id", "pid"});
 	private SerializeFilter showKeys = new SimplePropertyPreFilter("id", "code", "name", "icon", "menu", "display", "validate", "enable", "parentCode", "children");

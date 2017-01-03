@@ -5,6 +5,6 @@ import com.frame.boot.frame.security.entity.SystemRole;
 import org.springframework.stereotype.Repository;
 
 @Repository("systemRoleRepository")
-public interface SystemRoleRepository extends BaseRepository<SystemRole, Long> {
+public interface SystemRoleRepository extends BaseRepository<SystemRole, String> {
 
 }

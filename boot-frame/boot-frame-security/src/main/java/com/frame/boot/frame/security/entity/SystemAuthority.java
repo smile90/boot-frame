@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "sys_authority")
-public class SystemAuthority extends BaseMysqlEntity<Long> implements GrantedAuthority {
+public class SystemAuthority extends BaseMysqlEntity<String> implements GrantedAuthority {
 
 	private static final long serialVersionUID = -8114252629309110405L;
 

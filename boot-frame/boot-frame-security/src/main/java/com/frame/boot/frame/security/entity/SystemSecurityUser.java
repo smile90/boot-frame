@@ -21,7 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "sys_security_user")
-public class SystemSecurityUser extends BaseMysqlEntity<Long> implements IUser, UserDetails {
+public class SystemSecurityUser extends BaseMysqlEntity<String> implements IUser, UserDetails {
 
 	@Transient
 	private Logger logger = LoggerFactory.getLogger(getClass());

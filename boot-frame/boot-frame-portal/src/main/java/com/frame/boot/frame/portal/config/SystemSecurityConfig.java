@@ -9,14 +9,10 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.Resource;
 
 @EnableWebSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -24,28 +20,20 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private RestTemplate restTemplate;
-
 	@Autowired
     private SystemSecurityProperties systemSecurityProperties;
 
-	@Resource(name = "securityAuthenticationProvider")
-	private AuthenticationProvider securityAuthenticationProvider;
+    @Autowired
+    private RestTemplate restTemplate;
 
-	@Bean
-	public FilterRegistrationBean securityFilter() {
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(new SecurityFilter(restTemplate));
-		registration.addUrlPatterns("/*");
-		registration.setOrder(1);
-		return registration;
-	}
-
-	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(securityAuthenticationProvider);
-	}
+    @Bean
+    public FilterRegistrationBean securityFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new SecurityFilter(restTemplate));
+        registration.addUrlPatterns("/*");
+        registration.setOrder(1);
+        return registration;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

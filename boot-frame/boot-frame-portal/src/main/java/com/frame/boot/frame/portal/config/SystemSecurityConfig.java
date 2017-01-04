@@ -1,6 +1,7 @@
 package com.frame.boot.frame.portal.config;
 
 import com.frame.boot.frame.portal.properties.SystemSecurityProperties;
+import com.frame.boot.frame.portal.rpc.service.SecurityService;
 import com.frame.boot.frame.security.filter.SecurityFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.client.RestTemplate;
 
 @EnableWebSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -24,12 +24,12 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     private SystemSecurityProperties systemSecurityProperties;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private SecurityService securityService;
 
     @Bean
     public FilterRegistrationBean securityFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SecurityFilter(restTemplate));
+        registration.setFilter(new SecurityFilter(securityService));
         registration.addUrlPatterns("/*");
         registration.setOrder(1);
         return registration;

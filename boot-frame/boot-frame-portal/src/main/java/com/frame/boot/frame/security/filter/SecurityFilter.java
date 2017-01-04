@@ -1,19 +1,17 @@
 package com.frame.boot.frame.security.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.frame.boot.frame.portal.constants.RemoteServiceConstant;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import com.frame.boot.frame.portal.rpc.service.SecurityService;
 
 import javax.servlet.*;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
 
-    private RestTemplate restTemplate;
+    private SecurityService securityService;
 
-    public SecurityFilter(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public SecurityFilter(SecurityService securityService) {
+        this.securityService = securityService;
     }
 
     @Override
@@ -21,10 +19,8 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(RemoteServiceConstant.SECURITY_SERVICE_FIND_USER + "/testUser", JSONObject.class);
-        System.out.println(responseEntity.getStatusCode());
-        System.out.println(responseEntity.getStatusCodeValue());
-        System.out.println(responseEntity.getBody());
+        JSONObject result = securityService.find("testUser");
+        System.out.println(result);
         filterChain.doFilter(request, response);
     }
 

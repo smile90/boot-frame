@@ -1,4 +1,4 @@
-package com.frame.boot.frame.utils;
+package com.frame.boot.frame.utils.file;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

@@ -29,6 +29,7 @@
 		<ojdbc.version>14</ojdbc.version>
 
 		<commons-compress.version>1.11</commons-compress.version>
+		<commons-csv.version>1.4</commons-csv.version>
 
 		<fastjson.version>1.2.8</fastjson.version>
 
@@ -79,6 +80,11 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-compress</artifactId>
 				<version>${commons-compress.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-csv</artifactId>
+				<version>${commons-csv.version}</version>
 			</dependency>
 
 			<!-- json -->

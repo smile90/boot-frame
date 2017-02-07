@@ -32,6 +32,7 @@
 		<commons-csv.version>1.4</commons-csv.version>
 
 		<fastjson.version>1.2.8</fastjson.version>
+		<druid.version>1.0.27</druid.version>
 
         <kaptcha.version>2.3.2</kaptcha.version>
 	</properties>
@@ -92,6 +93,11 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
 			</dependency>
 
 			<!-- kaptcha -->

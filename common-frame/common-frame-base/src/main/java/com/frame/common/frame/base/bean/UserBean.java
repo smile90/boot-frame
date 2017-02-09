@@ -1,8 +1,8 @@
-package com.frame.common.frame.base.params;
+package com.frame.common.frame.base.bean;
 
-import com.frame.common.frame.base.bean.RequestBean;
+import java.io.Serializable;
 
-public class UserBean extends RequestBean {
+public class UserBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

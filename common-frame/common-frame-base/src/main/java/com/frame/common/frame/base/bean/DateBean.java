@@ -1,10 +1,9 @@
-package com.frame.common.frame.base.params;
+package com.frame.common.frame.base.bean;
 
-import com.frame.common.frame.base.bean.RequestBean;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class DateBean extends RequestBean {
+public class DateBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

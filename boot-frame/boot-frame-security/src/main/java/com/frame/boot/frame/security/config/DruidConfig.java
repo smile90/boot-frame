@@ -50,7 +50,7 @@ public class DruidConfig {
         fitler.setFilter(new WebStatFilter());
         fitler.setUrlPatterns(Arrays.asList("/*"));
         if (EmptyUtil.notEmpty(druidProperties.getExclusions())) {
-            fitler.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+            fitler.addInitParameter("exclusions", druidProperties.getExclusions());
         }
         return fitler;
     }

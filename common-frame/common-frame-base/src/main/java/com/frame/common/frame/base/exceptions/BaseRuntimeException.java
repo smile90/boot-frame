@@ -7,6 +7,8 @@ package com.frame.common.frame.base.exceptions;
  */
 public class BaseRuntimeException extends RuntimeException {
 
+    private static final long serialVersionUID = 3026035531464881328L;
+
     /**
      * 错误码
      */

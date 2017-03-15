@@ -1,8 +1,8 @@
 package com.frame.boot.frame.core.search;
 
 import com.frame.boot.frame.utils.EmptyUtil;
-import com.frame.common.frame.base.params.PageBean;
-import com.frame.common.frame.base.params.SortBean;
+import com.frame.common.frame.base.bean.PageBean;
+import com.frame.common.frame.base.bean.SortBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;

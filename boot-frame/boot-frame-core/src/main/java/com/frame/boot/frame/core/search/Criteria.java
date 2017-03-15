@@ -2,7 +2,7 @@ package com.frame.boot.frame.core.search;
 
 import com.frame.boot.frame.core.exceptions.SearchException;
 import com.frame.common.frame.base.enums.SearchType;
-import com.frame.common.frame.base.params.SearchBean;
+import com.frame.common.frame.base.bean.SearchBean;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

@@ -1,10 +1,11 @@
-package com.frame.common.frame.base.params;
+package com.frame.common.frame.base.bean;
 
-import com.frame.common.frame.base.bean.RequestBean;
 import com.frame.common.frame.base.enums.DataType;
 import com.frame.common.frame.base.enums.SearchType;
 
-public class SearchBean extends RequestBean {
+import java.io.Serializable;
+
+public class SearchBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

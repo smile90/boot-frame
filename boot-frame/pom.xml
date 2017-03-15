@@ -24,6 +24,7 @@
 		<module>boot-frame-portal</module>
 		<module>boot-frame-boot-admin</module>
 		<module>boot-frame-eureka-server</module>
+		<module>boot-frame-config-server</module>
 	</modules>
 
 </project>

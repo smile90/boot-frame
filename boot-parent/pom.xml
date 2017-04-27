@@ -26,13 +26,13 @@
 		<spring-cloud.version>Camden.SR3</spring-cloud.version>
 		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
 
+		<druid.version>1.0.27</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 
 		<commons-compress.version>1.11</commons-compress.version>
 		<commons-csv.version>1.4</commons-csv.version>
 
 		<fastjson.version>1.2.8</fastjson.version>
-		<druid.version>1.0.27</druid.version>
 
         <kaptcha.version>2.3.2</kaptcha.version>
 	</properties>
@@ -70,6 +70,12 @@
 				<version>${spring-boot-admin.version}</version>
 			</dependency>
 
+			<!-- dataSource -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>ojdbc</groupId>
 				<artifactId>ojdbc</artifactId>
@@ -93,11 +99,6 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>druid</artifactId>
-				<version>${druid.version}</version>
 			</dependency>
 
 			<!-- kaptcha -->

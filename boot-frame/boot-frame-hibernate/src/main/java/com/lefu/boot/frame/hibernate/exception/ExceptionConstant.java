@@ -1,4 +1,4 @@
-package com.frame..boot.frame.hibernate.exception;
+package com.frame.boot.frame.hibernate.exception;
 
 /**
  * 异常码常量

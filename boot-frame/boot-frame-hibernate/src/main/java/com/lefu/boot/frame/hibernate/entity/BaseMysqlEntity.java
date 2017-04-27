@@ -1,4 +1,4 @@
-package com.frame..boot.frame.hibernate.entity;
+package com.frame.boot.frame.hibernate.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

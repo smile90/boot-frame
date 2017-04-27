@@ -1,10 +1,10 @@
-package com.frame..boot.frame.hibernate.search;
+package com.frame.boot.frame.hibernate.search;
 
 
-import com.frame..boot.frame.hibernate.param.SearchParam;
-import com.frame..common.frame.base.param.PageParam;
-import com.frame..common.frame.base.param.SortParam;
-import com.frame..common.frame.utils.EmptyUtil;
+import com.frame.boot.frame.hibernate.param.SearchParam;
+import com.frame.common.frame.base.param.PageParam;
+import com.frame.common.frame.base.param.SortParam;
+import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;

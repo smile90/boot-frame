@@ -1,6 +1,6 @@
-package com.frame..boot.frame.hibernate.utils;
+package com.frame.boot.frame.hibernate.utils;
 
-import com.frame..common.frame.utils.EmptyUtil;
+import com.frame.common.frame.utils.EmptyUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

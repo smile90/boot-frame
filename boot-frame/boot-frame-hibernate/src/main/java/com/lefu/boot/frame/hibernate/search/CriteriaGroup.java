@@ -1,15 +1,15 @@
-package com.frame..boot.frame.hibernate.search;
+package com.frame.boot.frame.hibernate.search;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.frame..boot.frame.hibernate.exception.ExceptionConstant;
-import com.frame..boot.frame.hibernate.search.enums.SearchConjunction;
+import com.frame.boot.frame.hibernate.exception.ExceptionConstant;
+import com.frame.boot.frame.hibernate.search.enums.SearchConjunction;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.frame..boot.frame.hibernate.exception.search.SearchException;
+import com.frame.boot.frame.hibernate.exception.search.SearchException;
 
 /**
  * 查询组

@@ -1,7 +1,7 @@
-package com.frame..boot.frame.hibernate.search;
+package com.frame.boot.frame.hibernate.search;
 
-import com.frame..boot.frame.hibernate.search.enums.DataType;
-import com.frame..boot.frame.hibernate.search.enums.SearchType;
+import com.frame.boot.frame.hibernate.search.enums.DataType;
+import com.frame.boot.frame.hibernate.search.enums.SearchType;
 
 /**
  * 查询数据

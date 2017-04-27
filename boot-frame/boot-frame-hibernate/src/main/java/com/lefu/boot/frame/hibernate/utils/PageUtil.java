@@ -1,6 +1,6 @@
-package com.frame..boot.frame.hibernate.utils;
+package com.frame.boot.frame.hibernate.utils;
 
-import com.frame..common.frame.base.bean.PageBean;
+import com.frame.common.frame.base.bean.PageBean;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

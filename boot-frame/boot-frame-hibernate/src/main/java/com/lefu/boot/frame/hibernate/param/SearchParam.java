@@ -1,8 +1,8 @@
-package com.frame..boot.frame.hibernate.param;
+package com.frame.boot.frame.hibernate.param;
 
 import com.alibaba.fastjson.JSON;
-import com.frame..boot.frame.hibernate.search.SearchData;
-import com.frame..common.frame.utils.EmptyUtil;
+import com.frame.boot.frame.hibernate.search.SearchData;
+import com.frame.common.frame.utils.EmptyUtil;
 
 import java.util.List;
 

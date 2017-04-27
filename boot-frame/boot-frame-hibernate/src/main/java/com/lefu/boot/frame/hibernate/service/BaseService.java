@@ -1,9 +1,9 @@
-package com.frame..boot.frame.hibernate.service;
+package com.frame.boot.frame.hibernate.service;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.frame..boot.frame.hibernate.entity.AbstractEntity;
+import com.frame.boot.frame.hibernate.entity.AbstractEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

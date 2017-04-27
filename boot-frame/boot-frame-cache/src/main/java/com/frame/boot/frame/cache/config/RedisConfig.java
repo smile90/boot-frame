@@ -1,9 +1,9 @@
-package com.frame..boot.frame.cache.config;
+package com.frame.boot.frame.cache.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.frame..boot.frame.cache.properties.RedisExpirProperties;
+import com.frame.boot.frame.cache.properties.RedisExpirProperties;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;

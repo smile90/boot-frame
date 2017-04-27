@@ -1,4 +1,4 @@
-package com.frame.boot.frame.utils.json;
+package com.frame.common.frame.utils.json;
 
 import java.util.Arrays;
 import java.util.List;

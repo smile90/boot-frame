@@ -1,4 +1,4 @@
-package com.frame.boot.frame.utils;
+package com.frame.common.frame.utils;
 
 import java.math.BigDecimal;
 
@@ -12,41 +12,47 @@ import java.math.BigDecimal;
 public class NumberUtil {
 
 	private NumberUtil() {}
-
+	
 	/**
 	 * 提供精确的加法运算
 	 * @param augend	被加数
-	 * @param addend	加数
+	 * @param addends	加数
 	 * @return			两个参数的和
 	 */
-	public static double add(double augend, double addend) {
-		BigDecimal b1 = BigDecimal.valueOf(augend);
-		BigDecimal b2 = BigDecimal.valueOf(addend);
-		return b1.add(b2).doubleValue();
+	public static double add(double augend, double... addends) {
+		BigDecimal sum = BigDecimal.valueOf(augend);
+		for (double addend : addends) {
+			sum = sum.add(BigDecimal.valueOf(addend));
+		}
+		return sum.doubleValue();
 	}
 
 	/**
 	 * 提供精确的减法运算
 	 * @param minuend		被减数
-	 * @param subtrahend	减数
+	 * @param subtrahends	减数
 	 * @return				两个参数的差
 	 */
-	public static double subtract(double minuend, double subtrahend) {
-		BigDecimal b1 = BigDecimal.valueOf(minuend);
-		BigDecimal b2 = BigDecimal.valueOf(subtrahend);
-		return b1.subtract(b2).doubleValue();
+	public static double subtract(double minuend, double... subtrahends) {
+		BigDecimal sum = BigDecimal.valueOf(minuend);
+		for (double subtrahend : subtrahends) {
+			sum = sum.subtract(BigDecimal.valueOf(subtrahend));
+		}
+		return sum.doubleValue();
 	}
 
 	/**
 	 * 提供精确的乘法运算
 	 * @param multiplicand	被乘数
-	 * @param multiplier	乘数
+	 * @param multipliers	乘数
 	 * @return				两个参数的积
 	 */
-	public static double multiply(double multiplicand, double multiplier) {
-		BigDecimal b1 = BigDecimal.valueOf(multiplicand);
-		BigDecimal b2 = BigDecimal.valueOf(multiplier);
-		return b1.multiply(b2).doubleValue();
+	public static double multiply(double multiplicand, double... multipliers) {
+		BigDecimal sum = BigDecimal.valueOf(multiplicand);
+		for (double multiplier : multipliers) {
+			sum = sum.multiply(BigDecimal.valueOf(multiplier));
+		}
+		return sum.doubleValue();
 	}
 
 	/**
@@ -180,4 +186,5 @@ public class NumberUtil {
 		BigDecimal b2 = BigDecimal.valueOf(n2);
 		return b1.compareTo(b2) <= 0;
 	}
+	
 }

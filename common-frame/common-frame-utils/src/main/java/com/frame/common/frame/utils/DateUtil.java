@@ -1,4 +1,4 @@
-package com.frame.boot.frame.utils;
+package com.frame.common.frame.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,7 +48,7 @@ public class DateUtil {
 	/**
 	 * 添加指定毫秒
 	 * @param date
-	 * @param seconds
+	 * @param milliSeconds
 	 * @return
 	 */
 	public static Date addMilliSecondToDate(Date date, int milliSeconds) {
@@ -85,12 +85,38 @@ public class DateUtil {
 	}
 
 	/**
-	 * 获取最小时间
+	 * 添加指定月
+	 * @param date
+	 * @param months
+	 * @return
+	 */
+	public static Date addMonthToDate(Date date, int months){
+		Calendar ca = Calendar.getInstance();
+		ca.setTime(date);
+		ca.add(Calendar.MONTH, months);
+		return ca.getTime();
+	}
+
+	/**
+	 * 添加指定年
+	 * @param date
+	 * @param years
+	 * @return
+	 */
+	public static Date addYearToDate(Date date, int years){
+		Calendar ca = Calendar.getInstance();
+		ca.setTime(date);
+		ca.add(Calendar.YEAR, years);
+		return ca.getTime();
+	}
+
+	/**
+	 * 获取当前最小时间
 	 * 例如：2016-04-01 12:00:00则为：2016-04-01 00:00:00
 	 * @param date
 	 * @return
 	 */
-	public static Date getMinDate(Date date) {
+	public static Date getCurrentMinDate(Date date) {
 		if (date == null) {
 			return null;
 		}
@@ -104,12 +130,12 @@ public class DateUtil {
 	}
 
 	/**
-	 * 获取最大时间
+	 * 获取当前最大时间
 	 * 例如：2016-04-01 12:00:00则为：2016-04-01 23:59:59.999
 	 * @param date
 	 * @return
 	 */
-	public static Date getMaxDate(Date date) {
+	public static Date getCurrentMaxDate(Date date) {
 		if (date == null) {
 			return null;
 		}
@@ -120,5 +146,37 @@ public class DateUtil {
 		calendar.set(Calendar.SECOND, 59);
 		calendar.set(Calendar.MILLISECOND, 999);
 		return calendar.getTime();
+	}
+
+	/**
+	 * 获取多个时间中的最小时间
+	 * @param dates
+	 * @return
+	 */
+	public static Date getMinDate(Date... dates) {
+		if (dates == null || EmptyUtil.isEmpty(dates)) {
+			return null;
+		}
+		Date minDate = null;
+		for (Date date : dates) {
+			minDate = (minDate == null ? date : (minDate.before(date) ? minDate : date));
+		}
+		return minDate;
+	}
+
+	/**
+	 * 获取多个时间中的最大时间
+	 * @param dates
+	 * @return
+	 */
+	public static Date getMaxDate(Date... dates) {
+		if (dates == null || EmptyUtil.isEmpty(dates)) {
+			return null;
+		}
+		Date maxDate = null;
+		for (Date date : dates) {
+			maxDate = (maxDate == null ? date : (maxDate.after(date) ? maxDate : date));
+		}
+		return maxDate;
 	}
 }

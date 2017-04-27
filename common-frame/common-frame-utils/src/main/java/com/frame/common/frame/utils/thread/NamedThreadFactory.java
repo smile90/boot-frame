@@ -1,4 +1,4 @@
-package com.frame.boot.frame.utils.thread;
+package com.frame.common.frame.utils.thread;
 
 import java.util.concurrent.ThreadFactory;
 
@@ -8,9 +8,9 @@ import java.util.concurrent.ThreadFactory;
  * 2015年4月10日上午11:36:21
  */
 public class NamedThreadFactory implements ThreadFactory {
-
+	
 	private String prefix;
-
+	
 	private int seq = 0;
 
 	public NamedThreadFactory(String threadNamePrefix) {

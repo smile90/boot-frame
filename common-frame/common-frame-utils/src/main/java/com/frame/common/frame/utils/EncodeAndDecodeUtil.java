@@ -1,4 +1,4 @@
-package com.frame.boot.frame.utils;
+package com.frame.common.frame.utils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;

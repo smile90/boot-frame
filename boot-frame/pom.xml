@@ -17,6 +17,9 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>boot-frame-common</module>
+		<module>boot-frame-cache</module>
+		<module>boot-frame-mybatis</module>
+		<module>boot-frame-hibernate</module>
 		<module>boot-frame-monitor</module>
 		<module>boot-frame-core</module>
 		<module>boot-frame-security</module>

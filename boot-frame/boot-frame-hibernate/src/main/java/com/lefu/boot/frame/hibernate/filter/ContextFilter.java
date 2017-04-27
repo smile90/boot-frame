@@ -1,4 +1,4 @@
-package com.lefu.boot.frame.hibernate.filter;
+package com.frame..boot.frame.hibernate.filter;
 
 import java.io.IOException;
 

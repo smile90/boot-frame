@@ -1,10 +1,10 @@
-package com.lefu.boot.frame.hibernate.service.impl;
+package com.frame..boot.frame.hibernate.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.lefu.boot.frame.hibernate.entity.AbstractEntity;
-import com.lefu.boot.frame.hibernate.service.BaseService;
+import com.frame..boot.frame.hibernate.entity.AbstractEntity;
+import com.frame..boot.frame.hibernate.service.BaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lefu.boot.frame.hibernate.repository.BaseRepository;
+import com.frame..boot.frame.hibernate.repository.BaseRepository;
 
 @Transactional
 public abstract class BaseServiceImpl<E extends AbstractEntity<ID>, ID extends Serializable> implements BaseService<E, ID> {

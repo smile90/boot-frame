@@ -1,8 +1,8 @@
-package com.lefu.boot.frame.hibernate.search;
+package com.frame..boot.frame.hibernate.search;
 
-import com.lefu.boot.frame.hibernate.exception.ExceptionConstant;
-import com.lefu.boot.frame.hibernate.exception.search.SearchException;
-import com.lefu.boot.frame.hibernate.search.enums.SearchType;
+import com.frame..boot.frame.hibernate.exception.ExceptionConstant;
+import com.frame..boot.frame.hibernate.exception.search.SearchException;
+import com.frame..boot.frame.hibernate.search.enums.SearchType;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

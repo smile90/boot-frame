@@ -1,7 +1,7 @@
-package com.lefu.boot.frame.hibernate.exception.search;
+package com.frame..boot.frame.hibernate.exception.search;
 
 
-import com.lefu.common.frame.base.exception.BaseRuntimeException;
+import com.frame..common.frame.base.exception.BaseRuntimeException;
 
 /**
  * 查询异常

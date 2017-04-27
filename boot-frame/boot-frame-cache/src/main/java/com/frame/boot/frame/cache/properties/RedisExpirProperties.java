@@ -1,4 +1,4 @@
-package com.lefu.boot.frame.cache.properties;
+package com.frame..boot.frame.cache.properties;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

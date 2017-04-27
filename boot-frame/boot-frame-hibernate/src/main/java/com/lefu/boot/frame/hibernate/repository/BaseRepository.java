@@ -1,4 +1,4 @@
-package com.lefu.boot.frame.hibernate.repository;
+package com.frame..boot.frame.hibernate.repository;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.lefu.boot.frame.hibernate.search.enums;
+package com.frame..boot.frame.hibernate.search.enums;
 
 /**
  * 查询类别

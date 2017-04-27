@@ -1,4 +1,4 @@
-package com.lefu.boot.frame.cache.utils;
+package com.frame..boot.frame.cache.utils;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

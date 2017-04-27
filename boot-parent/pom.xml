@@ -26,6 +26,8 @@
 		<spring-cloud.version>Camden.SR3</spring-cloud.version>
 		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
 
+		<spring-boot-mybatis.version>1.2.0</spring-boot-mybatis.version>
+
 		<druid.version>1.0.27</druid.version>
 		<ojdbc.version>14</ojdbc.version>
 
@@ -46,6 +48,13 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<!-- spring boot mybatis -->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${spring-boot-mybatis.version}</version>
 			</dependency>
 
 			<!-- spring-boot-admin -->

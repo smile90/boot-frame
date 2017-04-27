@@ -1,32 +1,27 @@
 package com.frame.common.frame.base.bean;
 
-import java.io.Serializable;
-
 import com.frame.common.frame.base.enums.SuccessFail;
 import com.frame.common.frame.base.utils.ServerIdentityUtil;
 
 /**
  * 响应bean
- * @author duancq 2015年4月4日下午1:46:15
+ * @author duancq
+ * 2014-1-1 上午11:49:21
  */
-public class ResponseBean<T extends Serializable> extends InfoBean<T> {
+public class ResponseBean<T> extends InfoBean<T> {
 
 	private static final long serialVersionUID = 1L;
 
-	public ResponseBean() {
-		super();
+	private String serverMsg = ServerIdentityUtil.getLocalHostIP() + "|" + ServerIdentityUtil.getLocalHostName();
+
+	public ResponseBean() {}
+
+	public ResponseBean(SuccessFail successFail, String showMsg, String code, String description, T object) {
+		super(successFail, showMsg, code, description, object);
 	}
 
-	public ResponseBean(SuccessFail successFail, String code, String description, String showMsg, T object) {
-		super(successFail, code, description, showMsg, object);
-	}
-
-	public ResponseBean(SuccessFail successFail, String code, String description, String showMsg) {
-		super(successFail, code, description, showMsg);
-	}
-
-	public ResponseBean(SuccessFail successFail, String showMsg, T object) {
-		super(successFail, showMsg, object);
+	public ResponseBean(SuccessFail successFail) {
+		super(successFail);
 	}
 
 	public ResponseBean(SuccessFail successFail, String showMsg) {
@@ -37,15 +32,19 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 		super(successFail, object);
 	}
 
-	public ResponseBean(SuccessFail successFail) {
-		super(successFail);
+	public ResponseBean(SuccessFail successFail, String showMsg, T object) {
+		super(successFail, showMsg, object);
+	}
+
+	public ResponseBean(SuccessFail successFail, String showMsg, String code, String description) {
+		super(successFail, showMsg, code, description);
 	}
 
 	/**
 	 * 成功
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> SUCCESS() {
+	public static <T> ResponseBean<T> SUCCESS() {
 		return new ResponseBean<T>(SuccessFail.SUCCESS);
 	}
 
@@ -54,7 +53,7 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> SUCCESS(T object) {
+	public static <T> ResponseBean<T> SUCCESS(T object) {
 		return new ResponseBean<T>(SuccessFail.SUCCESS, object);
 	}
 
@@ -63,7 +62,7 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> SUCCESS(String showMsg) {
+	public static <T> ResponseBean<T> SUCCESS(String showMsg) {
 		return new ResponseBean<T>(SuccessFail.SUCCESS, showMsg);
 	}
 
@@ -73,38 +72,38 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> SUCCESS(String showMsg, T object) {
+	public static <T> ResponseBean<T> SUCCESS(String showMsg, T object) {
 		return new ResponseBean<T>(SuccessFail.SUCCESS, showMsg, object);
 	}
 
 	/**
 	 * 成功内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> SUCCESS(String code, String description, String showMsg) {
-		return new ResponseBean<T>(SuccessFail.SUCCESS, code, description, showMsg);
+	public static <T> ResponseBean<T> SUCCESS(String showMsg, String code, String description) {
+		return new ResponseBean<T>(SuccessFail.SUCCESS, showMsg, code, description);
 	}
 
 	/**
 	 * 成功内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> SUCCESS(String code, String description, String showMsg, T object) {
-		return new ResponseBean<T>(SuccessFail.SUCCESS, code, description, showMsg, object);
+	public static <T> ResponseBean<T> SUCCESS(String showMsg, String code, String description, T object) {
+		return new ResponseBean<T>(SuccessFail.SUCCESS, showMsg, code, description, object);
 	}
 
 	/**
 	 * 失败
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> FAIL() {
+	public static <T> ResponseBean<T> FAIL() {
 		return new ResponseBean<T>(SuccessFail.FAIL);
 	}
 
@@ -113,7 +112,7 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> FAIL(String showMsg) {
+	public static <T> ResponseBean<T> FAIL(String showMsg) {
 		return new ResponseBean<T>(SuccessFail.FAIL, showMsg);
 	}
 
@@ -122,7 +121,7 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> FAIL(T object) {
+	public static <T> ResponseBean<T> FAIL(T object) {
 		return new ResponseBean<T>(SuccessFail.FAIL, object);
 	}
 
@@ -132,38 +131,38 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> FAIL(String showMsg, T object) {
+	public static <T> ResponseBean<T> FAIL(String showMsg, T object) {
 		return new ResponseBean<T>(SuccessFail.FAIL, showMsg, object);
 	}
 
 	/**
 	 * 失败内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> FAIL(String code, String description, String showMsg) {
-		return new ResponseBean<T>(SuccessFail.FAIL, code, description, showMsg);
+	public static <T> ResponseBean<T> FAIL(String showMsg, String code, String description) {
+		return new ResponseBean<T>(SuccessFail.FAIL, showMsg, code, description);
 	}
 
 	/**
 	 * 失败内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> FAIL(String code, String description, String showMsg, T object) {
-		return new ResponseBean<T>(SuccessFail.FAIL, code, description, showMsg, object);
+	public static <T> ResponseBean<T> FAIL(String showMsg, String code, String description, T object) {
+		return new ResponseBean<T>(SuccessFail.FAIL, showMsg, code, description, object);
 	}
 
 	/**
 	 * 异常
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> EXCEPTION() {
+	public static <T> ResponseBean<T> EXCEPTION() {
 		return new ResponseBean<T>(SuccessFail.EXCEPTION);
 	}
 
@@ -172,7 +171,7 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> EXCEPTION(String showMsg) {
+	public static <T> ResponseBean<T> EXCEPTION(String showMsg) {
 		return new ResponseBean<T>(SuccessFail.EXCEPTION, showMsg);
 	}
 
@@ -181,7 +180,7 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> EXCEPTION(T object) {
+	public static <T> ResponseBean<T> EXCEPTION(T object) {
 		return new ResponseBean<T>(SuccessFail.EXCEPTION, object);
 	}
 
@@ -191,41 +190,39 @@ public class ResponseBean<T extends Serializable> extends InfoBean<T> {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> EXCEPTION(String showMsg, T object) {
+	public static <T> ResponseBean<T> EXCEPTION(String showMsg, T object) {
 		return new ResponseBean<T>(SuccessFail.EXCEPTION, showMsg, object);
 	}
 
 	/**
 	 * 异常内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> EXCEPTION(String code, String description, String showMsg) {
-		return new ResponseBean<T>(SuccessFail.EXCEPTION, code, description, showMsg);
+	public static <T> ResponseBean<T> EXCEPTION(String showMsg, String code, String description) {
+		return new ResponseBean<T>(SuccessFail.EXCEPTION, showMsg, code, description);
 	}
 
 	/**
 	 * 异常内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> ResponseBean<T> EXCEPTION(String code, String description, String showMsg, T object) {
-		return new ResponseBean<T>(SuccessFail.EXCEPTION, code, description, showMsg, object);
+	public static <T> ResponseBean<T> EXCEPTION(String showMsg, String code, String description, T object) {
+		return new ResponseBean<T>(SuccessFail.EXCEPTION, showMsg, code, description, object);
 	}
 
-	@Override
-	public String toString() {
-		final StringBuffer sb = new StringBuffer("ResponseBean{");
-		sb.append("successFail=").append(getResult());
-		sb.append(", msg=").append(getMsg());
-		sb.append(". ").append(ServerIdentityUtil.getLocalHostIP() + "|" + ServerIdentityUtil.getLocalHostName());
-		sb.append('}');
-		return sb.toString();
+	/**
+	 * 获取服务器
+	 * @return
+	 */
+	public String getServerMsg() {
+		return this.serverMsg;
 	}
 
 }

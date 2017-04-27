@@ -2,56 +2,42 @@ package com.frame.common.frame.base.bean;
 
 import java.io.Serializable;
 
-public class PageBean implements Serializable {
+public class PageBean<T> implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private int page = 1;
-    private int rows = 15;
+	private int pageSize = 10;
+	private long totalPage;
+	private long totalResult;
+	private long currentPage;
+	private T result;
 
-    public PageBean() {
-    }
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public long getTotalPage() {
+		return pageSize == 0 ? 0 : (int)Math.ceil((double)totalResult / (double)pageSize);
+	}
+	public long getTotalResult() {
+		return totalResult;
+	}
+	public void setTotalResult(long totalResult) {
+		this.totalResult = totalResult;
+	}
+	public long getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(long currentPage) {
+		this.currentPage = currentPage;
+	}
+	public T getResult() {
+		return result;
+	}
+	public void setResult(T result) {
+		this.result = result;
+	}
 
-    public PageBean(int page) {
-        this.page = page;
-    }
-
-    public PageBean(int page, int rows) {
-        this.page = page;
-        this.rows = rows;
-    }
-
-    /**
-     * JPA默认从0页开始
-     *
-     * @return
-     */
-    public int getJpaPage() {
-        return page > 0 ? page - 1 : page;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("PageBean{");
-        sb.append("page=").append(page);
-        sb.append(", rows=").append(rows);
-        sb.append('}');
-        return sb.toString();
-    }
 }

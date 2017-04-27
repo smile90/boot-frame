@@ -8,8 +8,8 @@ package com.frame.common.frame.base.enums;
 public enum YesNo {
 
 	YES("YES", "是"),
-	Y("Y", "是"),
 	NO("NO", "否"),
+	Y("Y", "是"),
 	N("N", "否");
 
 	private String name;

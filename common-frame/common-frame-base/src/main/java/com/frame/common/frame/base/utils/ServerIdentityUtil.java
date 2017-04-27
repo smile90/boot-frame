@@ -10,7 +10,7 @@ import java.net.InetAddress;
 public class ServerIdentityUtil {
 
 	private ServerIdentityUtil() {}
-	
+
 	/*
 	 * 获取本地IP
 	 */

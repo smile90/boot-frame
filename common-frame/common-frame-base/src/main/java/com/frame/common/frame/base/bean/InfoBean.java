@@ -1,17 +1,17 @@
 package com.frame.common.frame.base.bean;
 
+import com.frame.common.frame.base.enums.SuccessFail;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.frame.common.frame.base.enums.SuccessFail;
-
 /**
- * 普通信息bean
+ * 信息bean
  * @author duancq
  * 2014-1-1 上午11:49:21
  */
-public class InfoBean<T extends Serializable> implements Serializable {
+public class InfoBean<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -78,11 +78,11 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param code
 	 * @param description
 	 */
-	protected InfoBean(SuccessFail successFail, String code, String description, String showMsg) {
+	protected InfoBean(SuccessFail successFail, String showMsg, String code, String description) {
 		this.successFail = successFail;
+		this.msg.put(MSG, showMsg);
 		this.msg.put(CODE, code);
 		this.msg.put(DESCRIPTION, description);
-		this.msg.put(MSG, showMsg);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param description
 	 * @param object
 	 */
-	protected InfoBean(SuccessFail successFail, String code, String description, String showMsg, T object) {
+	protected InfoBean(SuccessFail successFail, String showMsg, String code, String description, T object) {
 		this.successFail = successFail;
 		this.msg.put(MSG, showMsg);
 		this.msg.put(CODE, code);
@@ -105,7 +105,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * 成功
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> SUCCESS() {
+	public static <T> InfoBean<T> SUCCESS() {
 		return new InfoBean<T>(SuccessFail.SUCCESS);
 	}
 
@@ -114,7 +114,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> SUCCESS(T object) {
+	public static <T> InfoBean<T> SUCCESS(T object) {
 		return new InfoBean<T>(SuccessFail.SUCCESS, object);
 	}
 
@@ -123,7 +123,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> SUCCESS(String showMsg) {
+	public static <T> InfoBean<T> SUCCESS(String showMsg) {
 		return new InfoBean<T>(SuccessFail.SUCCESS, showMsg);
 	}
 
@@ -133,38 +133,38 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> SUCCESS(String showMsg, T object) {
+	public static <T> InfoBean<T> SUCCESS(String showMsg, T object) {
 		return new InfoBean<T>(SuccessFail.SUCCESS, showMsg, object);
 	}
 
 	/**
 	 * 成功内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> SUCCESS(String code, String description, String showMsg) {
-		return new InfoBean<T>(SuccessFail.SUCCESS, code, description, showMsg);
+	public static <T> InfoBean<T> SUCCESS(String showMsg, String code, String description) {
+		return new InfoBean<T>(SuccessFail.SUCCESS, showMsg, code, description);
 	}
 
 	/**
 	 * 成功内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> SUCCESS(String code, String description, String showMsg, T object) {
-		return new InfoBean<T>(SuccessFail.SUCCESS, code, description, showMsg, object);
+	public static <T> InfoBean<T> SUCCESS(String showMsg, String code, String description, T object) {
+		return new InfoBean<T>(SuccessFail.SUCCESS, showMsg, code, description, object);
 	}
 
 	/**
 	 * 失败
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> FAIL() {
+	public static <T> InfoBean<T> FAIL() {
 		return new InfoBean<T>(SuccessFail.FAIL);
 	}
 
@@ -173,7 +173,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> FAIL(String showMsg) {
+	public static <T> InfoBean<T> FAIL(String showMsg) {
 		return new InfoBean<T>(SuccessFail.FAIL, showMsg);
 	}
 
@@ -182,7 +182,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> FAIL(T object) {
+	public static <T> InfoBean<T> FAIL(T object) {
 		return new InfoBean<T>(SuccessFail.FAIL, object);
 	}
 
@@ -192,38 +192,38 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> FAIL(String showMsg, T object) {
+	public static <T> InfoBean<T> FAIL(String showMsg, T object) {
 		return new InfoBean<T>(SuccessFail.FAIL, showMsg, object);
 	}
 
 	/**
 	 * 失败内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> FAIL(String code, String description, String showMsg) {
-		return new InfoBean<T>(SuccessFail.FAIL, code, description, showMsg);
+	public static <T> InfoBean<T> FAIL(String showMsg, String code, String description) {
+		return new InfoBean<T>(SuccessFail.FAIL, showMsg, code, description);
 	}
 
 	/**
 	 * 失败内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> FAIL(String code, String description, String showMsg, T object) {
-		return new InfoBean<T>(SuccessFail.FAIL, code, description, showMsg, object);
+	public static <T> InfoBean<T> FAIL(String showMsg, String code, String description, T object) {
+		return new InfoBean<T>(SuccessFail.FAIL, showMsg, code, description, object);
 	}
 
 	/**
 	 * 异常
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> EXCEPTION() {
+	public static <T> InfoBean<T> EXCEPTION() {
 		return new InfoBean<T>(SuccessFail.EXCEPTION);
 	}
 
@@ -232,7 +232,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> EXCEPTION(String showMsg) {
+	public static <T> InfoBean<T> EXCEPTION(String showMsg) {
 		return new InfoBean<T>(SuccessFail.EXCEPTION, showMsg);
 	}
 
@@ -241,7 +241,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> EXCEPTION(T object) {
+	public static <T> InfoBean<T> EXCEPTION(T object) {
 		return new InfoBean<T>(SuccessFail.EXCEPTION, object);
 	}
 
@@ -251,31 +251,31 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> EXCEPTION(String showMsg, T object) {
+	public static <T> InfoBean<T> EXCEPTION(String showMsg, T object) {
 		return new InfoBean<T>(SuccessFail.EXCEPTION, showMsg, object);
 	}
 
 	/**
 	 * 异常内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> EXCEPTION(String code, String description, String showMsg) {
-		return new InfoBean<T>(SuccessFail.EXCEPTION, code, description, showMsg);
+	public static <T> InfoBean<T> EXCEPTION(String showMsg, String code, String description) {
+		return new InfoBean<T>(SuccessFail.EXCEPTION, showMsg, code, description);
 	}
 
 	/**
 	 * 异常内容
+	 * @param showMsg
 	 * @param code
 	 * @param description
-	 * @param showMsg
 	 * @param object
 	 * @return
 	 */
-	public static <T extends Serializable> InfoBean<T> EXCEPTION(String code, String description, String showMsg, T object) {
-		return new InfoBean<T>(SuccessFail.EXCEPTION, code, description, showMsg, object);
+	public static <T> InfoBean<T> EXCEPTION(String showMsg, String code, String description, T object) {
+		return new InfoBean<T>(SuccessFail.EXCEPTION, showMsg, code, description, object);
 	}
 
 	/**
@@ -292,8 +292,8 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @param key
 	 * @return
 	 */
-	public T get(String key) {
-		return (T) msg.get(key);
+	public Object get(String key) {
+		return msg.get(key);
 	}
 
 	/**
@@ -382,7 +382,7 @@ public class InfoBean<T extends Serializable> implements Serializable {
 	 * @return
 	 */
 	public T getObject() {
-		return get(OBJECT);
+		return (T) get(OBJECT);
 	}
 
 	@Override

@@ -1,0 +1,6 @@
+# spring boot actuator
+management:
+  security:
+    enabled: false
+    roles: ${security.user.role}
+  context-path: /actuator

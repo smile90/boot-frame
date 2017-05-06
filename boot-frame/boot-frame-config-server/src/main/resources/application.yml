@@ -34,10 +34,3 @@ eureka:
   instance:
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
-
-# spring boot actuator
-management:
-  security:
-    enabled: false
-    roles: ${security.user.role}
-  context-path: /actuator

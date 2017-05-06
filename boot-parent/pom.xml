@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>Brussels-SR2</version>
-    </parent>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.3.RELEASE</version>
+	</parent>
 
 	<groupId>com.frame</groupId>
 	<artifactId>boot-parent</artifactId>
@@ -23,7 +23,8 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.source>${java.version}</maven.compiler.source>
 
-		<spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
+		<spring-platform.version>Brussels-SR2</spring-platform.version>
+		<spring-cloud.version>Brixton.SR7</spring-cloud.version>
 		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
 
 		<spring-boot-mybatis.version>1.2.0</spring-boot-mybatis.version>
@@ -41,6 +42,15 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- spring platform -->
+			<dependency>
+				<groupId>io.spring.platform</groupId>
+				<artifactId>platform-bom</artifactId>
+				<version>${spring-platform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
 			<!-- spring cloud -->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -118,18 +128,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-    <build>
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/application*.yml</include>
-                    <include>**/application*.properties</include>
-                    <include>**/config/*.properties</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
 </project>

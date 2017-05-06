@@ -19,6 +19,7 @@ spring:
 
   cloud:
     config:
+      name: @project.artifactId@
       server:
         git:
           uri: https://github.com/smile90/boot-frame-config

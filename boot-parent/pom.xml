@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.spring.platform</groupId>
         <artifactId>platform-bom</artifactId>
-        <version>Athens-SR4</version>
+        <version>Brussels-SR2</version>
     </parent>
 
 	<groupId>com.frame</groupId>
@@ -23,7 +23,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.source>${java.version}</maven.compiler.source>
 
-		<spring-cloud.version>Camden.SR6</spring-cloud.version>
+		<spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
 		<spring-boot-admin.version>1.4.4</spring-boot-admin.version>
 
 		<spring-boot-mybatis.version>1.2.0</spring-boot-mybatis.version>

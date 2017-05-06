@@ -64,13 +64,13 @@
         </dependency>
         <dependency>
             <groupId>ojdbc</groupId>
-            <artifactId>ojdbc-11g</artifactId>
+            <artifactId>ojdbc</artifactId>
         </dependency>
 
-		<!-- javax -->
-		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
-		</dependency>
+        <!-- javax -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

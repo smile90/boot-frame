@@ -30,7 +30,6 @@
 		<spring-boot-mybatis.version>1.2.0</spring-boot-mybatis.version>
 
 		<druid.version>1.0.27</druid.version>
-		<ojdbc.version>14</ojdbc.version>
 
 		<commons-compress.version>1.11</commons-compress.version>
 		<commons-csv.version>1.4</commons-csv.version>
@@ -94,11 +93,6 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid</artifactId>
 				<version>${druid.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ojdbc</groupId>
-				<artifactId>ojdbc</artifactId>
-				<version>${ojdbc.version}</version>
 			</dependency>
 
 			<!-- commons -->

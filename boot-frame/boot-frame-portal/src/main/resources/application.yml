@@ -39,8 +39,7 @@ spring:
 
 # dataSource
 #DATASOURCE
-#     schema: classpath:schema.sql
-spring:
+#   schema: classpath:schema.sql
   datasource:
     continueOnError: true
     type: com.alibaba.druid.pool.DruidDataSource
@@ -65,9 +64,6 @@ spring:
 
     druid:
       login-enable: true
-    druid:
       login-username: admin
-    druid:
       login-password: 123456
-    druid:
-      exclusions: *.js,*.css,*.gif,*.jpg,*.png,*.ico,/druid/*
+      exclusions: '*.js,*.css,*.gif,*.jpg,*.png,*.ico,/druid/*'

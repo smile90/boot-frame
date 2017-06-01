@@ -1,9 +1,9 @@
 package com.frame.boot.frame.mybatis.model;
 
-import se.spagettikod.optimist.Identity;
-import se.spagettikod.optimist.Version;
+import com.baomidou.mybatisplus.annotations.Version;
 
 import java.io.Serializable;
+
 
 /**
  * 基础模型属性
@@ -11,18 +11,17 @@ import java.io.Serializable;
  * @date:2017-03-02 下午8:50
  */
 public class BaseMysqlModel implements Serializable {
-	
-	@Identity("id")
-	private Integer id;
-	
-	@Version("optimistic")
+
+	private String id;
+
+	@Version
 	private Integer optimistic = 0;
-	
-	public Integer getId() {
+
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

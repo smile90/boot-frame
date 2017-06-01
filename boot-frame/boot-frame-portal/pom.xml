@@ -16,7 +16,12 @@
     <dependencies>
         <dependency>
             <groupId>com.frame</groupId>
-            <artifactId>boot-frame-core</artifactId>
+            <artifactId>common-frame-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>boot-frame-mybatis</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

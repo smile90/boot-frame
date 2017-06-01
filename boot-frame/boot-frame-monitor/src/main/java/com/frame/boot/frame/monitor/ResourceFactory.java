@@ -1,7 +1,7 @@
 package com.frame.boot.frame.monitor;
 
-import com.frame.boot.frame.utils.EmptyUtil;
-import com.frame.boot.frame.utils.thread.NamedThreadFactory;
+import com.frame.common.frame.utils.EmptyUtil;
+import com.frame.common.frame.utils.thread.NamedThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

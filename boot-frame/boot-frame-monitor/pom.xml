@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.frame</groupId>
-            <artifactId>boot-frame-utils</artifactId>
+            <artifactId>common-frame-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
 

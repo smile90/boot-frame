@@ -1,6 +1,7 @@
 package com.frame.common.frame.base.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PageBean<T> implements Serializable {
 
@@ -10,7 +11,7 @@ public class PageBean<T> implements Serializable {
 	private long totalPage;
 	private long totalResult;
 	private long currentPage;
-	private T result;
+	private List<T> result;
 
 	public int getPageSize() {
 		return pageSize;
@@ -33,10 +34,10 @@ public class PageBean<T> implements Serializable {
 	public void setCurrentPage(long currentPage) {
 		this.currentPage = currentPage;
 	}
-	public T getResult() {
+	public List<T> getResult() {
 		return result;
 	}
-	public void setResult(T result) {
+	public void setResult(List<T> result) {
 		this.result = result;
 	}
 

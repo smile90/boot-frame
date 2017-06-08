@@ -13,8 +13,8 @@ public class PageUtil {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> PageBean<List<T>> convert(Page<T> page) {
-		PageBean<List<T>> pageBean = new PageBean<List<T>>();
+	public static <T> PageBean<T> convert(Page<T> page) {
+		PageBean<T> pageBean = new PageBean<>();
 		pageBean.setResult(page.getContent());
 		pageBean.setCurrentPage(page.getNumber() >= 0 ? page.getNumber() + 1 : page.getNumber());
 		pageBean.setPageSize(page.getSize());

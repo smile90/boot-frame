@@ -15,6 +15,12 @@
 	<version>1.0.0</version>
 
     <dependencies>
+		<dependency>
+			<groupId>com.frame</groupId>
+			<artifactId>common-frame-base</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 		<!-- commons -->
 		<dependency>
 			<groupId>commons-cli</groupId>

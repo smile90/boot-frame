@@ -1,6 +1,7 @@
 package com.frame.boot.frame.mybatis.model;
 
-import com.baomidou.mybatisplus.annotations.Version;
+import se.spagettikod.optimist.Identity;
+import se.spagettikod.optimist.Version;
 
 import java.io.Serializable;
 
@@ -12,16 +13,17 @@ import java.io.Serializable;
  */
 public class BaseMysqlModel implements Serializable {
 
-	private String id;
+	@Identity("id")
+	private Integer id;
 
-	@Version
+	@Version("optimistic")
 	private Integer optimistic = 0;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

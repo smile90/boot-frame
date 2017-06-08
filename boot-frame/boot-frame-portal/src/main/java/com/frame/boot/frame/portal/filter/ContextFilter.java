@@ -1,17 +1,11 @@
-package com.frame.boot.frame.mybatis.filter;
-
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+package com.frame.boot.frame.portal.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
 
 @WebFilter(filterName = "defaultCtxFilter", urlPatterns = "/*")
 public class ContextFilter implements Filter {

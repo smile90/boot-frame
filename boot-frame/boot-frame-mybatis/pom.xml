@@ -9,10 +9,10 @@
 	</parent>
 
     <artifactId>boot-frame-mybatis</artifactId>
-    <packaging>jar</packaging>
-    <version>1.0.0</version>
     <name>Spring Boot基础框架-MyBatis</name>
     <description>Spring Boot基础框架-MyBatis</description>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
 
     <dependencies>
 		<dependency>

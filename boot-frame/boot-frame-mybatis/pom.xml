@@ -49,6 +49,7 @@
 		    <artifactId>mybatis-spring-boot-starter</artifactId>
 	    </dependency>
 
+		<!-- MyBatis Plugin -->
 		<dependency>
 			<groupId>com.github.miemiedev</groupId>
 			<artifactId>mybatis-paginator</artifactId>
@@ -70,23 +71,11 @@
 			</exclusions>
 		</dependency>
 
-	    <!-- jackson -->
-	    <dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-	    </dependency>
-	    <dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-	    </dependency>
-	    <dependency>
-		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-joda</artifactId>
-	    </dependency>
-	    <dependency>
-		    <groupId>com.fasterxml.jackson.module</groupId>
-		    <artifactId>jackson-module-parameter-names</artifactId>
-	    </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
 
     </dependencies>
 </project>

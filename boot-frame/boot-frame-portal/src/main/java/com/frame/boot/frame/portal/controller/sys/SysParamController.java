@@ -1,7 +1,10 @@
 package com.frame.boot.frame.portal.controller.sys;
 
+import com.frame.boot.frame.mybatis.util.PageUtil;
 import com.frame.boot.frame.portal.entity.sys.SysParam;
 import com.frame.boot.frame.portal.service.sys.SysParamService;
+import com.github.miemiedev.mybatis.paginator.domain.Order;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +35,11 @@ public class SysParamController {
         sysParam.setKey("test2");
         sysParamService.update(sysParam);
         return sysParam;
+    }
+
+    @RequestMapping("/find")
+    @ResponseBody
+    public Object findAll() {
+        return PageUtil.page(sysParamService.findAll(new PageBounds(1, 2, Order.formString("id.desc"))));
     }
 }

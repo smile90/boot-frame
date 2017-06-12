@@ -20,7 +20,7 @@
     <select id="selectAll" resultType="com.frame.boot.frame.portal.entity.sys.SysParam">
         select
         <include refid="Base_Column_List"/>
-        from sys_param
+        from sys_param t
     </select>
     <delete id="deleteByPK" parameterType="java.lang.Integer">
         delete from sys_param

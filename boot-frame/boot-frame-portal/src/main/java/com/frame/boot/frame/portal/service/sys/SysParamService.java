@@ -2,8 +2,12 @@ package com.frame.boot.frame.portal.service.sys;
 
 import com.frame.boot.frame.portal.entity.sys.SysParam;
 import com.frame.boot.frame.portal.mapper.sys.SysParamMapper;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SysParamService {
@@ -23,6 +27,14 @@ public class SysParamService {
 
     public SysParam find(Integer id) {
         return sysParamMapper.selectByPK(id);
+    }
+
+    public List<SysParam> findAll() {
+        return sysParamMapper.selectAll();
+    }
+
+    public PageList<SysParam> findAll(PageBounds pageParam) {
+        return sysParamMapper.selectAll(pageParam);
     }
 
 }

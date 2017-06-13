@@ -1,6 +1,6 @@
-package com.frame.boot.frame.security.mapper.sys;
+package com.frame.boot.frame.security.mapper;
 
-import com.frame.boot.frame.security.entity.sys.SysRoleModule;
+import com.frame.boot.frame.security.entity.SysRoleModule;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

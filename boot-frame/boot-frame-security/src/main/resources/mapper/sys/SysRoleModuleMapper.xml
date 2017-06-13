@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.frame.boot.frame.security.mapper.sys.SysRoleModuleMapper">
-    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.sys.SysRoleModule">
+<mapper namespace="com.frame.boot.frame.security.mapper.SysRoleModuleMapper">
+    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysRoleModule">
         <id column="ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
         <result column="OPTIMISTIC" javaType="java.lang.Long" jdbcType="BIGINT"/>
         <result column="ROLE_ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
@@ -27,7 +27,7 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysRoleModule">
+            parameterType="com.frame.boot.frame.security.entity.SysRoleModule">
     insert into sys_role_module (OPTIMISTIC, ROLE_ID,
       MODULE_ID, STATUS, CREATE_USER, 
       CREATE_TIME, UPDATE_USER, UPDATE_TIME
@@ -38,7 +38,7 @@
       )
   </insert>
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysRoleModule">
+            parameterType="com.frame.boot.frame.security.entity.SysRoleModule">
         insert into sys_role_module
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="optimistic != null">
@@ -93,7 +93,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.frame.boot.frame.security.entity.sys.SysRoleModule">
+    <update id="updateByPrimaryKeySelective" parameterType="com.frame.boot.frame.security.entity.SysRoleModule">
         update sys_role_module
         <set>
             <if test="optimistic != null">
@@ -123,7 +123,7 @@
         </set>
         where ID = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.sys.SysRoleModule">
+    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.SysRoleModule">
     update sys_role_module
     set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
       ROLE_ID = #{roleId,jdbcType=BIGINT},

@@ -1,12 +1,16 @@
-package com.frame.boot.frame.security.entity.sys;
+package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
 import se.spagettikod.optimist.OptimisticLocking;
 
-@OptimisticLocking("sys_function")
-public class SysFunction extends BaseMysqlModel {
+import java.util.Date;
 
-    private String moduleCode;
+@OptimisticLocking("sys_module")
+public class SysModule extends BaseMysqlModel {
+
+    private String parentCode;
+
+    private String typeCode;
 
     private String validate;
 
@@ -16,16 +20,22 @@ public class SysFunction extends BaseMysqlModel {
 
     private String code;
 
-    private Integer orders;
-
     private String url;
 
-    public String getModuleCode() {
-        return moduleCode;
+    public String getParentCode() {
+        return parentCode;
     }
 
-    public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode;
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode == null ? null : parentCode.trim();
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode == null ? null : typeCode.trim();
     }
 
     public String getValidate() {
@@ -60,14 +70,6 @@ public class SysFunction extends BaseMysqlModel {
         this.code = code == null ? null : code.trim();
     }
 
-    public Integer getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Integer orders) {
-        this.orders = orders;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -75,4 +77,5 @@ public class SysFunction extends BaseMysqlModel {
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
     }
+
 }

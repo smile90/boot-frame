@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security.entity.sys;
+package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
 import se.spagettikod.optimist.OptimisticLocking;

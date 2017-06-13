@@ -1,10 +1,9 @@
-package com.frame.boot.frame.security.entity.sys;
+package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @OptimisticLocking("sys_role")

@@ -1,10 +1,8 @@
-package com.frame.boot.frame.security.mapper.sys;
+package com.frame.boot.frame.security.mapper;
 
 
-import com.frame.boot.frame.security.entity.sys.SysUser;
+import com.frame.boot.frame.security.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface SysUserMapper {

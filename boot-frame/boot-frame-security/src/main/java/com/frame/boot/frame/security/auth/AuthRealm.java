@@ -1,9 +1,9 @@
 package com.frame.boot.frame.security.auth;
 
-import com.frame.boot.frame.security.entity.sys.SysModule;
-import com.frame.boot.frame.security.entity.sys.SysRole;
-import com.frame.boot.frame.security.entity.sys.SysUser;
-import com.frame.boot.frame.security.service.sys.SysUserService;
+import com.frame.boot.frame.security.entity.SysModule;
+import com.frame.boot.frame.security.entity.SysRole;
+import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

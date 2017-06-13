@@ -1,7 +1,7 @@
-package com.frame.boot.frame.security.service.sys;
+package com.frame.boot.frame.security.service;
 
-import com.frame.boot.frame.security.entity.sys.SysUser;
-import com.frame.boot.frame.security.mapper.sys.SysUserMapper;
+import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

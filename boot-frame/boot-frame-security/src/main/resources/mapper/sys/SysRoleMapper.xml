@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.frame.boot.frame.security.mapper.sys.SysRoleMapper">
-    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.sys.SysRole">
+<mapper namespace="com.frame.boot.frame.security.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysRole">
         <id column="ID" property="id" />
         <result column="OPTIMISTIC" property="optimistic" />
         <result column="TYPE_CODE" property="typeCode" />
@@ -30,7 +30,7 @@
         where ID = #{id,jdbcType=BIGINT}
       </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysRole">
+            parameterType="com.frame.boot.frame.security.entity.SysRole">
         insert into sys_role (OPTIMISTIC, TYPE_CODE,
           NAME, CODE, ORDERS,
           DESCRIPTION, STATUS, CREATE_USER,
@@ -43,7 +43,7 @@
           )
     </insert>
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysRole">
+            parameterType="com.frame.boot.frame.security.entity.SysRole">
         insert into sys_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="optimistic != null">
@@ -116,7 +116,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.frame.boot.frame.security.entity.sys.SysRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.frame.boot.frame.security.entity.SysRole">
         update sys_role
         <set>
             <if test="optimistic != null">
@@ -155,7 +155,7 @@
         </set>
         where ID = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.sys.SysRole">
+    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.SysRole">
         update sys_role
         set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
           TYPE_CODE = #{typeCode,jdbcType=VARCHAR},

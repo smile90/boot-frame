@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.frame.boot.frame.security.mapper.sys.SysFunctionMapper">
-    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.sys.SysFunction">
+<mapper namespace="com.frame.boot.frame.security.mapper.SysFunctionMapper">
+    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysFunction">
         <id column="ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
         <result column="OPTIMISTIC" javaType="java.lang.Long" jdbcType="BIGINT"/>
         <result column="MODULE_CODE" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -33,7 +33,7 @@
         where ID = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysFunction">
+            parameterType="com.frame.boot.frame.security.entity.SysFunction">
         insert into sys_function (ID, OPTIMISTIC, MODULE_CODE,
           VALIDATE, USEABLE, NAME,
           CODE, ORDERS, URL,
@@ -48,7 +48,7 @@
           )
     </insert>
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysFunction">
+            parameterType="com.frame.boot.frame.security.entity.SysFunction">
         insert into sys_function
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="optimistic != null">
@@ -140,7 +140,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective"
-            parameterType="com.frame.boot.frame.security.entity.sys.SysFunction">
+            parameterType="com.frame.boot.frame.security.entity.SysFunction">
         update sys_function
         <set>
             <if test="optimistic != null">
@@ -188,7 +188,7 @@
         </set>
         where ID = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.sys.SysFunction">
+    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.SysFunction">
         update sys_function
         set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
           MODULE_CODE = #{moduleCode,jdbcType=VARCHAR},

@@ -1,7 +1,8 @@
 package com.frame.boot.frame.security.service.sys;
 
 import com.frame.boot.frame.security.base.BaseTest;
-import com.frame.boot.frame.security.entity.sys.SysUser;
+import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.service.SysUserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

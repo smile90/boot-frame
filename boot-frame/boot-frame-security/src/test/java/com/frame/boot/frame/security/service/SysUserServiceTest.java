@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security.service.sys;
+package com.frame.boot.frame.security.service;
 
 import com.frame.boot.frame.security.base.BaseTest;
 import com.frame.boot.frame.security.entity.SysUser;

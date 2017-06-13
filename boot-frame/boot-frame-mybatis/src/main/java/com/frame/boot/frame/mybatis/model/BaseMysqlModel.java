@@ -4,6 +4,7 @@ import se.spagettikod.optimist.Identity;
 import se.spagettikod.optimist.Version;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -18,6 +19,20 @@ public class BaseMysqlModel implements Serializable {
 
 	@Version("optimistic")
 	private Integer optimistic = 0;
+
+	private Integer orders;
+
+	private String status;
+
+	private String description;
+
+	private String createUser;
+
+	private Date createTime;
+
+	private String updateUser;
+
+	private Date updateTime;
 
 	public Integer getId() {
 		return id;
@@ -34,7 +49,63 @@ public class BaseMysqlModel implements Serializable {
 	public void setOptimistic(Integer optimistic) {
 		this.optimistic = optimistic;
 	}
-	
+
+	public Integer getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Integer orders) {
+		this.orders = orders;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuffer sb = new StringBuffer('{');

@@ -4,7 +4,7 @@ info:
 
 # server config
 server:
-  port: 8080
+  port: 12080
   servlet-path: /
 
 # config

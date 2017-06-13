@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frame.boot.frame.security.mapper.sys.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.sys.SysUser">
+        <id column="ID" property="id" />
+        <result column="OPTIMISTIC" property="optimistic" />
+        <result column="USERNAME" property="username" />
+        <result column="PASSWORD" property="password" />
+        <result column="REALNAME" property="realname" />
+        <result column="EMAIL" property="email" />
+        <result column="TELEPHONE" property="telephone" />
+        <result column="CELLPHONE" property="cellphone" />
+        <result column="SEX" property="sex" />
+        <result column="AGE" property="age" />
+        <result column="ADDRESS" property="address" />
+        <result column="PHOTO" property="photo" />
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" />
+        <result column="LAST_LOGIN_IP" property="lastLoginIp" />
+        <result column="LAST_PASSWORD" property="lastPassword" />
+        <result column="USER_STATUS" property="userStatus" />
+        <result column="USER_TYPE_CODE" property="userTypeCode" />
+        <result column="TYPE_CODE" property="typeCode" />
+        <result column="ORDERS" property="orders" />
+        <result column="STATUS" property="status" />
+        <result column="DESCRIPTION" property="description" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <collection property="roles" ofType="com.frame.boot.frame.security.entity.sys.SysRole">
+            <id column="ID" property="id" />
+            <result column="OPTIMISTIC" property="optimistic" />
+            <result column="TYPE_CODE" property="typeCode" />
+            <result column="NAME" property="name" />
+            <result column="CODE" property="code" />
+            <result column="ORDERS" property="orders" />
+            <result column="STATUS" property="status" />
+            <result column="DESCRIPTION" property="description" />
+            <result column="CREATE_USER" property="createUser" />
+            <result column="CREATE_TIME" property="createTime" />
+            <result column="UPDATE_USER" property="updateUser" />
+            <result column="UPDATE_TIME" property="updateTime" />
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, OPTIMISTIC, USERNAME, PASSWORD, REALNAME, EMAIL, TELEPHONE, CELLPHONE, SEX, AGE,
+        ADDRESS, PHOTO, ORDERS, LAST_LOGIN_TIME, LAST_LOGIN_IP, LAST_PASSWORD, USER_STATUS,
+        USER_TYPE_CODE, DESCRIPTION, TYPE_CODE, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER,
+        UPDATE_TIME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_user
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.frame.boot.frame.security.entity.sys.SysUser">
+        insert into sys_user (OPTIMISTIC, USERNAME,
+          PASSWORD, REALNAME, EMAIL,
+          TELEPHONE, CELLPHONE, SEX,
+          AGE, ADDRESS, PHOTO,
+          ORDERS, LAST_LOGIN_TIME, LAST_LOGIN_IP,
+          LAST_PASSWORD, USER_STATUS, USER_TYPE_CODE,
+          DESCRIPTION, TYPE_CODE, STATUS,
+          CREATE_USER, CREATE_TIME, UPDATE_USER,
+          UPDATE_TIME)
+        values (#{optimistic,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
+          #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+          #{telephone,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+          #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
+          #{orders,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR},
+          #{lastPassword,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{userTypeCode,jdbcType=VARCHAR},
+          #{description,jdbcType=VARCHAR}, #{typeCode,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+          #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
+          #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.frame.boot.frame.security.entity.sys.SysUser">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="optimistic != null">
+                OPTIMISTIC,
+            </if>
+            <if test="username != null">
+                USERNAME,
+            </if>
+            <if test="password != null">
+                PASSWORD,
+            </if>
+            <if test="realname != null">
+                REALNAME,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="telephone != null">
+                TELEPHONE,
+            </if>
+            <if test="cellphone != null">
+                CELLPHONE,
+            </if>
+            <if test="sex != null">
+                SEX,
+            </if>
+            <if test="age != null">
+                AGE,
+            </if>
+            <if test="address != null">
+                ADDRESS,
+            </if>
+            <if test="photo != null">
+                PHOTO,
+            </if>
+            <if test="orders != null">
+                ORDERS,
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME,
+            </if>
+            <if test="lastLoginIp != null">
+                LAST_LOGIN_IP,
+            </if>
+            <if test="lastPassword != null">
+                LAST_PASSWORD,
+            </if>
+            <if test="userStatus != null">
+                USER_STATUS,
+            </if>
+            <if test="userTypeCode != null">
+                USER_TYPE_CODE,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="typeCode != null">
+                TYPE_CODE,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="createUser != null">
+                CREATE_USER,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="updateUser != null">
+                UPDATE_USER,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="optimistic != null">
+                #{optimistic,jdbcType=BIGINT},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null">
+                #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="cellphone != null">
+                #{cellphone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="orders != null">
+                #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginIp != null">
+                #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastPassword != null">
+                #{lastPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="userTypeCode != null">
+                #{userTypeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="typeCode != null">
+                #{typeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.frame.boot.frame.security.entity.sys.SysUser">
+        update sys_user
+        <set>
+            <if test="optimistic != null">
+                OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
+            </if>
+            <if test="username != null">
+                USERNAME = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null">
+                REALNAME = #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                TELEPHONE = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="cellphone != null">
+                CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                SEX = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                AGE = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                PHOTO = #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="orders != null">
+                ORDERS = #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginIp != null">
+                LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastPassword != null">
+                LAST_PASSWORD = #{lastPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="userTypeCode != null">
+                USER_TYPE_CODE = #{userTypeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="typeCode != null">
+                TYPE_CODE = #{typeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.sys.SysUser">
+        update sys_user
+        set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
+          USERNAME = #{username,jdbcType=VARCHAR},
+          PASSWORD = #{password,jdbcType=VARCHAR},
+          REALNAME = #{realname,jdbcType=VARCHAR},
+          EMAIL = #{email,jdbcType=VARCHAR},
+          TELEPHONE = #{telephone,jdbcType=VARCHAR},
+          CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+          SEX = #{sex,jdbcType=VARCHAR},
+          AGE = #{age,jdbcType=INTEGER},
+          ADDRESS = #{address,jdbcType=VARCHAR},
+          PHOTO = #{photo,jdbcType=VARCHAR},
+          ORDERS = #{orders,jdbcType=INTEGER},
+          LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+          LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR},
+          LAST_PASSWORD = #{lastPassword,jdbcType=VARCHAR},
+          USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+          USER_TYPE_CODE = #{userTypeCode,jdbcType=VARCHAR},
+          DESCRIPTION = #{description,jdbcType=VARCHAR},
+          TYPE_CODE = #{typeCode,jdbcType=VARCHAR},
+          STATUS = #{status,jdbcType=VARCHAR},
+          CREATE_USER = #{createUser,jdbcType=VARCHAR},
+          CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+          UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+          UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where username = #{username,jdbcType=BIGINT}
+    </select>
+
+    <select id="findSecurityUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+          su.*, sr.*
+        from sys_user su
+        left join sys_role_user sru on sru.user_id = su.id
+        left join sys_role sr on sru.role_id = sr.id
+        where su.username = #{username,jdbcType=BIGINT}
+    </select>
+</mapper>

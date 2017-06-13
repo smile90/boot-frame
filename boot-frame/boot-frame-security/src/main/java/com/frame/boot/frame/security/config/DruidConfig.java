@@ -3,7 +3,7 @@ package com.frame.boot.frame.security.config;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.frame.boot.frame.security.properties.DruidProperties;
-import com.frame.boot.frame.utils.EmptyUtil;
+import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -41,7 +41,7 @@ public class DruidConfig {
     }
 
     /**
-     * @see com.alibaba.druid.support.http.WebStatFilter
+     * @see WebStatFilter
      * @return
      */
     @Bean

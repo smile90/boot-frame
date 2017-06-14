@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -35,7 +36,7 @@ public class SecurityController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Object submitLogin(String username, String password) {
+    public Object submitLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         try {

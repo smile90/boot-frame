@@ -357,17 +357,17 @@ public class InfoBean<T> implements Serializable {
 	 * 设置信息对象
 	 * @param msg
 	 */
-	public void setMsg(Map<String, Object> msg) {
-		this.msg = msg;
-	}
+//	public void setMsg(Map<String, Object> msg) {
+//		this.msg = msg;
+//	}
 
 	/**
 	 * 获取信息对象
 	 * @return
 	 */
-	public Map<String, Object> getMsg() {
-		return msg;
-	}
+//	public Map<String, Object> getMsg() {
+//		return msg;
+//	}
 
 	/**
 	 * 设置对象

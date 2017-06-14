@@ -15,10 +15,10 @@ import java.util.Date;
 public class BaseMysqlModel implements Serializable {
 
 	@Identity("id")
-	private Integer id;
+	private Long id;
 
 	@Version("optimistic")
-	private Integer optimistic = 0;
+	private Long optimistic = 0L;
 
 	private Integer orders;
 
@@ -34,19 +34,19 @@ public class BaseMysqlModel implements Serializable {
 
 	private Date updateTime;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public Integer getOptimistic() {
+	public Long getOptimistic() {
 		return optimistic;
 	}
 	
-	public void setOptimistic(Integer optimistic) {
+	public void setOptimistic(Long optimistic) {
 		this.optimistic = optimistic;
 	}
 

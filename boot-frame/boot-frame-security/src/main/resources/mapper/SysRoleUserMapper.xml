@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frame.boot.frame.security.mapper.SysRoleUserMapper">
     <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysRoleUser">
-        <id column="ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result column="OPTIMISTIC" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result column="ROLE_ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result column="USER_ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result column="STATUS" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-        <result column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <id column="ID" property="id"/>
+        <result column="OPTIMISTIC" property="optimistic"/>
+        <result column="ROLE_ID"  property="roleId"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="STATUS" property="status"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
         ID, OPTIMISTIC, ROLE_ID, USER_ID, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER,

@@ -4,6 +4,7 @@ import com.frame.boot.frame.security.exception.SecurityException;
 import com.frame.boot.frame.security.exception.SystemException;
 import com.frame.common.frame.base.bean.InfoBean;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -22,18 +23,12 @@ public class SecurityController {
     // 跳转到登录表单页面
     @RequestMapping(value = "/loginPage")
     public String login() {
-        return "/sys/login.jsp";
-    }
-
-    // 跳转到登录表单页面
-    @RequestMapping(value = "/test")
-    @ResponseBody
-    public Object test() {
-        return "/sys/login.html";
+        return "/sys/login";
     }
 
     /**
      * ajax登录请求
+     *
      * @param username
      * @param password
      * @return
@@ -48,8 +43,16 @@ public class SecurityController {
             subject.login(token);
             return InfoBean.SUCCESS(subject.getPrincipal());
         } catch (SecurityException e) {
-            logger.error(null, e);
+            logger.info("{}", e.toString());
             return InfoBean.FAIL(e.getShowMsg(), e.getErrorCode(), null);
+        } catch (AuthenticationException e) {
+            if (e.getCause() instanceof SecurityException) {
+                logger.info("{}", e.toString());
+                return InfoBean.FAIL(((SecurityException) e.getCause()).getShowMsg(), ((SecurityException) e.getCause()).getErrorCode(), null);
+            } else {
+                logger.error(null, e);
+                throw new SystemException(e);
+            }
         } catch (Exception e) {
             logger.error(null, e);
             throw new SystemException(e);

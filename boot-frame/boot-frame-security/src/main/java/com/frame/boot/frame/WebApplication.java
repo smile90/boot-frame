@@ -7,8 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @EnableEurekaClient
-@SpringBootApplication(scanBasePackages = {"com.frame"})
-@ServletComponentScan(basePackages = {"com.frame"})
+@SpringBootApplication
 @EnableConfigurationProperties
 public class WebApplication {
 

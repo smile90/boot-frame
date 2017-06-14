@@ -3,7 +3,9 @@ package com.frame.boot.frame.security.entity;
 import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
 import se.spagettikod.optimist.OptimisticLocking;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @OptimisticLocking("sys_module")
 public class SysModule extends BaseMysqlModel {
@@ -21,6 +23,8 @@ public class SysModule extends BaseMysqlModel {
     private String code;
 
     private String url;
+
+    private List<SysFunction> functions = new ArrayList<>();
 
     public String getParentCode() {
         return parentCode;
@@ -78,4 +82,11 @@ public class SysModule extends BaseMysqlModel {
         this.url = url == null ? null : url.trim();
     }
 
+    public List<SysFunction> getFunctions() {
+        return functions;
+    }
+
+    public void setFunctions(List<SysFunction> functions) {
+        this.functions = functions;
+    }
 }

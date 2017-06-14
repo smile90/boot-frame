@@ -2,46 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frame.boot.frame.security.mapper.SysUserMapper">
     <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysUser">
-        <id column="ID" property="id" />
-        <result column="OPTIMISTIC" property="optimistic" />
-        <result column="USERNAME" property="username" />
-        <result column="PASSWORD" property="password" />
-        <result column="REALNAME" property="realname" />
-        <result column="EMAIL" property="email" />
-        <result column="TELEPHONE" property="telephone" />
-        <result column="CELLPHONE" property="cellphone" />
-        <result column="SEX" property="sex" />
-        <result column="AGE" property="age" />
-        <result column="ADDRESS" property="address" />
-        <result column="PHOTO" property="photo" />
-        <result column="LAST_LOGIN_TIME" property="lastLoginTime" />
-        <result column="LAST_LOGIN_IP" property="lastLoginIp" />
-        <result column="LAST_PASSWORD" property="lastPassword" />
-        <result column="USER_STATUS" property="userStatus" />
-        <result column="USER_TYPE_CODE" property="userTypeCode" />
-        <result column="TYPE_CODE" property="typeCode" />
-        <result column="ORDERS" property="orders" />
-        <result column="STATUS" property="status" />
-        <result column="DESCRIPTION" property="description" />
-        <result column="CREATE_USER" property="createUser" />
-        <result column="CREATE_TIME" property="createTime" />
-        <result column="UPDATE_USER" property="updateUser" />
-        <result column="UPDATE_TIME" property="updateTime" />
-        <collection property="roles" ofType="com.frame.boot.frame.security.entity.SysRole">
-            <id column="ID" property="id" />
-            <result column="OPTIMISTIC" property="optimistic" />
-            <result column="TYPE_CODE" property="typeCode" />
-            <result column="NAME" property="name" />
-            <result column="CODE" property="code" />
-            <result column="ORDERS" property="orders" />
-            <result column="STATUS" property="status" />
-            <result column="DESCRIPTION" property="description" />
-            <result column="CREATE_USER" property="createUser" />
-            <result column="CREATE_TIME" property="createTime" />
-            <result column="UPDATE_USER" property="updateUser" />
-            <result column="UPDATE_TIME" property="updateTime" />
-        </collection>
+        <id column="ID" property="id"/>
+        <result column="OPTIMISTIC" property="optimistic"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="REALNAME" property="realname"/>
+        <result column="EMAIL" property="email"/>
+        <result column="TELEPHONE" property="telephone"/>
+        <result column="CELLPHONE" property="cellphone"/>
+        <result column="SEX" property="sex"/>
+        <result column="AGE" property="age"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="PHOTO" property="photo"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime"/>
+        <result column="LAST_LOGIN_IP" property="lastLoginIp"/>
+        <result column="LAST_PASSWORD" property="lastPassword"/>
+        <result column="USER_STATUS" property="userStatus"/>
+        <result column="USER_TYPE_CODE" property="userTypeCode"/>
+        <result column="TYPE_CODE" property="typeCode"/>
+        <result column="ORDERS" property="orders"/>
+        <result column="STATUS" property="status"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
     </resultMap>
+
+    <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysUser" extends="BaseResultMap">
+        <collection column="id" property="roles" ofType="com.frame.boot.frame.security.entity.SysRole"
+                    select="com.frame.boot.frame.security.mapper.SysRoleMapper.selectSecurityByUserId" />
+    </resultMap>
+
     <sql id="Base_Column_List">
         ID, OPTIMISTIC, USERNAME, PASSWORD, REALNAME, EMAIL, TELEPHONE, CELLPHONE, SEX, AGE,
         ADDRESS, PHOTO, ORDERS, LAST_LOGIN_TIME, LAST_LOGIN_IP, LAST_PASSWORD, USER_STATUS,
@@ -345,12 +337,10 @@
         where username = #{username,jdbcType=BIGINT}
     </select>
 
-    <select id="findSecurityUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findSecurityUserByUsername" parameterType="java.lang.String" resultMap="SecurityResultMap">
         select
-          su.*, sr.*
-        from sys_user su
-        left join sys_role_user sru on sru.user_id = su.id
-        left join sys_role sr on sru.role_id = sr.id
-        where su.username = #{username,jdbcType=BIGINT}
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where username = #{username,jdbcType=BIGINT}
     </select>
 </mapper>

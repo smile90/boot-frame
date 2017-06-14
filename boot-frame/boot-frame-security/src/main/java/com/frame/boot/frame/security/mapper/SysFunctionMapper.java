@@ -3,6 +3,8 @@ package com.frame.boot.frame.security.mapper;
 import com.frame.boot.frame.security.entity.SysFunction;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SysFunctionMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,6 @@ public interface SysFunctionMapper {
     int updateByPrimaryKeySelective(SysFunction record);
 
     int updateByPrimaryKey(SysFunction record);
+
+    List<SysFunction> selectByModuleCode(String moduleCode);
 }

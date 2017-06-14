@@ -15,6 +15,11 @@
         <result column="UPDATE_USER" property="updateUser" />
         <result column="UPDATE_TIME" property="updateTime" />
     </resultMap>
+    <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysRole" extends="BaseResultMap">
+        <collection column="id" property="modules" ofType="com.frame.boot.frame.security.entity.SysModule"
+                    select="com.frame.boot.frame.security.mapper.SysModuleMapper.selectSecurityByRoleId" />
+    </resultMap>
+
     <sql id="Base_Column_List">
         ID, OPTIMISTIC, TYPE_CODE, NAME, CODE, ORDERS, DESCRIPTION, STATUS, CREATE_USER,
         CREATE_TIME, UPDATE_USER, UPDATE_TIME
@@ -170,4 +175,13 @@
           UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
         where ID = #{id,jdbcType=BIGINT}
     </update>
+
+
+    <select id="selectSecurityByUserId" parameterType="java.lang.Long" resultMap="SecurityResultMap">
+        select
+          sr.*
+        from sys_role sr, sys_role_user sru
+        where sr.id = sru.role_id
+        and sru.user_id = #{userId,jdbcType=BIGINT}
+    </select>
 </mapper>

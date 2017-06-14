@@ -22,7 +22,7 @@ public class SysUserServiceTest extends BaseTest {
 
     @Test
     public void findSecurityUserByUsername() {
-        SysUser user = sysUserService.findSecurityUserByUsername("test1");
+        SysUser user = sysUserService.findSecurityUserByUsername("test2");
         logger.info("{}", user);
     }
 }

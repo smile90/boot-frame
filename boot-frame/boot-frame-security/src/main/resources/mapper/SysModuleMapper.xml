@@ -2,27 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frame.boot.frame.security.mapper.SysModuleMapper">
     <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysModule">
-        <id column="ID" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result column="OPTIMISTIC" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result column="TYPE_CODE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="PARENT_CODE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="VALIDATE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="USEABLE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CODE" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ORDERS" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        <result column="URL" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="DESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="STATUS" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CREATE_USER" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-        <result column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <id column="ID" property="id"/>
+        <result column="OPTIMISTIC" property="optimistic"/>
+        <result column="TYPE_CODE" property="typeCode"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="VALIDATE" property="validate"/>
+        <result column="USEABLE" property="useable"/>
+        <result column="NAME" property="name"/>
+        <result column="CODE" property="code"/>
+        <result column="URL" property="url"/>
+        <result column="ORDERS" property="orders"/>
+        <result column="STATUS" property="status"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
     </resultMap>
+    <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysModule" extends="BaseResultMap">
+        <collection column="code" property="functions" ofType="com.frame.boot.frame.security.entity.SysFunction"
+                    select="com.frame.boot.frame.security.mapper.SysFunctionMapper.selectByModuleCode" />
+    </resultMap>
+
     <sql id="Base_Column_List">
-    ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, VALIDATE, USEABLE, NAME, CODE, ORDERS, URL, 
-    DESCRIPTION, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
-  </sql>
+        ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, VALIDATE, USEABLE, NAME, CODE, ORDERS, URL,
+        DESCRIPTION, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -222,4 +227,12 @@
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
+    <select id="selectSecurityByRoleId" parameterType="java.lang.Long" resultMap="SecurityResultMap">
+        select
+          sm.*
+        from sys_module sm, sys_role_module srm
+        where sm.id = srm.module_id
+        and srm.role_id = #{roleId,jdbcType=BIGINT}
+    </select>
 </mapper>

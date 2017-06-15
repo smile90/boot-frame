@@ -15,6 +15,7 @@
 	<description>Spring Boot基础框架-父包</description>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
+
 	<modules>
 		<module>boot-frame-common</module>
 		<module>boot-frame-cache</module>

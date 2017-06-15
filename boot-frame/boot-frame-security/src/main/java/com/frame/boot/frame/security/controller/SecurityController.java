@@ -27,7 +27,7 @@ public class SecurityController {
      */
     @RequestMapping(value = "/loginPage")
     public String login() {
-        return "/sys/login";
+        return "/sys/login.jsp";
     }
 
     /**
@@ -36,7 +36,7 @@ public class SecurityController {
      */
     @RequestMapping(value = "/index")
     public String index() {
-        return "/sys/index";
+        return "/sys/index.jsp";
     }
 
     /**

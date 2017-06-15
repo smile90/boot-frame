@@ -21,10 +21,22 @@ public class SecurityController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    // 跳转到登录表单页面
+    /**
+     * 跳转登录页面
+     * @return
+     */
     @RequestMapping(value = "/loginPage")
     public String login() {
         return "/sys/login";
+    }
+
+    /**
+     * 首页
+     * @return
+     */
+    @RequestMapping(value = "/index")
+    public String index() {
+        return "/sys/index";
     }
 
     /**

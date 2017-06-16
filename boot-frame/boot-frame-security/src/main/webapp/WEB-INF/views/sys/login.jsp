@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/resources/common/taglib.jsp" %>
+
 <!DOCTYPE HTML>
 <html>
 <head>
-    <%@ include file="/resources/common/head.jsp" %>
+    <%@ include file="/resources/common/meta.jsp" %>
 
     <link href="/static/lib/ui/admin/css/H-ui.login.css" rel="stylesheet" type="text/css"/>
-    <title>管理后台 - 登录</title>
 </head>
 <body>
 <div class="header"></div>
 <div class="loginWraper">
     <div class="loginBox">
-        <form id="loginForm" class="form form-horizontal" action="/sys/login" method="post">
+        <form id="loginForm" class="form form-horizontal" action="${ctxPath}/sys/login" method="post">
             <!-- TODO -->
             <div id="showMsg" class="row cl col-xs-12 text-c"></div>
             <div class="row cl">
@@ -52,7 +53,9 @@
     </div>
 </div>
 
-<%@ include file="/resources/common/foot.jsp" %>
+<div class="footer">Copyright 你的公司名称 by XXX</div>
+
+<%@ include file="/resources/common/footer.jsp" %>
 
 <script type="text/javascript" src="/static/lib/ui/admin/js/login.js"></script>
 </body>

@@ -10,6 +10,7 @@
         <result column="USEABLE" property="useable"/>
         <result column="NAME" property="name"/>
         <result column="CODE" property="code"/>
+        <result column="ICON" property="code"/>
         <result column="URL" property="url"/>
         <result column="ORDERS" property="orders"/>
         <result column="STATUS" property="status"/>
@@ -25,7 +26,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, VALIDATE, USEABLE, NAME, CODE, ORDERS, URL,
+        ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, VALIDATE, USEABLE, NAME, CODE, ICON, ORDERS, URL,
         DESCRIPTION, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -42,13 +43,13 @@
             parameterType="com.frame.boot.frame.security.entity.SysModule">
         insert into sys_module (OPTIMISTIC, TYPE_CODE,
           PARENT_CODE, VALIDATE, USEABLE,
-          NAME, CODE, ORDERS,
+          NAME, CODE, ICON, ORDERS,
           URL, DESCRIPTION, STATUS,
           CREATE_USER, CREATE_TIME, UPDATE_USER,
           UPDATE_TIME)
         values (#{optimistic,jdbcType=BIGINT}, #{typeCode,jdbcType=VARCHAR},
           #{parentCode,jdbcType=VARCHAR}, #{validate,jdbcType=VARCHAR}, #{useable,jdbcType=VARCHAR},
-          #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER},
+          #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER},
           #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
           #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
           #{updateTime,jdbcType=TIMESTAMP})
@@ -79,6 +80,9 @@
             </if>
             <if test="code != null">
                 CODE,
+            </if>
+            <if test="icon != null">
+                ICON,
             </if>
             <if test="orders != null">
                 ORDERS,
@@ -129,6 +133,9 @@
             </if>
             <if test="code != null">
                 #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
             </if>
             <if test="orders != null">
                 #{orders,jdbcType=INTEGER},
@@ -181,6 +188,9 @@
             <if test="code != null">
                 CODE = #{code,jdbcType=VARCHAR},
             </if>
+            <if test="icon != null">
+                ICON = #{icon,jdbcType=VARCHAR},
+            </if>
             <if test="orders != null">
                 ORDERS = #{orders,jdbcType=INTEGER},
             </if>
@@ -217,6 +227,7 @@
       USEABLE = #{useable,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
       CODE = #{code,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
       ORDERS = #{orders,jdbcType=INTEGER},
       URL = #{url,jdbcType=VARCHAR},
       DESCRIPTION = #{description,jdbcType=VARCHAR},

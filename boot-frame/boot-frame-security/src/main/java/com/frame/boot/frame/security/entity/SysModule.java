@@ -22,6 +22,8 @@ public class SysModule extends BaseMysqlModel {
 
     private String code;
 
+    private String icon;
+
     private String url;
 
     private List<SysFunction> functions = new ArrayList<>();
@@ -72,6 +74,14 @@ public class SysModule extends BaseMysqlModel {
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getUrl() {

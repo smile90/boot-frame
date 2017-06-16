@@ -40,6 +40,15 @@ public class SecurityController {
     }
 
     /**
+     * 欢迎页
+     * @return
+     */
+    @RequestMapping(value = "/welcome")
+    public String welcome() {
+        return  "/sys/welcome.jsp";
+    }
+
+    /**
      * ajax登录请求
      *
      * @param username

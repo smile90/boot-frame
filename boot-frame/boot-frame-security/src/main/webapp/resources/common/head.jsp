@@ -8,6 +8,7 @@
 <link href="/static/lib/ui/common/css/H-ui.css" rel="stylesheet" type="text/css"/>
 <link href="/static/lib/ui/admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
 <link href="/static/lib/ui/admin/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="/static/lib/ui/admin/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
 
 <script type="text/javascript">
     // 应用路径

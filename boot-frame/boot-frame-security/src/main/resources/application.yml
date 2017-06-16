@@ -6,8 +6,6 @@ info:
 server:
   port: 12080
   servlet-path: /
-  error:
-    include-stacktrace: ALWAYS
 
 # config
 spring:

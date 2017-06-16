@@ -1,12 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link href="/static/lib/iconfont/iconfont.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/lib/ui/common/css/H-ui.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/lib/ui/admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/lib/ui/admin/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
-    <link href="/static/lib/ui/admin/css/style.css" rel="stylesheet" type="text/css"/>
-    <title>后台登录</title>
+    <%@ include file="/resources/common/head.jsp" %>
+
+    <title>管理后台</title>
 </head>
 
 <body>
@@ -110,11 +108,7 @@
     </ul>
 </div>
 
-<script type="text/javascript" src="/static/lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="/static/lib/layer/layer.js"></script>
-<script type="text/javascript" src="/static/lib/ui/common/js/H-ui.js"></script>
-<script type="text/javascript" src="/static/lib/ui/admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="/static/lib/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
+<%@ include file="/resources/common/foot.jsp" %>
 
 </body>
 </html>

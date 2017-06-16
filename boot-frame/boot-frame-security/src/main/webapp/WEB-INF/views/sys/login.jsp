@@ -5,7 +5,7 @@
     <%@ include file="/resources/common/head.jsp" %>
 
     <link href="/static/lib/ui/admin/css/H-ui.login.css" rel="stylesheet" type="text/css"/>
-    <title>后台登录</title>
+    <title>管理后台 - 登录</title>
 </head>
 <body>
 <div class="header"></div>

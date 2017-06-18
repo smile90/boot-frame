@@ -124,6 +124,7 @@
 </div>
 
 <%@ include file="/resources/common/footer.jsp" %>
+<script type="text/javascript" src="${ctxPath}/static/lib/ui/admin/js/index.admin.js"></script>
 
 </body>
 </html>

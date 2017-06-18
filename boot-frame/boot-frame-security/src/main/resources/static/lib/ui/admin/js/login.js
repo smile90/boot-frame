@@ -7,7 +7,7 @@ $(function() {
                 $("#showMsg").text(data.showMsg);
                 return false;
             } else {
-                window.location.href = "/sys/index";
+                window.location.href = ctxPath + "/sys/index";
             }
         },
         error: function (data) {

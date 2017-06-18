@@ -1,6 +1,7 @@
 package com.frame.boot.frame.security.auth;
 
 import com.frame.boot.frame.security.exception.SecurityException;
+import com.frame.common.frame.utils.EmptyUtil;
 import com.frame.common.frame.utils.EncodeAndDecodeUtil;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -23,6 +24,10 @@ public class CredentialsMatcher extends SimpleCredentialsMatcher {
         // 获得数据库中的密码
         String dbPassword = (String) info.getCredentials();
         // 进行密码的比对
-        return this.equals(inPassword, dbPassword);
+        if (EmptyUtil.isEmpty(dbPassword) || EmptyUtil.isEmpty(inPassword)) {
+            return false;
+        } else {
+            return this.equals(inPassword, dbPassword);
+        }
     }
 }

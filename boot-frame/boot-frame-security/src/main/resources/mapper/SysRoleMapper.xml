@@ -16,8 +16,8 @@
         <result column="UPDATE_TIME" property="updateTime" />
     </resultMap>
     <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysRole" extends="BaseResultMap">
-        <collection column="id" property="modules" ofType="com.frame.boot.frame.security.entity.SysModule"
-                    select="com.frame.boot.frame.security.mapper.SysModuleMapper.selectSecurityByRoleId" />
+        <collection column="{roleId = id}" property="modules" ofType="com.frame.boot.frame.security.entity.SysModule"
+                    select="com.frame.boot.frame.security.mapper.SysModuleMapper.selectSecurityByRole" />
     </resultMap>
 
     <sql id="Base_Column_List">

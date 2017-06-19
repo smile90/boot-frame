@@ -2,6 +2,7 @@ package com.frame.boot.frame.security.mapper;
 
 import com.frame.boot.frame.security.entity.SysModule;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,9 @@ public interface SysModuleMapper {
 
     int updateByPrimaryKey(SysModule record);
 
-    List<SysModule> selectSecurityByRoleId(Long roleId);
+    List<SysModule> selectByRole(@Param("roleId") Long roleId, @Param("typeCode") String typeCode);
+    List<SysModule> selectByUser(@Param("userId") Long userId, @Param("typeCode") String typeCode);
+
+    List<SysModule> selectSecurityByRole(@Param("roleId") Long roleId, @Param("typeCode") String typeCode);
+    List<SysModule> selectSecurityByUser(@Param("userId") Long userId, @Param("typeCode") String typeCode);
 }

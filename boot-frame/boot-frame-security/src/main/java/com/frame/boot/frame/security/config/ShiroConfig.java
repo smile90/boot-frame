@@ -56,6 +56,8 @@ public class ShiroConfig {
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/actuator/**", "anon");
+        filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/sys/loginPage", "anon");
         filterChainDefinitionMap.put("/sys/login", "anon");
 

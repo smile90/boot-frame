@@ -10,13 +10,13 @@ import java.util.List;
 @Mapper
 public interface SysParamMapper {
 
-    int deleteByPK(Integer id);
+    int deleteByPK(Long id);
 
     int insert(SysParam record);
 
     int insertSelective(SysParam record);
 
-    SysParam selectByPK(Integer id);
+    SysParam selectByPK(Long id);
 
     List<SysParam> selectAll();
 

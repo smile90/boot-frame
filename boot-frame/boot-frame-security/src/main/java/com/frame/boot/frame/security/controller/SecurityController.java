@@ -1,7 +1,10 @@
 package com.frame.boot.frame.security.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.exception.SecurityException;
 import com.frame.boot.frame.security.exception.SystemException;
+import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.common.frame.base.bean.InfoBean;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -9,6 +12,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SecurityController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    private SysModuleService sysModuleService;
+
 
     /**
      * 跳转登录页面
@@ -46,6 +54,22 @@ public class SecurityController {
     @RequestMapping(value = "/welcome")
     public String welcome() {
         return  "/sys/welcome.jsp";
+    }
+
+    @RequestMapping(value = "/menu")
+    @ResponseBody
+    public Object menu() {
+        // 获取用户
+        Subject subject = SecurityUtils.getSubject();
+        if (subject == null) {
+            return null;
+        }
+        SysUser user = (SysUser) subject.getPrincipal();
+        if (user == null) {
+            return null;
+        }
+        // 获取用户菜单
+        return JSONArray.toJSONString(sysModuleService.findMenuByUserId(user.getId()));
     }
 
     /**

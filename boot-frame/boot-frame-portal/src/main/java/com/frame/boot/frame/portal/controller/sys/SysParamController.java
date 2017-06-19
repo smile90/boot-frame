@@ -18,11 +18,16 @@ public class SysParamController {
     @Autowired
     private SysParamService sysParamService;
 
+    @RequestMapping("/page")
+    public String page() {
+        return "/sys/page.html";
+    }
+
     @RequestMapping("/create")
     @ResponseBody
     public Object create(SysParam sysParam) {
         sysParam = new SysParam();
-        sysParam.setId(1);
+        sysParam.setId(1L);
         sysParam.setKey("test1");
         sysParam.setDescription("描述");
         return sysParamService.create(sysParam);
@@ -30,7 +35,7 @@ public class SysParamController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(@RequestParam("id") Integer id) {
+    public Object update(@RequestParam("id") Long id) {
         SysParam sysParam = sysParamService.find(id);
         sysParam.setKey("test2");
         sysParamService.update(sysParam);

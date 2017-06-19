@@ -25,7 +25,7 @@ public class SysParamService {
         return sysParam;
     }
 
-    public SysParam find(Integer id) {
+    public SysParam find(Long id) {
         return sysParamMapper.selectByPK(id);
     }
 

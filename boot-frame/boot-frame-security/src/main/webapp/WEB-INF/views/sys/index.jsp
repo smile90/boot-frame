@@ -75,7 +75,7 @@
 </header>
 
 <aside class="Hui-aside">
-    <div class="menu_dropdown bk_2">
+    <div id="menu-show" class="menu_dropdown bk_2">
         <dl id="menu-article">
             <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
@@ -124,7 +124,7 @@
 </div>
 
 <%@ include file="/resources/common/footer.jsp" %>
-<script type="text/javascript" src="${ctxPath}/static/lib/ui/admin/js/index.admin.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/lib/ui/admin/js/index.js"></script>
 
 </body>
 </html>

@@ -10,7 +10,7 @@
         <result column="USEABLE" property="useable"/>
         <result column="NAME" property="name"/>
         <result column="CODE" property="code"/>
-        <result column="ICON" property="code"/>
+        <result column="ICON" property="icon"/>
         <result column="URL" property="url"/>
         <result column="ORDERS" property="orders"/>
         <result column="STATUS" property="status"/>
@@ -239,11 +239,49 @@
     where ID = #{id,jdbcType=BIGINT}
   </update>
 
-    <select id="selectSecurityByRoleId" parameterType="java.lang.Long" resultMap="SecurityResultMap">
+    <select id="selectByRole" resultMap="BaseResultMap">
+        select
+        sm.*
+        from sys_module sm, sys_role_module srm
+        where sm.id = srm.module_id
+        <if test="typeCode != null and typeCode != ''">
+            and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and srm.role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUser" resultMap="BaseResultMap">
+        select
+        sm.*
+        from sys_module sm, sys_role_module srm, sys_role_user sru
+        where sm.id = srm.module_id
+        and srm.role_id = sru.role_id
+        <if test="typeCode != null and typeCode != ''">
+            and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and sru.user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectSecurityByRole" resultMap="SecurityResultMap">
         select
           sm.*
         from sys_module sm, sys_role_module srm
         where sm.id = srm.module_id
+        <if test="typeCode != null and typeCode != ''">
+          and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
         and srm.role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectSecurityByUser" resultMap="SecurityResultMap">
+        select
+        sm.*
+        from sys_module sm, sys_role_module srm, sys_role_user sru
+        where sm.id = srm.module_id
+        and srm.role_id = sru.role_id
+        <if test="typeCode != null and typeCode != ''">
+            and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and sru.user_id = #{userId,jdbcType=BIGINT}
     </select>
 </mapper>

@@ -77,6 +77,14 @@
 <aside class="Hui-aside">
     <div id="menu-show" class="menu_dropdown bk_2">
         <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe616;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="${ctxPath}/sys/role/page" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-article1">
             <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>

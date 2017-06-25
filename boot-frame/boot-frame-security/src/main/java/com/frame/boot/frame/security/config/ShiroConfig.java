@@ -1,7 +1,7 @@
 package com.frame.boot.frame.security.config;
 
 import com.frame.boot.frame.security.auth.AuthRealm;
-import com.frame.boot.frame.security.auth.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -22,10 +22,6 @@ public class ShiroConfig {
     /** 身份认证realm; (这个需要自己写，账号密码校验；权限等) */
     @Autowired
     private AuthRealm authRealm;
-
-    /** 令牌认证 */
-    @Autowired
-    private CredentialsMatcher credentialsMatcher;
 
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
@@ -76,8 +72,17 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
-        authRealm.setCredentialsMatcher(credentialsMatcher);
+        authRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         securityManager.setRealm(authRealm);
         return securityManager;
+    }
+
+    @Bean(name = "hashedCredentialsMatcher")
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+        credentialsMatcher.setHashAlgorithmName("MD5");
+        credentialsMatcher.setHashIterations(2);
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return credentialsMatcher;
     }
 }

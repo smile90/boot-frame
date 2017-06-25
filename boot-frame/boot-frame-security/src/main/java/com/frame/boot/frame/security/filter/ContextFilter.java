@@ -1,18 +1,24 @@
 package com.frame.boot.frame.security.filter;
 
 
+import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
+@Component
 @WebFilter(filterName = "defaultCtxFilter", urlPatterns = "/*")
 public class ContextFilter implements Filter {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    public static final String STATIC_HOST_CODE = "staticHost";
+
+    private String staticHost;
     private String ctxPath;
 
     @Override
@@ -21,7 +27,11 @@ public class ContextFilter implements Filter {
         if (ctxPath.endsWith("/")) {
             ctxPath = ctxPath.substring(0, ctxPath.length() - 1);
         }
-        logger.info("create contextPath is ctxPath:{}", ctxPath);
+        staticHost = filterConfig.getInitParameter(STATIC_HOST_CODE);
+        if (EmptyUtil.notEmpty(staticHost)) {
+            ctxPath = staticHost + ctxPath;
+        }
+        logger.info("create staticHost:{},ctxPath:{}", ctxPath, staticHost);
     }
 
     @Override

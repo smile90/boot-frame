@@ -1,6 +1,6 @@
 package com.frame.boot.frame.security.config;
 
-import com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor;
+import com.frame.boot.frame.mybatis.interceptor.OffsetLimitInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class MyBatisConfig {
         {
             OffsetLimitInterceptor offsetLimit = new OffsetLimitInterceptor();
             Properties properties = new Properties();
-            properties.put("dialectClass", "com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect");
+            properties.put("dialectClass", "com.frame.boot.frame.mybatis.dialect.MySQLDialect");
             offsetLimit.setProperties(properties);
             sqlSessionFactory.getConfiguration().addInterceptor(offsetLimit);
         }

@@ -1,8 +1,10 @@
 package com.frame.boot.frame.mybatis.util;
 
+import com.frame.boot.frame.mybatis.bean.PageBounds;
 import com.frame.common.frame.base.bean.PageBean;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
+import com.frame.boot.frame.mybatis.bean.PageList;
+import com.frame.boot.frame.mybatis.bean.Paginator;
+import com.frame.common.frame.base.param.PageParam;
 
 public class PageUtil {
 
@@ -19,5 +21,13 @@ public class PageUtil {
             page.setTotalResult(pageList.getPaginator().getTotalCount());
         }
         return page;
+    }
+
+    public static PageBounds paginator(PageParam pageParam) {
+        PageParam result = pageParam;
+        if (result == null) {
+            result = new PageParam();
+        }
+        return new PageBounds(result.getPage(), result.getRows());
     }
 }

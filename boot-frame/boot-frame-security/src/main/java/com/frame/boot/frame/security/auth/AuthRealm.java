@@ -33,24 +33,8 @@ public class AuthRealm extends AuthorizingRealm {
         UsernamePasswordToken uToken = (UsernamePasswordToken) token;
         String username = uToken.getUsername();
 
-        SysUser user = sysUserService.findSecurityUserByUsername(username);
-        if (user == null) {
-            throw new SecurityException(SecurityException.USERNAME_PWD_NOT_SUCC_CODE, "user not found.", SecurityException.USERNAME_PWD_NOT_SUCC_MSG);
-        } else if (UserStatus.DELETED.name().equals(user.getUserStatus())) {
-            throw new SecurityException(SecurityException.USER_ERROR_CODE, "user status:DELETED.", SecurityException.USER_ERROR_MSG);
-        } else if (UserStatus.LOCKED.name().equals(user.getUserStatus())) {
-            throw new SecurityException(SecurityException.USER_LOCKED_CODE, "user status: LOCKED.", SecurityException.USER_LOCKED_MSG);
-        } else if (UserStatus.DISABLED.name().equals(user.getUserStatus())) {
-            throw new SecurityException(SecurityException.USER_DISABLED_CODE, "user status: DISABLED.", SecurityException.USER_DISABLED_MSG);
-        } else if (UserStatus.EXPIRED.name().equals(user.getUserStatus())) {
-            throw new SecurityException(SecurityException.USER_EXPIRED_CODE, "user status: EXPIRED.", SecurityException.USER_EXPIRED_MSG);
-        } else {
-            // 更新登录时间 last login time
-            user.setLastLoginTime(new Date());
-            sysUserService.updateByPK(user);
-        }
-
         // 放入shiro. 调用CredentialsMatcher检验密码
+        SysUser user = sysUserService.findSecurityUserByUsername(username);
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 

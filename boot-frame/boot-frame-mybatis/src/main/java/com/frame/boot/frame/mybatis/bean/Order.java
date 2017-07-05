@@ -109,6 +109,14 @@ public class Order implements Serializable {
         return create(array[0], array.length == 2 ? array[1] : "asc", orderExpr);
     }
 
+    public static Order asc(String property) {
+        return new Order(property, Order.Direction.ASC, null);
+    }
+
+    public static Order desc(String property) {
+        return new Order(property, Direction.DESC, null);
+    }
+
     public static Order create(String property, String direction){
         return create(property, direction,null);
     }

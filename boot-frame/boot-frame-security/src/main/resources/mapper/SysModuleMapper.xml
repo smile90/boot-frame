@@ -6,6 +6,8 @@
         <result column="OPTIMISTIC" property="optimistic"/>
         <result column="TYPE_CODE" property="typeCode"/>
         <result column="PARENT_CODE" property="parentCode"/>
+        <result column="LEVEL" property="level"/>
+        <result column="CODE_PATH" property="codePath"/>
         <result column="VALIDATE" property="validate"/>
         <result column="USEABLE" property="useable"/>
         <result column="NAME" property="name"/>
@@ -26,7 +28,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, VALIDATE, USEABLE, NAME, CODE, ICON, ORDERS, URL,
+        ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, LEVEL, CODE_PATH, VALIDATE, USEABLE, NAME, CODE, ICON, ORDERS, URL,
         DESCRIPTION, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -35,135 +37,26 @@
         from sys_module
         where ID = #{id,jdbcType=BIGINT}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="delete" parameterType="java.lang.Long">
         delete from sys_module
         where ID = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             parameterType="com.frame.boot.frame.security.entity.SysModule">
         insert into sys_module (OPTIMISTIC, TYPE_CODE,
-          PARENT_CODE, VALIDATE, USEABLE,
+          PARENT_CODE, LEVEL, CODE_PATH, VALIDATE, USEABLE,
           NAME, CODE, ICON, ORDERS,
           URL, DESCRIPTION, STATUS,
           CREATE_USER, CREATE_TIME, UPDATE_USER,
           UPDATE_TIME)
         values (#{optimistic,jdbcType=BIGINT}, #{typeCode,jdbcType=VARCHAR},
-          #{parentCode,jdbcType=VARCHAR}, #{validate,jdbcType=VARCHAR}, #{useable,jdbcType=VARCHAR},
+          #{parentCode,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{codePath,jdbcType=VARCHAR}, #{validate,jdbcType=VARCHAR}, #{useable,jdbcType=VARCHAR},
           #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER},
           #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
           #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
           #{updateTime,jdbcType=TIMESTAMP})
       </insert>
-    <insert id="insertSelective" parameterType="com.frame.boot.frame.security.entity.SysModule">
-        insert into sys_module
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                ID,
-            </if>
-            <if test="optimistic != null">
-                OPTIMISTIC,
-            </if>
-            <if test="typeCode != null">
-                TYPE_CODE,
-            </if>
-            <if test="parentCode != null">
-                PARENT_CODE,
-            </if>
-            <if test="validate != null">
-                VALIDATE,
-            </if>
-            <if test="useable != null">
-                USEABLE,
-            </if>
-            <if test="name != null">
-                NAME,
-            </if>
-            <if test="code != null">
-                CODE,
-            </if>
-            <if test="icon != null">
-                ICON,
-            </if>
-            <if test="orders != null">
-                ORDERS,
-            </if>
-            <if test="url != null">
-                URL,
-            </if>
-            <if test="description != null">
-                DESCRIPTION,
-            </if>
-            <if test="status != null">
-                STATUS,
-            </if>
-            <if test="createUser != null">
-                CREATE_USER,
-            </if>
-            <if test="createTime != null">
-                CREATE_TIME,
-            </if>
-            <if test="updateUser != null">
-                UPDATE_USER,
-            </if>
-            <if test="updateTime != null">
-                UPDATE_TIME,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="optimistic != null">
-                #{optimistic,jdbcType=BIGINT},
-            </if>
-            <if test="typeCode != null">
-                #{typeCode,jdbcType=VARCHAR},
-            </if>
-            <if test="parentCode != null">
-                #{parentCode,jdbcType=VARCHAR},
-            </if>
-            <if test="validate != null">
-                #{validate,jdbcType=VARCHAR},
-            </if>
-            <if test="useable != null">
-                #{useable,jdbcType=VARCHAR},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="code != null">
-                #{code,jdbcType=VARCHAR},
-            </if>
-            <if test="icon != null">
-                #{icon,jdbcType=VARCHAR},
-            </if>
-            <if test="orders != null">
-                #{orders,jdbcType=INTEGER},
-            </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=VARCHAR},
-            </if>
-            <if test="createUser != null">
-                #{createUser,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateUser != null">
-                #{updateUser,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective"
+    <update id="updateSelective"
             parameterType="com.frame.boot.frame.security.entity.SysModule">
         update sys_module
         <set>
@@ -223,6 +116,8 @@
     set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
       TYPE_CODE = #{typeCode,jdbcType=VARCHAR},
       PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      CODE_PATH = #{codePath,jdbcType=VARCHAR},
       VALIDATE = #{validate,jdbcType=VARCHAR},
       USEABLE = #{useable,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},

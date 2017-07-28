@@ -7,6 +7,7 @@ $(function () {
     $.ajax({
         url: ctxPath + "/sys/menu",
         dataType: "JSON",
+        async: false,
         success: function (data, textStatus) {
             // 数据、请求状态
             $.each(data, function (index, domEle) {
@@ -17,7 +18,7 @@ $(function () {
                         "<dd><ul></ul></dd>" +
                         "</dl>");
                 } else {
-                    $("#" + domEle.parentCode + " dt dd ul").append("<li><a data-href=\"" + domEle.url + "\" data-title=\"" + domEle.name + "\" href=\"javascript:void(0)\">" + domEle.name + "</a></li>");
+                    $("#" + domEle.parentCode + " dd ul").append("<li><a data-href=\"" + domEle.url + "\" data-title=\"" + domEle.name + "\" href=\"javascript:void(0)\">" + domEle.name + "</a></li>");
                 }
             });
         },

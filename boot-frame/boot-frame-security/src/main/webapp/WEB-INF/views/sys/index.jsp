@@ -75,24 +75,7 @@
 </header>
 
 <aside class="Hui-aside">
-    <div id="menu-show" class="menu_dropdown bk_2">
-        <dl id="menu-article">
-            <dt><i class="Hui-iconfont">&#xe616;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd>
-                <ul>
-                    <li><a data-href="${ctxPath}/sys/role/page" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
-                </ul>
-            </dd>
-        </dl>
-        <dl id="menu-article1">
-            <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd>
-                <ul>
-                    <li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li>
-                </ul>
-            </dd>
-        </dl>
-    </div>
+    <div id="menu-show" class="menu_dropdown bk_2"></div>
 </aside>
 
 <div class="dislpayArrow hidden-xs">
@@ -131,8 +114,11 @@
     </ul>
 </div>
 
-<%@ include file="/resources/common/footer.jsp" %>
+<script type="text/javascript" src="${ctxPath}/static/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/lib/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript" src="${ctxPath}/static/lib/ui/admin/js/index.js"></script>
-
+<script type="text/javascript" src="${ctxPath}/static/lib/layer/layer.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/lib/ui/common/js/H-ui.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/lib/ui/admin/js/H-ui.admin.js"></script>
 </body>
 </html>

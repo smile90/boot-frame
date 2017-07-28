@@ -10,9 +10,11 @@ import java.util.List;
 @OptimisticLocking("sys_module")
 public class SysModule extends BaseMysqlModel {
 
+    private String typeCode;
+
     private String parentCode;
 
-    private String typeCode;
+    private Integer level;
 
     private String validate;
 
@@ -28,20 +30,28 @@ public class SysModule extends BaseMysqlModel {
 
     private List<SysFunction> functions = new ArrayList<>();
 
-    public String getParentCode() {
-        return parentCode;
-    }
-
-    public void setParentCode(String parentCode) {
-        this.parentCode = parentCode == null ? null : parentCode.trim();
-    }
-
     public String getTypeCode() {
         return typeCode;
     }
 
     public void setTypeCode(String typeCode) {
-        this.typeCode = typeCode == null ? null : typeCode.trim();
+        this.typeCode = typeCode;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getValidate() {

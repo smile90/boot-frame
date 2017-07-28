@@ -69,7 +69,7 @@ public class SecurityController {
             return null;
         }
         // 获取用户菜单
-        return JSONArray.toJSONString(sysModuleService.findMenuByUserId(user.getId()));
+        return sysModuleService.findMenuByUserId(user.getId());
     }
 
     /**

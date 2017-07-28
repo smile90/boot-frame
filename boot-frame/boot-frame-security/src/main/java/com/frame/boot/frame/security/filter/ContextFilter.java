@@ -10,8 +10,6 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@Component
-@WebFilter(filterName = "defaultCtxFilter", urlPatterns = "/*")
 public class ContextFilter implements Filter {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

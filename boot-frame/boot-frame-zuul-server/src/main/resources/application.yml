@@ -1,0 +1,36 @@
+# debug=true
+info:
+  version: @project.version@
+
+# server config
+server:
+  port: 2222
+  servlet-path: /
+
+# config
+spring:
+  application:
+    name: @project.artifactId@
+# Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+
+  cloud:
+    config:
+      name: @project.artifactId@
+      server:
+        git:
+          uri: https://github.com/smile90/boot-frame-config
+          search-paths: config-repo
+          username:
+          password:
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:1111/eureka
+  instance:
+    health-check-url-path: ${management.context-path}/health
+    status-page-url-path: ${management.context-path}/info

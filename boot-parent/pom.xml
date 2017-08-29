@@ -135,4 +135,13 @@
             <url>http://127.0.0.1:8081/repository/maven-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

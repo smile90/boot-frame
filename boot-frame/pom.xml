@@ -32,5 +32,4 @@
 		<module>boot-frame-zuul-server</module>
 		<module>boot-frame-cfg-client-test</module>
     </modules>
-
 </project>

@@ -32,8 +32,6 @@ eureka:
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
       defaultZone: http://127.0.0.1:1111/eureka
     healthcheck:

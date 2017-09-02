@@ -1,5 +1,0 @@
-# spring boot actuator
-management:
-  security:
-    enabled: false
-  context-path: /actuator

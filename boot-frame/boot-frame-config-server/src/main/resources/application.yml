@@ -22,7 +22,7 @@ spring:
       name: @project.artifactId@
       server:
         git:
-          uri: https://github.com/smile90/boot-frame-config
+          uri: ssh://127.0.0.1:29418/boot-frame-config.git
           search-paths: config-repo
           username:
           password:
@@ -34,5 +34,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:1111/eureka
-    healthcheck:
-      enabled: true
+
+# spring boot actuator
+management:
+  security:
+    enabled: false
+  context-path: /actuator

@@ -22,7 +22,7 @@ spring:
       name: @project.artifactId@
       server:
         git:
-          uri: ssh://127.0.0.1:29418/boot-frame-config.git
+          uri: https://github.com/smile90/boot-frame-config
           search-paths: config-repo
           username:
           password:

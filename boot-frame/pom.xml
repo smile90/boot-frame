@@ -29,6 +29,7 @@
 		<module>boot-frame-boot-admin</module>
 		<module>boot-frame-eureka-server</module>
 		<module>boot-frame-config-server</module>
+		<module>boot-frame-zipkin-server</module>
 		<module>boot-frame-zuul-server</module>
 		<module>boot-frame-cfg-client-test</module>
     </modules>

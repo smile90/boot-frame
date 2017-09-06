@@ -7,7 +7,22 @@ server:
   port: 2222
   servlet-path: /
 
-# config
+# spring boot actuator
+management:
+  security:
+    enabled: false
+  context-path: /actuator
+
+# eureka config
+eureka:
+  instance:
+    health-check-url-path: ${management.context-path}/health
+    status-page-url-path: ${management.context-path}/info
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:1111/eureka
+
+# spring config
 spring:
   application:
     name: @project.artifactId@
@@ -32,17 +47,3 @@ spring:
     port: 5672
     username: SpringCloudConfig
     password: 123456
-
-eureka:
-  instance:
-    health-check-url-path: ${management.context-path}/health
-    status-page-url-path: ${management.context-path}/info
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka
-
-# spring boot actuator
-management:
-  security:
-    enabled: false
-  context-path: /actuator

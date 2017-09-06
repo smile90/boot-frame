@@ -27,6 +27,12 @@ spring:
           username:
           password:
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: SpringCloudConfig
+    password: 123456
+
 eureka:
   instance:
     health-check-url-path: ${management.context-path}/health

@@ -7,28 +7,32 @@ server:
   port: 1111
   servlet-path: /
 
-# Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
-spring:
-  application:
-    name: @project.artifactId@
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    serialization:
-      indent_output: true
-
-# eureka
-eureka:
-  instance:
-    health-check-url-path: ${management.context-path}/health
-    status-page-url-path: ${management.context-path}/info
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    serviceUrl:
-      defaultZone: http://127.0.0.1:${server.port}/eureka
-
 # spring boot actuator
 management:
   security:
     enabled: false
   context-path: /actuator
+
+# eureka config
+eureka:
+  instance:
+    ip-address: 127.0.0.1
+    health-check-url-path: ${management.context-path}/health
+    status-page-url-path: ${management.context-path}/info
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka
+
+# spring config
+spring:
+  application:
+    name: @project.artifactId@
+# Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true

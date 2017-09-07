@@ -1,14 +1,11 @@
 package com.frame.boot.frame.portal.config;
 
-import com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor;
+import com.frame.boot.frame.mybatis.interceptor.OffsetLimitInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import se.spagettikod.optimist.impl.OptimisticLockingInterceptor;
 
 import javax.annotation.PostConstruct;
@@ -35,7 +32,7 @@ public class MyBatisConfig {
         {
             OffsetLimitInterceptor offsetLimit = new OffsetLimitInterceptor();
             Properties properties = new Properties();
-            properties.put("dialectClass", "com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect");
+            properties.put("dialectClass", "com.frame.boot.frame.mybatis.dialect.MySQLDialect");
             offsetLimit.setProperties(properties);
             sqlSessionFactory.getConfiguration().addInterceptor(offsetLimit);
         }

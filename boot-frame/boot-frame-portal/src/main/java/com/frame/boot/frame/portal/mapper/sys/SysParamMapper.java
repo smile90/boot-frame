@@ -1,8 +1,8 @@
 package com.frame.boot.frame.portal.mapper.sys;
 
 import com.frame.boot.frame.portal.entity.sys.SysParam;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.frame.boot.frame.mybatis.bean.PageBounds;
+import com.frame.boot.frame.mybatis.bean.PageList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -2,8 +2,8 @@ package com.frame.boot.frame.portal.service.sys;
 
 import com.frame.boot.frame.portal.entity.sys.SysParam;
 import com.frame.boot.frame.portal.mapper.sys.SysParamMapper;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.frame.boot.frame.mybatis.bean.PageBounds;
+import com.frame.boot.frame.mybatis.bean.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

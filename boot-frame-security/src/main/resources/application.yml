@@ -1,0 +1,13 @@
+# debug: true
+info:
+  version: @project.version@
+
+# server config
+server:
+  port: 12080
+  servlet-path: /
+
+# config
+spring:
+  application:
+    name: @project.artifactId@

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frame.boot.frame.security.mapper.SysModuleMapper">
+    <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysModule">
+        <id column="ID" property="id"/>
+        <result column="OPTIMISTIC" property="optimistic"/>
+        <result column="TYPE_CODE" property="typeCode"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="LEVEL" property="level"/>
+        <result column="CODE_PATH" property="codePath"/>
+        <result column="VALIDATE" property="validate"/>
+        <result column="USEABLE" property="useable"/>
+        <result column="NAME" property="name"/>
+        <result column="CODE" property="code"/>
+        <result column="ICON" property="icon"/>
+        <result column="URL" property="url"/>
+        <result column="ORDERS" property="orders"/>
+        <result column="STATUS" property="status"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+    </resultMap>
+    <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysModule" extends="BaseResultMap">
+        <collection column="code" property="functions" ofType="com.frame.boot.frame.security.entity.SysFunction"
+                    select="com.frame.boot.frame.security.mapper.SysFunctionMapper.selectByModuleCode" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, OPTIMISTIC, TYPE_CODE, PARENT_CODE, LEVEL, CODE_PATH, VALIDATE, USEABLE, NAME, CODE, ICON, ORDERS, URL,
+        DESCRIPTION, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_module
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from sys_module
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.frame.boot.frame.security.entity.SysModule">
+        insert into sys_module (OPTIMISTIC, TYPE_CODE,
+          PARENT_CODE, LEVEL, CODE_PATH, VALIDATE, USEABLE,
+          NAME, CODE, ICON, ORDERS,
+          URL, DESCRIPTION, STATUS,
+          CREATE_USER, CREATE_TIME, UPDATE_USER,
+          UPDATE_TIME)
+        values (#{optimistic,jdbcType=BIGINT}, #{typeCode,jdbcType=VARCHAR},
+          #{parentCode,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{codePath,jdbcType=VARCHAR}, #{validate,jdbcType=VARCHAR}, #{useable,jdbcType=VARCHAR},
+          #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER},
+          #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+          #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
+          #{updateTime,jdbcType=TIMESTAMP})
+      </insert>
+    <update id="updateSelective"
+            parameterType="com.frame.boot.frame.security.entity.SysModule">
+        update sys_module
+        <set>
+            <if test="optimistic != null">
+                OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
+            </if>
+            <if test="typeCode != null">
+                TYPE_CODE = #{typeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null">
+                PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="validate != null">
+                VALIDATE = #{validate,jdbcType=VARCHAR},
+            </if>
+            <if test="useable != null">
+                USEABLE = #{useable,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                ICON = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="orders != null">
+                ORDERS = #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                URL = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.frame.boot.frame.security.entity.SysModule">
+    update sys_module
+    set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
+      TYPE_CODE = #{typeCode,jdbcType=VARCHAR},
+      PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      CODE_PATH = #{codePath,jdbcType=VARCHAR},
+      VALIDATE = #{validate,jdbcType=VARCHAR},
+      USEABLE = #{useable,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
+      ORDERS = #{orders,jdbcType=INTEGER},
+      URL = #{url,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByRole" resultMap="BaseResultMap">
+        select
+        sm.*
+        from sys_module sm, sys_role_module srm
+        where sm.id = srm.module_id
+        <if test="typeCode != null and typeCode != ''">
+            and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and srm.role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUser" resultMap="BaseResultMap">
+        select
+        sm.*
+        from sys_module sm, sys_role_module srm, sys_role_user sru
+        where sm.id = srm.module_id
+        and srm.role_id = sru.role_id
+        <if test="typeCode != null and typeCode != ''">
+            and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and sru.user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectSecurityByRole" resultMap="SecurityResultMap">
+        select
+          sm.*
+        from sys_module sm, sys_role_module srm
+        where sm.id = srm.module_id
+        <if test="typeCode != null and typeCode != ''">
+          and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and srm.role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectSecurityByUser" resultMap="SecurityResultMap">
+        select
+        sm.*
+        from sys_module sm, sys_role_module srm, sys_role_user sru
+        where sm.id = srm.module_id
+        and srm.role_id = sru.role_id
+        <if test="typeCode != null and typeCode != ''">
+            and sm.type_code = #{typeCode,jdbcType=VARCHAR}
+        </if>
+        and sru.user_id = #{userId,jdbcType=BIGINT}
+    </select>
+</mapper>

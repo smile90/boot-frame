@@ -4,7 +4,7 @@ info:
 
 # server config
 server:
-  port: 1111
+  port: 1112
   servlet-path: /
 
 # spring boot actuator
@@ -16,7 +16,7 @@ management:
 # eureka config
 eureka:
   instance:
-    hostname: eureka-peer
+    hostname: eureka-peer2
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
   server:
@@ -25,7 +25,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka
+      defaultZone: http://127.0.0.1:1111/eureka,http://127.0.0.1:1113/eureka
 
 # spring config
 spring:

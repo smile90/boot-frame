@@ -19,11 +19,7 @@ eureka:
     hostname: eureka-peer1
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
-  server:
-    waitTimeInMsWhenSyncEmpty: 0
   client:
-    register-with-eureka: false
-    fetch-registry: false
     serviceUrl:
       defaultZone: http://127.0.0.1:1112/eureka,http://127.0.0.1:1113/eureka
 

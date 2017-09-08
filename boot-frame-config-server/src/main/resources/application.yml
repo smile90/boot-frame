@@ -20,7 +20,7 @@ eureka:
     status-page-url-path: ${management.context-path}/info
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka
+      defaultZone: http://127.0.0.1:1110/eureka
 
 # spring config
 spring:

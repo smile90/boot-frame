@@ -20,8 +20,10 @@ eureka:
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
   client:
+    register-with-eureka: true
+    fetch-registry: true
     serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka,http://127.0.0.1:1113/eureka
+      defaultZone: http://127.0.0.1:1111/eureka,http://127.0.0.1:1112/eureka,http://127.0.0.1:1113/eureka
 
 # spring config
 spring:

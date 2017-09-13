@@ -11,8 +11,7 @@
     <artifactId>boot-frame-config-server</artifactId>
     <name>Spring Boot基础框架-服务配置中心</name>
     <description>Spring Boot基础-服务配置中心</description>
-    <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -34,6 +33,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+
+        <!-- Provided -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

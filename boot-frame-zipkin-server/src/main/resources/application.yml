@@ -3,9 +3,9 @@ info:
   version: @project.version@
 
 # server config
-#server:
-#  port: 1111
-#  servlet-path: /zipkin-server
+server:
+  port: 3331
+  servlet-path: /zipkin-server
 
 # config
 spring:

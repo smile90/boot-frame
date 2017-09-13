@@ -3,9 +3,9 @@ info:
   version: @project.version@
 
 # server config
-#server:
-#  port: 1111
-#  servlet-path: /eureka-server
+server:
+  port: 1111
+  servlet-path: /
 
 # spring boot actuator
 management:
@@ -19,20 +19,16 @@ eureka:
     hostname: eureka-peer
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
-  server:
-    waitTimeInMsWhenSyncEmpty: 0
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka-server/eureka
+      defaultZone: http://127.0.0.1:1111/eureka
 
 # spring config
 spring:
   application:
     name: @project.artifactId@
-  jmx:
-    default-domain: @project.artifactId@
 # Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

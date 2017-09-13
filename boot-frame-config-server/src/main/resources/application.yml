@@ -3,9 +3,9 @@ info:
   version: @project.version@
 
 # server config
-#server:
-#  port: 1111
-#  servlet-path: /config-server
+server:
+  port: 2221
+  servlet-path: /
 
 # spring boot actuator
 management:
@@ -20,14 +20,12 @@ eureka:
     status-page-url-path: ${management.context-path}/info
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka-server/eureka
+      defaultZone: http://127.0.0.1:1111/eureka
 
 # spring config
 spring:
   application:
     name: @project.artifactId@
-  jmx:
-    default-domain: @project.artifactId@
 # Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -38,7 +36,6 @@ spring:
     config:
       name: @project.artifactId@
       server:
-        prefix: /config-server
         git:
           uri: https://github.com/smile90/boot-frame-config
           search-paths: config-repo

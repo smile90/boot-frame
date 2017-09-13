@@ -7,7 +7,7 @@ management:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:1111/eureka
+      defaultZone: http://127.0.0.1:1111/eureka-server/eureka
   instance:
       health-check-url-path: ${management.context-path}/health
       status-page-url-path: ${management.context-path}/info

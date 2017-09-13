@@ -3,9 +3,9 @@ info:
   version: @project.version@
 
 # server config
-server:
-  port: 1111
-  servlet-path: /
+#server:
+#  port: 1111
+#  servlet-path: /eureka-server
 
 # spring boot actuator
 management:
@@ -22,10 +22,10 @@ eureka:
   server:
     waitTimeInMsWhenSyncEmpty: 0
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     serviceUrl:
-      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka
+      defaultZone: http://127.0.0.1:1111/eureka-server/eureka
 
 # spring config
 spring:

@@ -4,8 +4,8 @@ info:
 
 # server config
 server:
-  port: 3333
-  servlet-path: /
+  port: 1111
+  servlet-path: /zipkin-server
 
 # config
 spring:

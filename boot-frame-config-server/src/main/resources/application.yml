@@ -3,9 +3,9 @@ info:
   version: @project.version@
 
 # server config
-server:
-  port: 2220
-  servlet-path: /
+#server:
+#  port: 1111
+#  servlet-path: /config-server
 
 # spring boot actuator
 management:
@@ -20,7 +20,7 @@ eureka:
     status-page-url-path: ${management.context-path}/info
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:1110/eureka
+      defaultZone: http://127.0.0.1:1111/eureka-server/eureka
 
 # spring config
 spring:

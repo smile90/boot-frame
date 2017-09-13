@@ -5,7 +5,7 @@ info:
 # server config
 server:
   port: 3331
-  servlet-path: /zipkin-server
+  servlet-path: /
 
 # config
 spring:

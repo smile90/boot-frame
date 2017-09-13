@@ -1,14 +1,14 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
+import com.frame.boot.frame.mybatis.model.BaseModel;
+import org.springframework.security.core.GrantedAuthority;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @OptimisticLocking("sys_module")
-public class SysModule extends BaseMysqlModel {
+public class SysModule extends BaseModel implements GrantedAuthority {
 
     private String typeCode;
 
@@ -108,5 +108,10 @@ public class SysModule extends BaseMysqlModel {
 
     public void setFunctions(List<SysFunction> functions) {
         this.functions = functions;
+    }
+
+    @Override
+    public String getAuthority() {
+        return code;
     }
 }

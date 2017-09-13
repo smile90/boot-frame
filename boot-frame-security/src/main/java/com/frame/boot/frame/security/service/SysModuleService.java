@@ -2,12 +2,11 @@ package com.frame.boot.frame.security.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.mybatis.bean.Order;
 import com.frame.boot.frame.mybatis.bean.PageBounds;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.mapper.SysModuleMapper;
-import com.frame.boot.frame.security.properties.FrameSecurityProperties;
+import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +20,12 @@ import java.util.Map;
 public class SysModuleService {
 
     @Autowired
-    private FrameSecurityProperties frameSecurityProperties;
+    private SystemSecurityProperties systemSecurityProperties;
     @Autowired
     private SysModuleMapper sysModuleMapper;
 
     public List<SysModule> findMenuByUserId(Long userId) {
-        return sysModuleMapper.selectByUser(userId, frameSecurityProperties.getMenuTypeCode(), new PageBounds(Order.asc("level"), Order.asc("orders")));
+        return sysModuleMapper.selectByUser(userId, systemSecurityProperties.getMenuTypeCode(), new PageBounds(Order.asc("level"), Order.asc("orders")));
     }
 
     public JSONArray findMenuJSONByUserId(Long userId) {

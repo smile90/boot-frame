@@ -3,15 +3,23 @@ package com.frame.boot.frame.security.service;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Service
-public class SysUserService {
+@Service("sysUserService")
+public class SysUserService implements UserDetailsService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Override
+    public SysUser loadUserByUsername(String username) throws UsernameNotFoundException {
+        return findSecurityUserByUsername(username);
+    }
 
     public SysUser create(SysUser sysUser) {
         sysUser.setCreateTime(new Date());

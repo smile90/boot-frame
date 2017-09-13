@@ -1,12 +1,10 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
+import com.frame.boot.frame.mybatis.model.BaseModel;
 import se.spagettikod.optimist.OptimisticLocking;
 
-import java.util.Date;
-
 @OptimisticLocking("sys_role_module")
-public class SysRoleModule extends BaseMysqlModel {
+public class SysRoleModule extends BaseModel {
 
     private Long roleId;
 

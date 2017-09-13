@@ -1,13 +1,13 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
+import com.frame.boot.frame.mybatis.model.BaseModel;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @OptimisticLocking("sys_role")
-public class SysRole extends BaseMysqlModel {
+public class SysRole extends BaseModel {
 
     private String typeCode;
 

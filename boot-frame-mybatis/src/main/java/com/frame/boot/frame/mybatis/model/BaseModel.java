@@ -12,27 +12,27 @@ import java.util.Date;
  * @author:changqing.duan
  * @date:2017-03-02 下午8:50
  */
-public class BaseMysqlModel implements Serializable {
+public class BaseModel implements Serializable {
 
 	@Identity("id")
-	private Long id;
+	protected Long id;
 
 	@Version("optimistic")
-	private Long optimistic = 0L;
+	protected Long optimistic = 0L;
 
-	private Integer orders;
+	protected Integer orders;
 
-	private String status;
+	protected String status;
 
-	private String description;
+	protected String description;
 
-	private String createUser;
+	protected String createUser;
 
-	private Date createTime;
+	protected Date createTime;
 
-	private String updateUser;
+	protected String updateUser;
 
-	private Date updateTime;
+	protected Date updateTime;
 
 	public Long getId() {
 		return id;

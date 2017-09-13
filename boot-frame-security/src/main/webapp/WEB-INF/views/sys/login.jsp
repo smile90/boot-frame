@@ -13,8 +13,6 @@
 <div class="loginWraper">
     <div class="loginBox">
         <form id="loginForm" class="form form-horizontal" action="${ctxPath}/sys/login" method="post">
-            <!-- TODO -->
-            <div id="showMsg" class="row cl col-xs-12 text-c"></div>
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
@@ -41,6 +39,7 @@
                     </label>
                 </div>
             </div>
+            <div id="showMsg" class="row cl col-xs-12 text-c"></div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
                     <input name="" type="submit" class="btn btn-success radius size-L"

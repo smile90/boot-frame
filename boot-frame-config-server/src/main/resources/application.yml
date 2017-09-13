@@ -38,6 +38,7 @@ spring:
     config:
       name: @project.artifactId@
       server:
+        prefix: /config-server
         git:
           uri: https://github.com/smile90/boot-frame-config
           search-paths: config-repo

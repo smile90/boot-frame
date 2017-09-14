@@ -22,14 +22,14 @@ public class SysSecurityUser implements UserDetails {
 
     private String username;
     private String password;
-    private String status;
+    private String userStatus;
     private List<SysRole> roles = new ArrayList<>();
 
     public SysSecurityUser(SysUser sysUser) {
         if (sysUser != null) {
             username = sysUser.getUsername();
             password = sysUser.getPassword();
-            status = sysUser.getStatus();
+            userStatus = sysUser.getUserStatus();
             roles = sysUser.getRoles();
         }
     }
@@ -46,12 +46,12 @@ public class SysSecurityUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return !UserStatus.EXPIRED.name().equals(status);
+        return !UserStatus.EXPIRED.name().equals(userStatus);
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !UserStatus.LOCKED.name().equals(status);
+        return !UserStatus.LOCKED.name().equals(userStatus);
     }
 
     @Override
@@ -63,9 +63,9 @@ public class SysSecurityUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         try {
-            return (!UserStatus.valueOf(status).equals(UserStatus.DISABLED) && !UserStatus.valueOf(status).equals(UserStatus.DELETED));
+            return (!UserStatus.valueOf(userStatus).equals(UserStatus.DISABLED) && !UserStatus.valueOf(userStatus).equals(UserStatus.DELETED));
         } catch (Exception e) {
-            logger.error("userStatus error. status:{}", status, e);
+            logger.error("userStatus error. status:{}", userStatus, e);
             return false;
         }
     }

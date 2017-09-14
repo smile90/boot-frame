@@ -1,5 +1,6 @@
 package com.frame.boot.frame.security.service;
 
+import com.frame.boot.frame.security.authentication.SysSecurityUser;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,13 @@ public class SysUserService implements UserDetailsService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public SysUser loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findSecurityUserByUsername(username);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        SysUser sysUser = findSecurityUserByUsername(username);
+        if (sysUser != null) {
+            return new SysSecurityUser(sysUser);
+        } else {
+            return null;
+        }
     }
 
     public SysUser create(SysUser sysUser) {

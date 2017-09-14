@@ -9,7 +9,7 @@ public class SysController {
 
     @RequestMapping("/index")
     public String index() {
-        return "sys/hello";
+        return "sys/index";
     }
 
     @RequestMapping("/login")

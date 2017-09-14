@@ -5,7 +5,7 @@ info:
 # server config
 server:
   port: 12080
-  servlet-path: /
+  context-path: /security
 
 # config
 spring:

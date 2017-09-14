@@ -5,7 +5,7 @@ info:
 # server config
 server:
   port: 2222
-  servlet-path: /
+  context-path: /
 
 # spring boot actuator
 management:

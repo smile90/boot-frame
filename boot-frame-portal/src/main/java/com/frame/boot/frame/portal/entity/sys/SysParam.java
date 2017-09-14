@@ -1,13 +1,13 @@
 package com.frame.boot.frame.portal.entity.sys;
 
-import com.frame.boot.frame.mybatis.model.BaseMysqlModel;
+import com.frame.boot.frame.mybatis.model.BaseModel;
 import se.spagettikod.optimist.OptimisticLocking;
 
 /**
  * 系统属性
  */
 @OptimisticLocking("sys_param")
-public class SysParam extends BaseMysqlModel {
+public class SysParam extends BaseModel {
 
     /**
      * 所属类别标识

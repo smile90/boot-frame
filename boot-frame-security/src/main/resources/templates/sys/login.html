@@ -6,18 +6,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>管理首页</title>
 
-    <link th:href="@{/lib/iconfont/iconfont.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/lib/ui/common/css/H-ui.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/lib/ui/admin/css/H-ui.admin.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/lib/ui/admin/css/style.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/lib/ui/admin/skin/default/skin.css}" rel="stylesheet" type="text/css" id="skin" />
-    <link th:href="@{/lib/ui/admin/css/H-ui.login.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/static/lib/iconfont/iconfont.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/static/lib/ui/common/css/H-ui.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/static/lib/ui/admin/css/H-ui.admin.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/static/lib/ui/admin/css/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/static/lib/ui/admin/skin/default/skin.css}" rel="stylesheet" type="text/css" id="skin" />
+    <link th:href="@{/static/lib/ui/admin/css/H-ui.login.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="header"></div>
 <div class="loginWraper">
     <div class="loginBox">
-        <form id="loginForm" class="form form-horizontal" action="/sys/login" method="post">
+        <form id="loginForm" class="form form-horizontal" th:action="@{/sys/login}" method="post">
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
@@ -32,8 +32,8 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input class="input-text size-L" type="text" placeholder="验证码" style="width:150px;"/>
-                    <img src=""/> <a id="kanbuq" href="javascript:;">看不清，换一张</a>
+                    <input name="yzm" class="input-text size-L" type="text" placeholder="验证码" style="width:150px;"/>
+                    <img id="yzm" th:src="@{/images/yzm}"/> <a id="kanbuq" href="javascript:$('#yzm').attr('src', $('#yzm').attr('src'))">换一张</a>
                 </div>
             </div>
             <div class="row cl">
@@ -44,12 +44,19 @@
                     </label>
                 </div>
             </div>
-            <div id="showMsg" class="row cl col-xs-12 text-c">${param}</div>
+            <div class="row cl">
+                <label class="formControls col-xs-8 col-xs-offset-3" th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+                    用户名或密码错误
+                </label>
+                <div class="formControls col-xs-8 col-xs-offset-3" th:if="${param.logout}">
+                    您已注销成功
+                </div>
+            </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input name="" type="submit" class="btn btn-success radius size-L"
+                    <input type="submit" class="btn btn-success radius size-L"
                            value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
-                    <input name="" type="reset" class="btn btn-default radius size-L"
+                    <input type="reset" class="btn btn-default radius size-L"
                            value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
                 </div>
             </div>
@@ -58,10 +65,9 @@
 </div>
 
 <div class="footer">Copyright 你的公司名称 by XXX</div>
-<script type="text/javascript" src="/static/lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="/static/lib/layer/layer.js"></script>
-<script type="text/javascript" src="/static/lib/ui/common/js/H-ui.js"></script>
-<script type="text/javascript" src="/static/lib/ui/admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="/static/lib/ui/admin/js/login.js"></script>
+<script type="text/javascript" th:src="@{/static/lib/jquery/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/static/lib/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/static/lib/ui/common/js/H-ui.js}"></script>
+<script type="text/javascript" th:src="@{/static/lib/ui/admin/js/H-ui.admin.js}"></script>
 </body>
 </html>

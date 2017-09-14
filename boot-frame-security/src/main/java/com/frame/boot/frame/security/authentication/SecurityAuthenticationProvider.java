@@ -4,6 +4,8 @@ package com.frame.boot.frame.security.authentication;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
 import com.frame.common.frame.utils.EncodeAndDecodeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -17,6 +19,8 @@ import javax.annotation.Resource;
 
 @Service("securityAuthenticationProvider")
 public class SecurityAuthenticationProvider implements AuthenticationProvider {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource(name = "sysUserService")
     private SysUserService sysUserService;

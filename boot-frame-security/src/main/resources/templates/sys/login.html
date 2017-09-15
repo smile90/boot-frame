@@ -42,7 +42,7 @@
                     <div class="c-error" th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
                         用户名或密码错误
                     </div>
-                    <div class="c-success" th:if="${param.logout}">
+                    <div class="c-blue" th:if="${param.logout}">
                         您已注销成功
                     </div>
                 </div>

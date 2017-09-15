@@ -47,7 +47,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
                 .and().formLogin().loginPage(url.getLoginUrl()).permitAll()
                 .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl()).failureUrl(url.getLoginUrl() + "?error")
-                .and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl()).permitAll();
+                .and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll();
     }
 
     @Bean

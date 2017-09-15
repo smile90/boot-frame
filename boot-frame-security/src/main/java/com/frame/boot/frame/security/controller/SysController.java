@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/sys")
 public class SysController {
 
+    @RequestMapping("/login")
+    public String login() {
+        return "sys/login";
+    }
     @RequestMapping("/index")
     public String index() {
         return "sys/index";
     }
-
-    @RequestMapping("/login")
-    public String login() {
-        return "sys/login";
+    @RequestMapping("/welcome")
+    public String welcome() {
+        return "sys/welcome";
     }
 }

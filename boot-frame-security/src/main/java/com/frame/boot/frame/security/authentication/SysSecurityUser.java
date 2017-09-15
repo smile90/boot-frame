@@ -21,6 +21,7 @@ public class SysSecurityUser implements UserDetails {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private String username;
+    private String realname;
     private String password;
     private String userStatus;
     private List<SysRole> roles = new ArrayList<>();
@@ -28,6 +29,7 @@ public class SysSecurityUser implements UserDetails {
     public SysSecurityUser(SysUser sysUser) {
         if (sysUser != null) {
             username = sysUser.getUsername();
+            realname = sysUser.getRealname();
             password = sysUser.getPassword();
             userStatus = sysUser.getUserStatus();
             roles = sysUser.getRoles();
@@ -42,6 +44,10 @@ public class SysSecurityUser implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getRealname() {
+        return realname;
     }
 
     @Override

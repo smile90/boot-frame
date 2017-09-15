@@ -41,7 +41,8 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("{}", systemSecurityProperties);
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         http
-                .authorizeRequests()
+                .headers().frameOptions().sameOrigin()
+                .and().authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
                 .and().formLogin().loginPage(url.getLoginUrl()).permitAll()

@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>管理首页</title>
-
-    <link th:href="@{/static/lib/iconfont/iconfont.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/static/lib/ui/common/css/H-ui.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/static/lib/ui/admin/css/H-ui.admin.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/static/lib/ui/admin/css/style.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/static/lib/ui/admin/skin/default/skin.css}" rel="stylesheet" type="text/css" id="skin" />
+    <div th:replace="/sys/fragments/common :: meta" />
+    <div th:replace="/sys/fragments/common :: common-css" />
 </head>
 
 <body>
@@ -41,10 +35,9 @@
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
-                    <li><sec:authentication property="principal.username"/></li>
+                    <li><span sec:authentication="principal.realname"></span>[<span sec:authentication="principal.username"></span>]</li>
                     <li class="dropDown dropDown_hover">
                         <a href="#" class="dropDown_A">
-                            <sec:authentication property="principal.username"/>
                             <i class="Hui-iconfont">&#xe6d5;</i>
                         </a>
                         <ul class="dropDown-menu menu radius box-shadow">
@@ -115,11 +108,7 @@
         <li id="closeall">关闭全部</li>
     </ul>
 </div>
-<script type="text/javascript" th:src="@{/static/lib/jquery/jquery.js}"></script>
-<script type="text/javascript" th:src="@{/static/lib/jquery/contextmenu/jquery.contextmenu.r2.js}"></script>
-<script type="text/javascript" th:src="@{/static/lib/layer/layer.js}"></script>
-<script type="text/javascript" th:src="@{/static/lib/ui/common/js/H-ui.js}"></script>
-<script type="text/javascript" th:src="@{/static/lib/ui/admin/js/H-ui.admin.js}"></script>
-
+    <div th:replace="/sys/fragments/common :: common-js" />
+    <script type="text/javascript" th:src="@{/static/lib/ui/admin/js/index.js}"></script>
 </body>
 </html>

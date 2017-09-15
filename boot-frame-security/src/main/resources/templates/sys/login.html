@@ -32,24 +32,26 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input name="yzm" class="input-text size-L" type="text" placeholder="验证码" style="width:150px;"/>
-                    <img id="yzm" th:src="@{/images/yzm}"/> <a id="kanbuq" href="javascript:$('#yzm').attr('src', $('#yzm').attr('src'))">换一张</a>
+                    <input name="validCode" class="input-text size-L" type="text" placeholder="验证码" style="width:150px;"/>
+                    <img id="validCode" th:src="@{/images/validCode}" alt="验证码" /> <a id="kanbuq" href="javascript:$('#validCode').attr('src', $('#validCode').attr('src'))">换一张</a>
                 </div>
             </div>
+            <!--<div class="row cl">-->
+                <!--<div class="formControls col-xs-8 col-xs-offset-3">-->
+                    <!--<label for="remember-me">-->
+                        <!--<input type="checkbox" name="remember-me" id="remember-me" />-->
+                        <!--使我保持登录状态-->
+                    <!--</label>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <label for="online">
-                        <input type="checkbox" name="online" id="online" value=""/>
-                        使我保持登录状态
-                    </label>
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="formControls col-xs-8 col-xs-offset-3" th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
-                    用户名或密码错误
-                </label>
-                <div class="formControls col-xs-8 col-xs-offset-3" th:if="${param.logout}">
-                    您已注销成功
+                    <div class="c-error" th:if="${param.error} and ${session.SPRING_SECURITY_LAST_EXCEPTION}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+                        用户名或密码错误
+                    </div>
+                    <div class="c-success" th:if="${param.logout}">
+                        您已注销成功
+                    </div>
                 </div>
             </div>
             <div class="row cl">

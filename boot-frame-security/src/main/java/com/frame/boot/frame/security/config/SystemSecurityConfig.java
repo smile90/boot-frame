@@ -2,12 +2,12 @@ package com.frame.boot.frame.security.config;
 
 import com.frame.boot.frame.security.authentication.LoginSuccessHandler;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
-import com.frame.boot.frame.security.service.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +25,9 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SystemSecurityProperties systemSecurityProperties;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @Resource(name = "securityAuthenticationProvider")
     private AuthenticationProvider securityAuthenticationProvider;
 
@@ -38,16 +41,16 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("{}", systemSecurityProperties);
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         http
-            .authorizeRequests()
-            .antMatchers(url.getPermitPaths()).permitAll()
-            .antMatchers(url.getAuthenticatePaths()).authenticated()
-            .and().formLogin().loginPage(url.getLoginUrl()).permitAll()
-            .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl()).failureUrl(url.getLoginUrl() + "?error")
-            .and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl()).permitAll();
+                .authorizeRequests()
+                .antMatchers(url.getPermitPaths()).permitAll()
+                .antMatchers(url.getAuthenticatePaths()).authenticated()
+                .and().formLogin().loginPage(url.getLoginUrl()).permitAll()
+                .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl()).failureUrl(url.getLoginUrl() + "?error")
+                .and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl()).permitAll();
     }
 
     @Bean
-    public LoginSuccessHandler loginSuccessHandler(){
+    public LoginSuccessHandler loginSuccessHandler() {
         return new LoginSuccessHandler();
     }
 }

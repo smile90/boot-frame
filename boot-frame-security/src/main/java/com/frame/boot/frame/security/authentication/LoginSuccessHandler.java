@@ -22,7 +22,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         // 获得授权后可得到用户信息
-        SysSecurityUser userDetails = (SysSecurityUser) authentication.getPrincipal();
+        SysUser userDetails = (SysUser) authentication.getPrincipal();
+        // 重新查询最新用户信息
         SysUser sysUser = sysUserService.findByUsername(userDetails.getUsername());
         if (sysUser != null) {
             sysUser.setLastLoginTime(new Date());

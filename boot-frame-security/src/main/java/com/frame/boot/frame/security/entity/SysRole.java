@@ -1,13 +1,14 @@
 package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseModel;
+import org.springframework.security.core.GrantedAuthority;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @OptimisticLocking("sys_role")
-public class SysRole extends BaseModel {
+public class SysRole extends BaseModel implements GrantedAuthority {
 
     private String typeCode;
 
@@ -49,4 +50,8 @@ public class SysRole extends BaseModel {
         this.modules = modules;
     }
 
+    @Override
+    public String getAuthority() {
+        return code;
+    }
 }

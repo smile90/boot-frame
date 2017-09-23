@@ -1,16 +1,21 @@
 package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseModel;
+import com.frame.common.frame.base.enums.UserStatus;
+import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @OptimisticLocking("sys_user")
-public class SysUser extends BaseModel {
+public class SysUser extends BaseModel implements UserDetails {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -48,6 +53,7 @@ public class SysUser extends BaseModel {
 
     private List<SysRole> roles = new ArrayList<>();
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -56,6 +62,7 @@ public class SysUser extends BaseModel {
         this.username = username == null ? null : username.trim();
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -184,4 +191,34 @@ public class SysUser extends BaseModel {
         this.roles = roles;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return !UserStatus.EXPIRED.name().equals(userStatus);
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !UserStatus.LOCKED.name().equals(userStatus);
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO 后期启用
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        try {
+            return (!UserStatus.valueOf(userStatus).equals(UserStatus.DISABLED) && !UserStatus.valueOf(userStatus).equals(UserStatus.DELETED));
+        } catch (Exception e) {
+            logger.error("userStatus error. status:{}", userStatus, e);
+            return false;
+        }
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
 }

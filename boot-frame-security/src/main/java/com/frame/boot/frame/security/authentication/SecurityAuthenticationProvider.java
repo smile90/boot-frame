@@ -1,6 +1,7 @@
 package com.frame.boot.frame.security.authentication;
 
 
+import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
 import com.frame.common.frame.utils.EncodeAndDecodeUtil;
@@ -43,7 +44,7 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider {
         }
 
         // 账户状态判断
-        UserDetails userDetails = sysUserService.loadUserByUsername(username);
+        SysUser userDetails = sysUserService.loadUserByUsername(username);
         if (userDetails == null) {
             throw new UsernameNotFoundException("用户/密码错误");
         } else if (!passwordMd5.equals(userDetails.getPassword())) {

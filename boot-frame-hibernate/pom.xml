@@ -20,11 +20,6 @@
             <artifactId>common-frame-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.frame</groupId>
-            <artifactId>boot-frame-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
         <!-- boot -->
         <dependency>

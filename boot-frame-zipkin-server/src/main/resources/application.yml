@@ -13,3 +13,5 @@ spring:
     name: @project.artifactId@
   jmx:
     default-domain: @project.artifactId@
+  datasource:
+    druid:

@@ -17,7 +17,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>boot-frame-common</module>
 		<module>boot-frame-cache</module>
 		<module>boot-frame-mybatis</module>
 		<module>boot-frame-mybatis-generator</module>

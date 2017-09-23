@@ -26,10 +26,7 @@ public class ContextFilter implements Filter {
             ctxPath = ctxPath.substring(0, ctxPath.length() - 1);
         }
         staticHost = filterConfig.getInitParameter(STATIC_HOST_CODE);
-        if (EmptyUtil.notEmpty(staticHost)) {
-            ctxPath = staticHost + ctxPath;
-        }
-        logger.info("create staticHost:{},ctxPath:{}", ctxPath, staticHost);
+        logger.info("create ctxPath:{}, staticHost:{}", ctxPath, staticHost);
     }
 
     @Override

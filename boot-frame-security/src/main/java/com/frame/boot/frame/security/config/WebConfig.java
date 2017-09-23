@@ -1,23 +1,14 @@
 package com.frame.boot.frame.security.config;
 
-import com.alibaba.druid.support.http.StatViewServlet;
-import com.alibaba.druid.support.http.WebStatFilter;
 import com.frame.boot.frame.security.filter.ContextFilter;
-import com.frame.boot.frame.security.properties.DruidProperties;
 import com.frame.boot.frame.security.properties.FrameHostProperties;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
-import com.frame.common.frame.utils.EmptyUtil;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class WebConfig {
@@ -32,16 +23,16 @@ public class WebConfig {
      * @see com.frame.boot.frame.security.filter.ContextFilter
      * @return
      */
-    @Bean
-    public FilterRegistrationBean contextFilter(){
+    @Bean("ctxContextFilter")
+    public FilterRegistrationBean ctxContextFilter(){
         FilterRegistrationBean fitler = new FilterRegistrationBean();
         fitler.setFilter(new ContextFilter());
         fitler.addInitParameter(ContextFilter.STATIC_HOST_CODE, frameHostProperties.getStaticHost());
         return fitler;
     }
 
-    @Bean
-    public ServletRegistrationBean servletRegistrationBean() {
+    @Bean("kaptchaServletRegistrationBean")
+    public ServletRegistrationBean kaptchaServletRegistrationBean() {
         ServletRegistrationBean servlet = new ServletRegistrationBean(new KaptchaServlet(), kaptchaProperties.getUrl());
         servlet.addInitParameter("kaptcha.border", kaptchaProperties.getBorder());
         servlet.addInitParameter("kaptcha.session.key", kaptchaProperties.getSessionKey());

@@ -1,6 +1,9 @@
 # debug=true
 info:
-  version: @project.version@
+  app:
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
 
 # server config
 server:
@@ -11,13 +14,9 @@ server:
 management:
   security:
     enabled: false
-  context-path: /actuator
 
 # eureka config
 eureka:
-  instance:
-    health-check-url-path: ${management.context-path}/health
-    status-page-url-path: ${management.context-path}/info
   client:
     register-with-eureka: true
     fetch-registry: true
@@ -33,5 +32,3 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
       indent_output: true
-
-

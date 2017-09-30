@@ -63,24 +63,24 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(sysUserService);
-        auth.authenticationProvider(securityAuthenticationProvider);
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         logger.info("{}", systemSecurityProperties);
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         http
 //                .addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
                 .headers().frameOptions().sameOrigin()
-                .and().authorizeRequests()
+            .and().authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
-                .and().formLogin().loginPage(url.getLoginUrl()).permitAll()
-                .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl()).failureUrl(url.getLoginUrl() + "?error")
-                .and().logout().logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
-                .and().rememberMe();;
+            .and().formLogin()
+                .loginPage(url.getLoginUrl()).permitAll()
+                .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl())
+                .failureUrl(url.getLoginUrl() + "?error")
+                .and().rememberMe()
+            .and().logout()
+                .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
+            .and()
+                .authenticationProvider(securityAuthenticationProvider)
+                .userDetailsService(sysUserService);
     }
 }

@@ -16,7 +16,6 @@ management:
 # eureka config
 eureka:
   instance:
-    hostname: eureka-peer
     health-check-url-path: ${management.context-path}/health
     status-page-url-path: ${management.context-path}/info
   client:

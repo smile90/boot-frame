@@ -1,10 +1,11 @@
-# debug: true
 info:
+  name: @project.name@
   version: @project.version@
+  description: @project.description@
 
 # server config
 server:
-  port: 4444
+  port: 4441
   context-path: /
 
 # config

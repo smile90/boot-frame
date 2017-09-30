@@ -1,9 +1,7 @@
-# debug=true
 info:
-  app:
-    name: "@project.name@"
-    description: "@project.description@"
-    version: "@project.version@"
+  name: @project.name@
+  version: @project.version@
+  description: @project.description@
 
 # server config
 server:

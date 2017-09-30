@@ -1,6 +1,7 @@
-# debug: true
 info:
+  name: @project.name@
   version: @project.version@
+  description: @project.description@
 
 # server config
 server:
@@ -13,5 +14,3 @@ spring:
     name: @project.artifactId@
   jmx:
     default-domain: @project.artifactId@
-  datasource:
-    druid:

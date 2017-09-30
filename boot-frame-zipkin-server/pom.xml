@@ -32,6 +32,11 @@
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+        </dependency>
+
         <!--使用@EnableZipkinServer注解方式只需要依赖如下两个包-->
         <dependency>
             <groupId>io.zipkin.java</groupId>

@@ -12,3 +12,5 @@ server:
 spring:
   application:
     name: @project.artifactId@
+  jmx:
+    default-domain: @project.artifactId@

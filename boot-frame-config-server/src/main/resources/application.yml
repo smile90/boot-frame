@@ -23,6 +23,8 @@ eureka:
 spring:
   application:
     name: @project.artifactId@
+  jmx:
+    default-domain: @project.artifactId@
 # Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

@@ -54,7 +54,7 @@ public class SystemSecurityProperties {
         private String loginUrl = "/sys/login";
         private String logoutUrl = "/sys/logout";
         private String indexUrl = "/sys/index";
-        private String[] permitPaths = new String[] {"/resources/**", "/sys/login"};
+        private String[] permitPaths = new String[] {"/static/**", "/sys/login"};
         private String[] authenticatePaths = new String[] {"/sys/**"};
 
         public String getLoginUrl() {

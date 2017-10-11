@@ -8,12 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.access.vote.AuthenticatedVoter;
+import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -22,44 +33,53 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private SystemSecurityProperties systemSecurityProperties;
 
     @Autowired
-    private SystemSecurityProperties systemSecurityProperties;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     @Qualifier("sysUserService")
     private UserDetailsService sysUserService;
 
     @Autowired
-    @Qualifier("securityAuthenticationProvider")
-    private AuthenticationProvider securityAuthenticationProvider;
+    @Qualifier("customAuthenticationProvider")
+    private AuthenticationProvider authenticationProvider;
 
-//    @Autowired
-//    @Qualifier("securityMetadataSource")
-//    private FilterInvocationSecurityMetadataSource securityMetadataSource;
-//
-//    @Autowired
-//    @Qualifier("securityAccessDecisionManager")
-//    private AccessDecisionManager securityAccessDecisionManager;
+    @Autowired
+    @Qualifier("customSecurityMetadataSource")
+    private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
-//    @Bean
-//    public FilterSecurityInterceptor filterSecurityInterceptor() {
-//        FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
-//        filterSecurityInterceptor.setAuthenticationManager(authenticationManager);
-//        filterSecurityInterceptor.setSecurityMetadataSource(securityMetadataSource);
-//        filterSecurityInterceptor.setAccessDecisionManager(securityAccessDecisionManager);
-//        return filterSecurityInterceptor;
-//    }
+    @PostConstruct
+    public void init() {
+        logger.info("{}", systemSecurityProperties);
+    }
+
+    @Bean
+    public AccessDecisionManager accessDecisionManager() {
+        List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList();
+        decisionVoters.add(new AuthenticatedVoter());
+        RoleVoter AuthVoter = new RoleVoter();
+        AuthVoter.setRolePrefix(null);// 特殊权限投票器,修改前缀为AUTH_
+        decisionVoters.add(AuthVoter);
+        return new AffirmativeBased(decisionVoters);
+    }
+
+    private FilterSecurityInterceptor filterSecurityInterceptor() throws Exception {
+        FilterSecurityInterceptor customFilterSecurityInterceptor = new FilterSecurityInterceptor();
+        customFilterSecurityInterceptor.setAuthenticationManager(super.authenticationManagerBean());
+        customFilterSecurityInterceptor.setAccessDecisionManager(accessDecisionManager());
+        customFilterSecurityInterceptor.setSecurityMetadataSource(securityMetadataSource);
+        return customFilterSecurityInterceptor;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        logger.info("{}", systemSecurityProperties);
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         http
-//                .addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
                 .headers().frameOptions().sameOrigin()
-            .and().authorizeRequests()
+            .and().addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
+                .authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
             .and().formLogin()
@@ -70,7 +90,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
             .and().logout()
                 .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
             .and()
-                .authenticationProvider(securityAuthenticationProvider)
+                .authenticationProvider(authenticationProvider)
                 .userDetailsService(sysUserService);
     }
 

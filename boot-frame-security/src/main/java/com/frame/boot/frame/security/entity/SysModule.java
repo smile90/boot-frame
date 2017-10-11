@@ -1,14 +1,14 @@
 package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseModel;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.access.ConfigAttribute;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @OptimisticLocking("sys_module")
-public class SysModule extends BaseModel implements GrantedAuthority {
+public class SysModule extends BaseModel implements ConfigAttribute {
 
     private String typeCode;
 
@@ -111,7 +111,20 @@ public class SysModule extends BaseModel implements GrantedAuthority {
     }
 
     @Override
-    public String getAuthority() {
+    public String getAttribute() {
         return code;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SysModule{");
+        sb.append("typeCode='").append(typeCode).append('\'');
+        sb.append(", level=").append(level);
+        sb.append(", validate='").append(validate).append('\'');
+        sb.append(", useable='").append(useable).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", url='").append(url).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

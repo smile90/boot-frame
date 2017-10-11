@@ -14,7 +14,7 @@ public class KaptchaProperties {
 
 
     /** 请求url */
-    private String url = "/images/validCode";
+    private String url = "/static/validCode";
     /** session中的key */
     private String sessionKey = "validCode.code";
 

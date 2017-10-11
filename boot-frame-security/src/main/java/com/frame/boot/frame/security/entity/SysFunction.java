@@ -18,6 +18,8 @@ public class SysFunction extends BaseModel {
 
     private Integer orders;
 
+    private String httpMethod;
+
     private String url;
 
     public String getModuleCode() {
@@ -66,6 +68,14 @@ public class SysFunction extends BaseModel {
 
     public void setOrders(Integer orders) {
         this.orders = orders;
+    }
+
+    public String getHttpMethod() {
+        return httpMethod;
+    }
+
+    public void setHttpMethod(String httpMethod) {
+        this.httpMethod = httpMethod;
     }
 
     public String getUrl() {

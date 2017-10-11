@@ -106,12 +106,4 @@ public class BaseModel implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	@Override
-	public String toString() {
-		final StringBuffer sb = new StringBuffer('{');
-		sb.append("id=").append(id);
-		sb.append(", optimistic=").append(optimistic);
-		sb.append('}');
-		return sb.toString();
-	}
 }

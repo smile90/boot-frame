@@ -36,7 +36,7 @@ public abstract class BaseService<T> {
         return getBaseMapper().selectAll();
     }
 
-    public PageList<T> findAll(PageBounds pageParam) {
-        return getBaseMapper().selectAll(pageParam);
+    public PageList<T> findAll(PageBounds pageBounds) {
+        return getBaseMapper().selectAll(pageBounds);
     }
 }

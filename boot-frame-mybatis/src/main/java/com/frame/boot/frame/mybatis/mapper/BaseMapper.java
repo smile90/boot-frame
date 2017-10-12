@@ -12,5 +12,5 @@ public interface BaseMapper<T> {
     int updateSelective(T record);
     T selectOne(Long id);
     List<T> selectAll();
-    PageList<T> selectAll(PageBounds pageParam);
+    PageList<T> selectAll(PageBounds pageBounds);
 }

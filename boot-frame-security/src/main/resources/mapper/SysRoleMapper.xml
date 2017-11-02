@@ -16,7 +16,7 @@
         <result column="UPDATE_TIME" property="updateTime" />
     </resultMap>
     <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysRole" extends="BaseResultMap">
-        <collection column="{roleId = id}" property="modules" ofType="com.frame.boot.frame.security.entity.SysModule"
+        <collection column="{roleCode = code}" property="modules" ofType="com.frame.boot.frame.security.entity.SysModule"
                     select="com.frame.boot.frame.security.mapper.SysModuleMapper.selectSecurityByRole" />
     </resultMap>
 
@@ -29,6 +29,12 @@
         <include refid="Base_Column_List"/>
         from sys_role
         where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where CODE = #{code,jdbcType=BIGINT}
     </select>
     <delete id="delete" parameterType="java.lang.Long">
         delete from sys_role
@@ -102,11 +108,11 @@
         where ID = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectSecurityByUserId" parameterType="java.lang.Long" resultMap="SecurityResultMap">
+    <select id="selectSecurityByUsername" resultMap="SecurityResultMap">
         select
           sr.*
         from sys_role sr, sys_role_user sru
-        where sr.id = sru.role_id
-        and sru.user_id = #{userId,jdbcType=BIGINT}
+        where sr.code = sru.role_code
+        and sru.username = #{username,jdbcType=VARCHAR}
     </select>
 </mapper>

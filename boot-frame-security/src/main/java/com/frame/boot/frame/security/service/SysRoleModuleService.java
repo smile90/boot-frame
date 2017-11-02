@@ -20,8 +20,8 @@ public class SysRoleModuleService extends BaseService<SysRoleModule> {
         return sysRoleModuleMapper;
     }
 
-    public List<SysRoleModule> findByModuleId(Long moduleId) {
-        return sysRoleModuleMapper.selectByModuleId(moduleId);
+    public List<SysRoleModule> findByModuleCode(String moduleCode) {
+        return sysRoleModuleMapper.selectByModuleCode(moduleCode);
     }
 
 }

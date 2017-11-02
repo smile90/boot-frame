@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface SysRoleModuleMapper extends BaseMapper<SysRoleModule> {
 
-    public List<SysRoleModule> selectByModuleId(Long moduleId);
+    public List<SysRoleModule> selectByModuleCode(String moduleCode);
 }

@@ -5,13 +5,12 @@ import com.frame.boot.frame.mybatis.service.BaseService;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service("sysUserService")
-public class SysUserService extends BaseService<SysUser> implements UserDetailsService {
+public class SysUserService extends BaseService<SysUser> {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -21,18 +20,13 @@ public class SysUserService extends BaseService<SysUser> implements UserDetailsS
         return sysUserMapper;
     }
 
-    @Override
-    public SysUser loadUserByUsername(String username) {
-        return findSecurityUserByUsername(username);
-    }
-
     public SysUser create(SysUser sysUser) {
         sysUser.setCreateTime(new Date());
         sysUserMapper.insert(sysUser);
         return sysUser;
     }
 
-    public SysUser updateByPK(SysUser sysUser) {
+    public SysUser update(SysUser sysUser) {
         sysUser.setUpdateTime(new Date());
         sysUserMapper.update(sysUser);
         return sysUser;

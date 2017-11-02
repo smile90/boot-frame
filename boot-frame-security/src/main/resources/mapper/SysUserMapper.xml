@@ -14,9 +14,6 @@
         <result column="AGE" property="age"/>
         <result column="ADDRESS" property="address"/>
         <result column="PHOTO" property="photo"/>
-        <result column="LAST_LOGIN_TIME" property="lastLoginTime"/>
-        <result column="LAST_LOGIN_IP" property="lastLoginIp"/>
-        <result column="LAST_PASSWORD" property="lastPassword"/>
         <result column="USER_STATUS" property="userStatus"/>
         <result column="USER_TYPE_CODE" property="userTypeCode"/>
         <result column="TYPE_CODE" property="typeCode"/>
@@ -30,13 +27,13 @@
     </resultMap>
 
     <resultMap id="SecurityResultMap" type="com.frame.boot.frame.security.entity.SysUser" extends="BaseResultMap">
-        <collection column="id" property="roles" ofType="com.frame.boot.frame.security.entity.SysRole"
-                    select="com.frame.boot.frame.security.mapper.SysRoleMapper.selectSecurityByUserId" />
+        <collection column="{username = username}" property="roles" ofType="com.frame.boot.frame.security.entity.SysRole"
+                    select="com.frame.boot.frame.security.mapper.SysRoleMapper.selectSecurityByUsername" />
     </resultMap>
 
     <sql id="Base_Column_List">
         ID, OPTIMISTIC, USERNAME, PASSWORD, REALNAME, EMAIL, TELEPHONE, CELLPHONE, SEX, AGE,
-        ADDRESS, PHOTO, ORDERS, LAST_LOGIN_TIME, LAST_LOGIN_IP, LAST_PASSWORD, USER_STATUS,
+        ADDRESS, PHOTO, ORDERS, USER_STATUS,
         USER_TYPE_CODE, DESCRIPTION, TYPE_CODE, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER,
         UPDATE_TIME
     </sql>
@@ -56,8 +53,7 @@
           PASSWORD, REALNAME, EMAIL,
           TELEPHONE, CELLPHONE, SEX,
           AGE, ADDRESS, PHOTO,
-          ORDERS, LAST_LOGIN_TIME, LAST_LOGIN_IP,
-          LAST_PASSWORD, USER_STATUS, USER_TYPE_CODE,
+          ORDERS, USER_STATUS, USER_TYPE_CODE,
           DESCRIPTION, TYPE_CODE, STATUS,
           CREATE_USER, CREATE_TIME, UPDATE_USER,
           UPDATE_TIME)
@@ -65,8 +61,7 @@
           #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
           #{telephone,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
           #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
-          #{orders,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR},
-          #{lastPassword,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{userTypeCode,jdbcType=VARCHAR},
+          #{orders,jdbcType=INTEGER}, #{userStatus,jdbcType=VARCHAR}, #{userTypeCode,jdbcType=VARCHAR},
           #{description,jdbcType=VARCHAR}, #{typeCode,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
           #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
           #{updateTime,jdbcType=TIMESTAMP})
@@ -109,15 +104,6 @@
             </if>
             <if test="orders != null">
                 ORDERS = #{orders,jdbcType=INTEGER},
-            </if>
-            <if test="lastLoginTime != null">
-                LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="lastLoginIp != null">
-                LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR},
-            </if>
-            <if test="lastPassword != null">
-                LAST_PASSWORD = #{lastPassword,jdbcType=VARCHAR},
             </if>
             <if test="userStatus != null">
                 USER_STATUS = #{userStatus,jdbcType=VARCHAR},
@@ -163,9 +149,6 @@
           ADDRESS = #{address,jdbcType=VARCHAR},
           PHOTO = #{photo,jdbcType=VARCHAR},
           ORDERS = #{orders,jdbcType=INTEGER},
-          LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
-          LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR},
-          LAST_PASSWORD = #{lastPassword,jdbcType=VARCHAR},
           USER_STATUS = #{userStatus,jdbcType=VARCHAR},
           USER_TYPE_CODE = #{userTypeCode,jdbcType=VARCHAR},
           DESCRIPTION = #{description,jdbcType=VARCHAR},

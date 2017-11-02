@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Autowired
     private SysUserService sysUserService;
@@ -26,10 +26,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         // 重新查询最新用户信息
         SysUser sysUser = sysUserService.findByUsername(userDetails.getUsername());
         if (sysUser != null) {
-            sysUser.setLastLoginTime(new Date());
-            sysUser.setLastLoginIp(getIpAddress(request));
-            sysUserService.updateByPK(sysUser);
-
             // 登录日志记录 TODO
         }
         super.onAuthenticationSuccess(request, response, authentication);

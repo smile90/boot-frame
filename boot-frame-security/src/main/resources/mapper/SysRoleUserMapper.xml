@@ -4,8 +4,8 @@
     <resultMap id="BaseResultMap" type="com.frame.boot.frame.security.entity.SysRoleUser">
         <id column="ID" property="id"/>
         <result column="OPTIMISTIC" property="optimistic"/>
-        <result column="ROLE_ID"  property="roleId"/>
-        <result column="USER_ID" property="userId"/>
+        <result column="ROLE_CODE"  property="roleCode"/>
+        <result column="USERNAME" property="username"/>
         <result column="STATUS" property="status"/>
         <result column="CREATE_USER" property="createUser"/>
         <result column="CREATE_TIME" property="createTime"/>
@@ -13,7 +13,7 @@
         <result column="UPDATE_TIME" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, OPTIMISTIC, ROLE_ID, USER_ID, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER,
+        ID, OPTIMISTIC, ROLE_CODE, USERNAME, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER,
         UPDATE_TIME
     </sql>
     <select id="selectOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -28,12 +28,12 @@
     </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             parameterType="com.frame.boot.frame.security.entity.SysRoleUser">
-        insert into sys_role_user (OPTIMISTIC, ROLE_ID,
-          USER_ID, STATUS, CREATE_USER,
+        insert into sys_role_user (OPTIMISTIC, ROLE_CODE,
+          USERNAME, STATUS, CREATE_USER,
           CREATE_TIME, UPDATE_USER, UPDATE_TIME
           )
-        values (#{optimistic,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT},
-          #{userId,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR},
+        values (#{optimistic,jdbcType=BIGINT}, #{roleCode,jdbcType=VARCHAR},
+          #{username,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR},
           #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
           )
     </insert>
@@ -43,11 +43,11 @@
             <if test="optimistic != null">
                 OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
             </if>
-            <if test="roleId != null">
-                ROLE_ID = #{roleId,jdbcType=BIGINT},
+            <if test="roleCode != null">
+                ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
             </if>
-            <if test="userId != null">
-                USER_ID = #{userId,jdbcType=BIGINT},
+            <if test="username != null">
+                USERNAME = #{username,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 STATUS = #{status,jdbcType=VARCHAR},
@@ -70,8 +70,8 @@
     <update id="update" parameterType="com.frame.boot.frame.security.entity.SysRoleUser">
         update sys_role_user
         set OPTIMISTIC = #{optimistic,jdbcType=BIGINT},
-          ROLE_ID = #{roleId,jdbcType=BIGINT},
-          USER_ID = #{userId,jdbcType=BIGINT},
+          ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+          USERNAME = #{username,jdbcType=VARCHAR},
           STATUS = #{status,jdbcType=VARCHAR},
           CREATE_USER = #{createUser,jdbcType=VARCHAR},
           CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},

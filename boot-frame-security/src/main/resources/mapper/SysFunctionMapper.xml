@@ -121,10 +121,10 @@
         where ID = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectByModuleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByModuleCode" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_function
-        where module_code = #{moduleCode,jdbcType=BIGINT}
+        where module_code = #{moduleCode,jdbcType=VARCHAR}
     </select>
 </mapper>

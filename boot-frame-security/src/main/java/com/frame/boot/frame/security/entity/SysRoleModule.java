@@ -6,24 +6,23 @@ import se.spagettikod.optimist.OptimisticLocking;
 @OptimisticLocking("sys_role_module")
 public class SysRoleModule extends BaseModel {
 
-    private Long roleId;
+    private String roleCode;
 
-    private Long moduleId;
+    private String moduleCode;
 
-    public Long getRoleId() {
-        return roleId;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
-    public Long getModuleId() {
-        return moduleId;
+    public String getModuleCode() {
+        return moduleCode;
     }
 
-    public void setModuleId(Long moduleId) {
-        this.moduleId = moduleId;
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
     }
-
 }

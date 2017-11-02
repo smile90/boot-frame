@@ -6,24 +6,23 @@ import se.spagettikod.optimist.OptimisticLocking;
 @OptimisticLocking("sys_role_user")
 public class SysRoleUser extends BaseModel {
 
-    private Long roleId;
+    private String roleCode;
 
-    private Long userId;
+    private String username;
 
-    public Long getRoleId() {
-        return roleId;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
 }

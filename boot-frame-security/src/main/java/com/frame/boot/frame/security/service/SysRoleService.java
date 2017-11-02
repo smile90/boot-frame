@@ -33,18 +33,19 @@ public class SysRoleService extends BaseService<SysRole> {
     public List<SysRole> findByModuleCode(String moduleCode) {
         List<SysRole> sysRoles = new ArrayList<>();
 
-        SysModule sysModule = sysModuleService.findByCode(moduleCode);
-        if (sysModule != null) {
-            List<SysRoleModule> sysRoleModules = sysRoleModuleService.findByModuleId(sysModule.getId());
-            if (EmptyUtil.notEmpty(sysRoleModules)) {
-                for (SysRoleModule sysRoleModule : sysRoleModules) {
-                    SysRole sysRole = findOne(sysRoleModule.getRoleId());
-                    if (sysRole != null) {
-                        sysRoles.add(sysRole);
-                    }
+        List<SysRoleModule> sysRoleModules = sysRoleModuleService.findByModuleCode(moduleCode);
+        if (EmptyUtil.notEmpty(sysRoleModules)) {
+            for (SysRoleModule sysRoleModule : sysRoleModules) {
+                SysRole sysRole = findByCode(sysRoleModule.getRoleCode());
+                if (sysRole != null) {
+                    sysRoles.add(sysRole);
                 }
             }
         }
         return sysRoles;
+    }
+
+    public SysRole findByCode(String code) {
+        return sysRoleMapper.selectByCode(code);
     }
 }

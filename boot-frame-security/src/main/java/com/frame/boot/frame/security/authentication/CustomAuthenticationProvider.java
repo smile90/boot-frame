@@ -1,6 +1,7 @@
 package com.frame.boot.frame.security.authentication;
 
 
+import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
@@ -25,7 +26,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private SysUserService sysUserService;
 
     @Override
-    @Transactional
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String username = token.getName();
@@ -42,19 +42,19 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         // 账户状态判断
-        SysUser userDetails = sysUserService.loadUserByUsername(username);
+        SysUser userDetails = sysUserService.findSecurityUserByUsername(username);
         if (userDetails == null) {
-            throw new UsernameNotFoundException("用户/密码错误");
+            throw new UsernameNotFoundException(SysConstants.SYS_USER_ERROR_MSG_BAD_CREDENTIALS);
         } else if (!passwordMd5.equals(userDetails.getPassword())) {
-            throw new BadCredentialsException("用户/密码错误");
+            throw new BadCredentialsException(SysConstants.SYS_USER_ERROR_MSG_BAD_CREDENTIALS);
         } else if (!userDetails.isEnabled()) {
-            throw new DisabledException("用户已被禁用");
+            throw new DisabledException(SysConstants.SYS_USER_ERROR_MSG_DISABLED);
         } else if (!userDetails.isAccountNonExpired()) {
-            throw new AccountExpiredException("账号已过期");
+            throw new AccountExpiredException(SysConstants.SYS_USER_ERROR_MSG_EXPIRED);
         } else if (!userDetails.isAccountNonLocked()) {
-            throw new LockedException("账号已被锁定");
+            throw new LockedException(SysConstants.SYS_USER_ERROR_MSG_LOCKED);
         } else if (!userDetails.isCredentialsNonExpired()) {
-            throw new LockedException("凭证已过期");
+            throw new LockedException(SysConstants.SYS_USER_ERROR_MSG_CREDENTIALS);
         }
         // 授权
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());

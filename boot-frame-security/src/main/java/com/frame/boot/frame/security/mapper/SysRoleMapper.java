@@ -9,5 +9,7 @@ import java.util.List;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
-    List<SysRole> selectSecurityByUserId(Long userId);
+    List<SysRole> selectSecurityByUsername(String username);
+
+    SysRole selectByCode(String code);
 }

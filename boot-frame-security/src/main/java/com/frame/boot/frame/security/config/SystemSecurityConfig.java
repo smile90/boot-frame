@@ -1,7 +1,7 @@
 package com.frame.boot.frame.security.config;
 
 import com.frame.boot.frame.security.authentication.CustomAdminRoleVoter;
-import com.frame.boot.frame.security.authentication.LoginSuccessHandler;
+import com.frame.boot.frame.security.authentication.CustomLoginSuccessHandler;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import org.slf4j.Logger;
@@ -37,8 +37,8 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     private SystemSecurityProperties systemSecurityProperties;
 
     @Autowired
-    @Qualifier("sysUserService")
-    private UserDetailsService sysUserService;
+    @Qualifier("customUserDetailsService")
+    private UserDetailsService userDetailsService;
 
     @Autowired
     @Qualifier("customAuthenticationProvider")
@@ -82,9 +82,10 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         http.headers().frameOptions().sameOrigin()
-            .and().addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
+            .and()
+                .addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
                 .authenticationProvider(authenticationProvider)
-                .userDetailsService(sysUserService)
+                .userDetailsService(userDetailsService)
             .authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
@@ -98,7 +99,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public LoginSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessHandler();
+    public CustomLoginSuccessHandler loginSuccessHandler() {
+        return new CustomLoginSuccessHandler();
     }
 }

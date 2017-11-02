@@ -1,6 +1,8 @@
 package com.frame.boot.frame.security.config;
 
+import com.frame.boot.frame.security.authentication.CustomAdminRoleVoter;
 import com.frame.boot.frame.security.authentication.LoginSuccessHandler;
+import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +15,6 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,9 +37,6 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     private SystemSecurityProperties systemSecurityProperties;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     @Qualifier("sysUserService")
     private UserDetailsService sysUserService;
 
@@ -58,10 +56,17 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AccessDecisionManager accessDecisionManager() {
         List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList();
+        // 登录状态控制
         decisionVoters.add(new AuthenticatedVoter());
-        RoleVoter AuthVoter = new RoleVoter();
-        AuthVoter.setRolePrefix(null);// 特殊权限投票器,修改前缀为AUTH_
-        decisionVoters.add(AuthVoter);
+        // 超级管理员投票器，超级管理员全部通过
+        CustomAdminRoleVoter superAdminVoter = new CustomAdminRoleVoter();
+        superAdminVoter.setRoleCode(SysConstants.ROLE_CODE_SUPER_ADMIN);
+        decisionVoters.add(superAdminVoter);
+        // 角色权限投票器，不要前缀，拥有角色则通过
+        RoleVoter roleVoter = new RoleVoter();
+        roleVoter.setRolePrefix("");
+        decisionVoters.add(roleVoter);
+        // 有一个通过，则通过
         return new AffirmativeBased(decisionVoters);
     }
 
@@ -76,9 +81,11 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
-        http
-                .headers().frameOptions().sameOrigin()
-            .and().authorizeRequests()
+        http.headers().frameOptions().sameOrigin()
+            .and().addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
+                .authenticationProvider(authenticationProvider)
+                .userDetailsService(sysUserService)
+            .authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
             .and().formLogin()
@@ -87,10 +94,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl(url.getLoginUrl() + "?error")
                 .and().rememberMe()
             .and().logout()
-                .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
-            .and().addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
-                .authenticationProvider(authenticationProvider)
-                .userDetailsService(sysUserService);
+                .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll();
     }
 
     @Bean

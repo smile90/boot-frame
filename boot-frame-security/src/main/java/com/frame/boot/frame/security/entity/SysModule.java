@@ -1,14 +1,13 @@
 package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.model.BaseModel;
-import org.springframework.security.access.ConfigAttribute;
 import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @OptimisticLocking("sys_module")
-public class SysModule extends BaseModel implements ConfigAttribute {
+public class SysModule extends BaseModel {
 
     private String typeCode;
 
@@ -108,11 +107,6 @@ public class SysModule extends BaseModel implements ConfigAttribute {
 
     public void setFunctions(List<SysFunction> functions) {
         this.functions = functions;
-    }
-
-    @Override
-    public String getAttribute() {
-        return code;
     }
 
     @Override

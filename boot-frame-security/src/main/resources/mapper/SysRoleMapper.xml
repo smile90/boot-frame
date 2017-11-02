@@ -102,7 +102,6 @@
         where ID = #{id,jdbcType=BIGINT}
     </update>
 
-
     <select id="selectSecurityByUserId" parameterType="java.lang.Long" resultMap="SecurityResultMap">
         select
           sr.*

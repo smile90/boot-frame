@@ -3,10 +3,14 @@ package com.frame.boot.frame.security.authentication;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysFunction;
 import com.frame.boot.frame.security.entity.SysModule;
+import com.frame.boot.frame.security.entity.SysRole;
+import com.frame.boot.frame.security.entity.SysRoleModule;
 import com.frame.boot.frame.security.mapper.SysFunctionMapper;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysFunctionService;
 import com.frame.boot.frame.security.service.SysModuleService;
+import com.frame.boot.frame.security.service.SysRoleModuleService;
+import com.frame.boot.frame.security.service.SysRoleService;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +31,13 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    AntPathMatcher antPathMatcher = new AntPathMatcher();
+
     @Autowired
     private SystemSecurityProperties systemSecurityProperties;
 
+    @Autowired
+    private SysRoleService sysRoleService;
     @Autowired
     private SysModuleService sysModuleService;
     @Autowired
@@ -37,8 +45,6 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-
         FilterInvocation filterInvocation = (FilterInvocation) object;
         String paramUrl = filterInvocation.getRequestUrl();
         String requestUrl = filterInvocation.getRequest().getServletPath();
@@ -55,30 +61,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
         }
 
         // 获取URL对应的权限
-        List<ConfigAttribute> authoritys = new ArrayList<>();
-
-        List<SysFunction> sysFunctions = sysFunctionService.findAll();
-        List<SysModule> sysModules = sysModuleService.findAll();
-        if (EmptyUtil.notEmpty(sysFunctions)) {
-            for (SysFunction sysFunction : sysFunctions) {
-                if (EmptyUtil.notEmpty(sysFunction.getUrl())
-                        && antPathMatcher.match(sysFunction.getUrl(), requestUrl)
-                        && EmptyUtil.notEmpty(sysFunction.getModuleCode())) {
-                    SysModule sysModule = sysModuleService.findByCode(sysFunction.getModuleCode());
-                    if (sysModule != null) {
-                        authoritys.add(sysModule);
-                    }
-                }
-            }
-        }
-        if (EmptyUtil.notEmpty(sysModules)) {
-            for (SysModule sysModule : sysModules) {
-                if (EmptyUtil.notEmpty(sysModule.getUrl())
-                        && antPathMatcher.match(sysModule.getUrl(), requestUrl)) {
-                    authoritys.add(sysModule);
-                }
-            }
-        }
+        List<ConfigAttribute> authoritys = getAttributesByUrl(requestUrl);
         logger.info("url:{}-{}({});authoritys:{}", httpMethod, requestUrl, paramUrl, authoritys);
         return authoritys;
     }
@@ -89,7 +72,14 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
         List<SysModule> sysModules = sysModuleService.findAll();
         if (EmptyUtil.notEmpty(sysModules)) {
             for (SysModule sysModule : sysModules) {
-                allCfgAttrs.add(sysModule);
+                List<SysRole> sysRoles = sysRoleService.findByModuleCode(sysModule.getCode());
+                if (EmptyUtil.notEmpty(sysRoles)) {
+                    for (SysRole sysRole : sysRoles) {
+                        if (sysRole != null) {
+                            allCfgAttrs.add(new SecurityConfig(sysRole.getCode()));
+                        }
+                    }
+                }
             }
         }
         return allCfgAttrs;
@@ -98,5 +88,49 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     @Override
     public boolean supports(Class<?> clazz) {
         return true;
+    }
+
+    /**
+     * 获取URL对应的权限
+     * @param requestUrl
+     * @return
+     */
+    private List<ConfigAttribute> getAttributesByUrl(String requestUrl) {
+        List<ConfigAttribute> authoritys = new ArrayList<>();
+
+        List<SysFunction> sysFunctions = sysFunctionService.findAll();
+        List<SysModule> sysModules = sysModuleService.findAll();
+        if (EmptyUtil.notEmpty(sysFunctions)) {
+            for (SysFunction sysFunction : sysFunctions) {
+                if (EmptyUtil.notEmpty(sysFunction.getUrl())
+                        && antPathMatcher.match(sysFunction.getUrl(), requestUrl)
+                        && EmptyUtil.notEmpty(sysFunction.getModuleCode())) {
+                    List<SysRole> sysRoles = sysRoleService.findByModuleCode(sysFunction.getModuleCode());
+                    if (EmptyUtil.notEmpty(sysRoles)) {
+                        for (SysRole sysRole : sysRoles) {
+                            if (sysRole != null) {
+                                authoritys.add(new SecurityConfig(sysRole.getCode()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (EmptyUtil.notEmpty(sysModules)) {
+            for (SysModule sysModule : sysModules) {
+                if (EmptyUtil.notEmpty(sysModule.getUrl())
+                        && antPathMatcher.match(sysModule.getUrl(), requestUrl)) {
+                    List<SysRole> sysRoles = sysRoleService.findByModuleCode(sysModule.getCode());
+                    if (EmptyUtil.notEmpty(sysRoles)) {
+                        for (SysRole sysRole : sysRoles) {
+                            if (sysRole != null) {
+                                authoritys.add(new SecurityConfig(sysRole.getCode()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return authoritys;
     }
 }

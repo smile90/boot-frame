@@ -1,7 +1,7 @@
 package com.frame.boot.frame.security.config;
 
-import com.frame.boot.frame.security.authentication.CustomAdminRoleVoter;
-import com.frame.boot.frame.security.authentication.CustomLoginSuccessHandler;
+import com.frame.boot.frame.security.auth.CustomAdminRoleVoter;
+import com.frame.boot.frame.security.auth.CustomLoginSuccessHandler;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import org.slf4j.Logger;

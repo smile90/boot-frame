@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security.authentication;
+package com.frame.boot.frame.security.auth;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security.authentication;
+package com.frame.boot.frame.security.auth;
 
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;

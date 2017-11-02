@@ -1,15 +1,11 @@
-package com.frame.boot.frame.security.authentication;
+package com.frame.boot.frame.security.auth;
 
-import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysFunction;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.entity.SysRole;
-import com.frame.boot.frame.security.entity.SysRoleModule;
-import com.frame.boot.frame.security.mapper.SysFunctionMapper;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysFunctionService;
 import com.frame.boot.frame.security.service.SysModuleService;
-import com.frame.boot.frame.security.service.SysRoleModuleService;
 import com.frame.boot.frame.security.service.SysRoleService;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security.authentication;
+package com.frame.boot.frame.security.auth;
 
 
 import com.frame.boot.frame.security.constants.SysConstants;
@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 

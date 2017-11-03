@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public SysUser loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser sysUser = sysUserService.findSecurityUserByUsername(username);
         if (sysUser == null) {
-            throw new UsernameNotFoundException(SysConstants.SYS_USER_ERROR_MSG_BAD_CREDENTIALS);
+            throw new UsernameNotFoundException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         }
         return sysUser;
     }

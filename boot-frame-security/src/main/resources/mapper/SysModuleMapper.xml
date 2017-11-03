@@ -43,6 +43,12 @@
         from sys_module
         where code = #{code,jdbcType=BIGINT}
     </select>
+    <select id="selectByParentCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_module
+        where parent_code = #{parentCode,jdbcType=BIGINT}
+    </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

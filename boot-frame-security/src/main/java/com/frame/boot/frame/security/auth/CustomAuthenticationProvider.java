@@ -43,17 +43,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         // 账户状态判断
         SysUser userDetails = sysUserService.findSecurityUserByUsername(username);
         if (userDetails == null) {
-            throw new UsernameNotFoundException(SysConstants.SYS_USER_ERROR_MSG_BAD_CREDENTIALS);
+            throw new UsernameNotFoundException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         } else if (!passwordMd5.equals(userDetails.getPassword())) {
-            throw new BadCredentialsException(SysConstants.SYS_USER_ERROR_MSG_BAD_CREDENTIALS);
+            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         } else if (!userDetails.isEnabled()) {
-            throw new DisabledException(SysConstants.SYS_USER_ERROR_MSG_DISABLED);
+            throw new DisabledException(SysConstants.USER_ERROR_MSG_DISABLED);
         } else if (!userDetails.isAccountNonExpired()) {
-            throw new AccountExpiredException(SysConstants.SYS_USER_ERROR_MSG_EXPIRED);
+            throw new AccountExpiredException(SysConstants.USER_ERROR_MSG_EXPIRED);
         } else if (!userDetails.isAccountNonLocked()) {
-            throw new LockedException(SysConstants.SYS_USER_ERROR_MSG_LOCKED);
+            throw new LockedException(SysConstants.USER_ERROR_MSG_LOCKED);
         } else if (!userDetails.isCredentialsNonExpired()) {
-            throw new LockedException(SysConstants.SYS_USER_ERROR_MSG_CREDENTIALS);
+            throw new LockedException(SysConstants.USER_ERROR_MSG_CREDENTIALS);
         }
         // 授权
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());

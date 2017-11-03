@@ -15,6 +15,10 @@
 </head>
 <body>
     欢迎！
+    <span sec:authorize="isAuthenticated()">
+        <span sec:authentication="principal.username"></span> <br />
+        <span sec:authentication="principal.authorities"></span> <br />
+    </span>
 <script type="text/javascript" th:src="@{/static/lib/jquery/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/static/lib/layer/layer.js}"></script>
 <script type="text/javascript" th:src="@{/static/lib/ui/common/js/H-ui.js}"></script>

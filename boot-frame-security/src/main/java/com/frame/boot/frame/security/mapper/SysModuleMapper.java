@@ -12,11 +12,12 @@ import java.util.List;
 public interface SysModuleMapper extends BaseMapper<SysModule> {
 
     SysModule selectByCode(@Param("code") String code);
+    List<SysModule> selectByParentCode(@Param("parentCode") String parentCode);
 
-    List<SysModule> selectByRole(@Param("roleId") Long roleId, @Param("typeCode") String typeCode);
-    List<SysModule> selectByUser(@Param("userId") Long userId, @Param("typeCode") String typeCode);
-    List<SysModule> selectByUser(@Param("userId") Long userId, @Param("typeCode") String typeCode, PageBounds pageBounds);
+    List<SysModule> selectByRole(@Param("roleCode") String roleCode, @Param("typeCode") String typeCode);
+    List<SysModule> selectByUser(@Param("username") String username, @Param("typeCode") String typeCode);
+    List<SysModule> selectByUser(@Param("username") String username, @Param("typeCode") String typeCode, PageBounds pageBounds);
 
-    List<SysModule> selectSecurityByRole(@Param("roleId") Long roleId, @Param("typeCode") String typeCode);
-    List<SysModule> selectSecurityByUser(@Param("userId") Long userId, @Param("typeCode") String typeCode);
+    List<SysModule> selectSecurityByRole(@Param("roleCode") String roleCode, @Param("typeCode") String typeCode);
+    List<SysModule> selectSecurityByUser(@Param("username") String username, @Param("typeCode") String typeCode);
 }

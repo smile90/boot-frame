@@ -54,4 +54,13 @@ public class SysRole extends BaseModel implements GrantedAuthority {
     public String getAuthority() {
         return code;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SysRole{");
+        sb.append("typeCode='").append(typeCode).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

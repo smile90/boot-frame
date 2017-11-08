@@ -2,11 +2,6 @@
 info:
   version: @project.version@
 
-# server config
-server:
-  port: 12080
-  context-path: /security
-
 # config
 spring:
   application:

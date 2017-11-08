@@ -3,11 +3,6 @@ info:
   version: @project.version@
   description: @project.description@
 
-# server config
-server:
-  port: 3331
-  context-path: /
-
 # config
 spring:
   application:

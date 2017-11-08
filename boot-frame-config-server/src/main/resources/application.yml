@@ -8,19 +8,35 @@ server:
   port: 2221
   context-path: /
 
-# spring boot actuator
+# management config
 management:
+  context-path: /actuator
   security:
     enabled: false
 
-# eureka config
+# eureka
 eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:1111/eureka
+  instance:
+    status-page-url-path: ${server.context-path}${management.context-path}/info
+    health-check-url-path: ${server.context-path}${management.context-path}/health
+    metadata-map:
+      management:
+        context-path: ${server.context-path}${management.context-path}
+    prefer-ip-address: true
 
 # spring config
 spring:
+# boot-admin
+  boot:
+    admin:
+      discovery:
+        converter:
+          management-context-pat‌​‌​h: ${server.context-path}${management.context-path}
+
+# info config
   application:
     name: @project.artifactId@
   jmx:

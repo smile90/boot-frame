@@ -83,9 +83,6 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         http.headers().frameOptions().sameOrigin()
             .and()
-                .addFilterBefore(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
-                .authenticationProvider(authenticationProvider)
-                .userDetailsService(userDetailsService)
             .authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
@@ -93,9 +90,13 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage(url.getLoginUrl()).permitAll()
                 .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl())
                 .failureUrl(url.getLoginUrl() + "?error")
-                .and().rememberMe()
+            .and().rememberMe()
             .and().logout()
-                .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll();
+                .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
+            .and()
+                .addFilterAfter(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
+                .authenticationProvider(authenticationProvider)
+                .userDetailsService(userDetailsService);
     }
 
     @Bean

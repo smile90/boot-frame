@@ -1,3 +1,14 @@
+# server config
+server:
+  port: 4441
+  context-path: /
+
+# management config
+management:
+  context-path: /actuator
+  security:
+    enabled: false
+
 # config
 spring:
   cloud:
@@ -5,13 +16,21 @@ spring:
       discovery:
         enabled: true                                 # 默认false，设为true表示使用注册中心中的configserver配置而不自己配置configserver的uri
         serviceId: boot-frame-config-server           # 指定config server在服务发现中的serviceId，默认为：configserver
-
+# boot-admin
+  boot:
+    admin:
+      discovery:
+        converter:
+          management-context-pat‌​‌​h: ${server.context-path}${management.context-path}
 # eureka
 eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:1111/eureka
-
-management:
-  security:
-    enabled: false
+  instance:
+    status-page-url-path: ${server.context-path}${management.context-path}/info
+    health-check-url-path: ${server.context-path}${management.context-path}/health
+    metadata-map:
+      management:
+        context-path: ${server.context-path}${management.context-path}
+    prefer-ip-address: true

@@ -32,33 +32,3 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
       indent_output: true
-
----
-# peer1
-spring:
-  profiles: peer1
-
-# server config
-server:
-  port: 1111
-
-# eureka config
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://172.28.5.44:1111/eureka,http://172.28.5.44:1112/eureka
-
----
-# peer2
-spring:
-  profiles: peer2
-
-# server config
-server:
-  port: 1112
-
-# eureka config
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://172.28.5.44:1111/eureka,http://172.28.5.44:1112/eureka

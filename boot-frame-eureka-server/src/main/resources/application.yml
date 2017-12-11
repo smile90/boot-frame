@@ -6,7 +6,7 @@ info:
 # server config
 server:
   port: 1111
-  context-path: /
+  context-path:
 
 # spring boot actuator
 management:

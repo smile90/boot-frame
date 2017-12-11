@@ -6,7 +6,7 @@ info:
 # server config
 server:
   port: 2221
-  context-path: /
+  context-path:
 
 # management config
 management:

@@ -37,6 +37,11 @@
         USER_TYPE_CODE, DESCRIPTION, TYPE_CODE, STATUS, CREATE_USER, CREATE_TIME, UPDATE_USER,
         UPDATE_TIME
     </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+    </select>
     <select id="selectOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -165,10 +170,17 @@
         select
         <include refid="Base_Column_List"/>
         from sys_user
-        where username = #{username,jdbcType=BIGINT}
+        where username = #{username,jdbcType=VARCHAR}
     </select>
 
-    <select id="findSecurityUserByUsername" parameterType="java.lang.String" resultMap="SecurityResultMap">
+    <select id="selectLikeRealname" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where realname like '%${realname}%'
+    </select>
+
+    <select id="selectSecurityUserByUsername" parameterType="java.lang.String" resultMap="SecurityResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_user

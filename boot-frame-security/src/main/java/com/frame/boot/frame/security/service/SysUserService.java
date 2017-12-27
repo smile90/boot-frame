@@ -1,5 +1,7 @@
 package com.frame.boot.frame.security.service;
 
+import com.frame.boot.frame.mybatis.bean.PageBounds;
+import com.frame.boot.frame.mybatis.bean.PageList;
 import com.frame.boot.frame.mybatis.mapper.BaseMapper;
 import com.frame.boot.frame.mybatis.service.BaseService;
 import com.frame.boot.frame.security.entity.SysUser;
@@ -42,6 +44,10 @@ public class SysUserService extends BaseService<SysUser> {
         return sysUserMapper.selectByUsername(username);
     }
 
+    public PageList<SysUser> findLikeRealname(PageBounds pageBounds, String realname) {
+        return sysUserMapper.selectLikeRealname(pageBounds, realname);
+    }
+
     /**
      * 查询权限用户
      *
@@ -49,6 +55,6 @@ public class SysUserService extends BaseService<SysUser> {
      * @return
      */
     public SysUser findSecurityUserByUsername(String username) {
-        return sysUserMapper.findSecurityUserByUsername(username);
+        return sysUserMapper.selectSecurityUserByUsername(username);
     }
 }

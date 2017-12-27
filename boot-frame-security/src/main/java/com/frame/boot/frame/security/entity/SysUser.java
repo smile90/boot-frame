@@ -191,4 +191,16 @@ public class SysUser extends BaseModel implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SysUser{");
+        sb.append("username='").append(username).append('\'');
+        sb.append(", realname='").append(realname).append('\'');
+        sb.append(", userStatus='").append(userStatus).append('\'');
+        sb.append(", userTypeCode='").append(userTypeCode).append('\'');
+        sb.append(", typeCode='").append(typeCode).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -76,7 +76,8 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AffirmativeBased(decisionVoters);
     }
 
-    private FilterSecurityInterceptor filterSecurityInterceptor() throws Exception {
+    @Bean
+    public FilterSecurityInterceptor filterSecurityInterceptor() throws Exception {
         FilterSecurityInterceptor customFilterSecurityInterceptor = new FilterSecurityInterceptor();
         customFilterSecurityInterceptor.setAuthenticationManager(super.authenticationManagerBean());
         customFilterSecurityInterceptor.setAccessDecisionManager(accessDecisionManager());
@@ -84,10 +85,16 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         return customFilterSecurityInterceptor;
     }
 
-    private WebAuthenticationDetailsSource webAuthenticationDetailsSource() {
+    @Bean
+    public WebAuthenticationDetailsSource webAuthenticationDetailsSource() {
         CustomWebAuthenticationDetailsSource source = new CustomWebAuthenticationDetailsSource();
         source.setValidCodeName(kaptchaProperties.getFormName());
         return source;
+    }
+
+    @Bean
+    public CustomLoginSuccessHandler loginSuccessHandler() {
+        return new CustomLoginSuccessHandler();
     }
 
     @Override
@@ -112,8 +119,4 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService);
     }
 
-    @Bean
-    public CustomLoginSuccessHandler loginSuccessHandler() {
-        return new CustomLoginSuccessHandler();
-    }
 }

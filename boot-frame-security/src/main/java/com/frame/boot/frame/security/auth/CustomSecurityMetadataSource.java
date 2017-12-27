@@ -1,5 +1,6 @@
 package com.frame.boot.frame.security.auth;
 
+import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysFunction;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.entity.SysRole;
@@ -58,6 +59,10 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 
         // 获取URL对应的权限
         List<ConfigAttribute> authoritys = getAttributesByUrl(requestUrl);
+        // 未获取到，则只能超级管理员访问
+        if (EmptyUtil.isEmpty(authoritys)) {
+            authoritys.add(new SecurityConfig(SysConstants.ROLE_CODE_SUPER_ADMIN));
+        }
         logger.info("url:{}-{}({});authoritys:{}", httpMethod, requestUrl, paramUrl, authoritys);
         return authoritys;
     }

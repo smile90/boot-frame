@@ -51,7 +51,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String sessionValidCode = (String) session.getAttribute(kaptchaProperties.getSessionKey());
         String requestValidCode = request.getParameter("validCode");
         logger.debug("{},{}:", sessionValidCode, requestValidCode);
-        // 验证码
+
+        // 清空验证码
+        session.removeAttribute(kaptchaProperties.getSessionKey());
+        // 验证码校验
         if (EmptyUtil.isEmpty(sessionValidCode)|| EmptyUtil.isEmpty(requestValidCode)
                 || !sessionValidCode.trim().equalsIgnoreCase(requestValidCode.trim())) {
             throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_VALID_CODE);

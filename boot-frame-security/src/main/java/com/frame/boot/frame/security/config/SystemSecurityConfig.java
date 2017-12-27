@@ -2,7 +2,9 @@ package com.frame.boot.frame.security.config;
 
 import com.frame.boot.frame.security.auth.CustomAdminRoleVoter;
 import com.frame.boot.frame.security.auth.CustomLoginSuccessHandler;
+import com.frame.boot.frame.security.auth.CustomWebAuthenticationDetailsSource;
 import com.frame.boot.frame.security.constants.SysConstants;
+import com.frame.boot.frame.security.properties.KaptchaProperties;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -37,6 +40,9 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     private SystemSecurityProperties systemSecurityProperties;
 
     @Autowired
+    private KaptchaProperties kaptchaProperties;
+
+    @Autowired
     @Qualifier("customUserDetailsService")
     private UserDetailsService userDetailsService;
 
@@ -50,7 +56,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     public void init() {
-        logger.info("{}", systemSecurityProperties);
+        logger.info("{}{}", systemSecurityProperties, kaptchaProperties);
     }
 
     @Bean
@@ -78,6 +84,12 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         return customFilterSecurityInterceptor;
     }
 
+    private WebAuthenticationDetailsSource webAuthenticationDetailsSource() {
+        CustomWebAuthenticationDetailsSource source = new CustomWebAuthenticationDetailsSource();
+        source.setValidCodeName(kaptchaProperties.getFormName());
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
@@ -87,6 +99,7 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
             .and().formLogin()
+                .authenticationDetailsSource(webAuthenticationDetailsSource())
                 .loginPage(url.getLoginUrl()).permitAll()
                 .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl())
                 .failureUrl(url.getLoginUrl() + "?error")

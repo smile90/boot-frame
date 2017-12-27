@@ -12,6 +12,7 @@ public class SysConstants {
     public static final String PUBLIC_SYSTEM_CODE_ACC = SYSTEM_CODE + "0001";
 
     public static final String USER_ERROR_MSG_BAD_CREDENTIALS = "用户/密码错误";
+    public static final String USER_ERROR_MSG_BAD_VALID_CODE = "验证码错误";
     public static final String USER_ERROR_MSG_DISABLED = "用户已被禁用";
     public static final String USER_ERROR_MSG_EXPIRED = "账号已过期";
     public static final String USER_ERROR_MSG_LOCKED = "账号已被锁定";

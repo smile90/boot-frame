@@ -17,6 +17,8 @@ public class KaptchaProperties {
     private String url = "/static/validCode";
     /** session中的key */
     private String sessionKey = "validCode.code";
+    /** form中的name要与该地方一致 */
+    private String formName = "validCode";
 
     /** 边框 */
     private String border = "no";
@@ -48,7 +50,15 @@ public class KaptchaProperties {
 		this.sessionKey = sessionKey;
 	}
 
-	public String getBorder() {
+    public String getFormName() {
+        return formName;
+    }
+
+    public void setFormName(String formName) {
+        this.formName = formName;
+    }
+
+    public String getBorder() {
 		return border;
 	}
 
@@ -172,19 +182,20 @@ public class KaptchaProperties {
 		}
     }
 
-	@Override
-	public String toString() {
-		final StringBuffer sb = new StringBuffer("KaptchaProperties{");
-		sb.append("url='").append(url).append('\'');
-		sb.append(", sessionKey='").append(sessionKey).append('\'');
-		sb.append(", border='").append(border).append('\'');
-		sb.append(", obscurificator='").append(obscurificator).append('\'');
-		sb.append(", noise='").append(noise).append('\'');
-		sb.append(", image=").append(image);
-		sb.append(", font=").append(font);
-		sb.append(", chars=").append(chars);
-		sb.append(", background=").append(background);
-		sb.append('}');
-		return sb.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("KaptchaProperties{");
+        sb.append("url='").append(url).append('\'');
+        sb.append(", sessionKey='").append(sessionKey).append('\'');
+        sb.append(", formName='").append(formName).append('\'');
+        sb.append(", border='").append(border).append('\'');
+        sb.append(", obscurificator='").append(obscurificator).append('\'');
+        sb.append(", noise='").append(noise).append('\'');
+        sb.append(", image=").append(image);
+        sb.append(", font=").append(font);
+        sb.append(", chars=").append(chars);
+        sb.append(", background=").append(background);
+        sb.append('}');
+        return sb.toString();
+    }
 }

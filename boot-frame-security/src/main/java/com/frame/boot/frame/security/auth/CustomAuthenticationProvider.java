@@ -3,18 +3,28 @@ package com.frame.boot.frame.security.auth;
 
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.properties.KaptchaProperties;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
 import com.frame.common.frame.utils.EncodeAndDecodeUtil;
+import com.google.code.kaptcha.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.util.ServletContextPropertyUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Service("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -24,6 +34,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Resource(name = "sysUserService")
     private SysUserService sysUserService;
 
+    @Autowired
+    private KaptchaProperties kaptchaProperties;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
@@ -32,12 +45,24 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if (EmptyUtil.isEmpty(username) || EmptyUtil.isEmpty(password)) {
             throw new BadCredentialsException("用户名/密码无效");
         }
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String sessionValidCode = (String) session.getAttribute(kaptchaProperties.getSessionKey());
+        String requestValidCode = request.getParameter("validCode");
+        logger.debug("{},{}:", sessionValidCode, requestValidCode);
+        // 验证码
+        if (EmptyUtil.isEmpty(sessionValidCode)|| EmptyUtil.isEmpty(requestValidCode)
+                || !sessionValidCode.trim().equalsIgnoreCase(requestValidCode.trim())) {
+            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_VALID_CODE);
+        }
+
         // 密码加密
         String passwordMd5;
         try {
             passwordMd5 = EncodeAndDecodeUtil.md5(password);
         } catch (Exception e) {
-            throw new BadCredentialsException("用户名/密码无效");
+            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         }
 
         // 账户状态判断

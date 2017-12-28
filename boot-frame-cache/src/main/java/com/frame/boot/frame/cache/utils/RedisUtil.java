@@ -3,10 +3,12 @@ package com.frame.boot.frame.cache.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class RedisUtil {
 	
 	private static RedisUtil redis;
@@ -33,6 +35,10 @@ public class RedisUtil {
 	public static void set(String key, String value, long timeout, TimeUnit unit) {
 		redis.template.boundValueOps(key).set(value, timeout, unit);
 	}
+
+	public static void delete(String key) {
+        redis.template.delete(key);
+    }
 	
 	public static Long increment(String key) {
 		return redis.template.boundValueOps(key).increment(SEQUENCE_INCREMENT_STEP);

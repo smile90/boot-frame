@@ -1,6 +1,9 @@
 package com.frame.boot.frame.cfg.client.test.entity;
 
-public class SysRole extends BaseModel {
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("sys_role")
+public class SysRole extends BaseModel<SysRole> {
 
     private String typeCode;
 

@@ -1,6 +1,7 @@
 package com.frame.boot.frame.cfg.client.test.controller;
 
 import com.frame.boot.frame.cfg.client.test.properties.TestProperties;
+import com.frame.boot.frame.cfg.client.test.service.SysRoleService;
 import com.frame.boot.frame.cfg.client.test.service.remote.TestRemoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,25 @@ public class ConfigClientController {
 
     @Autowired
     private TestRemoteService testRemoteService;
+
+    @Autowired
+    private SysRoleService sysRoleService;
+
+    @RequestMapping("/sys/role/all")
+    public Object findAll() {
+        return sysRoleService.findAll();
+    }
+
+    @RequestMapping("/sys/role/list")
+    public Object findList() {
+        return sysRoleService.findList();
+    }
+
+    @RequestMapping("/sys/role/select")
+    public Object selectList() {
+        return sysRoleService.selectList(null);
+    }
+
 
     @RequestMapping("/remote/{test}")
     public String remoteTest(@PathVariable("test") String test) {

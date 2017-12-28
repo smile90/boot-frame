@@ -1,7 +1,8 @@
-package com.frame.boot.frame.mybatis.model;
+package com.frame.boot.frame.security.entity;
 
-import se.spagettikod.optimist.Identity;
-import se.spagettikod.optimist.Version;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.Version;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,12 +13,12 @@ import java.util.Date;
  * @author:changqing.duan
  * @date:2017-03-02 下午8:50
  */
-public class BaseModel implements Serializable {
+public class BaseModel extends Model implements Serializable {
 
-	@Identity("id")
+	@TableId
 	protected Long id;
 
-	@Version("optimistic")
+	@Version
 	protected Long optimistic = 0L;
 
 	protected Integer orders;
@@ -106,4 +107,8 @@ public class BaseModel implements Serializable {
 		this.updateTime = updateTime;
 	}
 
+	@Override
+	protected Serializable pkVal() {
+		return this.id;
+	}
 }

@@ -1,20 +1,16 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseModel;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.frame.common.frame.base.enums.UserStatus;
-import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
-@OptimisticLocking("sys_user")
 public class SysUser extends BaseModel implements UserDetails {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -45,6 +41,7 @@ public class SysUser extends BaseModel implements UserDetails {
 
     private String photo;
 
+    @TableField(exist = false)
     private List<SysRole> roles = new ArrayList<>();
 
     @Override

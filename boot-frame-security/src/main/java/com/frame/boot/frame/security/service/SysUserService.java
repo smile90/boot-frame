@@ -1,9 +1,6 @@
 package com.frame.boot.frame.security.service;
 
-import com.frame.boot.frame.mybatis.bean.PageBounds;
-import com.frame.boot.frame.mybatis.bean.PageList;
-import com.frame.boot.frame.mybatis.mapper.BaseMapper;
-import com.frame.boot.frame.mybatis.service.BaseService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +9,17 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service("sysUserService")
-public class SysUserService extends BaseService<SysUser> {
-
-    @Autowired
-    private SysUserMapper sysUserMapper;
-
-    @Override
-    public BaseMapper<SysUser> getBaseMapper() {
-        return sysUserMapper;
-    }
+public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
     public SysUser create(SysUser sysUser) {
         sysUser.setCreateTime(new Date());
-        sysUserMapper.insert(sysUser);
+        baseMapper.insert(sysUser);
         return sysUser;
     }
 
     public SysUser update(SysUser sysUser) {
         sysUser.setUpdateTime(new Date());
-        sysUserMapper.update(sysUser);
+        baseMapper.updateById(sysUser);
         return sysUser;
     }
 
@@ -41,11 +30,7 @@ public class SysUserService extends BaseService<SysUser> {
      * @return
      */
     public SysUser findByUsername(String username) {
-        return sysUserMapper.selectByUsername(username);
-    }
-
-    public PageList<SysUser> findLikeRealname(PageBounds pageBounds, String realname) {
-        return sysUserMapper.selectLikeRealname(pageBounds, realname);
+        return baseMapper.selectByUsername(username);
     }
 
     /**
@@ -55,6 +40,6 @@ public class SysUserService extends BaseService<SysUser> {
      * @return
      */
     public SysUser findSecurityUserByUsername(String username) {
-        return sysUserMapper.selectSecurityUserByUsername(username);
+        return baseMapper.selectSecurityUserByUsername(username);
     }
 }

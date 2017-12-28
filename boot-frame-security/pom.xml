@@ -16,12 +16,12 @@
     <dependencies>
         <dependency>
             <groupId>com.frame</groupId>
-            <artifactId>common-frame-utils</artifactId>
+            <artifactId>common-frame-base</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.frame</groupId>
-            <artifactId>boot-frame-mybatis</artifactId>
+            <artifactId>common-frame-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
 
@@ -53,9 +53,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-sleuth-zipkin</artifactId>-->
+        <!--</dependency>-->
+
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatisplus-spring-boot-starter</artifactId>
+            <version>1.0.5</version>
         </dependency>
 
         <dependency>

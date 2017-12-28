@@ -2,10 +2,8 @@ package com.frame.boot.frame.security.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.frame.boot.frame.mybatis.bean.Order;
-import com.frame.boot.frame.mybatis.bean.PageBounds;
-import com.frame.boot.frame.mybatis.mapper.BaseMapper;
-import com.frame.boot.frame.mybatis.service.BaseService;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.mapper.SysModuleMapper;
@@ -17,28 +15,22 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class SysModuleService extends BaseService<SysModule> {
+public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
 
     @Autowired
     private SystemSecurityProperties systemSecurityProperties;
-    @Autowired
-    private SysModuleMapper sysModuleMapper;
-
-    @Override
-    public BaseMapper<SysModule> getBaseMapper() {
-        return sysModuleMapper;
-    }
 
     public SysModule findByCode(String code) {
-        return sysModuleMapper.selectByCode(code);
+        return baseMapper.selectByCode(code);
     }
 
     public List<SysModule> findByParentCode(String parentCode) {
-        return sysModuleMapper.selectByParentCode(parentCode);
+        return baseMapper.selectByParentCode(parentCode);
     }
 
     public List<SysModule> findMenuByUsername(String username) {
-        return sysModuleMapper.selectByUser(username, systemSecurityProperties.getMenuTypeCode(), new PageBounds(Order.asc("level"), Order.asc("orders")));
+        return baseMapper.selectByUser(username, systemSecurityProperties.getMenuTypeCode(),
+                new EntityWrapper<SysModule>().orderBy("level").orderBy("orders"));
     }
 
     public JSONArray findMenuJSONByUsername(String username) {

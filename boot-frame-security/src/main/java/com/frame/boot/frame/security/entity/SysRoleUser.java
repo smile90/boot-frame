@@ -1,9 +1,5 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseModel;
-import se.spagettikod.optimist.OptimisticLocking;
-
-@OptimisticLocking("sys_role_user")
 public class SysRoleUser extends BaseModel {
 
     private String roleCode;

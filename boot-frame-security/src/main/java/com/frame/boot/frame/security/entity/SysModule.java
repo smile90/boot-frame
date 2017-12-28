@@ -1,12 +1,10 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseModel;
-import se.spagettikod.optimist.OptimisticLocking;
+import com.baomidou.mybatisplus.annotations.TableField;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@OptimisticLocking("sys_module")
 public class SysModule extends BaseModel {
 
     private String typeCode;
@@ -27,6 +25,7 @@ public class SysModule extends BaseModel {
 
     private String url;
 
+    @TableField(exist = false)
     private List<SysFunction> functions = new ArrayList<>();
 
     public String getTypeCode() {

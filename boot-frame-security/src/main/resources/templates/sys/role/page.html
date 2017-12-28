@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:replace="/sys/fragments/common :: meta" />
+    <div th:replace="/sys/fragments/common :: common-css" />
+    <div th:replace="/sys/fragments/listPage :: listPage-css" />
+</head>
+
+<body>
+
+    <table data-toggle="table" th:attr="data-href=@{/sys/role/listPage}"
+           data-pagination="true" data-search="true" >
+        <thead>
+        <tr>
+            <th data-field="id">Item ID</th>
+            <th data-field="name">Item Name</th>
+            <th data-field="price">Item Price</th>
+        </tr>
+        </thead>
+    </table>
+
+    <div th:replace="/sys/fragments/common :: common-js" />
+    <div th:replace="/sys/fragments/listPage :: listPage-js" />
+</body>
+</html>

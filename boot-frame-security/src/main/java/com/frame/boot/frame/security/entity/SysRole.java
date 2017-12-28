@@ -1,13 +1,11 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.model.BaseModel;
+import com.baomidou.mybatisplus.annotations.TableField;
 import org.springframework.security.core.GrantedAuthority;
-import se.spagettikod.optimist.OptimisticLocking;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@OptimisticLocking("sys_role")
 public class SysRole extends BaseModel implements GrantedAuthority {
 
     private String typeCode;
@@ -16,6 +14,7 @@ public class SysRole extends BaseModel implements GrantedAuthority {
 
     private String code;
 
+    @TableField(exist = false)
     private List<SysModule> modules = new ArrayList<>();
 
     public String getTypeCode() {

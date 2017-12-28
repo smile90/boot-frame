@@ -1,10 +1,7 @@
 package com.frame.boot.frame.security.service;
 
-import com.frame.boot.frame.mybatis.bean.PageBounds;
-import com.frame.boot.frame.mybatis.bean.PageList;
 import com.frame.boot.frame.security.base.BaseTest;
 import com.frame.boot.frame.security.entity.SysUser;
-import com.frame.boot.frame.security.service.SysUserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,21 +25,4 @@ public class SysUserServiceTest extends BaseTest {
         logger.info("{}", user);
     }
 
-    @Test
-    public void findByPage() {
-        PageList<?> page = sysUserService.findLikeRealname(new PageBounds(1, 1), "");
-        logger.info("----------{}", page);
-        page = sysUserService.findLikeRealname(new PageBounds(2, 1), "");
-        logger.info("----------{}", page);
-        page = sysUserService.findLikeRealname(new PageBounds(3, 1), "");
-        logger.info("----------{}", page);
-
-
-        page = sysUserService.findLikeRealname(new PageBounds(1, 1), "测试");
-        logger.info("----------{}", page);
-        page = sysUserService.findLikeRealname(new PageBounds(2, 1), "测试");
-        logger.info("----------{}", page);
-        page = sysUserService.findLikeRealname(new PageBounds(3, 1), "测试");
-        logger.info("----------{}", page);
-    }
 }

@@ -70,7 +70,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         List<ConfigAttribute> allCfgAttrs = new ArrayList<>();
-        List<SysModule> sysModules = sysModuleService.findAll();
+        List<SysModule> sysModules = sysModuleService.selectList(null);
         if (EmptyUtil.notEmpty(sysModules)) {
             for (SysModule sysModule : sysModules) {
                 List<SysRole> sysRoles = sysRoleService.findByModuleCode(sysModule.getCode());
@@ -99,8 +99,8 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     private List<ConfigAttribute> getAttributesByUrl(String requestUrl) {
         List<ConfigAttribute> authoritys = new ArrayList<>();
 
-        List<SysFunction> sysFunctions = sysFunctionService.findAll();
-        List<SysModule> sysModules = sysModuleService.findAll();
+        List<SysFunction> sysFunctions = sysFunctionService.selectList(null);
+        List<SysModule> sysModules = sysModuleService.selectList(null);
         if (EmptyUtil.notEmpty(sysFunctions)) {
             for (SysFunction sysFunction : sysFunctions) {
                 if (EmptyUtil.notEmpty(sysFunction.getUrl())

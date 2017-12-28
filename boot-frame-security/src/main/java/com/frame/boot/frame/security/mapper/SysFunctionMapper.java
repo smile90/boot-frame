@@ -1,6 +1,6 @@
 package com.frame.boot.frame.security.mapper;
 
-import com.frame.boot.frame.mybatis.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.frame.boot.frame.security.entity.SysFunction;
 import org.apache.ibatis.annotations.Mapper;
 

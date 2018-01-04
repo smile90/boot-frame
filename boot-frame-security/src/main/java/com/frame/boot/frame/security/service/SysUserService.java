@@ -4,20 +4,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service("sysUserService")
-public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implements UserDetailsService {
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findSecurityUserByUsername(username);
-    }
+public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
     public SysUser create(SysUser sysUser) {
         sysUser.setCreateTime(new Date());
@@ -50,5 +42,4 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     public SysUser findSecurityUserByUsername(String username) {
         return baseMapper.selectSecurityUserByUsername(username);
     }
-
 }

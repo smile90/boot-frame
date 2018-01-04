@@ -56,6 +56,7 @@ public class SystemSecurityProperties {
         private String indexUrl = "/sys/index";
         private String[] permitPaths = new String[] {"/static/**", "/sys/login"};
         private String[] authenticatePaths = new String[] {"/sys/**"};
+        private String[] csrfIgnoringPaths = new String[] {"/druid/**"};
 
         public String getLoginUrl() {
             return loginUrl;
@@ -97,11 +98,26 @@ public class SystemSecurityProperties {
             this.authenticatePaths = authenticatePaths;
         }
 
-        @Override
-        public String toString() {
-            return "Url [loginUrl=" + loginUrl + ", logoutUrl=" + logoutUrl + ", indexUrl=" + indexUrl + ", permitPaths=" + Arrays.toString(permitPaths) + ", authenticatePaths=" + Arrays.toString(authenticatePaths) + "]";
+        public String[] getCsrfIgnoringPaths() {
+            return csrfIgnoringPaths;
         }
 
+        public void setCsrfIgnoringPaths(String[] csrfIgnoringPaths) {
+            this.csrfIgnoringPaths = csrfIgnoringPaths;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuffer sb = new StringBuffer("Url{");
+            sb.append("loginUrl='").append(loginUrl).append('\'');
+            sb.append(", logoutUrl='").append(logoutUrl).append('\'');
+            sb.append(", indexUrl='").append(indexUrl).append('\'');
+            sb.append(", permitPaths=").append(permitPaths == null ? "null" : Arrays.asList(permitPaths).toString());
+            sb.append(", authenticatePaths=").append(authenticatePaths == null ? "null" : Arrays.asList(authenticatePaths).toString());
+            sb.append(", csrfIgnoringPaths=").append(csrfIgnoringPaths == null ? "null" : Arrays.asList(csrfIgnoringPaths).toString());
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
     @Override

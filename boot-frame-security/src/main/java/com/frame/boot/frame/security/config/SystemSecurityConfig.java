@@ -100,6 +100,11 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
+        if (systemSecurityProperties.isEnableCsrf()) {
+            http.csrf().ignoringAntMatchers(url.getCsrfIgnoringPaths());
+        } else {
+            http.csrf().disable();
+        }
         http.headers().frameOptions().sameOrigin()
             .and()
             .authorizeRequests()

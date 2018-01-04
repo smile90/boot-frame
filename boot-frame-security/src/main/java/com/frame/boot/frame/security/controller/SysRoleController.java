@@ -29,9 +29,6 @@ public class SysRoleController {
     @RequestMapping("/listPage")
     @ResponseBody
     public Object listPage(Page<SysRole> page) {
-        if (page == null) {
-            page = new Page<>(1,10);
-        }
         return sysRoleService.selectPage(page);
     }
     @RequestMapping("/list")

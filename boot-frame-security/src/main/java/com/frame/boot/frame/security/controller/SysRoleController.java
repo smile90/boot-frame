@@ -30,9 +30,14 @@ public class SysRoleController {
     @ResponseBody
     public Object listPage(Page<SysRole> page) {
         if (page == null) {
-            page = new Page<>();
+            page = new Page<>(1,10);
         }
         return sysRoleService.selectPage(page);
+    }
+    @RequestMapping("/list")
+    @ResponseBody
+    public Object list() {
+        return sysRoleService.selectList(null);
     }
 
     @RequestMapping("/update/{id}")

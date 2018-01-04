@@ -18,7 +18,6 @@
 
 	<modules>
 		<module>boot-frame-cache</module>
-		<module>boot-frame-mybatis</module>
 		<module>boot-frame-mybatis-generator</module>
 		<module>boot-frame-hibernate</module>
 		<module>boot-frame-monitor</module>

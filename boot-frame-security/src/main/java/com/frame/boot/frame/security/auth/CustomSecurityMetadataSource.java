@@ -63,7 +63,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
         if (EmptyUtil.isEmpty(authoritys)) {
             authoritys.add(new SecurityConfig(SysConstants.ROLE_CODE_SUPER_ADMIN));
         }
-        logger.info("url:{}-{}({});authoritys:{}", httpMethod, requestUrl, paramUrl, authoritys);
+        logger.debug("url:{}-{}({});authoritys:{}", httpMethod, requestUrl, paramUrl, authoritys);
         return authoritys;
     }
 

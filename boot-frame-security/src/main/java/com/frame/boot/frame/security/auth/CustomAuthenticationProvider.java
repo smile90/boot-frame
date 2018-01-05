@@ -4,6 +4,7 @@ package com.frame.boot.frame.security.auth;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
+import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
 import com.frame.common.frame.utils.EncodeAndDecodeUtil;
@@ -37,29 +38,36 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private KaptchaProperties kaptchaProperties;
 
+    @Autowired
+    private SystemSecurityProperties systemSecurityProperties;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String username = token.getName();
         String password = (String) token.getCredentials();
+
+        // 验证码
+        if (systemSecurityProperties.isEnableValidCode()) {
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session = request.getSession();
+            String sessionValidCode = (String) session.getAttribute(kaptchaProperties.getSessionKey());
+            String requestValidCode = request.getParameter("validCode");
+            logger.debug("{},{}:", sessionValidCode, requestValidCode);
+
+            // 清空验证码
+            session.removeAttribute(kaptchaProperties.getSessionKey());
+            // 验证码校验
+            if (EmptyUtil.isEmpty(sessionValidCode)|| EmptyUtil.isEmpty(requestValidCode)
+                    || !sessionValidCode.trim().equalsIgnoreCase(requestValidCode.trim())) {
+                throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_VALID_CODE);
+            }
+        }
+
+        // 用户名密码
         if (EmptyUtil.isEmpty(username) || EmptyUtil.isEmpty(password)) {
             throw new BadCredentialsException("用户名/密码无效");
         }
-
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        String sessionValidCode = (String) session.getAttribute(kaptchaProperties.getSessionKey());
-        String requestValidCode = request.getParameter("validCode");
-        logger.debug("{},{}:", sessionValidCode, requestValidCode);
-
-        // 清空验证码
-        session.removeAttribute(kaptchaProperties.getSessionKey());
-        // 验证码校验
-        if (EmptyUtil.isEmpty(sessionValidCode)|| EmptyUtil.isEmpty(requestValidCode)
-                || !sessionValidCode.trim().equalsIgnoreCase(requestValidCode.trim())) {
-            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_VALID_CODE);
-        }
-
         // 密码加密
         String passwordMd5;
         try {

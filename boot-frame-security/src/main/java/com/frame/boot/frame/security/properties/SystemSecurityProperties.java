@@ -15,6 +15,8 @@ public class SystemSecurityProperties {
 
     private boolean enableFrameOptions = true;
 
+    private boolean enableValidCode = true;
+
     /** URL配置 */
     private Url url = new Url();
 
@@ -40,6 +42,14 @@ public class SystemSecurityProperties {
 
     public void setEnableFrameOptions(boolean enableFrameOptions) {
         this.enableFrameOptions = enableFrameOptions;
+    }
+
+    public boolean isEnableValidCode() {
+        return enableValidCode;
+    }
+
+    public void setEnableValidCode(boolean enableValidCode) {
+        this.enableValidCode = enableValidCode;
     }
 
     public Url getUrl() {
@@ -126,6 +136,7 @@ public class SystemSecurityProperties {
         sb.append("menuTypeCode='").append(menuTypeCode).append('\'');
         sb.append(", enableCsrf=").append(enableCsrf);
         sb.append(", enableFrameOptions=").append(enableFrameOptions);
+        sb.append(", enableValidCode=").append(enableValidCode);
         sb.append(", url=").append(url);
         sb.append('}');
         return sb.toString();

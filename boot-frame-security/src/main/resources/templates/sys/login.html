@@ -11,7 +11,7 @@
 <div class="header"></div>
 <div class="loginWraper">
     <div class="loginBox">
-        <form id="loginForm" class="form form-horizontal" th:action="@{/sys/login}" method="post">
+        <form id="loginForm" class="form form-horizontal" th:action="@{/sys/login}" method="post" th:object="${loginModel}">
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
@@ -24,7 +24,7 @@
                     <input name="password" type="password" placeholder="密码" class="input-text size-L"/>
                 </div>
             </div>
-            <div class="row cl">
+            <div class="row cl" th:if="*{enableValidCode}">
                 <div class="formControls col-xs-8 col-xs-offset-3">
                     <input name="validCode" class="input-text size-L" type="text" placeholder="验证码" style="width:150px;"/>
                     <img id="validCode" th:src="@{/static/validCode}" alt="验证码" /> <a id="kanbuq" onclick="$('#validCode').attr('src', $('#validCode').attr('src'));">换一张</a>

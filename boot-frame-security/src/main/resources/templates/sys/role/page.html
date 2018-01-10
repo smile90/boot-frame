@@ -4,24 +4,37 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <div th:replace="/sys/fragments/common :: meta" />
-    <div th:replace="/sys/fragments/common :: common-css" />
     <div th:replace="/sys/fragments/listPage :: listPage-css" />
 </head>
 
 <body>
 
-    <table data-toggle="table" th:attr="data-href=@{/sys/role/listPage}"
-           data-pagination="true" data-search="true" >
-        <thead>
-        <tr>
-            <th data-field="id">Item ID</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
-        </tr>
-        </thead>
-    </table>
+    <table th:replace="/sys/fragments/listPage :: listPage-table"></table>
 
     <div th:replace="/sys/fragments/common :: common-js" />
     <div th:replace="/sys/fragments/listPage :: listPage-js" />
+    <script type="text/javascript" >
+        $('#table').bootstrapTable({
+            url: ctxPath + '/sys/role/listPage',
+            clickToSelect: true,
+            columns: [{
+                field: 'checkBox',
+                checkbox:true,
+                align:"center"
+            }, {
+                field: 'id',
+                title: 'ID',
+                visible : false, //隐藏该列
+            }, {
+                field: 'code',
+                title: '标识',
+                sortable: true
+            }, {
+                field: 'name',
+                title: '名称',
+                sortable: true
+            }]
+        });
+    </script>
 </body>
 </html>

@@ -4,11 +4,10 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <div th:replace="/sys/fragments/common :: meta" />
-    <div th:replace="/sys/fragments/listPage :: listPage-css" />
+    <div th:replace="/sys/fragments/common :: common-css" />
 </head>
 
 <body>
-
     <table th:replace="/sys/fragments/listPage :: listPage-table"></table>
 
     <div th:replace="/sys/fragments/common :: common-js" />

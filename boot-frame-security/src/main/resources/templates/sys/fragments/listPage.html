@@ -1,32 +1,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:fragment="meta">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>管理首页</title>
-    </div>
-    <div th:fragment="listPage-css">
-        <link th:href="@{/static/lib/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
-        <link th:href="@{/static/lib/bootstrapTable/bootstrap-table.css}" rel="stylesheet" type="text/css"/>
-    </div>
+    <div th:replace="/sys/fragments/common :: meta" />
+    <div th:replace="/sys/fragments/common :: common-css" />
 </head>
 <body>
-
 
     <table th:fragment="listPage-table" id="table"
            data-toggle="table"
            data-striped="true"
            data-pagination="true"
            data-side-pagination="server"
-           data-page-size="1"
+           data-page-size="2"
            data-page-number="1"
-           data-query-params="{}"
+           data-query-params="PageTable.queryParams"
            data-page-list="[5, 10, 20, 50, 100, 200]"
-           data-response-handler="PageTable.responseHandler">
+           data-response-handler="PageTable.responseHandler"
+    >
     </table>
 
+    <div th:replace="/sys/fragments/common :: common-js" />
     <div th:fragment="listPage-js">
-        <script type="text/javascript" th:src="@{/static/lib/bootstrap/js/bootstrap.js}"></script>
         <script type="text/javascript" th:src="@{/static/lib/bootstrapTable/bootstrap-table.js}"></script>
         <script type="text/javascript" th:src="@{/static/lib/bootstrapTable/locale/bootstrap-table-zh-CN.js}"></script>
         <script type="text/javascript" th:src="@{/static/lib/ui/admin/js/page.js}"></script>

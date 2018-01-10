@@ -17,6 +17,11 @@
     <dependencies>
         <dependency>
             <groupId>com.frame</groupId>
+            <artifactId>common-frame-base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.frame</groupId>
             <artifactId>common-frame-utils</artifactId>
             <version>1.0.0</version>
         </dependency>

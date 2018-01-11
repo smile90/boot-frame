@@ -17,6 +17,8 @@ public class SystemSecurityProperties {
 
     private boolean enableValidCode = true;
 
+    private boolean enableRememberMe = true;
+
     /** URL配置 */
     private Url url = new Url();
 
@@ -50,6 +52,14 @@ public class SystemSecurityProperties {
 
     public void setEnableValidCode(boolean enableValidCode) {
         this.enableValidCode = enableValidCode;
+    }
+
+    public boolean isEnableRememberMe() {
+        return enableRememberMe;
+    }
+
+    public void setEnableRememberMe(boolean enableRememberMe) {
+        this.enableRememberMe = enableRememberMe;
     }
 
     public Url getUrl() {
@@ -137,6 +147,7 @@ public class SystemSecurityProperties {
         sb.append(", enableCsrf=").append(enableCsrf);
         sb.append(", enableFrameOptions=").append(enableFrameOptions);
         sb.append(", enableValidCode=").append(enableValidCode);
+        sb.append(", enableRememberMe=").append(enableRememberMe);
         sb.append(", url=").append(url);
         sb.append('}');
         return sb.toString();

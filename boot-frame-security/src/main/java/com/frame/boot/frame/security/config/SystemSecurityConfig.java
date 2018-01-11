@@ -18,6 +18,7 @@ import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -97,13 +98,27 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomLoginSuccessHandler();
     }
 
+    @Autowired
+    public void configureAuthenticationManagerBuilder(AuthenticationManagerBuilder auth) {
+        try {
+            auth.userDetailsService(userDetailsService);
+        } catch (Exception e) {
+            logger.error("Set userDetailService failed.", e);
+        }
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
+        // CSRF
         if (systemSecurityProperties.isEnableCsrf()) {
             http.csrf().ignoringAntMatchers(url.getCsrfIgnoringPaths());
         } else {
             http.csrf().disable();
+        }
+        // Remember Me
+        if (systemSecurityProperties.isEnableRememberMe()) {
+            http.rememberMe();
         }
         http.headers().frameOptions().sameOrigin()
             .and()
@@ -116,7 +131,6 @@ public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage(url.getLoginUrl()).permitAll()
                 .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl())
                 .failureUrl(url.getLoginUrl() + "?error")
-            .and().rememberMe()
             .and().logout()
                 .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
 // 无权限            .and().exceptionHandling().accessDeniedPage("/403")

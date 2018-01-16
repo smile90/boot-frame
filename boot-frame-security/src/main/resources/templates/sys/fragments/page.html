@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+    <table th:fragment="listPage"
+           id="table"
+
+           data-page-number="1"
+           data-page-size="2"
+           data-side-pagination="server"
+           data-query-params="PageTable.queryParams"
+           data-response-handler="PageTable.responseHandler"
+
+           data-striped="true"
+
+           data-pagination="true"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-show-columns="true"
+    >
+    </table>
+</body>
+</html>

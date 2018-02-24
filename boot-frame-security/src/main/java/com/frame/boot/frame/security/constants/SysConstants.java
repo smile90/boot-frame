@@ -8,8 +8,10 @@ public class SysConstants {
     public static final String SYSTEM_NAME = "boot-frame-security";
     public static final String SYSTEM_CODE = "0001";
 
-    /** 账号 */
-    public static final String PUBLIC_SYSTEM_CODE_ACC = SYSTEM_CODE + "0001";
+    /** 查询 */
+    public static final String PUBLIC_SYSTEM_CODE_SEARCH = SYSTEM_CODE + "0001";
+    /** 权限 */
+    public static final String PUBLIC_SYSTEM_CODE_AUTH = SYSTEM_CODE + "0002";
 
     public static final String USER_ERROR_MSG_BAD_CREDENTIALS = "用户/密码错误";
     public static final String USER_ERROR_MSG_BAD_VALID_CODE = "验证码错误";

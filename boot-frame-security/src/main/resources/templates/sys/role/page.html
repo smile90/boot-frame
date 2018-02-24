@@ -5,33 +5,37 @@
 <head>
     <div th:replace="/sys/fragments/common :: meta" />
     <div th:replace="/sys/fragments/common :: common-css" />
+    <div th:replace="/sys/fragments/common :: list-css" />
 </head>
 
 <body>
     <div id="toolbar">
-        <div class="my-container">
-            <label class="myLabel-content">名称：</label>
-            <div class="myText-content">
-                <input name="name" type="text" class="form-control" placeholder="输入名称" />
+        <div class="form-inline" role="form">
+            <div class="form-group">
+                <label>标识：</label>
+                <input name="code" type="text" class="search form-control" placeholder="输入标识" />
             </div>
-        </div>
-        <div class="my-container">
-            <label class="myLabel-content">标识：</label>
-            <div class="myText-content">
-                <input name="code" type="text" class="form-control" placeholder="输入标识" />
+            <div class="form-group">
+                <label>名称：</label>
+                <input name="name" type="text" class="search form-control" placeholder="输入名称" />
             </div>
-        </div>
-        <div class="myBtn-content">
             <input id="search" type="button" class="btn btn-primary" value="搜索" />
-            <input id="reset" type="button" class="btn btn-default" value="重置" />
+            <input id="reset" type="button" class="btn btn-default reset" value="重置" />
         </div>
     </div>
+
     <div th:replace="/sys/fragments/page :: listPage"></div>
 </body>
     <div th:replace="/sys/fragments/common :: common-js" />
     <div th:replace="/sys/fragments/common :: list-js" />
     <script type="text/javascript" >
-        $('#table').bootstrapTable({
+        var $table = $("#table");
+
+        $("#search").click(function () {
+            $table.bootstrapTable('refresh');
+        });
+
+        $table.bootstrapTable({
             url: ctxPath + '/sys/role/listPage',
             clickToSelect: true,
             toolbar: "#toolbar",

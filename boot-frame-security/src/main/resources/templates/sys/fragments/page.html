@@ -4,15 +4,16 @@
     <table th:fragment="listPage"
            id="table"
 
+           data-pagination="true"
            data-page-number="1"
-           data-page-size="2"
+           data-page-size="5"
+           data-page-list="[1,5,10,50,100,ALL]"
            data-side-pagination="server"
            data-query-params="PageTable.queryParams"
            data-response-handler="PageTable.responseHandler"
 
            data-striped="true"
 
-           data-pagination="true"
            data-show-refresh="true"
            data-show-toggle="true"
            data-show-columns="true"

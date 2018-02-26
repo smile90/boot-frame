@@ -14,20 +14,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SysUserServiceTest extends BaseTest {
 
     @Autowired
-    private SysRoleService sysRoleService;
+    private SysUserService sysUserService;
 
     @Test
-    public void find() {
-        Page<SysRole> page = new Page<>();
-        logger.info("----start:{}", page);
-        page = sysRoleService.selectPage(page,
-                new SearchBuilder<SysRole>()
-//                        .build(new SearchData("id", SearchType.GE, ValueType.LONG, "1"))
-//                        .and()
-//                        .build(new SearchData("id", SearchType.LE, ValueType.LONG, "2"))
-                        .build(new SearchData("name", SearchType.EQ, ValueType.STRING, "TEST1"))
-                        .build());
-        logger.info("----end:{}", page);
+    public void create() {
+        SysUser user = new SysUser();
+        user.setUsername("test1");
+        logger.info("{}", user);
+        sysUserService.create(user);
+        logger.info("{}", user);
+    }
+
+    @Test
+    public void findSecurityUserByUsername() {
+        SysUser user = sysUserService.findSecurityUserByUsername("test2");
+        logger.info("{}", user);
     }
 
 }

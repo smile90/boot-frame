@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import com.frame.boot.frame.mybatis.entity.BaseModel;
 
 public class SysUser extends BaseModel implements UserDetails {
 

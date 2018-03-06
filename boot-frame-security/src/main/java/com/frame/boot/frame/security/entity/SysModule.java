@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.frame.boot.frame.mybatis.entity.BaseModel;
 
 public class SysModule extends BaseModel {
 

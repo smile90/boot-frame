@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.frame.boot.frame.mybatis.entity.BaseModel;
 
 public class SysRole extends BaseModel implements GrantedAuthority {
 

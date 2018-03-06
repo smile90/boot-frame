@@ -1,5 +1,7 @@
 package com.frame.boot.frame.security.entity;
 
+import com.frame.boot.frame.mybatis.entity.BaseModel;
+
 public class SysFunction extends BaseModel {
 
     private String moduleCode;

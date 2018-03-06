@@ -1,5 +1,7 @@
 package com.frame.boot.frame.security.entity;
 
+import com.frame.boot.frame.mybatis.entity.BaseModel;
+
 public class SysRoleModule extends BaseModel {
 
     private String roleCode;

@@ -1,10 +1,10 @@
 package com.frame.boot.frame.security.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.frame.boot.frame.search.SearchBuilder;
-import com.frame.boot.frame.search.SearchData;
-import com.frame.boot.frame.search.SearchType;
-import com.frame.boot.frame.search.ValueType;
+import com.frame.boot.frame.search.bean.SearchBuilder;
+import com.frame.boot.frame.search.bean.SearchData;
+import com.frame.boot.frame.search.bean.SearchType;
+import com.frame.boot.frame.search.bean.ValueType;
 import com.frame.boot.frame.security.base.BaseTest;
 import com.frame.boot.frame.security.entity.SysRole;
 import com.frame.boot.frame.security.entity.SysUser;

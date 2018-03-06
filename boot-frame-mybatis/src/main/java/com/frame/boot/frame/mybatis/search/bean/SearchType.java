@@ -1,4 +1,4 @@
-package com.frame.boot.frame.search.bean;
+package com.frame.boot.frame.mybatis.search.bean;
 
 /**
  * 查询类别

@@ -1,4 +1,4 @@
-package com.frame.boot.frame.search.exception;
+package com.frame.boot.frame.mybatis.search.exception;
 
 
 import com.frame.common.frame.base.constants.ExceptionConstant;

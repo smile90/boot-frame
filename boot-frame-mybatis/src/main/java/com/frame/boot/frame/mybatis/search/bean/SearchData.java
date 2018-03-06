@@ -1,4 +1,4 @@
-package com.frame.boot.frame.search.bean;
+package com.frame.boot.frame.mybatis.search.bean;
 
 import com.frame.common.frame.utils.DateUtil;
 import org.slf4j.Logger;

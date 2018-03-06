@@ -1,8 +1,8 @@
-package com.frame.boot.frame.search.bean;
+package com.frame.boot.frame.mybatis.search.bean;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.frame.boot.frame.search.exception.SearchException;
+import com.frame.boot.frame.mybatis.search.exception.SearchException;
 import com.frame.common.frame.utils.EmptyUtil;
 
 public class SearchBuilder<T> {

@@ -44,11 +44,9 @@ public class RedisConfig {
 			sentinelConfig.setMasterName(sentinel.getMaster())
 					.setDatabase(redisProperties.getDatabase())
 					.setConnectTimeout(redisProperties.getTimeout());
-
 			if (redisProperties.getPassword() != null && !redisProperties.getPassword().isEmpty()) {
 				sentinelConfig.setPassword(redisProperties.getPassword());
 			}
-
 			for (String node : sentinel.getNodes().split(",")) {
 				sentinelConfig.addSentinelAddress(node);
 			}
@@ -58,7 +56,6 @@ public class RedisConfig {
 			singleServerConfig.setAddress(redisProperties.getHost() + ":" + redisProperties.getPort())
 					.setDatabase(redisProperties.getDatabase())
 					.setConnectTimeout(redisProperties.getTimeout());
-
 			if (redisProperties.getPassword() != null && !redisProperties.getPassword().isEmpty()) {
 				singleServerConfig.setPassword(redisProperties.getPassword());
 			}

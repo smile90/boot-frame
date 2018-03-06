@@ -8,6 +8,7 @@ import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.config.SentinelServersConfig;
+import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.cache.CacheManager;
@@ -36,25 +37,45 @@ public class RedisConfig {
 	@Bean
 	public RedissonClient getRedissonClient() {
 		Config config = new Config();
+		// 哨兵模式
 		RedisProperties.Sentinel sentinel = redisProperties.getSentinel();
-		SentinelServersConfig sentinelConfig = config.useSentinelServers();
-		sentinelConfig.setMasterName(sentinel.getMaster())
-				.setPassword(redisProperties.getPassword())
-				.setDatabase(redisProperties.getDatabase())
-				.setConnectTimeout(redisProperties.getTimeout());
-		
-		for (String node : sentinel.getNodes().split(",")) {
-			sentinelConfig.addSentinelAddress(node);
+		if (sentinel != null) {
+			SentinelServersConfig sentinelConfig = config.useSentinelServers();
+			sentinelConfig.setMasterName(sentinel.getMaster())
+					.setDatabase(redisProperties.getDatabase())
+					.setConnectTimeout(redisProperties.getTimeout());
+
+			if (redisProperties.getPassword() != null && !redisProperties.getPassword().isEmpty()) {
+				sentinelConfig.setPassword(redisProperties.getPassword());
+			}
+
+			for (String node : sentinel.getNodes().split(",")) {
+				sentinelConfig.addSentinelAddress(node);
+			}
+		// 单一模式
+		} else {
+			SingleServerConfig singleServerConfig = config.useSingleServer();
+			singleServerConfig.setAddress(redisProperties.getHost() + ":" + redisProperties.getPort())
+					.setDatabase(redisProperties.getDatabase())
+					.setConnectTimeout(redisProperties.getTimeout());
+
+			if (redisProperties.getPassword() != null && !redisProperties.getPassword().isEmpty()) {
+				singleServerConfig.setPassword(redisProperties.getPassword());
+			}
 		}
-		
+
 		return Redisson.create(config);
 	}
 	
 	@Bean
 	public CacheManager cacheManager() {
 		RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate());
-		cacheManager.setDefaultExpiration(redisExpirProperties.getDefaultConfig());
-		cacheManager.setExpires(redisExpirProperties.getConfig());
+		if (redisExpirProperties.getDefaultConfig() != null) {
+			cacheManager.setDefaultExpiration(redisExpirProperties.getDefaultConfig());
+		}
+		if (redisExpirProperties.getConfig() != null) {
+			cacheManager.setExpires(redisExpirProperties.getConfig());
+		}
 		return cacheManager;
 	}
 	

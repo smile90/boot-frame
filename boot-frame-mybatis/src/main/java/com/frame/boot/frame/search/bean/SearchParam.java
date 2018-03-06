@@ -1,4 +1,4 @@
-package com.frame.boot.frame.search;
+package com.frame.boot.frame.search.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.frame.common.frame.utils.EmptyUtil;

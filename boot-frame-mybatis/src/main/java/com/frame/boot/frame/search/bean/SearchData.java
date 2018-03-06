@@ -1,10 +1,8 @@
-package com.frame.boot.frame.search;
+package com.frame.boot.frame.search.bean;
 
 import com.frame.common.frame.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.math.BigDecimal;
 
 /**
  * 查询数据

@@ -1,4 +1,4 @@
-package com.frame.boot.frame.security.dataSource;
+package com.frame.boot.frame.datasource;
 
 public class DataSourceContextHolder {
 

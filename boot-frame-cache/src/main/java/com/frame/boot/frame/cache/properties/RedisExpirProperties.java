@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@ConfigurationProperties(prefix = "redis.expir", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.redis.expir", ignoreInvalidFields = true)
 public class RedisExpirProperties {
 	
 	private Long defaultConfig;

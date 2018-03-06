@@ -1,8 +1,8 @@
 package com.frame.boot.frame.security.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
-import com.frame.boot.frame.security.dataSource.DataSourceTypeEnum;
-import com.frame.boot.frame.security.dataSource.DynamicDataSource;
+import com.frame.boot.frame.datasource.DataSourceTypeEnum;
+import com.frame.boot.frame.datasource.DynamicDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

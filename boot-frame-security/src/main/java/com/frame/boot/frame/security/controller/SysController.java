@@ -4,14 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.common.frame.utils.EmptyUtil;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -46,6 +44,17 @@ public class SysController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && EmptyUtil.notEmpty(auth.getName())) {
             return sysModuleService.findMenuJSONByUsername(auth.getName());
+        } else {
+            return null;
+        }
+    }
+
+    @RequestMapping("/user")
+    @ResponseBody
+    public Object user() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            return auth.getName();
         } else {
             return null;
         }

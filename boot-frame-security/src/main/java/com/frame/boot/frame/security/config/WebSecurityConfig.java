@@ -33,7 +33,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SystemSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 

@@ -1,7 +1,7 @@
 package com.frame.boot.frame.security.config;
 
-import com.frame.boot.frame.security.dataSource.DataSourceContextHolder;
-import com.frame.boot.frame.security.dataSource.DataSourceTypeEnum;
+import com.frame.boot.frame.datasource.DataSourceContextHolder;
+import com.frame.boot.frame.datasource.DataSourceTypeEnum;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;

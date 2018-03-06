@@ -1,5 +1,7 @@
-package com.frame.boot.frame.security.dataSource;
+package com.frame.boot.frame.security.config;
 
+import com.frame.boot.frame.security.dataSource.DataSourceContextHolder;
+import com.frame.boot.frame.security.dataSource.DataSourceTypeEnum;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class DataSourceAopInDao {
-    private static Logger logger = LoggerFactory.getLogger(DataSourceAopInDao.class);
+public class DataSourceAopConfig {
+    private static Logger logger = LoggerFactory.getLogger(DataSourceAopConfig.class);
 
     @Before("execution(* com.frame..mapper*..*.find*(..)) "
             + " || execution(* com.frame..mapper*..*.get*(..)) "

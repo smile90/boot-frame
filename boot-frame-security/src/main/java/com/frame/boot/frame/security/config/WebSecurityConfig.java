@@ -17,6 +17,7 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -60,6 +61,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("{}{}", systemSecurityProperties, kaptchaProperties);
     }
 
+    @Bean("authenticationManagerBean")
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Bean
     public AccessDecisionManager accessDecisionManager() {
         List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList();
@@ -80,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public FilterSecurityInterceptor filterSecurityInterceptor() throws Exception {
         FilterSecurityInterceptor customFilterSecurityInterceptor = new FilterSecurityInterceptor();
-        customFilterSecurityInterceptor.setAuthenticationManager(super.authenticationManagerBean());
+        customFilterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());
         customFilterSecurityInterceptor.setAccessDecisionManager(accessDecisionManager());
         customFilterSecurityInterceptor.setSecurityMetadataSource(securityMetadataSource);
         return customFilterSecurityInterceptor;

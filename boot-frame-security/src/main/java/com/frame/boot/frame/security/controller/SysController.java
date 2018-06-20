@@ -26,7 +26,6 @@ public class SysController {
     public String login(Model model) {
         JSONObject loginModel = new JSONObject();
         loginModel.put("enableValidCode", systemSecurityProperties.isEnableValidCode());
-
         model.addAttribute("loginModel", loginModel);
         return "sys/login";
     }

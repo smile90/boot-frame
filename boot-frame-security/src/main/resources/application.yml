@@ -9,10 +9,11 @@ spring:
   jmx:
     default-domain: @project.artifactId@
 
+
 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
   http:
     encoding:
-      enabled: true   # Enable http encoding support.
+      enabled: true
       charset: UTF-8
 
 # Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
@@ -100,7 +101,6 @@ spring:
         max-active: 100
 # 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException
         max-wait: 1000
-
 # 超时配置
 #    expir:
 
@@ -141,8 +141,13 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
-# 权限配置
-# security:
+# 网关配置
+zuul:
+  ignored-services: '*'
+  routes:
+    boot-frame-cfg-client-test:
+      path: /auth/**
+      serviceId: boot-frame-security
 
 # 框架配置
 frame:

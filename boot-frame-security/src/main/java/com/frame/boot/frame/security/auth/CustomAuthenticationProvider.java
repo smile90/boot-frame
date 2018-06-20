@@ -19,8 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.util.ServletContextPropertyUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

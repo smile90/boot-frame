@@ -1,9 +1,11 @@
 package com.frame.boot.frame;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringCloudApplication
+@EnableDiscoveryClient
+@SpringBootApplication
 public class WebApplication {
 
     public static void main(String[] args) {

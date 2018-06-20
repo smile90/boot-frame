@@ -105,15 +105,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomLoginSuccessHandler();
     }
 
-    @Autowired
-    public void configureAuthenticationManagerBuilder(AuthenticationManagerBuilder auth) {
-        try {
-            auth.userDetailsService(userDetailsService);
-        } catch (Exception e) {
-            logger.error("Set userDetailService failed.", e);
-        }
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();

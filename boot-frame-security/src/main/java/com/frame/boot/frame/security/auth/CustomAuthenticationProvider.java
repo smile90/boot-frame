@@ -66,7 +66,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         // 用户名密码
         if (EmptyUtil.isEmpty(username) || EmptyUtil.isEmpty(password)) {
-            throw new BadCredentialsException("用户名/密码无效");
+            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         }
         // 密码加密
         String passwordMd5;

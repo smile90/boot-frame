@@ -2,7 +2,7 @@
 server:
   port: 80
   servlet:
-    context-path: /
+    context-path: /front
 
 ## config
 #spring:

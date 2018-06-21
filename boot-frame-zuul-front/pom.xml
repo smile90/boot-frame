@@ -8,9 +8,9 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>boot-frame-zuul-server</artifactId>
-    <name>Spring Boot基础框架-网关</name>
-    <description>Spring Boot基础-网关</description>
+    <artifactId>boot-frame-zuul-front</artifactId>
+    <name>Spring Boot基础框架-前端网关</name>
+    <description>Spring Boot基础-前端网关</description>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 

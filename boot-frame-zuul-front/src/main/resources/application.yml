@@ -1,3 +1,7 @@
+logging:
+  level:
+    root: info
+
 info:
   version: @project.version@
 
@@ -20,16 +24,17 @@ spring:
     serialization:
       indent_output: true
 
-# Spring MVC
-  mvc:
-    static-path-pattern: /static/**
-    contentnegotiation:
-      media-types.json: application/json
-
 # 网关配置
 zuul:
   ignored-services: '*'
   routes:
-    boot-frame-cfg-client-test:
-      path: /sso/**
+    boot-frame-auth:
+      path: /auth/**
       serviceId: boot-frame-auth
+    boot-frame-test:
+      path: /test/**
+      serviceId: boot-frame-test
+
+    baidu:
+      path: /baidu
+      url: http://www.baidu.com

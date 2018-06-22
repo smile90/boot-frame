@@ -141,14 +141,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
-# 网关配置
-zuul:
-  ignored-services: '*'
-  routes:
-    boot-frame-cfg-client-test:
-      path: /auth/**
-      serviceId: boot-frame-security
-
 # 框架配置
 frame:
   host:

@@ -16,6 +16,7 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -66,19 +67,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if (EmptyUtil.isEmpty(username) || EmptyUtil.isEmpty(password)) {
             throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         }
-        // 密码加密
-        String passwordMd5;
-        try {
-            passwordMd5 = EncodeAndDecodeUtil.md5(password);
-        } catch (Exception e) {
-            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
-        }
 
         // 账户状态判断
         SysUser userDetails = sysUserService.findSecurityUserByUsername(username);
         if (userDetails == null) {
             throw new UsernameNotFoundException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
-        } else if (!passwordMd5.equals(userDetails.getPassword())) {
+        } else if (!new BCryptPasswordEncoder().encode(password).equals(userDetails.getPassword())) {
             throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
         } else if (!userDetails.isEnabled()) {
             throw new DisabledException(SysConstants.USER_ERROR_MSG_DISABLED);

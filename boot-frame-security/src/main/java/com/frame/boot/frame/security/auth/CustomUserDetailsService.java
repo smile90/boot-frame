@@ -1,11 +1,9 @@
 package com.frame.boot.frame.security.auth;
 
-import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
-import com.frame.boot.frame.security.exception.FrameSecurityException;
+import com.frame.boot.frame.security.exception.SystemSecurityException;
 import com.frame.boot.frame.security.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public SysUser loadUserByUsername(String username) throws RuntimeException {
         SysUser sysUser = sysUserService.findSecurityUserByUsername(username);
         if (sysUser == null) {
-            throw new UsernameNotFoundException("user not found", new FrameSecurityException(FrameSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", FrameSecurityException.USERNAME_PWD_ERROR_MSG));
+            throw new UsernameNotFoundException("user not found", new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
         }
         return sysUser;
     }

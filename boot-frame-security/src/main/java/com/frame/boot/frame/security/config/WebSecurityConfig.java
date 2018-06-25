@@ -1,7 +1,6 @@
 package com.frame.boot.frame.security.config;
 
 import com.frame.boot.frame.security.auth.CustomAdminRoleVoter;
-import com.frame.boot.frame.security.auth.CustomLoginSuccessHandler;
 import com.frame.boot.frame.security.auth.CustomWebAuthenticationDetailsSource;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
@@ -19,7 +18,6 @@ import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -114,6 +112,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return userDetailsService;
     }
 
     @Override

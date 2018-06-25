@@ -2,7 +2,7 @@ package com.frame.boot.frame.security.auth;
 
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.constants.SysConstants;
-import com.frame.boot.frame.security.exception.FrameSecurityException;
+import com.frame.boot.frame.security.exception.SystemSecurityException;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +31,8 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
         // 登录日志记录 TODO
 
         JSONObject result = new JSONObject();
-        if (exception.getCause() instanceof FrameSecurityException) {
-            FrameSecurityException securityException = ((FrameSecurityException) exception.getCause());
+        if (exception.getCause() instanceof SystemSecurityException) {
+            SystemSecurityException securityException = ((SystemSecurityException) exception.getCause());
             result.put("code", securityException.getErrorCode());
             result.put("msg", securityException.getMessage());
             result.put("showMsg", securityException.getShowMsg());

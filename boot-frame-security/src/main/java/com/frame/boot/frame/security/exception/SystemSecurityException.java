@@ -3,7 +3,7 @@ package com.frame.boot.frame.security.exception;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.common.frame.base.exception.BaseRuntimeException;
 
-public class FrameSecurityException extends BaseRuntimeException {
+public class SystemSecurityException extends BaseRuntimeException {
 
     public static final String USERNAME_PWD_ERROR_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0001";
     public static final String USERNAME_PWD_ERROR_MSG = "用户名或密码错误";
@@ -20,27 +20,27 @@ public class FrameSecurityException extends BaseRuntimeException {
     public static final String USER_EXPIRED_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0006";
     public static final String USER_EXPIRED_MSG = "用户状态异常，已过期";
 
-    public FrameSecurityException(String errorCode, String message, String showMsg) {
+    public SystemSecurityException(String errorCode, String message, String showMsg) {
         super(errorCode, message, showMsg);
     }
 
-    public FrameSecurityException(String errorCode, String message) {
+    public SystemSecurityException(String errorCode, String message) {
         super(errorCode, message);
     }
 
-    public FrameSecurityException(Throwable cause) {
+    public SystemSecurityException(Throwable cause) {
         super(cause);
     }
 
-    public FrameSecurityException(String errorCode, Throwable cause) {
+    public SystemSecurityException(String errorCode, Throwable cause) {
         super(errorCode, cause);
     }
 
-    public FrameSecurityException(String errorCode, String message, Throwable cause) {
+    public SystemSecurityException(String errorCode, String message, Throwable cause) {
         super(errorCode, message, cause);
     }
 
-    public FrameSecurityException(String errorCode, String message, String showMsg, Throwable cause) {
+    public SystemSecurityException(String errorCode, String message, String showMsg, Throwable cause) {
         super(errorCode, message, showMsg, cause);
     }
 

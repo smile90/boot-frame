@@ -27,6 +27,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import javax.annotation.PostConstruct;
@@ -44,6 +46,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private KaptchaProperties kaptchaProperties;
+
+    @Autowired
+    @Qualifier("customLoginSuccessHandler")
+    private AuthenticationSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    @Qualifier("customLoginFailureHandler")
+    private AuthenticationFailureHandler loginFailureHandler;
 
     @Autowired
     @Qualifier("customUserDetailsService")
@@ -102,11 +112,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public CustomLoginSuccessHandler loginSuccessHandler() {
-        return new CustomLoginSuccessHandler();
-    }
-
-    @Bean
     public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -133,8 +138,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and().formLogin()
                 .authenticationDetailsSource(webAuthenticationDetailsSource())
                 .loginPage(url.getLoginUrl()).permitAll()
-                .successHandler(loginSuccessHandler()).defaultSuccessUrl(url.getIndexUrl())
-                .failureUrl(url.getLoginUrl() + "?error")
+                .successHandler(loginSuccessHandler)
+                .failureHandler(loginFailureHandler)
             .and().logout()
                 .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
 // 无权限            .and().exceptionHandling().accessDeniedPage("/403")

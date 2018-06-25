@@ -10,13 +10,10 @@ public class SysConstants {
 
     /** 权限 */
     public static final String PUBLIC_SYSTEM_CODE_AUTH = SYSTEM_CODE + "0001";
-
-    public static final String USER_ERROR_MSG_BAD_CREDENTIALS = "用户/密码错误";
-    public static final String USER_ERROR_MSG_BAD_VALID_CODE = "验证码错误";
-    public static final String USER_ERROR_MSG_DISABLED = "用户已被禁用";
-    public static final String USER_ERROR_MSG_EXPIRED = "账号已过期";
-    public static final String USER_ERROR_MSG_LOCKED = "账号已被锁定";
-    public static final String USER_ERROR_MSG_CREDENTIALS = "凭证已过期";
+    /** 权限系统异常 */
+    public static final String AUTH_ERROR_CODE = PUBLIC_SYSTEM_CODE_AUTH + "9999";
+    public static final String AUTH_ERROR_MSG = "auth is error.";
+    public static final String AUTH_ERROR_SHOW_MSG = "权限验证异常.";
 
     /** SUPER_ADMIN */
     public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";

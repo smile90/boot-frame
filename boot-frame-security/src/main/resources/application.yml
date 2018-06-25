@@ -9,6 +9,9 @@ spring:
   jmx:
     default-domain: @project.artifactId@
 
+# AOP
+  aop:
+    proxy-target-class: true
 
 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
   http:
@@ -31,9 +34,9 @@ spring:
     contentnegotiation:
       media-types.json: application/json
 
-# AOP
-  aop:
-    proxy-target-class: true
+# session
+  session:
+      store-type: redis
 
 # dataSource
   datasource:
@@ -84,7 +87,7 @@ spring:
 
 #################redis基础配置#################
 # 密码
-    password: 123456
+    password:
 # 库
     database: 5
 # 连接超时时间 单位 ms（毫秒）

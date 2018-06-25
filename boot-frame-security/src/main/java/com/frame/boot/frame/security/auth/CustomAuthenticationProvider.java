@@ -3,19 +3,17 @@ package com.frame.boot.frame.security.auth;
 
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.exception.FrameSecurityException;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.utils.EmptyUtil;
-import com.frame.common.frame.utils.EncodeAndDecodeUtil;
-import com.google.code.kaptcha.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -24,7 +22,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 @Service("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -59,29 +56,29 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             // 验证码校验
             if (EmptyUtil.isEmpty(sessionValidCode)|| EmptyUtil.isEmpty(requestValidCode)
                     || !sessionValidCode.trim().equalsIgnoreCase(requestValidCode.trim())) {
-                throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_VALID_CODE);
+                throw new FrameSecurityException(FrameSecurityException.VALID_CODE_ERROR_CODE, "valid code is error", FrameSecurityException.VALID_CODE_ERROR_MSG);
             }
         }
 
         // 用户名密码
         if (EmptyUtil.isEmpty(username) || EmptyUtil.isEmpty(password)) {
-            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
+            throw new FrameSecurityException(FrameSecurityException.USERNAME_PWD_ERROR_CODE, "username or password is null", FrameSecurityException.USERNAME_PWD_ERROR_MSG);
         }
 
         // 账户状态判断
         SysUser userDetails = sysUserService.findSecurityUserByUsername(username);
         if (userDetails == null) {
-            throw new UsernameNotFoundException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
+            throw new FrameSecurityException(FrameSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", FrameSecurityException.USERNAME_PWD_ERROR_MSG);
         } else if (!new BCryptPasswordEncoder().encode(password).equals(userDetails.getPassword())) {
-            throw new BadCredentialsException(SysConstants.USER_ERROR_MSG_BAD_CREDENTIALS);
+            throw new FrameSecurityException(FrameSecurityException.USERNAME_PWD_ERROR_CODE, "password is error", FrameSecurityException.USERNAME_PWD_ERROR_MSG);
         } else if (!userDetails.isEnabled()) {
-            throw new DisabledException(SysConstants.USER_ERROR_MSG_DISABLED);
+            throw new FrameSecurityException(FrameSecurityException.USER_DISABLED_CODE, "user not enabled", FrameSecurityException.USER_DISABLED_MSG);
         } else if (!userDetails.isAccountNonExpired()) {
-            throw new AccountExpiredException(SysConstants.USER_ERROR_MSG_EXPIRED);
+            throw new FrameSecurityException(FrameSecurityException.USER_EXPIRED_CODE, "account non expored", FrameSecurityException.USER_EXPIRED_MSG);
         } else if (!userDetails.isAccountNonLocked()) {
-            throw new LockedException(SysConstants.USER_ERROR_MSG_LOCKED);
+            throw new FrameSecurityException(FrameSecurityException.USER_LOCKED_CODE, "account non locked", FrameSecurityException.USER_LOCKED_MSG);
         } else if (!userDetails.isCredentialsNonExpired()) {
-            throw new LockedException(SysConstants.USER_ERROR_MSG_CREDENTIALS);
+            throw new FrameSecurityException(FrameSecurityException.USER_EXPIRED_CODE, "credentials non expored", FrameSecurityException.USER_EXPIRED_MSG);
         }
         // 授权
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());

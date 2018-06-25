@@ -43,7 +43,6 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         result.put("code", ResultCodeConstant.PUBLIC_SYSTEM_SUCC_CODE);
         result.put("token", request.getRequestedSessionId());
 
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(result.toJSONString());
     }

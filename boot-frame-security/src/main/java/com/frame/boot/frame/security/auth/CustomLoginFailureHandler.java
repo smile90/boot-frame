@@ -29,17 +29,20 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
         logger.info("login error:{}. {}", username, exception.getMessage());
         logger.debug(null, exception);
         // 登录日志记录 TODO
-        JSONObject result = new JSONObject();
-        result.put("msg", exception.getMessage());
 
-        if (exception instanceof FrameSecurityException) {
-            result.put("code", ((FrameSecurityException) exception).getErrorCode());
-            result.put("showMsg", ((FrameSecurityException) exception).getShowMsg());
+        JSONObject result = new JSONObject();
+        if (exception.getCause() instanceof FrameSecurityException) {
+            FrameSecurityException securityException = ((FrameSecurityException) exception.getCause());
+            result.put("code", securityException.getErrorCode());
+            result.put("msg", securityException.getMessage());
+            result.put("showMsg", securityException.getShowMsg());
         } else {
             result.put("code", SysConstants.AUTH_ERROR_CODE);
-            result.put("showMsg", SysConstants.AUTH_ERROR_MSG);
+            result.put("msg", exception.getMessage());
+            result.put("showMsg", SysConstants.AUTH_ERROR_SHOW_MSG);
         }
 
+        // 响应
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(result.toJSONString());

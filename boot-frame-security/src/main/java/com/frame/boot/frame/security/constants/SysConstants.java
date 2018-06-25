@@ -13,7 +13,7 @@ public class SysConstants {
     /** 权限系统异常 */
     public static final String AUTH_ERROR_CODE = PUBLIC_SYSTEM_CODE_AUTH + "9999";
     public static final String AUTH_ERROR_MSG = "auth is error.";
-    public static final String AUTH_ERROR_SHOW_MSG = "权限验证异常.";
+    public static final String AUTH_ERROR_SHOW_MSG = "权限验证异常";
 
     /** SUPER_ADMIN */
     public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +35,7 @@ public class TestController {
         return JSONObject.toJSON(test);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/sessions", method = RequestMethod.GET)
     public Object sessions (HttpServletRequest request){
         Map<String, Object> map = new HashMap<>();

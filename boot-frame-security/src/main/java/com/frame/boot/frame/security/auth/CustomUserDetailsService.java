@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public SysUser loadUserByUsername(String username) throws RuntimeException {
         SysUser sysUser = sysUserService.findSecurityUserByUsername(username);
         if (sysUser == null) {
-            throw new FrameSecurityException(FrameSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", FrameSecurityException.USERNAME_PWD_ERROR_MSG);
+            throw new UsernameNotFoundException("user not found", new FrameSecurityException(FrameSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", FrameSecurityException.USERNAME_PWD_ERROR_MSG));
         }
         return sysUser;
     }

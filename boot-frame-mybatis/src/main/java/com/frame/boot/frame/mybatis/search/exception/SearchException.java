@@ -1,7 +1,7 @@
 package com.frame.boot.frame.mybatis.search.exception;
 
 
-import com.frame.common.frame.base.constants.ExceptionConstant;
+import com.frame.common.frame.base.constants.ResultCodeConstant;
 import com.frame.common.frame.base.exception.BaseRuntimeException;
 
 /**
@@ -13,7 +13,7 @@ public class SearchException extends BaseRuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String BUILD_SEARCH_ERROR_CODE = ExceptionConstant.PUBLIC_SYSTEM_CODE_SEARCH + "0001";
+	public static final String BUILD_SEARCH_ERROR_CODE = ResultCodeConstant.PUBLIC_SYSTEM_CODE_SEARCH + "0001";
 	public static final String BUILD_SEARCH_ERROR_MSG = "构建查询错误！";
 
 	public SearchException(String errorCode, String message, String showMsg, Throwable cause) {

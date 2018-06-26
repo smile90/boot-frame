@@ -152,8 +152,6 @@ zuul:
 
 # 框架配置
 frame:
-  host:
-    static-host: http://127.0.0.1:12080/security
   security:
     enable-csrf: false
     enable-valid-code: false

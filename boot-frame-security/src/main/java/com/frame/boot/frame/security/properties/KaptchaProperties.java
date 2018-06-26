@@ -12,11 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "kaptcha")
 public class KaptchaProperties {
 
-
     /** 请求url */
     private String url = "/static/validCode";
     /** session中的key */
-    private String sessionKey = "validCode.code";
+    private String sessionKey = "login.validCode.code";
     /** form中的name要与该地方一致 */
     private String formName = "validCode";
 

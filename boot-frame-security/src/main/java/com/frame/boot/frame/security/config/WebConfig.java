@@ -1,11 +1,8 @@
 package com.frame.boot.frame.security.config;
 
-import com.frame.boot.frame.security.filter.ContextFilter;
-import com.frame.boot.frame.security.properties.FrameHostProperties;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,22 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class WebConfig {
 
     @Autowired
-    private FrameHostProperties frameHostProperties;
-
-    @Autowired
     private KaptchaProperties kaptchaProperties;
-
-    /**
-     * @see com.frame.boot.frame.security.filter.ContextFilter
-     * @return
-     */
-    @Bean("ctxContextFilter")
-    public FilterRegistrationBean ctxContextFilter(){
-        FilterRegistrationBean fitler = new FilterRegistrationBean();
-        fitler.setFilter(new ContextFilter());
-        fitler.addInitParameter(ContextFilter.STATIC_HOST_CODE, frameHostProperties.getStaticHost());
-        return fitler;
-    }
 
     @Bean("kaptchaServletRegistrationBean")
     public ServletRegistrationBean kaptchaServletRegistrationBean() {

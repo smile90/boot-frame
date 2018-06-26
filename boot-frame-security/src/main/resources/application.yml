@@ -37,6 +37,8 @@ spring:
 # session
   session:
       store-type: redis
+      redis:
+        flush-mode: immediate
 
 # dataSource
   datasource:
@@ -144,10 +146,15 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
+# 网关配置
+zuul:
+  sensitive-headers:
+
 # 框架配置
 frame:
   host:
     static-host: http://127.0.0.1:12080/security
   security:
-    menu-type-code: SYS_MENU
+    enable-csrf: false
     enable-valid-code: false
+    menu-type-code: SYS_MENU

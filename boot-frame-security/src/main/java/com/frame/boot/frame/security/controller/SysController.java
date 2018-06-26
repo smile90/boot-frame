@@ -3,6 +3,7 @@ package com.frame.boot.frame.security.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysModuleService;
+import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -42,7 +43,7 @@ public class SysController {
     public Object menu() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && EmptyUtil.notEmpty(auth.getName())) {
-            return sysModuleService.findMenuJSONByUsername(auth.getName());
+            return ResponseBean.successContent(sysModuleService.findMenuJSONByUsername(auth.getName()));
         } else {
             return null;
         }

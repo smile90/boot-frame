@@ -3,11 +3,10 @@ package com.frame.boot.frame.security.auth;
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.service.SysUserService;
-import com.frame.common.frame.base.constants.ResultCodeConstant;
+import com.frame.common.frame.base.bean.ResponseBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -39,12 +38,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             // 登录日志记录 TODO
         }
 
-        JSONObject result = new JSONObject();
-        result.put("code", ResultCodeConstant.PUBLIC_SYSTEM_SUCC_CODE);
-        result.put("token", request.getRequestedSessionId());
-
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(result.toJSONString());
+        response.getWriter().write(JSONObject.toJSONString(ResponseBean.success()));
     }
 
     public String getIpAddress(HttpServletRequest request) {

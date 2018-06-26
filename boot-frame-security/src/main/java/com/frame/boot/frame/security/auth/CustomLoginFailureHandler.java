@@ -3,6 +3,7 @@ package com.frame.boot.frame.security.auth;
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.exception.SystemSecurityException;
+import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,21 +31,17 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
         logger.debug(null, exception);
         // 登录日志记录 TODO
 
-        JSONObject result = new JSONObject();
+
+        ResponseBean result = null;
         if (exception.getCause() instanceof SystemSecurityException) {
             SystemSecurityException securityException = ((SystemSecurityException) exception.getCause());
-            result.put("code", securityException.getErrorCode());
-            result.put("msg", securityException.getMessage());
-            result.put("showMsg", securityException.getShowMsg());
+            result = ResponseBean.getInstance(securityException.getErrorCode(), securityException.getMessage(), securityException.getShowMsg());
         } else {
-            result.put("code", SysConstants.AUTH_ERROR_CODE);
-            result.put("msg", exception.getMessage());
-            result.put("showMsg", SysConstants.AUTH_ERROR_SHOW_MSG);
+            result = ResponseBean.getInstance(SysConstants.AUTH_ERROR_CODE, exception.getMessage(), SysConstants.AUTH_ERROR_SHOW_MSG);
         }
 
         // 响应
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(result.toJSONString());
+        response.getWriter().write(JSONObject.toJSONString(result));
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.exception.SystemSecurityException;
 import com.frame.common.frame.base.bean.ResponseBean;
+import com.frame.common.frame.base.constants.CommonConstant;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,8 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
         }
 
         // 响应
-        response.setContentType("application/json;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding(CommonConstant.ENCODING);
         response.getWriter().write(JSONObject.toJSONString(result));
     }
 }

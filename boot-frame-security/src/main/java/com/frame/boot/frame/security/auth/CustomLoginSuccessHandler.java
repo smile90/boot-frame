@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.base.bean.ResponseBean;
+import com.frame.common.frame.base.constants.CommonConstant;
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             // 登录日志记录 TODO
         }
 
-        response.setContentType("application/json;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding(CommonConstant.ENCODING);
         response.getWriter().write(JSONObject.toJSONString(ResponseBean.success()));
     }
 

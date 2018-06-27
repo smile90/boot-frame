@@ -15,6 +15,12 @@ public class SysConstants {
     public static final String AUTH_ERROR_MSG = "auth is error.";
     public static final String AUTH_ERROR_SHOW_MSG = "权限验证异常";
 
+    /** 用户未登录 */
+    public static final String USER_AUTH_ERROR_CODE = PUBLIC_SYSTEM_CODE_AUTH + "9998";
+    public static final String USER_AUTH_ERROR_MSG = "user auth is error.";
+    public static final String USER_AUTH_ERROR_SHOW_MSG = "用户权限异常";
+
+
     /** SUPER_ADMIN */
     public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";
 

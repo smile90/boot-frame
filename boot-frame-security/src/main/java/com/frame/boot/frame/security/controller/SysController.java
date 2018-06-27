@@ -1,6 +1,8 @@
 package com.frame.boot.frame.security.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.frame.boot.frame.security.constants.SysConstants;
+import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.common.frame.base.bean.ResponseBean;
@@ -59,9 +61,13 @@ public class SysController {
     public Object user() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            return auth.getName();
+            SysUser user = (SysUser) auth.getPrincipal();
+            JSONObject content = new JSONObject();
+            content.put("username", user.getUsername());
+            content.put("username", user.getRealname());
+            return ResponseBean.successContent(content);
         } else {
-            return null;
+            return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);
         }
     }
 }

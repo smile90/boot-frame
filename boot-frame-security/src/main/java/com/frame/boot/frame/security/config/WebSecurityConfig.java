@@ -115,16 +115,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        return userDetailsService;
-    }
-
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return userDetailsService;
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         // CSRF

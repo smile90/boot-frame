@@ -16,12 +16,9 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -54,26 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationFailureHandler loginFailureHandler;
 
     @Autowired
-    @Qualifier("customUserDetailsService")
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    @Qualifier("customAuthenticationProvider")
-    private AuthenticationProvider authenticationProvider;
-
-    @Autowired
     @Qualifier("customSecurityMetadataSource")
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
     @PostConstruct
     public void init() {
         logger.info("{}{}", systemSecurityProperties, kaptchaProperties);
-    }
-
-    @Bean("authenticationManagerBean")
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Bean
@@ -94,9 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterSecurityInterceptor filterSecurityInterceptor() throws Exception {
+    public FilterSecurityInterceptor filterSecurityInterceptor() {
         FilterSecurityInterceptor customFilterSecurityInterceptor = new FilterSecurityInterceptor();
-        customFilterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());
         customFilterSecurityInterceptor.setAccessDecisionManager(accessDecisionManager());
         customFilterSecurityInterceptor.setSecurityMetadataSource(securityMetadataSource);
         return customFilterSecurityInterceptor;
@@ -142,9 +124,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
 // 无权限            .and().exceptionHandling().accessDeniedPage("/403")
             .and()
-                .addFilterAfter(filterSecurityInterceptor(), FilterSecurityInterceptor.class)
-                .authenticationProvider(authenticationProvider)
-                .userDetailsService(userDetailsService);
+                .addFilterAfter(filterSecurityInterceptor(), FilterSecurityInterceptor.class);
     }
 
 }

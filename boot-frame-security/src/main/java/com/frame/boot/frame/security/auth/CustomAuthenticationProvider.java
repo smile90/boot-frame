@@ -69,7 +69,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         SysUser userDetails = sysUserService.findSecurityUserByUsername(username);
         if (userDetails == null) {
             throw new UsernameNotFoundException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
-        } else if (!new BCryptPasswordEncoder().encode(password).equals(userDetails.getPassword())) {
+        } else if (!new BCryptPasswordEncoder().matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "password is error", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
         } else if (!userDetails.isEnabled()) {
             throw new DisabledException(SystemSecurityException.USER_DISABLED_CODE, new SystemSecurityException(SystemSecurityException.USER_DISABLED_CODE, "user not enabled", SystemSecurityException.USER_DISABLED_MSG));

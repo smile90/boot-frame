@@ -11,7 +11,7 @@ public class SysConstants {
     /** 公共 */
     public static final String PUBLIC_SYSTEM_CODE_COMMON = SYSTEM_CODE + "0001";
     /** 用户未登录 */
-    public static final String COMMON_SYSTEM_ERROR_CODE = PUBLIC_SYSTEM_CODE_COMMON + "9998";
+    public static final String COMMON_SYSTEM_ERROR_CODE = PUBLIC_SYSTEM_CODE_COMMON + "9999";
     public static final String COMMON_SYSTEM_ERROR_MSG = "system is error.";
     public static final String COMMON_SYSTEM_SHOW_MSG = "系统异常，请重试或联系管理员";
 

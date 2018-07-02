@@ -5,7 +5,6 @@ import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.base.constants.CommonConstant;
-import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

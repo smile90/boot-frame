@@ -1,12 +1,89 @@
 package com.frame.boot.frame.security.entity;
 
-import com.frame.boot.frame.mybatis.entity.BaseModel;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.Version;
 
-public class SysRoleUser extends BaseModel {
+import java.io.Serializable;
+import java.util.Date;
+
+public class SysRoleUser extends Model implements Serializable {
+
+    @TableId
+    protected Long id;
+
+    @Version
+    protected Long optimistic = 0L;
+
+    protected String status;
+
+    protected String createUser;
+
+    protected Date createTime;
+
+    protected String updateUser;
+
+    protected Date updateTime;
 
     private String roleCode;
 
     private String username;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getOptimistic() {
+        return optimistic;
+    }
+
+    public void setOptimistic(Long optimistic) {
+        this.optimistic = optimistic;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public String getRoleCode() {
         return roleCode;
@@ -22,5 +99,10 @@ public class SysRoleUser extends BaseModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return id;
     }
 }

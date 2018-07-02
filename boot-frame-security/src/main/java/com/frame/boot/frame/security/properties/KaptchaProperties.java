@@ -148,7 +148,7 @@ public class KaptchaProperties {
     }
 
     public class Chars {
-    	private int length = 6;
+    	private int length = 4;
     	private int space = 5;
 		public int getLength() {
 			return length;

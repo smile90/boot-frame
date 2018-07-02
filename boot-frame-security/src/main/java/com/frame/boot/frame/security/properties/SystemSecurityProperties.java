@@ -9,7 +9,7 @@ import java.util.Arrays;
 @ConfigurationProperties(prefix = "frame.security")
 public class SystemSecurityProperties {
 
-    private String menuTypeCode;
+    private String menuTypeCode = "SYS_MENU";
 
     private boolean enableCsrf = true;
 

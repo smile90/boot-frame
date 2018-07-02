@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysModule;
+import com.frame.boot.frame.security.entity.SysRoleModule;
+import com.frame.boot.frame.security.entity.SysRoleUser;
 import com.frame.boot.frame.security.mapper.SysModuleMapper;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.common.frame.utils.EmptyUtil;
@@ -19,18 +21,34 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
 
     @Autowired
     private SystemSecurityProperties systemSecurityProperties;
-
-    public SysModule findByCode(String code) {
-        return baseMapper.selectByCode(code);
-    }
-
-    public List<SysModule> findByParentCode(String parentCode) {
-        return baseMapper.selectByParentCode(parentCode);
-    }
+    @Autowired
+    private SysRoleUserService sysRoleUserService;
+    @Autowired
+    private SysRoleModuleService sysRoleModuleService;
 
     public List<SysModule> findMenuByUsername(String username) {
-        return baseMapper.selectByUser(username, systemSecurityProperties.getMenuTypeCode(),
-                new EntityWrapper<SysModule>().orderBy("level").orderBy("orders"));
+        Set<String> moduleCodes = new HashSet<>();
+
+        List<SysRoleUser> sysRoleUsers = sysRoleUserService.selectList(new EntityWrapper<SysRoleUser>().eq("username", username));
+        if (EmptyUtil.notEmpty(sysRoleUsers)) {
+            Set<String> roleCodes = new HashSet<>();
+            for (SysRoleUser sysRoleUser : sysRoleUsers) {
+                roleCodes.add(sysRoleUser.getRoleCode());
+            }
+            List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().in("role_code", roleCodes));
+            if (EmptyUtil.notEmpty(sysRoleModules)) {
+                for (SysRoleModule sysRoleModule : sysRoleModules) {
+                    moduleCodes.add(sysRoleModule.getModuleCode());
+                }
+            }
+        }
+        if (EmptyUtil.notEmpty(moduleCodes)) {
+            return selectList(new EntityWrapper<SysModule>().in("code", moduleCodes)
+                    .eq("type_code", systemSecurityProperties.getMenuTypeCode())
+                    .orderBy("level").orderBy("orders"));
+        } else {
+            return null;
+        }
     }
 
     public JSONArray findMenuJSONByUsername(String username) {

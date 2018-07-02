@@ -14,6 +14,7 @@ import com.frame.boot.frame.mybatis.entity.BaseModel;
 
 public class SysUser extends BaseModel implements UserDetails {
 
+    @TableField(exist = false)
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private String username;

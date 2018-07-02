@@ -1,10 +1,10 @@
 package com.frame.boot.frame.security.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/test")
@@ -26,16 +26,45 @@ public class TestController {
     @Autowired
     private StringRedisTemplate template;
 
-    @RequestMapping("/{test}")
+    @RequestMapping("/redis/{key}/{value}/{timeout}")
     @ResponseBody
-    public Object test(@PathVariable String test) {
+    public Object redisPut(@PathVariable("key") String key, @PathVariable("value") String value, @PathVariable("timeout")Long timeout) {
         try {
-            template.boundValueOps("test").set(test);
+            template.boundValueOps(key).set(value);
+            template.expire(key, timeout, TimeUnit.SECONDS);
         } catch (Exception e) {
             logger.info("{}", e);
         }
-        return JSONObject.toJSON(test);
+        return key + "/" + value;
     }
+    @RequestMapping("/redis/{key}/{value}")
+    @ResponseBody
+    public Object redisPutTime(@PathVariable("key") String key, @PathVariable("value") String value) {
+        try {
+            template.boundValueOps(key).set(value);
+        } catch (Exception e) {
+            logger.info("{}", e);
+        }
+        return key + "/" + value;
+    }
+
+    @RequestMapping("/redis/{key}")
+    @ResponseBody
+    public Object redisGet(@PathVariable("key") String key) {
+        try {
+            return key + "/" + template.boundValueOps(key).get() + "/" + template.boundValueOps(key).getExpire();
+        } catch (Exception e) {
+            logger.info("{}", e);
+            throw e;
+        }
+    }
+    @RequestMapping("/cache/{key}/{value}")
+    @Cacheable(value = "test", key = "#key")
+    @ResponseBody
+    public Object cache(@PathVariable("key") String key, @PathVariable("value") String value) {
+        return key + "/" + value;
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/sessions", method = RequestMethod.GET)
@@ -57,4 +86,7 @@ public class TestController {
     public Object session (HttpServletRequest request) {
         return JSONObject.toJSON(request.getSession());
     }
+
+
+
 }

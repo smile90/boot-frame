@@ -64,7 +64,7 @@ public class SysController {
             SysUser user = (SysUser) auth.getPrincipal();
             JSONObject content = new JSONObject();
             content.put("username", user.getUsername());
-            content.put("username", user.getRealname());
+            content.put("realname", user.getRealname());
             return ResponseBean.successContent(content);
         } else {
             return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);

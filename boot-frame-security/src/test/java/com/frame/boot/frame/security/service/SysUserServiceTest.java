@@ -5,6 +5,8 @@ import com.frame.boot.frame.security.entity.SysUser;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
+
 public class SysUserServiceTest extends BaseTest {
 
     @Autowired
@@ -14,8 +16,9 @@ public class SysUserServiceTest extends BaseTest {
     public void create() {
         SysUser user = new SysUser();
         user.setUsername("test1");
+        user.setCreateTime(new Date());
         logger.info("{}", user);
-        sysUserService.create(user);
+        sysUserService.insert(user);
         logger.info("{}", user);
     }
 

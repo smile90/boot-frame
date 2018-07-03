@@ -1,19 +1,17 @@
 package com.frame.boot.frame.security.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.frame.boot.frame.mybatis.entity.BaseModel;
+import com.frame.common.frame.base.enums.YesNo;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.frame.boot.frame.mybatis.entity.BaseModel;
-import com.frame.common.frame.base.enums.YesNo;
 
 public class SysModule extends BaseModel {
 
     private String typeCode;
 
     private String parentCode;
-
-    private Integer level;
 
     private String validate = YesNo.Y.name();
 
@@ -44,14 +42,6 @@ public class SysModule extends BaseModel {
 
     public void setParentCode(String parentCode) {
         this.parentCode = parentCode;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
     }
 
     public String getValidate() {
@@ -114,7 +104,6 @@ public class SysModule extends BaseModel {
     public String toString() {
         final StringBuffer sb = new StringBuffer("SysModule{");
         sb.append("typeCode='").append(typeCode).append('\'');
-        sb.append(", level=").append(level);
         sb.append(", validate='").append(validate).append('\'');
         sb.append(", useable='").append(useable).append('\'');
         sb.append(", code='").append(code).append('\'');

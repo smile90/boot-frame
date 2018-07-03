@@ -1,6 +1,7 @@
 package com.frame.boot.frame.security.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.frame.boot.frame.mybatis.entity.BaseModel;
 import com.frame.common.frame.base.enums.UserStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import com.frame.boot.frame.mybatis.entity.BaseModel;
 
 public class SysUser extends BaseModel implements UserDetails {
 
@@ -26,8 +26,6 @@ public class SysUser extends BaseModel implements UserDetails {
     private String userStatus;
 
     private String userTypeCode;
-
-    private String typeCode;
 
     private String email;
 
@@ -86,14 +84,6 @@ public class SysUser extends BaseModel implements UserDetails {
 
     public void setUserTypeCode(String userTypeCode) {
         this.userTypeCode = userTypeCode == null ? null : userTypeCode.trim();
-    }
-
-    public String getTypeCode() {
-        return typeCode;
-    }
-
-    public void setTypeCode(String typeCode) {
-        this.typeCode = typeCode == null ? null : typeCode.trim();
     }
 
     public String getEmail() {
@@ -198,7 +188,6 @@ public class SysUser extends BaseModel implements UserDetails {
         sb.append(", realname='").append(realname).append('\'');
         sb.append(", userStatus='").append(userStatus).append('\'');
         sb.append(", userTypeCode='").append(userTypeCode).append('\'');
-        sb.append(", typeCode='").append(typeCode).append('\'');
         sb.append('}');
         return sb.toString();
     }

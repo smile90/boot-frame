@@ -59,6 +59,7 @@ public class SysController {
     }
 
     @PostMapping("/pwd/{username}")
+    @ResponseBody
     public Object updatePwd(@PathVariable(value = "username", required = true)String username,
                             @RequestParam(value = "oldPwd", required = true)String oldPwd,
                             @RequestParam(value = "newPwd", required = true)String newPwd) {

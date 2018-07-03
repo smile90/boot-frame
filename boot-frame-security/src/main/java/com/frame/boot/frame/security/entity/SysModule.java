@@ -1,11 +1,7 @@
 package com.frame.boot.frame.security.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.frame.boot.frame.mybatis.entity.BaseModel;
 import com.frame.common.frame.base.enums.YesNo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SysModule extends BaseModel {
 
@@ -14,6 +10,8 @@ public class SysModule extends BaseModel {
     private String typeCode;
 
     private String parentCode;
+
+    private String parentPath;
 
     private String validate = YesNo.Y.name();
 
@@ -26,9 +24,6 @@ public class SysModule extends BaseModel {
     private String icon;
 
     private String url;
-
-    @TableField(exist = false)
-    private List<SysFunction> functions = new ArrayList<>();
 
     public String getTypeCode() {
         return typeCode;
@@ -44,6 +39,14 @@ public class SysModule extends BaseModel {
 
     public void setParentCode(String parentCode) {
         this.parentCode = parentCode;
+    }
+
+    public String getParentPath() {
+        return parentPath;
+    }
+
+    public void setParentPath(String parentPath) {
+        this.parentPath = parentPath;
     }
 
     public String getValidate() {
@@ -94,22 +97,19 @@ public class SysModule extends BaseModel {
         this.url = url == null ? null : url.trim();
     }
 
-    public List<SysFunction> getFunctions() {
-        return functions;
-    }
-
-    public void setFunctions(List<SysFunction> functions) {
-        this.functions = functions;
-    }
-
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SysModule{");
         sb.append("typeCode='").append(typeCode).append('\'');
+        sb.append(", parentCode='").append(parentCode).append('\'');
+        sb.append(", parentPath='").append(parentPath).append('\'');
         sb.append(", validate='").append(validate).append('\'');
         sb.append(", useable='").append(useable).append('\'');
+        sb.append(", name='").append(name).append('\'');
         sb.append(", code='").append(code).append('\'');
+        sb.append(", icon='").append(icon).append('\'');
         sb.append(", url='").append(url).append('\'');
+        sb.append(", status='").append(status).append('\'');
         sb.append('}');
         return sb.toString();
     }

@@ -9,7 +9,7 @@ INSERT INTO `sys_module` VALUES ('4', '0', 'SYS_MODULE', 'PUBLIC_INDEX', 'N', 'Y
 INSERT INTO `sys_module` VALUES ('5', '0', 'SYS_FUNCTION', 'PUBLIC_INDEX', 'N', 'Y', '个人信息', 'PUB_INDEX_USER', null, '3', '/sys/user', null, 'NORMAL', 'sql', null, null, null);
 INSERT INTO `sys_module` VALUES ('6', '0', 'SYS_FUNCTION', 'PUBLIC_INDEX', 'N', 'Y', '个人详情', 'PUB_INDEX_USERDETAIL', null, '4', '/sys/userDetail', null, 'NORMAL', 'sql', null, null, null);
 INSERT INTO `sys_module` VALUES ('7', '0', 'SYS_FUNCTION', 'PUBLIC_INDEX', 'N', 'Y', '欢迎页面', 'PUB_INDEX_WELCOME', null, '5', '/sys/welcome', null, 'NORMAL', 'sql', null, null, null);
-INSERT INTO `sys_module` VALUES ('8', '0', 'SYS_FUNCTION', 'PUBLIC_INDEX', 'N', 'Y', '修改密码', 'PUB_INDEX_PWD_UPDATE', null, '6', '/sys/psw/**', null, 'NORMAL', 'sql', null, null, null);
+INSERT INTO `sys_module` VALUES ('8', '0', 'SYS_FUNCTION', 'PUBLIC_INDEX', 'N', 'Y', '修改密码', 'PUB_INDEX_PWD_UPDATE', null, '6', '/sys/psw/*', null, 'NORMAL', 'sql', null, null, null);
 
 INSERT INTO `sys_module` VALUES ('9', '0', 'SYS_MENU', 'ROOT', 'Y', 'Y', '权限管理', 'AUTH', null, '1', null, null, 'NORMAL', 'sql', null, null, null);
 INSERT INTO `sys_module` VALUES ('10', '0', 'SYS_MENU', 'AUTH', 'Y', 'Y', '角色管理', 'AUTH_ROLE', null, '1', '/sys/role/listPage', null, 'NORMAL', 'sql', null, null, null);

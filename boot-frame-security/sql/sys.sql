@@ -37,7 +37,6 @@ create table sys_module
    `USEABLE`              varchar(32) not null comment '是否可用',
    `NAME`                 varchar(512) not null comment '名称',
    `CODE`                  varchar(128) not null unique comment '标识',
-   `TYPE_CODE`            varchar(128) not null unique comment '模块类型',
    `ICON`                  varchar(1024) comment '图标',
    `ORDERS`              int comment '排序值',
    `URL`                  varchar(1024) comment 'URL',

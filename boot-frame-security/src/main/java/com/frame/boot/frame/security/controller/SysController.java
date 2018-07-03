@@ -84,13 +84,14 @@ public class SysController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             SysUser user = sysUserService.findByUsername(auth.getName());
-            JSONObject content = new JSONObject();
-            content.put("username", user.getUsername());
-            content.put("realname", user.getRealname());
-            return ResponseBean.successContent(content);
-        } else {
-            return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);
+            if (user != null) {
+                JSONObject content = new JSONObject();
+                content.put("username", user.getUsername());
+                content.put("realname", user.getRealname());
+                return ResponseBean.successContent(content);
+            }
         }
+        return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);
     }
 
     @GetMapping("/userDetail")
@@ -99,19 +100,20 @@ public class SysController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             SysUser user = sysUserService.findByUsername(auth.getName());
-            JSONObject content = new JSONObject();
-            content.put("username", user.getUsername());
-            content.put("realname", user.getRealname());
-            content.put("sex", user.getSex());
-            content.put("age", user.getAge());
-            content.put("address", user.getAddress());
-            content.put("telephone", user.getTelephone());
-            content.put("cellphone", user.getCellphone());
-            content.put("userStatus", user.getUserStatus());
-            content.put("roles", user.getRoles());
-            return ResponseBean.successContent(content);
-        } else {
-            return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);
+            if(user != null) {
+                JSONObject content = new JSONObject();
+                content.put("username", user.getUsername());
+                content.put("realname", user.getRealname());
+                content.put("sex", user.getSex());
+                content.put("age", user.getAge());
+                content.put("address", user.getAddress());
+                content.put("telephone", user.getTelephone());
+                content.put("cellphone", user.getCellphone());
+                content.put("userStatus", user.getUserStatus());
+                content.put("roles", user.getRoles());
+                return ResponseBean.successContent(content);
+            }
         }
+        return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);
     }
 }

@@ -1,7 +1,7 @@
 -- 管理员
 INSERT INTO `sys_user` VALUES ('1', '0', 'admin', '$2a$10$1B1qFlepHm/zN1P3hTs4IuJ57WE/nnpub3AMI7E4PSMa4/Fd7J5.C', '管理员', null, null, null, null, null, null, null, null, 'NORMAL', null, null, 'NORMAL', null, null, null, null);
 
--- ROOT模块
+-- 模块
 INSERT INTO `sys_module` VALUES ('1', '0', 'ROOT', 'ROOT', 'Y', 'Y', '公共模块', 'PUBLIC', null, '0', null, null, 'NORMAL', 'sql', null, null, null);
 INSERT INTO `sys_module` VALUES ('2', '0', 'SYS_MODULE', 'PUBLIC', 'N', 'Y', '首页', 'PUBLIC_INDEX', null, '0', null, null, 'NORMAL', 'sql', null, null, null);
 INSERT INTO `sys_module` VALUES ('3', '0', 'SYS_MODULE', 'PUBLIC_INDEX', 'N', 'Y', '主页', 'PUB_INDEX_INDEX', null, '1', '/sys/index', null, 'NORMAL', 'sql', null, null, null);

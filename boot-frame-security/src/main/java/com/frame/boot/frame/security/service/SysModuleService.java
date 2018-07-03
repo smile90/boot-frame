@@ -52,7 +52,7 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
         if (EmptyUtil.notEmpty(moduleCodes)) {
             return selectList(new EntityWrapper<SysModule>().in("code", moduleCodes)
                     .eq("type_code", systemSecurityProperties.getMenuTypeCode())
-                    .orderBy("level").orderBy("orders"));
+                    .orderBy("orders"));
         } else {
             return null;
         }

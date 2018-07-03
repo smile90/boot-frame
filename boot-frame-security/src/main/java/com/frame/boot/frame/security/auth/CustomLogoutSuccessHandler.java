@@ -27,16 +27,18 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        SysUser userDetails = (SysUser) authentication.getPrincipal();
-        if (userDetails != null) {
-            logger.info("logout success:{}", userDetails.getUsername());
+        if (authentication != null) {
+            SysUser userDetails = (SysUser) authentication.getPrincipal();
+            if (userDetails != null) {
+                logger.info("logout success:{}", userDetails.getUsername());
 
-            // 重新查询最新用户信息
-            SysUser sysUser = sysUserService.findByUsername(userDetails.getUsername());
-            logger.debug("{}", sysUser);
-            // 登出日志记录 TODO
-        } else {
-            logger.error("logout error:{}", userDetails.getUsername());
+                // 重新查询最新用户信息
+                SysUser sysUser = sysUserService.findByUsername(userDetails.getUsername());
+                logger.debug("{}", sysUser);
+                // 登出日志记录 TODO
+            } else {
+                logger.error("logout error:{}", userDetails.getUsername());
+            }
         }
 
         response.setContentType("application/json");

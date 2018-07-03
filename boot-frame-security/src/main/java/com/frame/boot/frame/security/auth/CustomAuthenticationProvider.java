@@ -1,6 +1,7 @@
 package com.frame.boot.frame.security.auth;
 
 
+import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.exception.SystemSecurityException;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
@@ -56,29 +57,29 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             // 验证码校验
             if (EmptyUtil.isEmpty(sessionValidCode)|| EmptyUtil.isEmpty(requestValidCode)
                     || !sessionValidCode.trim().equalsIgnoreCase(requestValidCode.trim())) {
-                throw new BadCredentialsException(SystemSecurityException.VALID_CODE_ERROR_CODE, new SystemSecurityException(SystemSecurityException.VALID_CODE_ERROR_CODE, "valid code is error", SystemSecurityException.VALID_CODE_ERROR_MSG));
+                throw new BadCredentialsException(SysConstants.VALID_CODE_ERROR_CODE, new SystemSecurityException(SysConstants.VALID_CODE_ERROR_CODE, "valid code is error", SysConstants.VALID_CODE_ERROR_MSG));
             }
         }
 
         // 用户名密码
         if (EmptyUtil.isEmpty(username) || EmptyUtil.isEmpty(password)) {
-            throw new BadCredentialsException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "username or password is null", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
+            throw new BadCredentialsException(SysConstants.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SysConstants.USERNAME_PWD_ERROR_CODE, "username or password is null", SysConstants.USERNAME_PWD_ERROR_MSG));
         }
 
         // 账户状态判断
         SysUser userDetails = sysUserService.findSecurityUserByUsername(username);
         if (userDetails == null) {
-            throw new UsernameNotFoundException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
+            throw new UsernameNotFoundException(SysConstants.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SysConstants.USERNAME_PWD_ERROR_CODE, "user not found", SysConstants.USERNAME_PWD_ERROR_MSG));
         } else if (!new BCryptPasswordEncoder().matches(password, userDetails.getPassword())) {
-            throw new BadCredentialsException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "password is error", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
+            throw new BadCredentialsException(SysConstants.USERNAME_PWD_ERROR_CODE, new SystemSecurityException(SysConstants.USERNAME_PWD_ERROR_CODE, "password is error", SysConstants.USERNAME_PWD_ERROR_MSG));
         } else if (!userDetails.isEnabled()) {
-            throw new DisabledException(SystemSecurityException.USER_DISABLED_CODE, new SystemSecurityException(SystemSecurityException.USER_DISABLED_CODE, "user not enabled", SystemSecurityException.USER_DISABLED_MSG));
+            throw new DisabledException(SysConstants.USER_DISABLED_CODE, new SystemSecurityException(SysConstants.USER_DISABLED_CODE, "user not enabled", SysConstants.USER_DISABLED_MSG));
         } else if (!userDetails.isAccountNonExpired()) {
-            throw new AccountExpiredException(SystemSecurityException.USER_EXPIRED_CODE, new SystemSecurityException(SystemSecurityException.USER_EXPIRED_CODE, "account non expored", SystemSecurityException.USER_EXPIRED_MSG));
+            throw new AccountExpiredException(SysConstants.USER_EXPIRED_CODE, new SystemSecurityException(SysConstants.USER_EXPIRED_CODE, "account non expored", SysConstants.USER_EXPIRED_MSG));
         } else if (!userDetails.isAccountNonLocked()) {
-            throw new LockedException(SystemSecurityException.USER_LOCKED_CODE, new SystemSecurityException(SystemSecurityException.USER_LOCKED_CODE, "account non locked", SystemSecurityException.USER_LOCKED_MSG));
+            throw new LockedException(SysConstants.USER_LOCKED_CODE, new SystemSecurityException(SysConstants.USER_LOCKED_CODE, "account non locked", SysConstants.USER_LOCKED_MSG));
         } else if (!userDetails.isCredentialsNonExpired()) {
-            throw new CredentialsExpiredException(SystemSecurityException.USER_EXPIRED_CODE, new SystemSecurityException(SystemSecurityException.USER_EXPIRED_CODE, "credentials non expored", SystemSecurityException.USER_EXPIRED_MSG));
+            throw new CredentialsExpiredException(SysConstants.USER_EXPIRED_CODE, new SystemSecurityException(SysConstants.USER_EXPIRED_CODE, "credentials non expored", SysConstants.USER_EXPIRED_MSG));
         }
         // 授权
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());

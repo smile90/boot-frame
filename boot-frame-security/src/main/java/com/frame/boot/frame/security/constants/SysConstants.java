@@ -8,6 +8,11 @@ public class SysConstants {
     public static final String SYSTEM_NAME = "boot-frame-security";
     public static final String SYSTEM_CODE = "0001";
 
+    /** SUPER_ADMIN */
+    public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";
+    /** ROOT */
+    public static final String MODULE_CODE_ROOT = "ROOT";
+
     /** 公共 */
     public static final String PUBLIC_SYSTEM_CODE_COMMON = SYSTEM_CODE + "0001";
     /** 用户未登录 */
@@ -32,10 +37,30 @@ public class SysConstants {
     public static final String USER_HAS_NO_AUTH_ERROR_MSG = "user has no auth.";
     public static final String USER_HAS_NO_AUTH_ERROR_SHOW_MSG = "无操作权限";
 
+    public static final String USERNAME_PWD_ERROR_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0001";
+    public static final String USERNAME_PWD_ERROR_MSG = "用户名或密码错误";
 
-    /** SUPER_ADMIN */
-    public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";
+    public static final String VALID_CODE_ERROR_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0002";
+    public static final String VALID_CODE_ERROR_MSG = "验证码错误";
 
-    /** ROOT */
-    public static final String MODULE_CODE_ROOT = "ROOT";
+    public static final String USER_ERROR_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0003";
+    public static final String USER_ERROR_MSG = "用户状态异常，请联系管理员";
+    public static final String USER_LOCKED_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0004";
+    public static final String USER_LOCKED_MSG = "用户状态异常，被锁定";
+    public static final String USER_DISABLED_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0005";
+    public static final String USER_DISABLED_MSG = "用户状态异常，被禁用";
+    public static final String USER_EXPIRED_CODE = SysConstants.PUBLIC_SYSTEM_CODE_AUTH + "0006";
+    public static final String USER_EXPIRED_MSG = "用户状态异常，已过期";
+
+    public static final String CODE_EXIST_ERROR_SHOW_MSG = "标识已存在";
+    /** 角色 */
+    public static final String ROLE = SYSTEM_CODE + "0003";
+    /** 角色相关异常 */
+    public static final String ROLE_ERROR_CODE = ROLE + "9999";
+    public static final String ROLE_ERROR_MSG = "auth is error.";
+    public static final String ROLE_ERROR_SHOW_MSG = "角色管理异常";
+
+    /** 角色标识已存在 */
+    public static final String ROLE_EXIST_ERROR_CODE = ROLE + "0001";
+
 }

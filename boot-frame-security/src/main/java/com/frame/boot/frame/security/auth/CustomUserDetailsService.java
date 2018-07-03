@@ -1,5 +1,6 @@
 package com.frame.boot.frame.security.auth;
 
+import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.exception.SystemSecurityException;
 import com.frame.boot.frame.security.service.SysUserService;
@@ -18,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public SysUser loadUserByUsername(String username) throws RuntimeException {
         SysUser sysUser = sysUserService.findSecurityUserByUsername(username);
         if (sysUser == null) {
-            throw new UsernameNotFoundException("user not found", new SystemSecurityException(SystemSecurityException.USERNAME_PWD_ERROR_CODE, "user not found", SystemSecurityException.USERNAME_PWD_ERROR_MSG));
+            throw new UsernameNotFoundException("user not found", new SystemSecurityException(SysConstants.USERNAME_PWD_ERROR_CODE, "user not found", SysConstants.USERNAME_PWD_ERROR_MSG));
         }
         return sysUser;
     }

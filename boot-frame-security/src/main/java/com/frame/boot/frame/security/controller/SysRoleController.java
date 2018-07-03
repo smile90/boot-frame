@@ -58,6 +58,21 @@ public class SysRoleController {
         return ResponseBean.successContent(sysRoleService.selectOne(new EntityWrapper<SysRole>().eq("code", code)));
     }
 
+    @GetMapping("/exist/{code}/{selfCode}")
+    public Object exist(@PathVariable("code") String code, @PathVariable("selfCode") String selfCode) {
+        SysRole sysRole;
+        if (EmptyUtil.notEmpty(selfCode)) {
+            sysRole = sysRoleService.selectOne(new EntityWrapper<SysRole>().eq("code", code).ne("code", selfCode));
+        } else {
+            sysRole = sysRoleService.selectOne(new EntityWrapper<SysRole>().eq("code", code));
+        }
+        if (sysRole == null) {
+            return ResponseBean.success();
+        } else {
+            return ResponseBean.getInstance(SysConstants.ROLE_EXIST_ERROR_CODE, "code is exist:" + code, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);
+        }
+    }
+
     @PostMapping("/save")
     public Object save(SysRole role) {
         try {
@@ -67,7 +82,7 @@ public class SysRoleController {
             return ResponseBean.success();
         } catch (Exception e) {
             logger.error("save SysRole error. role:{}", role, e);
-            return ResponseBean.getInstance(SysConstants.COMMON_SYSTEM_ERROR_CODE, SysConstants.COMMON_SYSTEM_ERROR_CODE, SysConstants.COMMON_SYSTEM_SHOW_MSG);
+            return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
         }
     }
 
@@ -87,7 +102,7 @@ public class SysRoleController {
             return ResponseBean.success();
         } catch (Exception e) {
             logger.error("save SysRole error. role:{}", role, e);
-            return ResponseBean.getInstance(SysConstants.COMMON_SYSTEM_ERROR_CODE, SysConstants.COMMON_SYSTEM_ERROR_CODE, SysConstants.COMMON_SYSTEM_SHOW_MSG);
+            return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
         }
     }
 
@@ -98,7 +113,7 @@ public class SysRoleController {
             return ResponseBean.success();
         } catch (Exception e) {
             logger.error("delete SysRole error. id:{}", id, e);
-            return ResponseBean.getInstance(SysConstants.COMMON_SYSTEM_ERROR_CODE, SysConstants.COMMON_SYSTEM_ERROR_CODE, SysConstants.COMMON_SYSTEM_SHOW_MSG);
+            return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
         }
     }
 }

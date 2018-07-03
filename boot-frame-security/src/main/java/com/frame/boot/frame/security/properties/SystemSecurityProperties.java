@@ -75,7 +75,7 @@ public class SystemSecurityProperties {
         private String logoutUrl = "/sys/logout";
         private String indexUrl = "/sys/index";
         private String[] permitPaths = new String[] {"/static/**", "/sys/login", "/validCode/login"};
-        private String[] authenticatePaths = new String[] {"/sys/**"};
+        private String[] authenticatePaths = new String[] {"/**"};
         private String[] csrfIgnoringPaths = new String[] {"/druid/**"};
 
         public String getLoginUrl() {

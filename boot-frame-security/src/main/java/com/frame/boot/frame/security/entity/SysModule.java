@@ -9,6 +9,8 @@ import java.util.List;
 
 public class SysModule extends BaseModel {
 
+    private static final long serialVersionUID = 1L;
+
     private String typeCode;
 
     private String parentCode;

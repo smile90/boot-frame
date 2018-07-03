@@ -5,6 +5,8 @@ import com.frame.common.frame.base.enums.YesNo;
 
 public class SysFunction extends BaseModel {
 
+    private static final long serialVersionUID = 1L;
+
     private String moduleCode;
 
     private String validate = YesNo.Y.name();

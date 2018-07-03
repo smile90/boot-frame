@@ -9,6 +9,8 @@ import com.frame.boot.frame.mybatis.entity.BaseModel;
 
 public class SysRole extends BaseModel implements GrantedAuthority {
 
+    private static final long serialVersionUID = 1L;
+
     private String typeCode;
 
     private String name;

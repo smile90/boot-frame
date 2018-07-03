@@ -14,6 +14,8 @@ import java.util.List;
 
 public class SysUser extends BaseModel implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     @TableField(exist = false)
     private Logger logger = LoggerFactory.getLogger(getClass());
 

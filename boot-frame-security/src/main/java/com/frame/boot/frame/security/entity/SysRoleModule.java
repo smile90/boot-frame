@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class SysRoleModule extends Model implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @TableId
     protected Long id;
 

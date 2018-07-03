@@ -91,13 +91,10 @@ spring:
     password:
 # 库
     database: 5
-# 连接超时时间 单位 ms（毫秒）
-    timeout: 3000
-
 # redis线程池设置
-# 连接池中的最大空闲连接，默认值也是8。
     pool:
       jedis:
+# 连接池中的最大空闲连接，默认值也是8。
         max-idle: 500
 #连接池中的最小空闲连接，默认值也是0。
         min-idle: 50
@@ -112,6 +109,7 @@ spring:
 #        test1: 20
 #        aaa: 30
       default-config: 10
+
 
 
 # 链路追踪

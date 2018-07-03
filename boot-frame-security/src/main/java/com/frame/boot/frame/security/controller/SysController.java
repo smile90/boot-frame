@@ -68,7 +68,7 @@ public class SysController {
             if (EmptyUtil.notEmpty(username) && user != null
                     && username.equals(auth.getName())
                     && new BCryptPasswordEncoder().matches(oldPwd, user.getPassword())) {
-                user.setPassword(newPwd);
+                user.setPassword(new BCryptPasswordEncoder().encode(newPwd));
                 sysUserService.updateById(user);
                 // TODO 记录日志
                 return ResponseBean.success();

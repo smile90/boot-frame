@@ -11,6 +11,7 @@ import com.frame.boot.frame.security.service.SysFunctionService;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.boot.frame.security.service.SysRoleModuleService;
 import com.frame.boot.frame.security.service.SysRoleService;
+import com.frame.common.frame.base.enums.DataStatus;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,9 +102,9 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
      */
     private List<ConfigAttribute> getAttributesByUrl(String requestUrl) {
         List<ConfigAttribute> authoritys = new ArrayList<>();
-        Set<String> moduleCodes = new HashSet<>();
 
-        List<SysFunction> sysFunctions = sysFunctionService.selectList(null);
+        Set<String> moduleCodes = new HashSet<>();
+        List<SysFunction> sysFunctions = sysFunctionService.selectList(new EntityWrapper<SysFunction>().eq("status", DataStatus.NORMAL.name()));
         if (EmptyUtil.notEmpty(sysFunctions)) {
             for (SysFunction sysFunction : sysFunctions) {
                 if (EmptyUtil.notEmpty(sysFunction.getUrl())
@@ -113,8 +114,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
                 }
             }
         }
-
-        List<SysModule> sysModules = sysModuleService.selectList(null);
+        List<SysModule> sysModules = sysModuleService.selectList(new EntityWrapper<SysModule>().eq("status", DataStatus.NORMAL.name()));
         if (EmptyUtil.notEmpty(sysModules)) {
             for (SysModule sysModule : sysModules) {
                 if (EmptyUtil.notEmpty(sysModule.getUrl())
@@ -124,11 +124,19 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
             }
         }
 
+        // 角色
         if (EmptyUtil.notEmpty(moduleCodes)) {
+            Set<String> roleCodes = new HashSet<>();
             List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().in("module_code", moduleCodes));
             if (EmptyUtil.notEmpty(sysRoleModules)) {
                 for (SysRoleModule SysRoleModule : sysRoleModules) {
-                    authoritys.add(new SecurityConfig(SysRoleModule.getRoleCode()));
+                    roleCodes.add(SysRoleModule.getRoleCode());
+                }
+            }
+            List<SysRole> sysRoles = sysRoleService.selectList(new EntityWrapper<SysRole>().in("code", roleCodes).eq("status", DataStatus.NORMAL.name()));
+            if (EmptyUtil.notEmpty(sysRoles)) {
+                for (SysRole sysRole : sysRoles) {
+                    authoritys.add(new SecurityConfig(sysRole.getCode()));
                 }
             }
         }

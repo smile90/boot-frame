@@ -2,11 +2,9 @@ package com.frame.boot.frame.security.auth;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.frame.boot.frame.security.constants.SysConstants;
-import com.frame.boot.frame.security.entity.SysFunction;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.entity.SysRole;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
-import com.frame.boot.frame.security.service.SysFunctionService;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.boot.frame.security.service.SysRoleService;
 import com.frame.common.frame.base.enums.DataStatus;
@@ -38,8 +36,6 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     private SysRoleService sysRoleService;
     @Autowired
     private SysModuleService sysModuleService;
-    @Autowired
-    private SysFunctionService sysFunctionService;
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
@@ -96,15 +92,6 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
      */
     private List<ConfigAttribute> getAttributesByUrl(String requestUrl) {
         Set<String> moduleCodes = new HashSet<>();
-        List<SysFunction> sysFunctions = sysFunctionService.findEnableListAll();
-        if (EmptyUtil.notEmpty(sysFunctions)) {
-            for (SysFunction sysFunction : sysFunctions) {
-                if (EmptyUtil.notEmpty(sysFunction.getUrl()) && EmptyUtil.notEmpty(sysFunction.getModuleCode())
-                        && antPathMatcher.match(sysFunction.getUrl(), requestUrl)) {
-                    moduleCodes.add(sysFunction.getModuleCode());
-                }
-            }
-        }
         List<SysModule> sysModules = sysModuleService.findEnableListAll();
         if (EmptyUtil.notEmpty(sysModules)) {
             for (SysModule sysModule : sysModules) {
@@ -127,25 +114,12 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     }
 
     private boolean validate(String requestUrl) {
-        List<SysFunction> sysFunctions = null;
-
         // 启用的，不做校验的模块
         List<SysModule> sysModules = sysModuleService.selectList(new EntityWrapper<SysModule>().eq("status", DataStatus.NORMAL.name())
                 .eq("useable", YesNo.Y.name()).eq("validate", YesNo.N.name()));
-
-        // 查询模块下的操作 或 不做验证的操作
         if (EmptyUtil.notEmpty(sysModules)) {
-            Set<String> moduleCodes = new HashSet<>();
             for (SysModule sysModule : sysModules) {
-                moduleCodes.add(sysModule.getCode());
-            }
-            sysFunctions = sysFunctionService.selectList(new EntityWrapper<SysFunction>().in("module_code", moduleCodes).or().eq("validate", YesNo.N.name()));
-        } else {
-            sysFunctions = sysFunctionService.selectList(new EntityWrapper<SysFunction>().eq("validate", YesNo.N.name()));
-        }
-        if (EmptyUtil.notEmpty(sysFunctions)) {
-            for (SysFunction sysFunction : sysFunctions) {
-                if (antPathMatcher.match(sysFunction.getUrl(), requestUrl)) {
+                if (EmptyUtil.notEmpty(sysModule.getUrl()) && antPathMatcher.match(sysModule.getUrl(), requestUrl)) {
                     return false;
                 }
             }

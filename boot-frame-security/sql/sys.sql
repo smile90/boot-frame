@@ -1,30 +1,4 @@
 /*==============================================================*/
-/* Table: sys_function                                          */
-/*==============================================================*/
-create table sys_function
-(
-   `ID`                   bigint auto_increment not null comment '主键',
-   `OPTIMISTIC`           bigint default 0 not null comment '乐观锁',
-   `MODULE_CODE`             varchar(32) not null comment '模块标识',
-   `VALIDATE`             varchar(32) not null comment '是否验证',
-   `USEABLE`              varchar(32) not null comment '是否可用',
-   `NAME`                 varchar(512) not null comment '名称',
-   `CODE`                  varchar(128) not null unique comment '标识',
-   `ORDERS`                int comment '排序值',
-   `URL`                  varchar(1024) not null comment 'URL',
-   `HTTP_METHOD`        varchar(32) comment '请求类型',
-   `DESCRIPTION`          varchar(2048) comment '描述',
-   `STATUS`               varchar(32) not null comment '数据状态',
-   `CREATE_USER`          varchar(32) comment '创建人',
-   `CREATE_TIME`          datetime comment '创建时间',
-   `UPDATE_USER`          varchar(32) comment '修改人',
-   `UPDATE_TIME`          datetime comment '修改时间',
-   primary key (ID)
-);
-
-alter table sys_function comment '功能表';
-
-/*==============================================================*/
 /* Table: sys_module                                            */
 /*==============================================================*/
 create table sys_module

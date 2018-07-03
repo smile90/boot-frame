@@ -23,16 +23,15 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
 
     public List<SysRole> findByModuleCode(Collection<String> moduleCodes) {
         if (EmptyUtil.notEmpty(moduleCodes)) {
-            Set<String> roleCodes = new HashSet<>();
             List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().in("module_code", moduleCodes));
             if (EmptyUtil.notEmpty(sysRoleModules)) {
+                Set<String> roleCodes = new HashSet<>();
                 for (SysRoleModule SysRoleModule : sysRoleModules) {
                     roleCodes.add(SysRoleModule.getRoleCode());
                 }
+                return selectList(new EntityWrapper<SysRole>().in("code", roleCodes).eq("status", DataStatus.NORMAL.name()));
             }
-            return selectList(new EntityWrapper<SysRole>().in("code", roleCodes).eq("status", DataStatus.NORMAL.name()));
-        } else {
-            return null;
         }
+        return null;
     }
 }

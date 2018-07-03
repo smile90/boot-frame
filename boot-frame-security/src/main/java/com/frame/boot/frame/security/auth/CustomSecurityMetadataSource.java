@@ -77,6 +77,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
                 allCfgAttrs.add(new SecurityConfig(sysRole.getCode()));
             }
         }
+        logger.debug("allCfgAttrs:{}", allCfgAttrs);
         return allCfgAttrs;
     }
 

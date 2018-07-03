@@ -15,8 +15,6 @@ public class SysRoleModule extends Model implements Serializable {
     @Version
     protected Long optimistic = 0L;
 
-    protected String status;
-
     protected String createUser;
 
     protected Date createTime;
@@ -43,14 +41,6 @@ public class SysRoleModule extends Model implements Serializable {
 
     public void setOptimistic(Long optimistic) {
         this.optimistic = optimistic;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getCreateUser() {

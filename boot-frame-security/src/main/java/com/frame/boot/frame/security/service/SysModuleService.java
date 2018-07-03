@@ -10,6 +10,8 @@ import com.frame.boot.frame.security.entity.SysRoleModule;
 import com.frame.boot.frame.security.entity.SysRoleUser;
 import com.frame.boot.frame.security.mapper.SysModuleMapper;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
+import com.frame.common.frame.base.enums.DataStatus;
+import com.frame.common.frame.base.enums.YesNo;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,11 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
     private SysRoleUserService sysRoleUserService;
     @Autowired
     private SysRoleModuleService sysRoleModuleService;
+
+    public List<SysModule> findEnableListAll() {
+        return selectList(new EntityWrapper<SysModule>().eq("status", DataStatus.NORMAL.name())
+                .eq("useable", YesNo.Y.name()));
+    }
 
     public List<SysModule> findMenuByUsername(String username) {
         Set<String> moduleCodes = new HashSet<>();

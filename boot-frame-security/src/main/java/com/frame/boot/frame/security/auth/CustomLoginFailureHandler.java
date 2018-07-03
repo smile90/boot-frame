@@ -26,12 +26,9 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
-
         String username = EmptyUtil.isEmpty(request.getParameter("username")) ? " " : request.getParameter("username");
-        logger.info("login error:{}. {}", username, exception.getMessage());
         logger.debug(null, exception);
         // 登录日志记录 TODO
-
 
         ResponseBean result = null;
         if (exception.getCause() instanceof SystemSecurityException) {
@@ -40,6 +37,7 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
         } else {
             result = ResponseBean.getInstance(SysConstants.AUTH_ERROR_CODE, exception.getMessage(), SysConstants.AUTH_ERROR_SHOW_MSG);
         }
+        logger.info("login error:{}. {}", username, result);
 
         // 响应
         response.setContentType("application/json");

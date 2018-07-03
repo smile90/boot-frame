@@ -27,6 +27,12 @@ public class SysConstants {
     public static final String USER_AUTH_ERROR_MSG = "user auth is error.";
     public static final String USER_AUTH_ERROR_SHOW_MSG = "用户权限异常";
 
+    /** 用户无权限 */
+    public static final String USER_HAS_NO_AUTH_ERROR_CODE = PUBLIC_SYSTEM_CODE_AUTH + "9997";
+    public static final String USER_HAS_NO_AUTH_ERROR_MSG = "user has no auth.";
+    public static final String USER_HAS_NO_AUTH_ERROR_SHOW_MSG = "无操作权限";
+
+
     /** SUPER_ADMIN */
     public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";
 

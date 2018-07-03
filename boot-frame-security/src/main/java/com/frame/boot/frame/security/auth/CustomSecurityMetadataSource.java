@@ -5,13 +5,12 @@ import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysFunction;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.entity.SysRole;
-import com.frame.boot.frame.security.entity.SysRoleModule;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysFunctionService;
 import com.frame.boot.frame.security.service.SysModuleService;
-import com.frame.boot.frame.security.service.SysRoleModuleService;
 import com.frame.boot.frame.security.service.SysRoleService;
 import com.frame.common.frame.base.enums.DataStatus;
+import com.frame.common.frame.base.enums.YesNo;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +40,6 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     private SysModuleService sysModuleService;
     @Autowired
     private SysFunctionService sysFunctionService;
-    @Autowired
-    private SysRoleModuleService sysRoleModuleService;
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
@@ -51,7 +48,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
         String requestUrl = filterInvocation.getRequest().getServletPath();
         String httpMethod = filterInvocation.getRequest().getMethod();
 
-        // 不做权限验证的请求跳过
+        // 系统不做权限验证的请求跳过
         SystemSecurityProperties.Url url = systemSecurityProperties.getUrl();
         if (url != null && EmptyUtil.notEmpty(url.getPermitPaths())) {
             for (String urlPath : url.getPermitPaths()) {
@@ -59,6 +56,10 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
                     return null;
                 }
             }
+        }
+        // 权限不做校验的请求跳过
+        if (!validate(requestUrl)) {
+            return null;
         }
 
         // 获取URL对应的权限
@@ -74,17 +75,10 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         List<ConfigAttribute> allCfgAttrs = new ArrayList<>();
-        List<SysModule> sysModules = sysModuleService.selectList(null);
-        if (EmptyUtil.notEmpty(sysModules)) {
-            Set<String> moduleCodes = new HashSet<>();
-            for (SysModule sysModule : sysModules) {
-                moduleCodes.add(sysModule.getCode());
-            }
-            List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().in("module_code", moduleCodes));
-            if (EmptyUtil.notEmpty(sysRoleModules)) {
-                for (SysRoleModule SysRoleModule : sysRoleModules) {
-                    allCfgAttrs.add(new SecurityConfig(SysRoleModule.getRoleCode()));
-                }
+        List<SysRole> sysRoles = sysRoleService.selectList(new EntityWrapper<SysRole>().eq("status", DataStatus.NORMAL.name()));
+        if (EmptyUtil.notEmpty(sysRoles)) {
+            for (SysRole sysRole : sysRoles) {
+                allCfgAttrs.add(new SecurityConfig(sysRole.getCode()));
             }
         }
         return allCfgAttrs;
@@ -101,20 +95,17 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
      * @return
      */
     private List<ConfigAttribute> getAttributesByUrl(String requestUrl) {
-        List<ConfigAttribute> authoritys = new ArrayList<>();
-
         Set<String> moduleCodes = new HashSet<>();
-        List<SysFunction> sysFunctions = sysFunctionService.selectList(new EntityWrapper<SysFunction>().eq("status", DataStatus.NORMAL.name()));
+        List<SysFunction> sysFunctions = sysFunctionService.findEnableListAll();
         if (EmptyUtil.notEmpty(sysFunctions)) {
             for (SysFunction sysFunction : sysFunctions) {
-                if (EmptyUtil.notEmpty(sysFunction.getUrl())
-                        && antPathMatcher.match(sysFunction.getUrl(), requestUrl)
-                        && EmptyUtil.notEmpty(sysFunction.getModuleCode())) {
+                if (EmptyUtil.notEmpty(sysFunction.getUrl()) && EmptyUtil.notEmpty(sysFunction.getModuleCode())
+                        && antPathMatcher.match(sysFunction.getUrl(), requestUrl)) {
                     moduleCodes.add(sysFunction.getModuleCode());
                 }
             }
         }
-        List<SysModule> sysModules = sysModuleService.selectList(new EntityWrapper<SysModule>().eq("status", DataStatus.NORMAL.name()));
+        List<SysModule> sysModules = sysModuleService.findEnableListAll();
         if (EmptyUtil.notEmpty(sysModules)) {
             for (SysModule sysModule : sysModules) {
                 if (EmptyUtil.notEmpty(sysModule.getUrl())
@@ -125,21 +116,40 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
         }
 
         // 角色
-        if (EmptyUtil.notEmpty(moduleCodes)) {
-            Set<String> roleCodes = new HashSet<>();
-            List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().in("module_code", moduleCodes));
-            if (EmptyUtil.notEmpty(sysRoleModules)) {
-                for (SysRoleModule SysRoleModule : sysRoleModules) {
-                    roleCodes.add(SysRoleModule.getRoleCode());
-                }
-            }
-            List<SysRole> sysRoles = sysRoleService.selectList(new EntityWrapper<SysRole>().in("code", roleCodes).eq("status", DataStatus.NORMAL.name()));
-            if (EmptyUtil.notEmpty(sysRoles)) {
-                for (SysRole sysRole : sysRoles) {
-                    authoritys.add(new SecurityConfig(sysRole.getCode()));
-                }
+        List<ConfigAttribute> authoritys = new ArrayList<>();
+        List<SysRole> sysRoles = sysRoleService.findByModuleCode(moduleCodes);
+        if (EmptyUtil.notEmpty(sysRoles)) {
+            for (SysRole sysRole : sysRoles) {
+                authoritys.add(new SecurityConfig(sysRole.getCode()));
             }
         }
         return authoritys;
+    }
+
+    private boolean validate(String requestUrl) {
+        List<SysFunction> sysFunctions = null;
+
+        // 启用的，不做校验的模块
+        List<SysModule> sysModules = sysModuleService.selectList(new EntityWrapper<SysModule>().eq("status", DataStatus.NORMAL.name())
+                .eq("useable", YesNo.Y.name()).eq("validate", YesNo.N.name()));
+
+        // 查询模块下的操作 或 不做验证的操作
+        if (EmptyUtil.notEmpty(sysModules)) {
+            Set<String> moduleCodes = new HashSet<>();
+            for (SysModule sysModule : sysModules) {
+                moduleCodes.add(sysModule.getCode());
+            }
+            sysFunctions = sysFunctionService.selectList(new EntityWrapper<SysFunction>().in("module_code", moduleCodes).or().eq("validate", YesNo.N.name()));
+        } else {
+            sysFunctions = sysFunctionService.selectList(new EntityWrapper<SysFunction>().eq("validate", YesNo.N.name()));
+        }
+        if (EmptyUtil.notEmpty(sysFunctions)) {
+            for (SysFunction sysFunction : sysFunctions) {
+                if (antPathMatcher.match(sysFunction.getUrl(), requestUrl)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

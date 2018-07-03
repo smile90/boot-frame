@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import java.util.ArrayList;
 import java.util.List;
 import com.frame.boot.frame.mybatis.entity.BaseModel;
+import com.frame.common.frame.base.enums.YesNo;
 
 public class SysModule extends BaseModel {
 
@@ -14,9 +15,9 @@ public class SysModule extends BaseModel {
 
     private Integer level;
 
-    private String validate;
+    private String validate = YesNo.Y.name();
 
-    private String useable;
+    private String useable = YesNo.Y.name();
 
     private String name;
 

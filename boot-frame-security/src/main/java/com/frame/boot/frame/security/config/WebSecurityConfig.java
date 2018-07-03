@@ -20,11 +20,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -45,10 +47,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("customLoginSuccessHandler")
     private AuthenticationSuccessHandler loginSuccessHandler;
-
     @Autowired
     @Qualifier("customLoginFailureHandler")
     private AuthenticationFailureHandler loginFailureHandler;
+
+    @Autowired
+    @Qualifier("customLogoutSuccessHandler")
+    private LogoutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    @Qualifier("customAccessDeniedHandler")
+    private AccessDeniedHandler accessDeniedHandler;
 
     @Autowired
     @Qualifier("customSecurityMetadataSource")
@@ -121,8 +130,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(loginSuccessHandler)
                 .failureHandler(loginFailureHandler)
             .and().logout()
-                .logoutUrl(url.getLogoutUrl()).logoutSuccessUrl(url.getLoginUrl() + "?logout").permitAll()
-// 无权限            .and().exceptionHandling().accessDeniedPage("/403")
+                .logoutUrl(url.getLogoutUrl()).permitAll()
+                .logoutSuccessHandler(logoutSuccessHandler)
+            .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
             .and()
                 .addFilterAfter(filterSecurityInterceptor(), FilterSecurityInterceptor.class);
     }

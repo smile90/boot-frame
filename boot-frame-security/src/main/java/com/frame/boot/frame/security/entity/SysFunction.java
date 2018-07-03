@@ -1,14 +1,15 @@
 package com.frame.boot.frame.security.entity;
 
 import com.frame.boot.frame.mybatis.entity.BaseModel;
+import com.frame.common.frame.base.enums.YesNo;
 
 public class SysFunction extends BaseModel {
 
     private String moduleCode;
 
-    private String validate;
+    private String validate = YesNo.Y.name();
 
-    private String useable;
+    private String useable = YesNo.Y.name();
 
     private String name;
 

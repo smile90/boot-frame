@@ -28,15 +28,18 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
         // 获得授权后可得到用户信息
         SysUser userDetails = (SysUser) authentication.getPrincipal();
-        // 重新查询最新用户信息
-        SysUser sysUser = sysUserService.findByUsername(userDetails.getUsername());
-        if (sysUser != null) {
-            logger.info("login success:{}", sysUser.getUsername());
+        if (userDetails != null) {
+            logger.info("login success:{}", userDetails.getUsername());
+
+            // 重新查询最新用户信息
+            SysUser sysUser = sysUserService.findByUsername(userDetails.getUsername());
             logger.debug("{}", sysUser);
             // 登录日志记录 TODO
+        } else {
+            logger.error("login error:{}", userDetails.getUsername());
         }
 
         response.setContentType("application/json");

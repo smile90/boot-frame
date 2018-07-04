@@ -43,18 +43,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         if (sysUser == null) {
             return null;
         }
-
-        // 查询用户对应角色
-        List<SysRoleUser> sysRoleUsers = sysRoleUserService.selectList(new EntityWrapper<SysRoleUser>().eq("username", username));
-        if (EmptyUtil.notEmpty(sysRoleUsers)) {
-            Set<String> roleCodes = new HashSet<>();
-            for (SysRoleUser sysRoleUser : sysRoleUsers) {
-                roleCodes.add(sysRoleUser.getRoleCode());
-            }
-
-            List<SysRole> sysRoles = sysRoleService.selectList(new EntityWrapper<SysRole>().in("code", roleCodes));
-            sysUser.setRoles(sysRoles);
-        }
+        sysUser.setRoles(sysRoleService.findByUsername(username));
         return sysUser;
     }
 }

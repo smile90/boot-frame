@@ -21,6 +21,10 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
     @Autowired
     private SysRoleModuleService sysRoleModuleService;
 
+    public List<SysRole> findByUsername(String username) {
+        return baseMapper.findByUsername(username);
+    }
+
     public List<SysRole> findByModuleCode(Collection<String> moduleCodes) {
         if (EmptyUtil.notEmpty(moduleCodes)) {
             List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().in("module_code", moduleCodes));

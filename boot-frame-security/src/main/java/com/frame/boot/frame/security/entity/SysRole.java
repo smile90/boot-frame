@@ -1,11 +1,7 @@
 package com.frame.boot.frame.security.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.ArrayList;
-import java.util.List;
 import com.frame.boot.frame.mybatis.entity.BaseModel;
+import org.springframework.security.core.GrantedAuthority;
 
 public class SysRole extends BaseModel implements GrantedAuthority {
 
@@ -16,9 +12,6 @@ public class SysRole extends BaseModel implements GrantedAuthority {
     private String name;
 
     private String code;
-
-    @TableField(exist = false)
-    private List<SysModule> modules = new ArrayList<>();
 
     public String getTypeCode() {
         return typeCode;
@@ -42,14 +35,6 @@ public class SysRole extends BaseModel implements GrantedAuthority {
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
-    }
-
-    public List<SysModule> getModules() {
-        return modules;
-    }
-
-    public void setModules(List<SysModule> modules) {
-        this.modules = modules;
     }
 
     @Override

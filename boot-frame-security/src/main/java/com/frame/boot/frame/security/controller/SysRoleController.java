@@ -79,41 +79,44 @@ public class SysRoleController {
             role.setCreateTime(new Date());
             role.setCreateUser(AuthUtil.getUsername());
             sysRoleService.insert(role);
-            return ResponseBean.success();
         } catch (Exception e) {
             logger.error("save SysRole error. role:{}", role, e);
             return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
         }
+        return ResponseBean.success();
     }
 
     @PostMapping("/update")
     public Object update(SysRole role) {
         try {
             SysRole dbRole = sysRoleService.selectById(role.getId());
-            dbRole.setTypeCode(role.getTypeCode());
-            dbRole.setCode(role.getCode());
-            dbRole.setName(role.getName());
-            dbRole.setStatus(role.getStatus());
-            dbRole.setOrders(role.getOrders());
-            dbRole.setDescription(role.getDescription());
-            dbRole.setUpdateUser(AuthUtil.getUsername());
-            dbRole.setUpdateTime(new Date());
-            sysRoleService.updateById(dbRole);
-            return ResponseBean.success();
+            // 系统数据不允许变更
+            if (SysConstants.ROLE_CODE_SUPER_ADMIN.equals(dbRole.getCode())) {
+                return ResponseBean.getInstance(SysConstants.SYS_DATA_MODIFY_ERROR_CODE, SysConstants.SYS_DATA_MODIFY_ERROR_MSG, SysConstants.SYS_DATA_MODIFY_ERROR_SHOW_MSG);
+            }
+            sysRoleService.update(role, dbRole);
         } catch (Exception e) {
             logger.error("save SysRole error. role:{}", role, e);
             return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
         }
+        return ResponseBean.success();
     }
 
     @DeleteMapping("/delete/{id}")
     public Object delete(@PathVariable("id") Long id) {
         try {
-            sysRoleService.deleteById(id);
-            return ResponseBean.success();
+            SysRole role = sysRoleService.selectById(id);
+            if (role != null) {
+                // 系统数据不允许变更
+                if (SysConstants.ROLE_CODE_SUPER_ADMIN.equals(role.getCode())) {
+                    return ResponseBean.getInstance(SysConstants.SYS_DATA_MODIFY_ERROR_CODE, SysConstants.SYS_DATA_MODIFY_ERROR_MSG, SysConstants.SYS_DATA_MODIFY_ERROR_SHOW_MSG);
+                }
+                sysRoleService.delete(role);
+            }
         } catch (Exception e) {
             logger.error("delete SysRole error. id:{}", id, e);
             return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
         }
+        return ResponseBean.success();
     }
 }

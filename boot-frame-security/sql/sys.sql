@@ -64,7 +64,7 @@ create table sys_role_module
    `UPDATE_TIME`          datetime comment '修改时间',
    primary key (ID)
 );
-
+ALTER TABLE sys_role_module ADD unique(`ROLE_CODE`, `MODULE_CODE`);
 alter table sys_role_module comment '角色模块关联表';
 
 /*==============================================================*/
@@ -113,5 +113,5 @@ create table sys_role_user
    `UPDATE_TIME`          datetime comment '修改时间',
    primary key (ID)
 );
-
+ALTER TABLE sys_role_user ADD unique(`ROLE_CODE`, `USERNAME`);
 alter table sys_role_user comment '角色用户关联';

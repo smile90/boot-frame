@@ -74,7 +74,7 @@ create table sys_user
 (
    `ID`                   bigint auto_increment not null comment '主键',
    `OPTIMISTIC`           bigint default 0 not null comment '乐观锁',
-   `USERNAME`             varchar(512) not null unique comment '用户名',
+   `USERNAME`             varchar(512) not null comment '用户名',
    `PASSWORD`             varchar(512) not null comment '密码',
    `REALNAME`             varchar(512) not null comment '真实名称',
    `EMAIL`                varchar(512) comment '电子邮件',

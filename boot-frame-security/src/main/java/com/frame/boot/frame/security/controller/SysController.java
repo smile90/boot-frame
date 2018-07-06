@@ -6,6 +6,7 @@ import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.boot.frame.security.service.SysUserService;
+import com.frame.boot.frame.security.utils.AuthUtil;
 import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
@@ -63,11 +64,11 @@ public class SysController {
     public Object updatePwd(@PathVariable(value = "username", required = true)String username,
                             @RequestParam(value = "oldPwd", required = true)String oldPwd,
                             @RequestParam(value = "newPwd", required = true)String newPwd) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            SysUser user = sysUserService.findByUsername(auth.getName());
+        String authUsername = AuthUtil.getUsername();
+        if (EmptyUtil.notEmpty(authUsername)) {
+            SysUser user = sysUserService.findByUsername(AuthUtil.getUsername());
             if (EmptyUtil.notEmpty(username) && user != null
-                    && username.equals(auth.getName())
+                    && username.equals(authUsername)
                     && new BCryptPasswordEncoder().matches(oldPwd, user.getPassword())) {
                 user.setPassword(new BCryptPasswordEncoder().encode(newPwd));
                 sysUserService.updateById(user);

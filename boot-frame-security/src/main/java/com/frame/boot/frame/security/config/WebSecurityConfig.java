@@ -30,6 +30,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -122,15 +124,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
-                .antMatchers(url.getAuthenticatePaths())
-                .authenticated()
+                .antMatchers(url.getAuthenticatePaths()).authenticated()
             .and().formLogin()
                 .authenticationDetailsSource(webAuthenticationDetailsSource())
-                .loginPage(url.getLoginUrl()).permitAll()
+                .loginPage(url.getLoginPageUrl()).loginProcessingUrl(url.getLoginProcessUrl()).permitAll()
                 .successHandler(loginSuccessHandler)
                 .failureHandler(loginFailureHandler)
             .and().logout()
-                .logoutUrl(url.getLogoutUrl()).permitAll()
+                .logoutUrl(url.getLogoutUrl())
                 .logoutSuccessHandler(logoutSuccessHandler)
             .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
             .and()

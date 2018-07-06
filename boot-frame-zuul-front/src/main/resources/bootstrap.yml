@@ -1,6 +1,6 @@
 # server config
 server:
-  port: 80
+  port: 12080
   servlet:
     context-path: /front
 

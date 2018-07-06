@@ -69,7 +69,7 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
                 }
             }
 
-            // 更新角色
+            // 更新自身
             dbRole.setTypeCode(role.getTypeCode());
             dbRole.setCode(role.getCode());
             dbRole.setName(role.getName());

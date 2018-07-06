@@ -3,13 +3,17 @@ package com.frame.boot.frame.security.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @ConfigurationProperties(prefix = "frame.security")
 public class SystemSecurityProperties {
 
     private String menuTypeCode = "SYS_MENU";
+    private String sysModuleTypeCode = "SYS_MODULE";
+    private String defualtUserPwd = "123456";
 
     private boolean enableCsrf = true;
 
@@ -28,6 +32,22 @@ public class SystemSecurityProperties {
 
     public void setMenuTypeCode(String menuTypeCode) {
         this.menuTypeCode = menuTypeCode;
+    }
+
+    public String getSysModuleTypeCode() {
+        return sysModuleTypeCode;
+    }
+
+    public void setSysModuleTypeCode(String sysModuleTypeCode) {
+        this.sysModuleTypeCode = sysModuleTypeCode;
+    }
+
+    public String getDefualtUserPwd() {
+        return defualtUserPwd;
+    }
+
+    public void setDefualtUserPwd(String defualtUserPwd) {
+        this.defualtUserPwd = defualtUserPwd;
     }
 
     public boolean isEnableCsrf() {
@@ -71,19 +91,28 @@ public class SystemSecurityProperties {
     }
 
     public class Url {
-        private String loginUrl = "/sys/login";
+        private String loginPageUrl = "/sys/login";
+        private String loginProcessUrl = "/sys/login";
         private String logoutUrl = "/sys/logout";
         private String indexUrl = "/sys/index";
-        private String[] permitPaths = new String[] {"/static/**", "/sys/login", "/validCode/login"};
+        private String[] permitPaths = new String[] {"/static/**", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif", "/**/*.jpg", "/**/*.jpeg", "/**/*.bmp", "/validCode/login"};
         private String[] authenticatePaths = new String[] {"/**"};
         private String[] csrfIgnoringPaths = new String[] {"/druid/**"};
 
-        public String getLoginUrl() {
-            return loginUrl;
+        public String getLoginPageUrl() {
+            return loginPageUrl;
         }
 
-        public void setLoginUrl(String loginUrl) {
-            this.loginUrl = loginUrl;
+        public void setLoginPageUrl(String loginPageUrl) {
+            this.loginPageUrl = loginPageUrl;
+        }
+
+        public String getLoginProcessUrl() {
+            return loginProcessUrl;
+        }
+
+        public void setLoginProcessUrl(String loginProcessUrl) {
+            this.loginProcessUrl = loginProcessUrl;
         }
 
         public String getLogoutUrl() {
@@ -103,7 +132,12 @@ public class SystemSecurityProperties {
         }
 
         public String[] getPermitPaths() {
-            return permitPaths;
+            List<String> permitPathList = new ArrayList<>();
+            permitPathList.addAll(Arrays.asList(permitPaths));
+            permitPathList.add(getLoginPageUrl());
+            permitPathList.add(getLoginProcessUrl());
+            permitPathList.add(getLogoutUrl());
+            return permitPathList.toArray(new String[0]);
         }
 
         public void setPermitPaths(String[] permitPaths) {
@@ -129,7 +163,8 @@ public class SystemSecurityProperties {
         @Override
         public String toString() {
             final StringBuffer sb = new StringBuffer("Url{");
-            sb.append("loginUrl='").append(loginUrl).append('\'');
+            sb.append("loginPageUrl='").append(loginPageUrl).append('\'');
+            sb.append(", loginProcessUrl='").append(loginProcessUrl).append('\'');
             sb.append(", logoutUrl='").append(logoutUrl).append('\'');
             sb.append(", indexUrl='").append(indexUrl).append('\'');
             sb.append(", permitPaths=").append(permitPaths == null ? "null" : Arrays.asList(permitPaths).toString());

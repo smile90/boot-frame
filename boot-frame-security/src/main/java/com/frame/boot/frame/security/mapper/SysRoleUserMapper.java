@@ -11,4 +11,6 @@ public interface SysRoleUserMapper extends BaseMapper<SysRoleUser> {
 
     @Delete("delete from sys_role_user where role_code = #{roleCode}")
     Integer deleteByRoleCode(String roleCode);
+    @Delete("delete from sys_role_user where username = #{username}")
+    Integer deleteByUsername(String username);
 }

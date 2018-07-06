@@ -12,25 +12,21 @@ spring:
     proxy-target-class: true
 
 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
-  http:
-    encoding:
-      enabled: true
-      charset: UTF-8
+#  http:
+#    encoding:
+#      enabled: true
+#      charset: UTF-8
 
 # Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    serialization:
-      indent_output: true
-
-  thymeleaf:
-    cache: false
-
-# Spring MVC
-  mvc:
-    static-path-pattern: /static/**
-    contentnegotiation:
-      media-types.json: application/json
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    serialization:
+#      indent_output: true
+#
+## Spring MVC
+#  mvc:
+#    contentnegotiation:
+#      media-types.json: application/json
 
 # session
   session:
@@ -41,7 +37,7 @@ spring:
 # dataSource
   datasource:
     # 基础配置，必须有，后面可以进行覆盖
-    url: jdbc:mysql://127.0.0.1:3306/frame?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/boss?useUnicode=true&characterEncoding=UTF-8&useSSL=true
     username: root
     password: root
 
@@ -109,8 +105,6 @@ spring:
 #        aaa: 30
 #      default-config: 10
 
-
-
 # 链路追踪
 #  zipkin:
 #    base-url: http://127.0.0.1:3331
@@ -146,10 +140,17 @@ mybatis-plus:
 # 网关配置
 zuul:
   sensitive-headers:
+  routes:
+    static:
+      path: /boss-front/**
+      url: http://127.0.0.1:11080/boss-front
 
 # 框架配置
 frame:
   security:
     enable-csrf: false
-    enable-valid-code: true
+    enable-valid-code: false
     menu-type-code: SYS_MENU
+    sys-module-type-code: SYS_MODULE
+    url:
+      login-page-url: /boss-front/page/login/login.html

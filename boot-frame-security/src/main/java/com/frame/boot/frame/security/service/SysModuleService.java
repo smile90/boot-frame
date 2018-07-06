@@ -10,11 +10,13 @@ import com.frame.boot.frame.security.entity.SysRoleModule;
 import com.frame.boot.frame.security.entity.SysRoleUser;
 import com.frame.boot.frame.security.mapper.SysModuleMapper;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
+import com.frame.boot.frame.security.utils.AuthUtil;
 import com.frame.common.frame.base.enums.DataStatus;
 import com.frame.common.frame.base.enums.YesNo;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -27,6 +29,53 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
     private SysRoleUserService sysRoleUserService;
     @Autowired
     private SysRoleModuleService sysRoleModuleService;
+
+    @Transactional
+    public void update(SysModule module, SysModule dbModule) {
+        if (module != null && dbModule != null) {
+            String username = AuthUtil.getUsername();
+            Date time = new Date();
+
+            // 更新关联关系
+            if (!module.getCode().equals(dbModule.getCode())) {
+                List<SysRoleModule> sysRoleModules = sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().eq("module_code", dbModule.getCode()));
+                if (EmptyUtil.notEmpty(sysRoleModules)) {
+                    for (SysRoleModule sysRoleModule : sysRoleModules) {
+                        sysRoleModule.setRoleCode(module.getCode());
+                        sysRoleModule.setUpdateUser(dbModule.getUpdateUser());
+                        sysRoleModule.setUpdateTime(dbModule.getUpdateTime());
+                    }
+                    sysRoleModuleService.updateAllColumnBatchById(sysRoleModules);
+                }
+            }
+
+            // 更新自身
+            dbModule.setTypeCode(module.getTypeCode());
+            dbModule.setParentCode(module.getParentCode());
+            dbModule.setParentPath(module.getParentPath());
+            dbModule.setCode(module.getCode());
+            dbModule.setName(module.getName());
+            dbModule.setUrl(module.getUrl());
+            dbModule.setStatus(module.getStatus());
+            dbModule.setOrders(module.getOrders());
+            dbModule.setDescription(module.getDescription());
+            dbModule.setUpdateUser(username);
+            dbModule.setUpdateTime(time);
+            updateById(dbModule);
+        }
+    }
+
+    @Transactional
+    public void delete(SysModule sysModule) {
+        if (sysModule != null) {
+            // 删除关联关系
+            sysRoleModuleService.deleteByModuleCode(sysModule.getCode());
+            // 删除下级
+            baseMapper.deleteByParentPath(sysModule.getParentPath() + "-" + sysModule.getCode());
+            // 删除自身
+            deleteById(sysModule.getId());
+        }
+    }
 
     public List<SysModule> findEnableListAll() {
         return selectList(new EntityWrapper<SysModule>().eq("status", DataStatus.NORMAL.name())

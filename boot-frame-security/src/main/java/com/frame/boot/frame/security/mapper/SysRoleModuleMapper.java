@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysRoleModuleMapper extends BaseMapper<SysRoleModule> {
 
+    @Delete("delete from sys_role_module where module_code = #{moduleCode}")
+    Integer deleteByModuleCode(String moduleCode);
     @Delete("delete from sys_role_module where role_code = #{roleCode}")
-    public Integer deleteByRoleCode(String roleCode);
+    Integer deleteByRoleCode(String roleCode);
 
 }

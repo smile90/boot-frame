@@ -10,8 +10,14 @@ public class SysConstants {
 
     /** SUPER_ADMIN */
     public static final String ROLE_CODE_SUPER_ADMIN = "SUPER_ADMIN";
+    /** ADMIN */
+    public static final String ROLE_CODE_ADMIN = "SUPER_ADMIN";
+
     /** ROOT */
     public static final String MODULE_CODE_ROOT = "ROOT";
+
+    /** admin */
+    public static final String USER_CODE_ADMIN = "admin";
 
     /** 公共 */
     public static final String PUBLIC_SYSTEM_CODE_COMMON = SYSTEM_CODE + "0001";
@@ -58,14 +64,4 @@ public class SysConstants {
     public static final String USER_EXPIRED_MSG = "用户状态异常，已过期";
 
     public static final String CODE_EXIST_ERROR_SHOW_MSG = "标识已存在";
-    /** 角色 */
-    public static final String ROLE = SYSTEM_CODE + "0003";
-    /** 角色相关异常 */
-    public static final String ROLE_ERROR_CODE = ROLE + "9999";
-    public static final String ROLE_ERROR_MSG = "auth is error.";
-    public static final String ROLE_ERROR_SHOW_MSG = "角色管理异常";
-
-    /** 角色标识已存在 */
-    public static final String ROLE_EXIST_ERROR_CODE = ROLE + "0001";
-
 }

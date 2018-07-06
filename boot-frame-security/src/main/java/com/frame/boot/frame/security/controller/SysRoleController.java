@@ -6,6 +6,7 @@ import com.frame.boot.frame.mybatis.search.bean.SearchBuilder;
 import com.frame.boot.frame.mybatis.search.bean.SearchData;
 import com.frame.boot.frame.mybatis.search.bean.SearchType;
 import com.frame.boot.frame.mybatis.search.bean.ValueType;
+import com.frame.boot.frame.security.constants.RoleConstants;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysRole;
 import com.frame.boot.frame.security.service.SysRoleService;
@@ -31,7 +32,7 @@ public class SysRoleController {
 
     @GetMapping("/listPage")
     public Object listPage(Page<SysRole> page, @RequestParam Map<String,String> map) {
-        SearchBuilder<SysRole> builder = new SearchBuilder<SysRole>();
+        SearchBuilder<SysRole> builder = new SearchBuilder<>();
         if (EmptyUtil.notEmpty(map) && EmptyUtil.notEmpty(map.get("name"))) {
             builder.build(new SearchData("name", SearchType.LIKE, ValueType.STRING, map.get("name")));
         }
@@ -39,18 +40,6 @@ public class SysRoleController {
             builder.build(new SearchData("code", SearchType.EQ, ValueType.STRING, map.get("code")));
         }
         return ResponseBean.successContent(sysRoleService.selectPage(page, builder.build()));
-    }
-
-    @GetMapping("/list")
-    public Object list(@RequestParam Map<String,String> map) {
-        SearchBuilder<SysRole> builder = new SearchBuilder<SysRole>();
-        if (EmptyUtil.notEmpty(map) && EmptyUtil.notEmpty(map.get("name"))) {
-            builder.build(new SearchData("name", SearchType.LIKE, ValueType.STRING, map.get("name")));
-        }
-        if (EmptyUtil.notEmpty(map) && EmptyUtil.notEmpty(map.get("code"))) {
-            builder.build(new SearchData("code", SearchType.EQ, ValueType.STRING, map.get("code")));
-        }
-        return sysRoleService.selectList(builder.build());
     }
 
     @GetMapping("/get/{code}")
@@ -69,7 +58,7 @@ public class SysRoleController {
         if (sysRole == null) {
             return ResponseBean.success();
         } else {
-            return ResponseBean.getInstance(SysConstants.ROLE_EXIST_ERROR_CODE, "code is exist:" + code, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);
+            return ResponseBean.getInstance(RoleConstants.ROLE_EXIST_ERROR_CODE, "code is exist:" + code, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);
         }
     }
 
@@ -81,7 +70,7 @@ public class SysRoleController {
             sysRoleService.insert(role);
         } catch (Exception e) {
             logger.error("save SysRole error. role:{}", role, e);
-            return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
+            return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
         }
         return ResponseBean.success();
     }
@@ -91,13 +80,13 @@ public class SysRoleController {
         try {
             SysRole dbRole = sysRoleService.selectById(role.getId());
             // 系统数据不允许变更
-            if (SysConstants.ROLE_CODE_SUPER_ADMIN.equals(dbRole.getCode())) {
+            if (SysConstants.ROLE_CODE_SUPER_ADMIN.equals(dbRole.getCode()) || SysConstants.ROLE_CODE_ADMIN.equals(dbRole.getCode())) {
                 return ResponseBean.getInstance(SysConstants.SYS_DATA_MODIFY_ERROR_CODE, SysConstants.SYS_DATA_MODIFY_ERROR_MSG, SysConstants.SYS_DATA_MODIFY_ERROR_SHOW_MSG);
             }
             sysRoleService.update(role, dbRole);
         } catch (Exception e) {
             logger.error("save SysRole error. role:{}", role, e);
-            return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
+            return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
         }
         return ResponseBean.success();
     }
@@ -108,14 +97,14 @@ public class SysRoleController {
             SysRole role = sysRoleService.selectById(id);
             if (role != null) {
                 // 系统数据不允许变更
-                if (SysConstants.ROLE_CODE_SUPER_ADMIN.equals(role.getCode())) {
+                if (SysConstants.ROLE_CODE_SUPER_ADMIN.equals(role.getCode()) || SysConstants.ROLE_CODE_ADMIN.equals(role.getCode())) {
                     return ResponseBean.getInstance(SysConstants.SYS_DATA_MODIFY_ERROR_CODE, SysConstants.SYS_DATA_MODIFY_ERROR_MSG, SysConstants.SYS_DATA_MODIFY_ERROR_SHOW_MSG);
                 }
                 sysRoleService.delete(role);
             }
         } catch (Exception e) {
             logger.error("delete SysRole error. id:{}", id, e);
-            return ResponseBean.getInstance(SysConstants.ROLE_ERROR_CODE, SysConstants.ROLE_ERROR_MSG, SysConstants.ROLE_ERROR_SHOW_MSG);
+            return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
         }
         return ResponseBean.success();
     }

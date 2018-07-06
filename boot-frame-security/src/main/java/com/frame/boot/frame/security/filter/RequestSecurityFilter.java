@@ -38,10 +38,13 @@ public class RequestSecurityFilter extends ZuulFilter {
         try {
             RequestContext context = RequestContext.getCurrentContext();
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            JSONObject bossAuth = new JSONObject();
             if (auth != null) {
-                SysUser user = (SysUser) auth.getPrincipal();
-                JSONObject bossAuth = new JSONObject();
-                bossAuth.put("username", user.getUsername());
+//                if (auth.getPrincipal() instanceof  SysUser) {
+//                    SysUser user = (SysUser) auth.getPrincipal();
+//                    bossAuth.put("username", user.getUsername());
+//                }
+                bossAuth.put("username", auth.getName());
                 context.addZuulRequestHeader("bossAuth", bossAuth.toJSONString());
             }
         } catch (Exception e) {

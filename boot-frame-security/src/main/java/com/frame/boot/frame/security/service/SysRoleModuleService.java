@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysRoleModuleService extends ServiceImpl<SysRoleModuleMapper, SysRoleModule> {
 
+    public Integer deleteByModuleCode(String moduleCode) {
+        return baseMapper.deleteByModuleCode(moduleCode);
+    }
     public Integer deleteByRoleCode(String roleCode) {
         return baseMapper.deleteByRoleCode(roleCode);
     }

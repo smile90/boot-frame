@@ -13,4 +13,7 @@ public class SysRoleUserService extends ServiceImpl<SysRoleUserMapper, SysRoleUs
     public Integer deleteByRoleCode(String roleCode) {
         return baseMapper.deleteByRoleCode(roleCode);
     }
+    public Integer deleteByUsername(String Username) {
+        return baseMapper.deleteByUsername(Username);
+    }
 }

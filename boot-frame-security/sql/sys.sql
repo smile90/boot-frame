@@ -74,6 +74,7 @@ create table sys_user
 (
    `ID`                   bigint auto_increment not null comment '主键',
    `OPTIMISTIC`           bigint default 0 not null comment '乐观锁',
+   `USER_NO`            varchar(512) not null comment '用户编号',
    `USERNAME`             varchar(512) not null comment '用户名',
    `PASSWORD`             varchar(512) not null comment '密码',
    `REALNAME`             varchar(512) not null comment '真实名称',
@@ -95,7 +96,7 @@ create table sys_user
    `UPDATE_TIME`          datetime comment '修改时间',
    primary key (ID)
 );
-
+ALTER TABLE sys_user ADD unique(`USER_NO`, `USERNAME`);
 alter table sys_user comment '用户';
 
 /*==============================================================*/

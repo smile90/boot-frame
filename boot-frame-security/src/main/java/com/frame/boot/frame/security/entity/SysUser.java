@@ -19,6 +19,8 @@ public class SysUser extends BaseModel implements UserDetails {
     @TableField(exist = false)
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    private String userNo;
+
     private String username;
 
     private String password;
@@ -45,6 +47,14 @@ public class SysUser extends BaseModel implements UserDetails {
 
     @TableField(exist = false)
     private List<SysRole> roles = new ArrayList<>();
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
+    }
 
     @Override
     public String getUsername() {
@@ -186,10 +196,11 @@ public class SysUser extends BaseModel implements UserDetails {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SysUser{");
-        sb.append("username='").append(username).append('\'');
-        sb.append(", realname='").append(realname).append('\'');
+        sb.append("userNo='").append(userNo).append('\'');
+        sb.append(", username='").append(username).append('\'');
         sb.append(", userStatus='").append(userStatus).append('\'');
         sb.append(", userTypeCode='").append(userTypeCode).append('\'');
+        sb.append(", roles=").append(roles);
         sb.append('}');
         return sb.toString();
     }

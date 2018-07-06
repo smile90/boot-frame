@@ -94,6 +94,7 @@ public class SysUserController {
             if (SysConstants.USER_CODE_ADMIN.equals(dbUser.getUsername())) {
                 return ResponseBean.getInstance(SysConstants.SYS_DATA_MODIFY_ERROR_CODE, SysConstants.SYS_DATA_MODIFY_ERROR_MSG, SysConstants.SYS_DATA_MODIFY_ERROR_SHOW_MSG);
             }
+            dbUser.setUserNo(user.getUserNo());
             dbUser.setRealname(user.getRealname());
             dbUser.setCellphone(user.getCellphone());
             dbUser.setTelephone(user.getTelephone());
@@ -104,7 +105,6 @@ public class SysUserController {
             dbUser.setPhoto(user.getPhoto());
             dbUser.setOrders(user.getOrders());
             dbUser.setUserStatus(user.getUserStatus());
-            dbUser.setStatus(user.getStatus());
             dbUser.setUpdateTime(new Date());
             dbUser.setUpdateUser(AuthUtil.getUsername());
             sysUserService.updateById(dbUser);

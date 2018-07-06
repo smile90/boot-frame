@@ -49,13 +49,7 @@ public class SysRoleController {
 
     @GetMapping("/exist/{code}/{selfCode}")
     public Object exist(@PathVariable("code") String code, @PathVariable("selfCode") String selfCode) {
-        SysRole sysRole;
-        if (EmptyUtil.notEmpty(selfCode)) {
-            sysRole = sysRoleService.selectOne(new EntityWrapper<SysRole>().eq("code", code).ne("code", selfCode));
-        } else {
-            sysRole = sysRoleService.selectOne(new EntityWrapper<SysRole>().eq("code", code));
-        }
-        if (sysRole == null) {
+        if (!sysRoleService.exist(code, selfCode)) {
             return ResponseBean.success();
         } else {
             return ResponseBean.getInstance(RoleConstants.ROLE_EXIST_ERROR_CODE, "code is exist:" + code, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);

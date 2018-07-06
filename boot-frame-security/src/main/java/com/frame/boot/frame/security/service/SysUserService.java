@@ -6,6 +6,7 @@ import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.mapper.SysUserMapper;
 import com.frame.common.frame.base.enums.DataStatus;
 import com.frame.common.frame.base.enums.UserStatus;
+import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,20 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     private SysRoleModuleService sysRoleModuleService;
     @Autowired
     private SysRoleService sysRoleService;
+
+    public boolean exist(String username) {
+        int count = 1;
+        if (EmptyUtil.notEmpty(username)) {
+            count = selectCount(new EntityWrapper<SysUser>().eq("username", username).ne("status", DataStatus.DELETE.name()));
+        } else {
+            count = selectCount(new EntityWrapper<SysUser>().eq("username", username));
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * 查询用户

@@ -1,6 +1,5 @@
 package com.frame.boot.frame.security.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.frame.boot.frame.mybatis.search.bean.SearchBuilder;
 import com.frame.boot.frame.mybatis.search.bean.SearchData;
@@ -13,7 +12,6 @@ import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.boot.frame.security.utils.AuthUtil;
 import com.frame.common.frame.base.bean.ResponseBean;
-import com.frame.common.frame.base.enums.DataStatus;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,16 +58,19 @@ public class SysUserController {
 
     @GetMapping("/exist/{username}")
     public Object exist(@PathVariable("username") String username) {
-        SysUser sysRole = sysUserService.selectOne(new EntityWrapper<SysUser>().eq("username", username).eq("status", DataStatus.NORMAL.name()));
-        if (sysRole == null) {
+        if (!sysUserService.exist(username)) {
             return ResponseBean.success();
         } else {
-            return ResponseBean.getInstance(UserConstants.USER_EXIST_ERROR_CODE, "code is exist:" + username, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);
+            return ResponseBean.getInstance(UserConstants.USER_EXIST_ERROR_CODE, "username is exist:" + username, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);
         }
     }
 
     @PostMapping("/save")
     public Object save(SysUser user) {
+        if (sysUserService.exist(user.getUsername())) {
+            return ResponseBean.getInstance(UserConstants.USER_EXIST_ERROR_CODE, "username is exist:" + user.getUsername(), SysConstants.CODE_EXIST_ERROR_SHOW_MSG);
+        }
+
         try {
             if (EmptyUtil.isEmpty(user.getPassword())) {
                 user.setPassword(systemSecurityProperties.getDefualtUserPwd());

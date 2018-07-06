@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.frame.boot.frame.security.constants.ModuleConstants;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysModule;
 import com.frame.boot.frame.security.entity.SysRoleModule;
@@ -11,12 +12,14 @@ import com.frame.boot.frame.security.entity.SysRoleUser;
 import com.frame.boot.frame.security.mapper.SysModuleMapper;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.utils.AuthUtil;
+import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.base.enums.DataStatus;
 import com.frame.common.frame.base.enums.YesNo;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -29,6 +32,20 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
     private SysRoleUserService sysRoleUserService;
     @Autowired
     private SysRoleModuleService sysRoleModuleService;
+
+    public boolean exist(String code, String selfCode) {
+        int count;
+        if (EmptyUtil.notEmpty(selfCode)) {
+            count = selectCount(new EntityWrapper<SysModule>().eq("code", code).ne("code", selfCode));
+        } else {
+            count = selectCount(new EntityWrapper<SysModule>().eq("code", code));
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Transactional
     public void update(SysModule module, SysModule dbModule) {

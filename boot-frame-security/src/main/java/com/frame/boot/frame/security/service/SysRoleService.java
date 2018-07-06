@@ -23,6 +23,20 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
     @Autowired
     private SysRoleUserService sysRoleUserService;
 
+    public boolean exist(String code, String selfCode) {
+        int count;
+        if (EmptyUtil.notEmpty(selfCode)) {
+            count = selectCount(new EntityWrapper<SysRole>().eq("code", code).ne("code", selfCode));
+        } else {
+            count = selectCount(new EntityWrapper<SysRole>().eq("code", code));
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<SysRole> findByUsername(String username) {
         return baseMapper.findByUsername(username);
     }

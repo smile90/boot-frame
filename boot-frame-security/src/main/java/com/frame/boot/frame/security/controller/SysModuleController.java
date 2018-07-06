@@ -65,13 +65,7 @@ public class SysModuleController {
 
     @GetMapping("/exist/{code}/{selfCode}")
     public Object exist(@PathVariable("code") String code, @PathVariable("selfCode") String selfCode) {
-        SysModule sysModule;
-        if (EmptyUtil.notEmpty(selfCode)) {
-            sysModule = sysModuleService.selectOne(new EntityWrapper<SysModule>().eq("code", code).ne("code", selfCode));
-        } else {
-            sysModule = sysModuleService.selectOne(new EntityWrapper<SysModule>().eq("code", code));
-        }
-        if (sysModule == null) {
+        if (!sysModuleService.exist(code, selfCode)) {
             return ResponseBean.success();
         } else {
             return ResponseBean.getInstance(ModuleConstants.MODULE_EXIST_ERROR_CODE, "code is exist:" + code, SysConstants.CODE_EXIST_ERROR_SHOW_MSG);

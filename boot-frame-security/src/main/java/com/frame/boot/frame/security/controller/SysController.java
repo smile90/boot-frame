@@ -3,7 +3,6 @@ package com.frame.boot.frame.security.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
-import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.boot.frame.security.utils.AuthUtil;
@@ -16,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -30,24 +28,6 @@ public class SysController {
     @Autowired
     private SysUserService sysUserService;
 
-    @Autowired
-    private SystemSecurityProperties systemSecurityProperties;
-
-    @RequestMapping("/login")
-    public String login(Model model) {
-        JSONObject loginModel = new JSONObject();
-        loginModel.put("enableValidCode", systemSecurityProperties.isEnableValidCode());
-        model.addAttribute("loginModel", loginModel);
-        return "sys/login";
-    }
-    @RequestMapping("/index")
-    public String index() {
-        return "sys/index";
-    }
-    @RequestMapping("/welcome")
-    public String welcome() {
-        return "sys/welcome";
-    }
     @RequestMapping("/menu")
     @ResponseBody
     public Object menu() {

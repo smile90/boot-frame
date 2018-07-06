@@ -13,5 +13,5 @@ import java.util.List;
 public interface SysModuleMapper extends BaseMapper<SysModule> {
 
     @Delete("delete from sys_module where parent_path like '${parentPath}%'")
-    Integer deleteByParentPath(String parentPath);
+    Integer deleteByParentPath(@Param("parentPath") String parentPath);
 }

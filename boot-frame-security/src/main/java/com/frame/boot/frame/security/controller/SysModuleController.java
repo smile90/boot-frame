@@ -75,6 +75,8 @@ public class SysModuleController {
     @PostMapping("/save")
     public Object save(SysModule module) {
         try {
+            SysModule parent = sysModuleService.selectOne(new EntityWrapper<SysModule>().eq("code", module.getParentCode()));
+            module.setParentPath(parent.getParentPath() + "-" + parent.getCode());
             module.setCreateTime(new Date());
             module.setCreateUser(AuthUtil.getUsername());
             sysModuleService.insert(module);

@@ -5,7 +5,6 @@ package com.frame.boot.frame.security.constants;
  */
 public class SysConstants {
 
-    public static final String SYSTEM_NAME = "boot-frame-security";
     public static final String SYSTEM_CODE = "0001";
 
     /** SUPER_ADMIN */

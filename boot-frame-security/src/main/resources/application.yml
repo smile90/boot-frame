@@ -11,22 +11,22 @@ spring:
   aop:
     proxy-target-class: true
 
-# Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
-#  http:
-#    encoding:
-#      enabled: true
-#      charset: UTF-8
+ Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
 
-# Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
-#  jackson:
-#    date-format: yyyy-MM-dd HH:mm:ss
-#    serialization:
-#      indent_output: true
-#
-## Spring MVC
-#  mvc:
-#    contentnegotiation:
-#      media-types.json: application/json
+ Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+
+# Spring MVC
+  mvc:
+    contentnegotiation:
+      media-types.json: application/json
 
 # session
   session:

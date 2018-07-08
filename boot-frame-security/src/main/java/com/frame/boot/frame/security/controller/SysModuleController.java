@@ -97,7 +97,7 @@ public class SysModuleController {
             }
             sysModuleService.update(module, dbModule);
         } catch (Exception e) {
-            logger.error("save SysModule error. module:{}", module, e);
+            logger.error("update SysModule error. module:{}", module, e);
             return ResponseBean.getInstance(ModuleConstants.MODULE_ERROR_CODE, ModuleConstants.MODULE_ERROR_MSG, ModuleConstants.MODULE_ERROR_SHOW_MSG);
         }
         return ResponseBean.success();

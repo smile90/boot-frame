@@ -1,5 +1,6 @@
 package com.frame.boot.frame.security.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.frame.boot.frame.mybatis.search.bean.SearchBuilder;
 import com.frame.boot.frame.mybatis.search.bean.SearchData;
@@ -9,6 +10,8 @@ import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.constants.UserConstants;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
+import com.frame.boot.frame.security.service.SysRoleService;
+import com.frame.boot.frame.security.service.SysRoleUserService;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.boot.frame.security.utils.AuthUtil;
 import com.frame.common.frame.base.bean.ResponseBean;
@@ -20,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,6 +36,10 @@ public class SysUserController {
     private SystemSecurityProperties systemSecurityProperties;
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SysRoleService sysRoleService;
+    @Autowired
+    private SysRoleUserService sysRoleUserService;
 
     @GetMapping("/listPage")
     public Object listPage(Page<SysUser> page, @RequestParam Map<String,String> map) {
@@ -53,7 +61,7 @@ public class SysUserController {
 
     @GetMapping("/get/{username}")
     public Object one(@PathVariable("username") String username) {
-        return ResponseBean.successContent(sysUserService.findByUsername(username));
+        return ResponseBean.successContent(sysUserService.findSecurityUserByUsername(username));
     }
 
     @GetMapping("/exist/{username}")
@@ -109,7 +117,7 @@ public class SysUserController {
             dbUser.setUpdateUser(AuthUtil.getUsername());
             sysUserService.updateById(dbUser);
         } catch (Exception e) {
-            logger.error("save SysUser error. user:{}", user, e);
+            logger.error("update SysUser error. user:{}", user, e);
             return ResponseBean.getInstance(UserConstants.USER_ERROR_CODE, UserConstants.USER_ERROR_MSG, UserConstants.USER_ERROR_SHOW_MSG);
         }
         return ResponseBean.success();
@@ -146,5 +154,21 @@ public class SysUserController {
             }
         }
         return ResponseBean.getInstance(SysConstants.USERNAME_PWD_ERROR_CODE, "username or password error.", SysConstants.USERNAME_PWD_ERROR_MSG);
+    }
+
+    @GetMapping("/roles/{username}")
+    public Object rolesByUsername(@PathVariable("username") String username) {
+        return ResponseBean.successContent(sysRoleService.findByUsername(username));
+    }
+
+    @PostMapping("/updateRoleUsers/{username}")
+    public Object updateRoleUsers(@PathVariable("username") String username, @RequestParam String roleCodes) {
+        try {
+            sysRoleUserService.updateRoleUsers(username, JSONArray.parseArray(roleCodes, String.class));
+        } catch (Exception e) {
+            logger.error("updateRoleUsers error. username:{},roleCodes:{}", username, roleCodes, e);
+            return ResponseBean.getInstance(UserConstants.USER_ERROR_CODE, UserConstants.USER_ERROR_MSG, UserConstants.USER_ERROR_SHOW_MSG);
+        }
+        return ResponseBean.success();
     }
 }

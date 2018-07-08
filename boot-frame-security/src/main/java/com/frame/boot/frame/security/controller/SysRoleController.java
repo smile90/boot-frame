@@ -1,5 +1,6 @@
 package com.frame.boot.frame.security.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.frame.boot.frame.mybatis.search.bean.SearchBuilder;
@@ -9,7 +10,11 @@ import com.frame.boot.frame.mybatis.search.bean.ValueType;
 import com.frame.boot.frame.security.constants.RoleConstants;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysRole;
+import com.frame.boot.frame.security.entity.SysRoleModule;
+import com.frame.boot.frame.security.entity.SysRoleUser;
+import com.frame.boot.frame.security.service.SysRoleModuleService;
 import com.frame.boot.frame.security.service.SysRoleService;
+import com.frame.boot.frame.security.service.SysRoleUserService;
 import com.frame.boot.frame.security.utils.AuthUtil;
 import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.utils.EmptyUtil;
@@ -19,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,6 +35,10 @@ public class SysRoleController {
 
     @Autowired
     private SysRoleService sysRoleService;
+    @Autowired
+    private SysRoleModuleService sysRoleModuleService;
+    @Autowired
+    private SysRoleUserService sysRoleUserService;
 
     @GetMapping("/listPage")
     public Object listPage(Page<SysRole> page, @RequestParam Map<String,String> map) {
@@ -79,7 +89,7 @@ public class SysRoleController {
             }
             sysRoleService.update(role, dbRole);
         } catch (Exception e) {
-            logger.error("save SysRole error. role:{}", role, e);
+            logger.error("update SysRole error. role:{}", role, e);
             return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
         }
         return ResponseBean.success();
@@ -102,4 +112,53 @@ public class SysRoleController {
         }
         return ResponseBean.success();
     }
+
+    @GetMapping("/modules/{roleCode}")
+    public Object modulesByRoleCode(@PathVariable("roleCode") String roleCode) {
+        return ResponseBean.successContent(sysRoleModuleService.selectList(new EntityWrapper<SysRoleModule>().eq("role_code", roleCode)));
+    }
+
+    @PostMapping("/updateRoleModules/{roleCode}")
+    public Object updateRoleModules(@PathVariable("roleCode") String roleCode, @RequestParam String moduleCodes) {
+        try {
+            sysRoleModuleService.updateRoleModules(roleCode, JSONArray.parseArray(moduleCodes, String.class));
+        } catch (Exception e) {
+            logger.error("updateRoleModules error. roleCode:{},moduleCodes:{}", roleCode, moduleCodes, e);
+            return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
+        }
+        return ResponseBean.success();
+    }
+
+    @GetMapping("/users/{roleCode}")
+    public Object usersByRoleCode(@PathVariable("roleCode") String roleCode) {
+        return ResponseBean.successContent(sysRoleUserService.selectList(new EntityWrapper<SysRoleUser>().eq("role_code", roleCode)));
+    }
+
+    @PostMapping("/saveUser")
+    public Object saveUser(@RequestParam("username") String username, @RequestParam("roleCode") String roleCode) {
+        try {
+            SysRoleUser sysRoleUser = new SysRoleUser();
+            sysRoleUser.setUsername(username);
+            sysRoleUser.setRoleCode(roleCode);
+            sysRoleUser.setCreateTime(new Date());
+            sysRoleUser.setCreateUser(AuthUtil.getUsername());
+            sysRoleUserService.insert(sysRoleUser);
+        } catch (Exception e) {
+            logger.error("updateRoleModules error. username:{},roleCode:{}", username, roleCode, e);
+            return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
+        }
+        return ResponseBean.success();
+    }
+
+    @DeleteMapping("/deleteUser/{username}")
+    public Object deleteUser(@RequestParam("username") String username) {
+        try {
+            sysRoleUserService.deleteByUsername(username);
+        } catch (Exception e) {
+            logger.error("updateRoleModules error. username:{}", username, e);
+            return ResponseBean.getInstance(RoleConstants.ROLE_ERROR_CODE, RoleConstants.ROLE_ERROR_MSG, RoleConstants.ROLE_ERROR_SHOW_MSG);
+        }
+        return ResponseBean.success();
+    }
+
 }

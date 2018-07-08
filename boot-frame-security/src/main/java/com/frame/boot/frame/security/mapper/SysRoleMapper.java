@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
-    @Select("select * from sys_role sr, sys_role_user sru where sr.code = sru.role_code and sru.username = #{username}")
+    @Select("select sr.* from sys_role sr, sys_role_user sru where sr.code = sru.role_code and sru.username = #{username}")
     List<SysRole> findByUsername(String username);
 }

@@ -80,7 +80,7 @@ public class SysController {
     public Object userDetail() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            SysUser user = sysUserService.findByUsername(auth.getName());
+            SysUser user = sysUserService.findSecurityUserByUsername(auth.getName());
             if(user != null) {
                 JSONObject content = new JSONObject();
                 content.put("username", user.getUsername());

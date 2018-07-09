@@ -34,9 +34,9 @@ create table sys_role
 (
    `ID`                   bigint auto_increment not null comment '主键',
    `OPTIMISTIC`           bigint default 0 not null comment '乐观锁',
-   `TYPE_CODE`             varchar(32) comment '类别标识',
+   `TYPE_CODE`             varchar(128) comment '类别标识',
    `NAME`                 varchar(512) not null comment '名称',
-   `CODE`                  varchar(32) not null unique comment '标识',
+   `CODE`                  varchar(128) not null unique comment '标识',
    `ORDERS`                int comment '排序值',
    `DESCRIPTION`          varchar(2048) comment '描述',
    `STATUS`               varchar(32) not null comment '数据状态',
@@ -74,8 +74,8 @@ create table sys_user
 (
    `ID`                   bigint auto_increment not null comment '主键',
    `OPTIMISTIC`           bigint default 0 not null comment '乐观锁',
-   `USER_NO`            varchar(512) not null comment '用户编号',
-   `USERNAME`             varchar(512) not null comment '用户名',
+   `USER_NO`            varchar(128) not null comment '用户编号',
+   `USERNAME`             varchar(128) not null comment '用户名',
    `PASSWORD`             varchar(512) not null comment '密码',
    `REALNAME`             varchar(512) not null comment '真实名称',
    `EMAIL`                varchar(512) comment '电子邮件',

@@ -74,6 +74,9 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
             dbModule.setCode(module.getCode());
             dbModule.setName(module.getName());
             dbModule.setUrl(module.getUrl());
+            dbModule.setIcon(module.getIcon());
+            dbModule.setUseable(module.getUseable());
+            dbModule.setValidate(module.getValidate());
             dbModule.setStatus(module.getStatus());
             dbModule.setOrders(module.getOrders());
             dbModule.setDescription(module.getDescription());

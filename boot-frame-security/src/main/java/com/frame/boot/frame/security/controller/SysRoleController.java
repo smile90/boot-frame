@@ -52,6 +52,18 @@ public class SysRoleController {
         return ResponseBean.successContent(sysRoleService.selectPage(page, builder.build()));
     }
 
+    @GetMapping("/list")
+    public Object list(Page<SysRole> page, @RequestParam Map<String,String> map) {
+        SearchBuilder<SysRole> builder = new SearchBuilder<>();
+        if (EmptyUtil.notEmpty(map) && EmptyUtil.notEmpty(map.get("name"))) {
+            builder.build(new SearchData("name", SearchType.LIKE, ValueType.STRING, map.get("name")));
+        }
+        if (EmptyUtil.notEmpty(map) && EmptyUtil.notEmpty(map.get("code"))) {
+            builder.build(new SearchData("code", SearchType.EQ, ValueType.STRING, map.get("code")));
+        }
+        return ResponseBean.successContent(sysRoleService.selectList(builder.build()));
+    }
+
     @GetMapping("/get/{code}")
     public Object one(@PathVariable("code") String code) {
         return ResponseBean.successContent(sysRoleService.selectOne(new EntityWrapper<SysRole>().eq("code", code)));

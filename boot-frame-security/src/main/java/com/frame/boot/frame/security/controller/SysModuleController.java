@@ -92,7 +92,7 @@ public class SysModuleController {
         try {
             SysModule dbModule = sysModuleService.selectById(module.getId());
             // 系统数据不允许变更
-            if (SysConstants.MODULE_CODE_ROOT.equals(module.getCode())) {
+            if (SysConstants.MODULE_CODE_ROOT.equals(dbModule.getCode())) {
                 return ResponseBean.getInstance(SysConstants.SYS_DATA_MODIFY_ERROR_CODE, SysConstants.SYS_DATA_MODIFY_ERROR_MSG, SysConstants.SYS_DATA_MODIFY_ERROR_SHOW_MSG);
             }
             sysModuleService.update(module, dbModule);

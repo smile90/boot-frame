@@ -69,7 +69,7 @@ public class SysModuleService extends ServiceImpl<SysModuleMapper, SysModule> {
             // 更新自身
             SysModule parent = selectOne(new EntityWrapper<SysModule>().eq("code", module.getParentCode()));
             dbModule.setTypeCode(module.getTypeCode());
-            module.setParentPath(parent.getParentPath() + "-" + parent.getCode());
+            dbModule.setParentPath(parent.getParentPath() + "-" + parent.getCode());
             dbModule.setParentCode(module.getParentCode());
             dbModule.setCode(module.getCode());
             dbModule.setName(module.getName());

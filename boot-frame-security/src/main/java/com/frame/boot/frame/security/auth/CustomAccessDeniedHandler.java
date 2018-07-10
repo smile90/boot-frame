@@ -25,7 +25,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         logger.error("{}.{}", request.getServletPath(),accessDeniedException.getMessage());
 
         response.setContentType("application/json");
-        response.setStatus(HttpStatus.SC_FORBIDDEN);
+        response.setStatus(HttpStatus.SC_OK);
         response.setCharacterEncoding(CommonConstant.ENCODING);
         response.getWriter().write(JSONObject.toJSONString(ResponseBean.getInstance(SysConstants.USER_HAS_NO_AUTH_ERROR_CODE,
                 SysConstants.USER_HAS_NO_AUTH_ERROR_MSG, SysConstants.USER_HAS_NO_AUTH_ERROR_SHOW_MSG)));

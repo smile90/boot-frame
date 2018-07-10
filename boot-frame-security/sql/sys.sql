@@ -5,11 +5,11 @@ create table sys_module
 (
    `ID`                   bigint auto_increment not null comment '主键',
    `OPTIMISTIC`           bigint default 0 not null comment '乐观锁',
-   `TYPE_CODE`             varchar(32) comment '类别标识',
+   `PARENT_PATH`           varchar(128) not null comment '所属路径',
    `PARENT_CODE`           varchar(128) not null comment '所属模块标识',
+   `TYPE_CODE`             varchar(32) comment '类别标识',
    `CODE`                  varchar(128) not null unique comment '标识',
    `NAME`                 varchar(512) not null comment '名称',
-    `PARENT_PATH`           varchar(128) not null comment '所属路径',
    `VALIDATE`             varchar(32) not null comment '是否验证',
    `USEABLE`              varchar(32) not null comment '是否可用',
    `ICON`                  varchar(1024) comment '图标',

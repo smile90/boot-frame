@@ -2,7 +2,7 @@
 server:
   port: 12080
   servlet:
-    context-path: /security
+    context-path: /agent-boss
 
 ## config
 #spring:

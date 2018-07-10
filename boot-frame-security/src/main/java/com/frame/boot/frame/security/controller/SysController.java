@@ -3,6 +3,7 @@ package com.frame.boot.frame.security.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.constants.SysConstants;
 import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysModuleService;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.boot.frame.security.utils.AuthUtil;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/sys")
+@RequestMapping
 public class SysController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -27,8 +28,15 @@ public class SysController {
     private SysModuleService sysModuleService;
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SystemSecurityProperties systemSecurityProperties;
 
-    @RequestMapping("/menu")
+    @RequestMapping("/")
+    public String index() {
+        return "redirect:" + systemSecurityProperties.getUrl().getLoginPageUrl();
+    }
+
+    @RequestMapping("/sys/menu")
     @ResponseBody
     public Object menu() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -39,7 +47,7 @@ public class SysController {
         }
     }
 
-    @PostMapping("/pwd/{username}")
+    @PostMapping("/sys/pwd/{username}")
     @ResponseBody
     public Object updatePwd(@PathVariable(value = "username", required = true)String username,
                             @RequestParam(value = "oldPwd", required = true)String oldPwd,
@@ -59,7 +67,7 @@ public class SysController {
         return ResponseBean.getInstance(SysConstants.USERNAME_PWD_ERROR_CODE, "username or password error.", SysConstants.USERNAME_PWD_ERROR_MSG);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/sys/user")
     @ResponseBody
     public Object user() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -75,7 +83,7 @@ public class SysController {
         return ResponseBean.getInstance(SysConstants.USER_AUTH_ERROR_CODE, SysConstants.USER_AUTH_ERROR_MSG, SysConstants.USER_AUTH_ERROR_SHOW_MSG);
     }
 
-    @GetMapping("/userDetail")
+    @GetMapping("/sys/userDetail")
     @ResponseBody
     public Object userDetail() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

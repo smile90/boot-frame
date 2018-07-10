@@ -140,10 +140,10 @@ mybatis-plus:
 # 网关配置
 zuul:
   sensitive-headers:
-  routes:
-    static:
-      path: /boss-front/**
-      url: http://127.0.0.1:11080/boss-front
+#  routes:
+#    static:
+#      path: /management/**
+#      url: http://127.0.0.1:11080/management
 
 # 框架配置
 frame:
@@ -153,4 +153,4 @@ frame:
     menu-type-code: SYS_MENU
     sys-module-type-code: SYS_MODULE
     url:
-      login-page-url: /boss-front/page/login/login.html
+      login-page-url: /page/login/login.html

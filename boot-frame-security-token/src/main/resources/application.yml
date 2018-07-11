@@ -1,0 +1,156 @@
+# debug: true
+info:
+  version: @project.version@
+# config
+spring:
+  application:
+    name: @project.artifactId@
+  jmx:
+    default-domain: @project.artifactId@
+# AOP
+  aop:
+    proxy-target-class: true
+
+# Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+
+# Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+
+# Spring MVC
+  mvc:
+    contentnegotiation:
+      media-types.json: application/json
+
+# session
+  session:
+      store-type: redis
+      redis:
+        flush-mode: immediate
+
+# dataSource
+  datasource:
+    # 基础配置，必须有，后面可以进行覆盖
+    url: jdbc:mysql://127.0.0.1:3306/boss?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: root
+
+    # 公共参数配置
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-log-stats-millis: 60000
+
+      filters: stat,wall
+#      stat-view-servlet:
+#        login-username: admin
+#        login-password: 123456
+
+      # 主数据源
+      primary:
+        name: ${spring.application.name}-primary
+        url: jdbc:mysql://127.0.0.1:3306/boss?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+        username: root
+        password: root
+
+      # 只读数据源
+      read:
+        name: ${spring.application.name}-read
+        url: jdbc:mysql://127.0.0.1:3306/boss?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+        username: root
+        password: root
+
+# redis
+# redis单一模式
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+# redis哨兵模式
+#    sentinel:
+## Redis服务器master的名字
+#      master: master
+## redis-sentinel的配置地址和端口
+#      nodes: 10.189.80.25:26379,10.189.80.26:26379,10.189.80.27:26378
+
+#################redis基础配置#################
+# 密码
+    password:
+# 库
+    database: 5
+# redis线程池设置
+    pool:
+      jedis:
+# 连接池中的最大空闲连接，默认值也是8。
+        max-idle: 500
+#连接池中的最小空闲连接，默认值也是0。
+        min-idle: 50
+# 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
+        max-active: 100
+# 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException
+        max-wait: 1000
+# 超时配置
+#    expir:
+#      config:
+#        test: 10
+#        test1: 20
+#        aaa: 30
+#      default-config: 10
+
+# 链路追踪
+#  zipkin:
+#    base-url: http://127.0.0.1:3331
+
+# mybatis-plus
+mybatis-plus:
+  type-aliases-package: com.**.entity.**
+  mapper-locations: classpath:mapper/**/*.xml
+  global-config:
+    # 主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    # 字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    # 驼峰下划线转换
+    db-column-underline: true
+    # 刷新mapper 调试神器
+    refresh-mapper: true
+    # 数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置
+    logic-delete-value: 0
+    logic-not-delete-value: 1
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+    #自定义SQL注入器
+    #sql-injector: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+# 网关配置
+zuul:
+  sensitive-headers:
+#  routes:
+#    static:
+#      path: /management/**
+#      url: http://127.0.0.1:11080/management
+
+# 框架配置
+frame:
+  security:
+    enable-csrf: false
+    enable-valid-code: false
+    menu-type-code: SYS_MENU
+    sys-module-type-code: SYS_MODULE
+    url:
+      login-page-url: /page/login/login.html

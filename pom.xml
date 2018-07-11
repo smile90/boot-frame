@@ -22,12 +22,13 @@
 		<module>boot-frame-hibernate</module>
 		<module>boot-frame-monitor</module>
 		<module>boot-frame-security</module>
+		<module>boot-frame-security-token</module>
 		<module>boot-frame-portal</module>
 
 		<module>boot-frame-eureka-server</module>
 		<module>boot-frame-config-server</module>
 		<module>boot-frame-boot-admin</module>
-		<module>boot-frame-zuul-server</module>
+		<module>boot-frame-zuul-front</module>
 		<module>boot-frame-zipkin-server</module>
     </modules>
 </project>

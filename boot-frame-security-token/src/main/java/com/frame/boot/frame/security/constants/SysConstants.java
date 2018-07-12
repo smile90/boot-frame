@@ -14,7 +14,6 @@ public class SysConstants {
 
     /** ROOT */
     public static final String MODULE_CODE_ROOT = "ROOT";
-
     /** admin */
     public static final String USER_CODE_ADMIN = "admin";
 

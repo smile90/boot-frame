@@ -30,8 +30,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -42,7 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SystemSecurityProperties systemSecurityProperties;
-
     @Autowired
     private KaptchaProperties kaptchaProperties;
 
@@ -52,15 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("customLoginFailureHandler")
     private AuthenticationFailureHandler loginFailureHandler;
-
     @Autowired
     @Qualifier("customLogoutSuccessHandler")
     private LogoutSuccessHandler logoutSuccessHandler;
-
     @Autowired
     @Qualifier("customAccessDeniedHandler")
     private AccessDeniedHandler accessDeniedHandler;
-
     @Autowired
     @Qualifier("customSecurityMetadataSource")
     private FilterInvocationSecurityMetadataSource securityMetadataSource;

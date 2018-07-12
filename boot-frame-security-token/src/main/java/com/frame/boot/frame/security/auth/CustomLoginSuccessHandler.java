@@ -1,7 +1,9 @@
 package com.frame.boot.frame.security.auth;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.frame.boot.frame.security.entity.SysUser;
+import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysUserService;
 import com.frame.common.frame.base.bean.ResponseBean;
 import com.frame.common.frame.base.constants.CommonConstant;
@@ -22,6 +24,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private SystemSecurityProperties systemSecurityProperties;
     @Autowired
     private SysUserService sysUserService;
 
@@ -44,6 +48,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         response.setContentType("application/json");
         response.setCharacterEncoding(CommonConstant.ENCODING);
+        response.setHeader(systemSecurityProperties.getJwt().getRequestKey(), (String) authentication.getCredentials());
         response.getWriter().write(JSONObject.toJSONString(ResponseBean.success()));
     }
 

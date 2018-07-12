@@ -12,7 +12,6 @@ import java.util.List;
 public class SystemSecurityProperties {
 
     private String menuTypeCode = "SYS_MENU";
-    private String sysModuleTypeCode = "SYS_MODULE";
     private String defualtUserPwd = "123456";
 
     private boolean enableCsrf = true;
@@ -25,6 +24,8 @@ public class SystemSecurityProperties {
 
     /** URL配置 */
     private Url url = new Url();
+    /** jwt配置 */
+    private Jwt jwt = new Jwt();
 
     public String getMenuTypeCode() {
         return menuTypeCode;
@@ -32,14 +33,6 @@ public class SystemSecurityProperties {
 
     public void setMenuTypeCode(String menuTypeCode) {
         this.menuTypeCode = menuTypeCode;
-    }
-
-    public String getSysModuleTypeCode() {
-        return sysModuleTypeCode;
-    }
-
-    public void setSysModuleTypeCode(String sysModuleTypeCode) {
-        this.sysModuleTypeCode = sysModuleTypeCode;
     }
 
     public String getDefualtUserPwd() {
@@ -88,6 +81,14 @@ public class SystemSecurityProperties {
 
     public void setUrl(Url url) {
         this.url = url;
+    }
+
+    public Jwt getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(Jwt jwt) {
+        this.jwt = jwt;
     }
 
     public class Url {
@@ -175,15 +176,71 @@ public class SystemSecurityProperties {
         }
     }
 
+    public class Jwt {
+        /** 秘钥 */
+        private String secret = "secret";
+        /** 失效时间：分钟 */
+        private long exp = 10 * 60;
+        /** 短失效时间：分钟 */
+        private long shortExp = 30;
+        /** 请求头key */
+        private String requestKey = "bossAuthToken";
+
+        public String getSecret() {
+            return secret;
+        }
+
+        public void setSecret(String secret) {
+            this.secret = secret;
+        }
+
+        public long getExp() {
+            return exp;
+        }
+
+        public void setExp(long exp) {
+            this.exp = exp;
+        }
+
+        public long getShortExp() {
+            return shortExp;
+        }
+
+        public void setShortExp(long shortExp) {
+            this.shortExp = shortExp;
+        }
+
+        public String getRequestKey() {
+            return requestKey;
+        }
+
+        public void setRequestKey(String requestKey) {
+            this.requestKey = requestKey;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuffer sb = new StringBuffer("Jwt{");
+            sb.append("secret='").append(secret).append('\'');
+            sb.append(", exp=").append(exp);
+            sb.append(", shortExp=").append(shortExp);
+            sb.append(", requestKey='").append(requestKey).append('\'');
+            sb.append('}');
+            return sb.toString();
+        }
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SystemSecurityProperties{");
         sb.append("menuTypeCode='").append(menuTypeCode).append('\'');
+        sb.append(", defualtUserPwd='").append(defualtUserPwd).append('\'');
         sb.append(", enableCsrf=").append(enableCsrf);
         sb.append(", enableFrameOptions=").append(enableFrameOptions);
         sb.append(", enableValidCode=").append(enableValidCode);
         sb.append(", enableRememberMe=").append(enableRememberMe);
         sb.append(", url=").append(url);
+        sb.append(", jwt=").append(jwt);
         sb.append('}');
         return sb.toString();
     }

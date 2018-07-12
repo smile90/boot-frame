@@ -7,6 +7,7 @@ import com.frame.boot.frame.security.exception.SystemSecurityException;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysUserService;
+import com.frame.boot.frame.security.utils.JwtTokenUtil;
 import com.frame.common.frame.utils.EmptyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +30,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     @Resource(name = "sysUserService")
     private SysUserService sysUserService;
-
     @Autowired
     private KaptchaProperties kaptchaProperties;
-
     @Autowired
     private SystemSecurityProperties systemSecurityProperties;
 
@@ -82,7 +83,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new CredentialsExpiredException(SysConstants.USER_EXPIRED_CODE, new SystemSecurityException(SysConstants.USER_EXPIRED_CODE, "credentials non expored", SysConstants.USER_EXPIRED_MSG));
         }
         // 授权
-        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        return jwtTokenUtil.getAuthentication(userDetails);
     }
 
     @Override

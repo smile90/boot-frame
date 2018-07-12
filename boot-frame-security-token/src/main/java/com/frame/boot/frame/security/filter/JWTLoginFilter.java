@@ -13,19 +13,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JWTLoginFilter extends GenericFilterBean {
+public class JWTLoginFilter extends OncePerRequestFilter {
 
     AntPathMatcher antPathMatcher = new AntPathMatcher();
     @Autowired
@@ -34,7 +31,7 @@ public class JWTLoginFilter extends GenericFilterBean {
     private SystemSecurityProperties systemSecurityProperties;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         boolean ok = false;
         String token = jwtTokenUtil.getToken((HttpServletRequest) request);
         if (EmptyUtil.notEmpty(token)) {
@@ -69,7 +66,8 @@ public class JWTLoginFilter extends GenericFilterBean {
             response.setCharacterEncoding(CommonConstant.ENCODING);
             response.getWriter().write(JSONObject.toJSONString(ResponseBean.getInstance(SysConstants.USER_HAS_NO_AUTH_ERROR_CODE,
                     SysConstants.USER_HAS_NO_AUTH_ERROR_MSG, SysConstants.USER_HAS_NO_AUTH_ERROR_SHOW_MSG)));
+        } else {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request, response);
     }
 }

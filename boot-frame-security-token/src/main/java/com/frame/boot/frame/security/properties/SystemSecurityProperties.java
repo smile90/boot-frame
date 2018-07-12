@@ -96,7 +96,7 @@ public class SystemSecurityProperties {
         private String loginProcessUrl = "/sys/login";
         private String logoutUrl = "/sys/logout";
         private String indexUrl = "/sys/index";
-        private String[] permitPaths = new String[] {"/static/**", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif", "/**/*.jpg", "/**/*.jpeg", "/**/*.bmp", "/validCode/login"};
+        private String[] permitPaths = new String[] {"/validCode/login", "/static/**", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif", "/**/*.jpg", "/**/*.jpeg", "/**/*.bmp"};
         private String[] authenticatePaths = new String[] {"/**"};
         private String[] csrfIgnoringPaths = new String[] {"/druid/**"};
 

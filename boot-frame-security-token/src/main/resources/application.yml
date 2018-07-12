@@ -151,6 +151,5 @@ frame:
     enable-csrf: false
     enable-valid-code: false
     menu-type-code: SYS_MENU
-    sys-module-type-code: SYS_MODULE
     url:
       login-page-url: /page/login/login.html

@@ -83,7 +83,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new CredentialsExpiredException(SysConstants.USER_EXPIRED_CODE, new SystemSecurityException(SysConstants.USER_EXPIRED_CODE, "credentials non expored", SysConstants.USER_EXPIRED_MSG));
         }
         // 授权
-        return jwtTokenUtil.getAuthentication(userDetails);
+        return jwtTokenUtil.createAuthentication(userDetails);
     }
 
     @Override

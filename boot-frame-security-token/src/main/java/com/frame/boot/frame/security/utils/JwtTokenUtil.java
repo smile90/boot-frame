@@ -36,10 +36,11 @@ public class JwtTokenUtil {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    public Authentication getAuthentication(SysUser sysUser) {
+    public Authentication createAuthentication(SysUser sysUser) {
         if (sysUser != null) {
             // 生成JWT Token
-            String credentials = generateToken(sysUser);
+            String credentials = createToken(sysUser);
+            logger.info("create token:{}", credentials);
             // Token有效时间
             redisTemplate.boundValueOps(sysUser.getUsername()).set(credentials, systemSecurityProperties.getJwt().getShortExp(), TimeUnit.MINUTES);
             // 授权
@@ -49,7 +50,7 @@ public class JwtTokenUtil {
         }
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String createToken(UserDetails userDetails) {
         if (userDetails != null) {
             SystemSecurityProperties.Jwt jwtCfg = systemSecurityProperties.getJwt();
     //        String authorities = authentication.getAuthorities()
@@ -80,6 +81,7 @@ public class JwtTokenUtil {
             String redisToken = redisTemplate.boundValueOps(username).get();
             if (EmptyUtil.notEmpty(redisToken)) {
                 redisTemplate.boundValueOps(username).set(token, systemSecurityProperties.getJwt().getShortExp(), TimeUnit.MINUTES);
+                logger.info("refresh token:{},redisToken:{}", token, redisToken);
             }
         }
     }
@@ -120,6 +122,7 @@ public class JwtTokenUtil {
 
             // 校验有效期
             String redisToken = redisTemplate.boundValueOps(username).get();
+            logger.info("valid token:{},redisToken:{},boolean:{}", token, redisToken, token.equals(redisToken));
             if (EmptyUtil.notEmpty(redisToken) && redisToken.equals(token)) {
                 return true;
             } else {
@@ -145,6 +148,22 @@ public class JwtTokenUtil {
     public Authentication getAuthentication(HttpServletRequest request) {
         SysUser sysUser = getUser(request);
         return getAuthentication(sysUser);
+    }
+
+    public Authentication getAuthentication(SysUser sysUser) {
+        if (sysUser != null) {
+            // Token有效时间
+            String token = redisTemplate.boundValueOps(sysUser.getUsername()).get();
+            logger.info("get token:{}", token);
+            if (EmptyUtil.notEmpty(token)) {
+                // 授权
+                return new CustomJwtAuthenticationToken(sysUser, token, sysUser.getAuthorities());
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     public SysUser getUser(HttpServletRequest request) {

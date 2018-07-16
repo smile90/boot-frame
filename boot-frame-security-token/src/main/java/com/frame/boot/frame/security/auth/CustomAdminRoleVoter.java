@@ -1,5 +1,6 @@
 package com.frame.boot.frame.security.auth;
 
+import com.frame.boot.frame.security.constants.SysConstants;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
@@ -9,7 +10,7 @@ import java.util.Collection;
 
 public class CustomAdminRoleVoter implements AccessDecisionVoter<Object> {
 
-    private String roleCode = "SUPER_ADMIN";
+    private String roleCode = SysConstants.ROLE_CODE_SUPER_ADMIN;
 
     public String getRoleCode() {
         return roleCode;

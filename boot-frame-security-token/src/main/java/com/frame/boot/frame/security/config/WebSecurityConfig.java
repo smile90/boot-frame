@@ -3,6 +3,7 @@ package com.frame.boot.frame.security.config;
 import com.frame.boot.frame.security.auth.CustomAdminRoleVoter;
 import com.frame.boot.frame.security.auth.CustomWebAuthenticationDetailsSource;
 import com.frame.boot.frame.security.constants.SysConstants;
+import com.frame.boot.frame.security.filter.JWTLoginFilter;
 import com.frame.boot.frame.security.properties.KaptchaProperties;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
@@ -42,7 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private SystemSecurityProperties systemSecurityProperties;
     @Autowired
     private KaptchaProperties kaptchaProperties;
-
+    @Autowired
+    private JWTLoginFilter jwtLoginFilter;
     @Autowired
     @Qualifier("customLoginSuccessHandler")
     private AuthenticationSuccessHandler loginSuccessHandler;
@@ -114,6 +117,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         if (systemSecurityProperties.isEnableRememberMe()) {
             http.rememberMe();
         }
+        // security不去创建session
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http.headers().frameOptions().sameOrigin()
             .and()
             .authorizeRequests()
@@ -129,6 +135,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler)
             .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
             .and()
+                .addFilterBefore(jwtLoginFilter, FilterSecurityInterceptor.class)
                 .addFilterAfter(filterSecurityInterceptor(), FilterSecurityInterceptor.class);
     }
 

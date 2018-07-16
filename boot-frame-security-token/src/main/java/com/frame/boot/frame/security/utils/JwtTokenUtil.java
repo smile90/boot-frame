@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.frame.boot.frame.security.auth.CustomJwtAuthenticationToken;
+import com.frame.boot.frame.security.constants.RedisKeyConstants;
 import com.frame.boot.frame.security.entity.SysUser;
 import com.frame.boot.frame.security.properties.SystemSecurityProperties;
 import com.frame.boot.frame.security.service.SysUserService;
@@ -40,9 +41,9 @@ public class JwtTokenUtil {
         if (sysUser != null) {
             // 生成JWT Token
             String credentials = createToken(sysUser);
-            logger.info("create token:{}", credentials);
+            logger.debug("create token:{}", credentials);
             // Token有效时间
-            redisTemplate.boundValueOps(sysUser.getUsername()).set(credentials, systemSecurityProperties.getJwt().getShortExp(), TimeUnit.MINUTES);
+            redisTemplate.boundValueOps(RedisKeyConstants.USERNAME_PRE + sysUser.getUsername()).set(credentials, systemSecurityProperties.getJwt().getShortExp(), TimeUnit.MINUTES);
             // 授权
             return new CustomJwtAuthenticationToken(sysUser, credentials, sysUser.getAuthorities());
         } else {
@@ -53,10 +54,10 @@ public class JwtTokenUtil {
     public String createToken(UserDetails userDetails) {
         if (userDetails != null) {
             SystemSecurityProperties.Jwt jwtCfg = systemSecurityProperties.getJwt();
-    //        String authorities = authentication.getAuthorities()
-    //                .stream()
-    //                .map(authority -> authority.getAuthority())
-    //                .collect(Collectors.joining(","));
+            //        String authorities = authentication.getAuthorities()
+            //                .stream()
+            //                .map(authority -> authority.getAuthority())
+            //                .collect(Collectors.joining(","));
 
             Date now = Date.from(Instant.now());
             Date expiration = Date.from(ZonedDateTime.now().plusMinutes(jwtCfg.getExp()).toInstant());
@@ -64,7 +65,7 @@ public class JwtTokenUtil {
             Algorithm algorithm = Algorithm.HMAC256(systemSecurityProperties.getJwt().getSecret());
             //create jwt
             String jwt = JWT.create()
-    //                .withClaim("authorities", authorities)
+                    //                .withClaim("authorities", authorities)
                     .withSubject(userDetails.getUsername())
                     .withIssuedAt(now)
                     .withExpiresAt(expiration)
@@ -78,9 +79,9 @@ public class JwtTokenUtil {
     public void refreshTokenExporation(String token) {
         String username = getUsername(token);
         if (EmptyUtil.notEmpty(username)) {
-            String redisToken = redisTemplate.boundValueOps(username).get();
+            String redisToken = redisTemplate.boundValueOps(RedisKeyConstants.USERNAME_PRE + username).get();
             if (EmptyUtil.notEmpty(redisToken)) {
-                redisTemplate.boundValueOps(username).set(token, systemSecurityProperties.getJwt().getShortExp(), TimeUnit.MINUTES);
+                redisTemplate.boundValueOps(RedisKeyConstants.USERNAME_PRE + username).set(token, systemSecurityProperties.getJwt().getShortExp(), TimeUnit.MINUTES);
                 logger.info("refresh token:{},redisToken:{}", token, redisToken);
             }
         }
@@ -121,8 +122,8 @@ public class JwtTokenUtil {
             JWT.require(algorithm).build().verify(token);
 
             // 校验有效期
-            String redisToken = redisTemplate.boundValueOps(username).get();
-            logger.info("valid token:{},redisToken:{},boolean:{}", token, redisToken, token.equals(redisToken));
+            String redisToken = redisTemplate.boundValueOps(RedisKeyConstants.USERNAME_PRE + username).get();
+            logger.debug("valid token:{},redisToken:{},boolean:{}", token, redisToken, token.equals(redisToken));
             if (EmptyUtil.notEmpty(redisToken) && redisToken.equals(token)) {
                 return true;
             } else {
@@ -153,8 +154,8 @@ public class JwtTokenUtil {
     public Authentication getAuthentication(SysUser sysUser) {
         if (sysUser != null) {
             // Token有效时间
-            String token = redisTemplate.boundValueOps(sysUser.getUsername()).get();
-            logger.info("get token:{}", token);
+            String token = redisTemplate.boundValueOps(RedisKeyConstants.USERNAME_PRE + sysUser.getUsername()).get();
+            logger.debug("get token:{}", token);
             if (EmptyUtil.notEmpty(token)) {
                 // 授权
                 return new CustomJwtAuthenticationToken(sysUser, token, sysUser.getAuthorities());
@@ -191,5 +192,4 @@ public class JwtTokenUtil {
             return null;
         }
     }
-
 }

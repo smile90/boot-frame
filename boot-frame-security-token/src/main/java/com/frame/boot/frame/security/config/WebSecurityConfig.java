@@ -120,8 +120,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // security不去创建session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.headers().frameOptions().sameOrigin()
-            .and()
+        http
             .authorizeRequests()
                 .antMatchers(url.getPermitPaths()).permitAll()
                 .antMatchers(url.getAuthenticatePaths()).authenticated()
@@ -138,5 +137,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(jwtLoginFilter, FilterSecurityInterceptor.class)
                 .addFilterAfter(filterSecurityInterceptor(), FilterSecurityInterceptor.class);
     }
-
 }

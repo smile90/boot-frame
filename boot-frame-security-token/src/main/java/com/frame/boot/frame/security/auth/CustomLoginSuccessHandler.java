@@ -48,8 +48,10 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         response.setContentType("application/json");
         response.setCharacterEncoding(CommonConstant.ENCODING);
-        response.setHeader(systemSecurityProperties.getJwt().getRequestKey(), (String) authentication.getCredentials());
-        response.getWriter().write(JSONObject.toJSONString(ResponseBean.success()));
+//        response.setHeader(systemSecurityProperties.getJwt().getRequestKey(), (String) authentication.getCredentials());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(systemSecurityProperties.getJwt().getRequestKey(), authentication.getCredentials());
+        response.getWriter().write(JSONObject.toJSONString(ResponseBean.successContent(jsonObject)));
     }
 
     public String getIpAddress(HttpServletRequest request) {

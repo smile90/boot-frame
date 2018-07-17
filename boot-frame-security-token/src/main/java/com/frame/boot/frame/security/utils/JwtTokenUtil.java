@@ -181,7 +181,12 @@ public class JwtTokenUtil {
     }
 
     public String getToken(HttpServletRequest request) {
-        return request.getHeader(systemSecurityProperties.getJwt().getRequestKey());
+        String token = request.getHeader(systemSecurityProperties.getJwt().getRequestKey());
+        if (EmptyUtil.notEmpty(token) && !"null".equalsIgnoreCase(token)) {
+            return token;
+        } else {
+            return null;
+        }
     }
 
     public String getUsername(String token) {

@@ -33,6 +33,7 @@ spring:
       store-type: redis
       redis:
         flush-mode: immediate
+      timeout: 30s
 
 # dataSource
   datasource:
@@ -149,7 +150,9 @@ zuul:
 frame:
   security:
     enable-csrf: false
-    enable-valid-code: true
+    enable-valid-code: false
     menu-type-code: SYS_MENU
     url:
       login-page-url: /page/login/login.html
+    cors:
+      access-control-allow-origin: http://127.0.0.1:13080

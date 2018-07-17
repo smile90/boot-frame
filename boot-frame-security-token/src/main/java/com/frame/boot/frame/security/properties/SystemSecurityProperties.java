@@ -26,6 +26,8 @@ public class SystemSecurityProperties {
     private Url url = new Url();
     /** jwt配置 */
     private Jwt jwt = new Jwt();
+    /** 跨域配置 */
+    private Cors cors = new Cors();
 
     public String getMenuTypeCode() {
         return menuTypeCode;
@@ -89,6 +91,14 @@ public class SystemSecurityProperties {
 
     public void setJwt(Jwt jwt) {
         this.jwt = jwt;
+    }
+
+    public Cors getCors() {
+        return cors;
+    }
+
+    public void setCors(Cors cors) {
+        this.cors = cors;
     }
 
     public class Url {
@@ -230,6 +240,26 @@ public class SystemSecurityProperties {
         }
     }
 
+    public class Cors {
+        private String accessControlAllowOrigin;
+
+        public String getAccessControlAllowOrigin() {
+            return accessControlAllowOrigin;
+        }
+
+        public void setAccessControlAllowOrigin(String accessControlAllowOrigin) {
+            this.accessControlAllowOrigin = accessControlAllowOrigin;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuffer sb = new StringBuffer("Cors{");
+            sb.append("accessControlAllowOrigin='").append(accessControlAllowOrigin).append('\'');
+            sb.append('}');
+            return sb.toString();
+        }
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("SystemSecurityProperties{");
@@ -241,6 +271,7 @@ public class SystemSecurityProperties {
         sb.append(", enableRememberMe=").append(enableRememberMe);
         sb.append(", url=").append(url);
         sb.append(", jwt=").append(jwt);
+        sb.append(", cors=").append(cors);
         sb.append('}');
         return sb.toString();
     }
